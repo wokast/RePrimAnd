@@ -1,0 +1,4 @@
+#define PATH_EOS "@PATH_EOS@"
+#define PATH_EOS_HYB "@PATH_EOS_HYB@"
+
+

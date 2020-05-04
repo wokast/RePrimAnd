@@ -1,0 +1,3 @@
+
+option('build_documentation', type : 'boolean', value : true)
+option('build_benchmarks', type : 'boolean', value : true)
