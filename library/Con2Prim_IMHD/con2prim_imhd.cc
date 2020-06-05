@@ -337,7 +337,7 @@ void con2prim_mhd::operator()(prim_vars_mhd& pv, cons_vars_mhd& cv,
   froot::cache sol{};
   froot f{eos, ye, d, q, rsqr, rbsqr, bsqr, sol}; 
 
-  auto bracket { f.initial_bracket(errs) };
+  auto bracket = f.initial_bracket(errs);
   
   if (errs.failed()) {
     set_to_nan(pv, cv);

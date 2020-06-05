@@ -26,30 +26,30 @@ installed via Python's pip. For more info, see
 https://mesonbuild.com
 
 
-To build the library, 
+To build the library::
 
-$> cd <repository>
-$> meson mbuild --buildtype=release
-$> cd mbuild
-$> ninja
-   
+  $> cd <repository>
+  $> meson mbuild --buildtype=release
+  $> cd mbuild
+  $> ninja
+
 This will compile with optimization and without debug symbols. Other
-possibilities are --buildtype=debug and --buildtype=debugoptimized
+possibilities are `--buildtype=debug` and `--buildtype=debugoptimized`
 To use a different compiler, e.g. clang, prefix the meson command
-with CC=clang CXX=clang++.
+with `CC=clang CXX=clang++`.
 See https://mesonbuild.com/Running-Meson.html for general Meson usage.
 
 
 Installing
 ----------
 
-To install the library systemwide,
+To install the library systemwide::
 
-$> ninja install
-   
-To install in a user-defined location
+  $> ninja install
 
-$> DESTDIR=<prefix absolute path> ninja install
+To install in a user-defined location::
+
+  $> DESTDIR=<prefix absolute path> ninja install
 
 
 Using the Library
@@ -63,65 +63,62 @@ with `libRePrimAnd`.
 Creating Documentation
 ----------------------
 
-To just build the documentation, use the target `documentation`.
+To just build the documentation, use the target `documentation`::
 
-$> ninja documentation
+  $> ninja documentation
 
 The resulting pages can be found in the build directory under
-docsrc/sphinx/index.html
+`docsrc/sphinx/index.html`
 When installing the library, the documentation is installed as well
-by default, to <prefix>/usr/local/share/doc/libreprimand/index.html
+by default, to `<prefix>/usr/local/share/doc/libreprimand/index.html`
 
 The building of the documentation requires sphinx with the breathe 
 extension as well as doxygen. To disable building documentation and 
-remove the corresponding dependencies, use the build option
+remove the corresponding dependencies, use the build option::
 
-$> cd <repository>/mbuild
-$> meson configure -Dbuild_documentation=false
+  $> cd <repository>/mbuild
+  $> meson configure -Dbuild_documentation=false
 
 
 Running Tests
 -------------
 
 Please also take a minute to run the unit tests to ensure 
-correct compilation
+correct compilation::
 
-$> ninja test
-   
+  $> ninja test
+
 
 Benchmarks
 ----------
 
 The repository contains code to map the efficiency and accuracy of
 the primitive recovery, producing the plots shown in the 
-article. To recreate the data and plots,
+article. To recreate the data and plots::
 
+  $> ninja benchplots
+  $> ninja accuracyplots
 
-$> ninja benchplots
-$> ninja accuracyplots
-   
 The resulting pdf figures are placed in the build directory under
 tests/benchmarks
 
 This requires Python+matplotlib. To disable building benchmarking and 
-remove the corresponding dependencies, use the build option
+remove the corresponding dependencies, use the build option::
 
-$> cd <repository>/mbuild
-$> meson configure -Dbuild_benchmarks=false
-
+  $> cd <repository>/mbuild
+  $> meson configure -Dbuild_benchmarks=false
 
 Visualizing Master Function
 ---------------------------
 
 In addition, there is code to sample the primitive recovery master
 function (the central ingredient of the scheme) for various cases,
-as shown in the paper.
+as shown in the paper::
 
+  $> ninja srootdata
 
-$> ninja srootdata
-  
 The resulting data files are placed in the build directory under 
-tests/sample_root/
+`tests/sample_root/`
  
 
 

@@ -77,7 +77,7 @@ void sample_froot(const eos_thermal eos,
   detail::froot f(eos, ye0, d, q, rsqr, rbsqr, bsqr, sol); 
 
   con2prim_mhd::report errs;
-  auto bracket{ f.initial_bracket(errs)};  
+  auto bracket = f.initial_bracket(errs);  
   
   ofstream os(path + "/" + p.name.c_str() + ".dat"); 
   os << setprecision(15);

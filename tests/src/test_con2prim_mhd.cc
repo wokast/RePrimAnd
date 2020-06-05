@@ -613,7 +613,7 @@ BOOST_AUTO_TEST_CASE( c2p_mhd_basic )
   
   env_idealgas par{1e6, 100., 1e-11, 1e-6, 10.0, 10.0, 4e-8};
 
-  const auto tst{make_env(par)};
+  const auto tst = make_env(par);
   
   const real_t ye_fixed{0.25};
   const real_t rho{1e-5};
@@ -674,7 +674,7 @@ BOOST_AUTO_TEST_CASE( c2p_mhd_fail )
   
   env_idealgas par{1e-3, 10., 1e-12, 1e-6, 10.0, 10.0, 4e-8};
   
-  const auto tst{make_env(par)};
+  const auto tst = make_env(par);
 
   cons_vars_mhd cv1{2e-3, 1e-4, 1e-3, {0.,0.,0.}, {0.,0.,0.}};    
   hope(tst.chk_fail_rho(cv1),
@@ -694,7 +694,7 @@ BOOST_AUTO_TEST_CASE( test_con2prim_phys_igas )
     
   env_idealgas par{1e6, 51., 1e-11, 1e-6, 1.0, 2e3, 1e-8};
   
-  const auto tst{make_env(par)};  
+  const auto tst = make_env(par);  
                  
   const real_t max_z{ 1e3 };
   const real_t min_z{ 1e-2 };
@@ -729,7 +729,7 @@ BOOST_AUTO_TEST_CASE( test_con2prim_phys_hybr )
 
   env_hybrideos par{1e-12, 1.0, 2e3, 1e-8};
   
-  const auto tst{make_env(par)};             
+  const auto tst = make_env(par);             
   
   real_t max_z{ 1e3};
   real_t min_z{ 1e-2};

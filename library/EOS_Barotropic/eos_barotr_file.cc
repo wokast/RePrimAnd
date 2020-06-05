@@ -11,7 +11,7 @@ eos_barotr detail::load_eos_barotr(const h5grp& g, const units& u)
   
   h5grp g2(g, std::string("eos_")+spec);
 
-  auto& r {implementations::registry_reader_eos_barotr::get(spec)};
+  auto& r = implementations::registry_reader_eos_barotr::get(spec);
   return r.load(g2,u);  
 }
 

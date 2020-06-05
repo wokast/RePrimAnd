@@ -4,7 +4,7 @@ configure_file(input : 'test_config.h.in',
                output : 'test_config.h',
                configuration : conf_tests)
 
-dep_utf = dependency('boost', modules : ['unit_test_framework'])
+dep_utf = dependency('boost', static : false, modules : ['unit_test_framework'])
 
 src_tst_c2p = ['test_con2prim_mhd.cc', 'test_utils.cc']
 
