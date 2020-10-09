@@ -6,8 +6,9 @@ conf_tests = configuration_data()
 conf_tests.set('PATH_EOS', data_eos)
 conf_tests.set('PATH_EOS_HYB', data_eos_hyb)
 
-
-subdir('src')
+if get_option('build_tests')
+  subdir('src')
+endif
 
 if get_option('build_benchmarks')
   subdir('benchmarks')

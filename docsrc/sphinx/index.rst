@@ -20,7 +20,9 @@ describing the recovery scheme:
 
 Wolfgang Kastaun, Jay Vijay Kalinani, Riccardo Ciolfi, 
 "Robust Recovery of Primitive Variables in Relativistic Ideal 
-Magnetohydrodynamics" (2020).
+Magnetohydrodynamics",  
+`arXiv:2005.01821 [gr-qc] <https://arxiv.org/abs/2005.01821>`_ 
+(2020).
 
 Prospective users should be sure to check for updated versions
 that will likely be made available in a public repository.

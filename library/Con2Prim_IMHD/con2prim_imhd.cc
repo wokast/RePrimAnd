@@ -7,7 +7,6 @@
 #include <cmath>
 #include "find_roots.h"
 
-
 using namespace EOS_Toolkit;
 using namespace EOS_Toolkit::detail;
 using namespace std;
@@ -252,7 +251,7 @@ auto froot::initial_bracket(report& errs) const -> interval<real_t>
     f_upper g(h0, rsqr, rbsqr, bsqr);
 
     ROOTSTAT status;
-    mu_max = findroot_using_deriv(g, status, ndigits2);
+    mu_max = findroot_using_deriv(g, status, ndigits2, ndigits2+4);
 
     if (status != ROOTSTAT::SUCCESS) {
       if (status == ROOTSTAT::NOT_CONVERGED) {
@@ -343,10 +342,26 @@ void con2prim_mhd::operator()(prim_vars_mhd& pv, cons_vars_mhd& cv,
     set_to_nan(pv, cv);
     return;
   }
+  
+  rarecase nc(bracket, eos.range_rho(), f);
 
+  if (nc.rho_too_big) 
+  {
+    errs.set_range_rho(d, d);
+    set_to_nan(pv, cv);
+    return;
+  }
+
+  if (nc.rho_too_small) 
+  {
+    errs.set_atmo_set();
+    atmo.set(pv, cv, g);
+    return;
+  }
+
+  
   ROOTSTAT status;  
-  bracket = findroot_no_deriv(f, bracket, acc, max_iter, status);
-  assert(bracket.contains(sol.lmu));
+  bracket = findroot_no_deriv(f, nc.bracket, acc, max_iter, status);
   
   errs.iters = sol.calls;
   if (status != ROOTSTAT::SUCCESS) {
@@ -354,22 +369,27 @@ void con2prim_mhd::operator()(prim_vars_mhd& pv, cons_vars_mhd& cv,
       errs.set_root_conv();
     }
     else if (status == ROOTSTAT::NOT_BRACKETED) {
+      if (nc.rho_big) { //That's why
+        errs.set_range_rho(d, d);
+        set_to_nan(pv, cv);
+        return;
+      }
+      if (nc.rho_small) {
+        errs.set_atmo_set();
+        atmo.set(pv, cv, g);
+        return;
+      }
       errs.set_root_bracket();
     }
     set_to_nan(pv, cv);
     return;
   }
+  assert(bracket.contains(sol.lmu));
 
   
   if (sol.rho < atmo.rho_cut) {
     errs.set_atmo_set();
     atmo.set(pv, cv, g);
-    return;
-  }
-  
-  if (sol.rho_raw > eos.range_rho()) {
-    errs.set_range_rho(d, sol.rho);
-    set_to_nan(pv, cv);
     return;
   }
 
@@ -430,3 +450,92 @@ void con2prim_mhd::operator()(prim_vars_mhd& pv, cons_vars_mhd& cv,
 }
 
 
+
+
+
+f_rare::f_rare(real_t wtarg_, const froot& f_)
+: v2targ(1.0 - 1.0/(wtarg_*wtarg_)), f(f_) {}
+
+
+/**
+This implements a root function for finding mu from W_hat
+**/
+auto f_rare::operator()(const real_t mu) const 
+-> std::pair<real_t, real_t>
+{
+  real_t x     = f.x_from_mu(mu);
+  real_t xsqr  = x*x;
+  real_t rfsqr = f.rfsqr_from_mu_x(mu,x);
+  real_t vsqr  = mu*mu * rfsqr;  
+  
+  real_t y     = vsqr - v2targ;
+  real_t dy = 2.0*mu*x*(xsqr * f.rsqr + mu * (xsqr+x+1.0) * f.rbsqr);
+  
+  return {y, dy};
+}
+
+
+/**
+This checks for the corner case where the density might cross the 
+allowed bounds while finding the root of the master function. In
+that case, a tighter initial root finding interval is constructed
+to guarantee uniqueness.
+**/
+rarecase::rarecase(const interval<real_t> ibracket,
+                   const interval<real_t> rgrho, const froot& f)
+{
+  
+  real_t muc0 = ibracket.min();
+  real_t muc1 = ibracket.max();
+  const int ndigits = 30;
+          
+  
+  if (f.d > rgrho.max()) {
+    real_t wc = f.d / rgrho.max(); 
+    if (wc  > f.winf) {
+      rho_too_big = true; 
+    }
+    else {
+      f_rare g(wc, f);
+      
+      if (g(muc1).first <= 0) {
+        rho_too_big = true; 
+      }
+      else {
+        if (g(muc0).first < 0) {
+          ROOTSTAT status;
+          real_t mucc = findroot_using_deriv(g, ibracket, 
+                                             status, ndigits, ndigits+2);
+          assert(status == ROOTSTAT::SUCCESS); 
+          muc0 = max(muc0, mucc);
+          rho_big = true;
+        }
+      }
+    }
+  }
+
+  if (f.d <  f.winf * rgrho.min()) {
+    real_t wc = f.d / rgrho.min(); 
+    if (wc < 1) {
+      rho_too_small = true; 
+    }
+    else {
+      f_rare g(wc, f);
+      if (g(muc0).first >= 0) {
+        rho_too_small = true; 
+      }
+      else {
+        if (g(muc1).first > 0) {
+          ROOTSTAT status;
+          real_t mucc = findroot_using_deriv(g, ibracket, 
+                                             status, ndigits, ndigits+2);
+          assert(status == ROOTSTAT::SUCCESS); 
+          muc1 = min(muc1, mucc);
+          rho_small = true;
+        }
+      }
+    }
+  }
+
+  bracket = interval<real_t>{muc0, muc1};
+}

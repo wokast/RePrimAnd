@@ -1,4 +1,3 @@
-#define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE con2prim
 #include <boost/test/unit_test.hpp>
 
@@ -195,7 +194,11 @@ bool test_con2prim_mhd::compare_prims(
     const real_t f1 = cs1*cs1 * (1.0 + a1) / a1;
     const real_t f  = max(f0,f1);
     
-    hope.isclose(pv0.press, pv1.press, f*acc + acc_eps, 0, 
+    const real_t F = (pv0.eps/pv0.press) 
+                       * eos.at_rho_eps_ye(pv0.rho, 
+                                      pv0.eps, pv0.ye).dpress_deps();
+    
+    hope.isclose(pv0.press, pv1.press, f*acc + F*acc_eps, 0, 
                  "press");
   }  
   hope(dv <= v * (acc/wsqr + acc_max), 
@@ -738,7 +741,7 @@ BOOST_AUTO_TEST_CASE( test_con2prim_phys_hybr )
   const real_t ye_fixed{0.25};
 
   auto iz   = log_spacing(min_z, max_z, 100);
-  auto ith  = linear_spacing(1e-4, 0.99, 10);
+  auto ith  = linear_spacing(2e-6, 0.99, 10); //2e-6 = 1e-4 / epsmax
   auto irho = log_spacing(par.atmo_rho*5, 
                           tst.eos.range_rho().max()/1.1, 10);
   auto ib   = linear_spacing(0.0, max_b, 10);

@@ -75,7 +75,10 @@ void map_z_eps(eos_thermal eos, con2prim_mhd& cv2pv, real_t b, real_t rho,
       }
       assert(!rep.failed());
       os << setw(20) << z << setw(20) << epsth 
-         << setw(20) << rep.iters << endl;
+         << setw(20) << rep.iters 
+         << setw(20) << pv.press 
+         << setw(20) << b*sqrt(cv.dens)
+         << endl;
     }
     os << endl;
   }
@@ -85,7 +88,7 @@ void map_z_b(eos_thermal eos, con2prim_mhd& cv2pv, real_t epsth,
              real_t rho, real_t ye, sm_metric3& g, string fn) 
 {
   auto iz     = log_spacing(1e-2, 1e3, 200);
-  auto ib     = log_spacing(1e-4, 1e1, 200);
+  auto ib     = log_spacing(1e-4, 1e4, 200);
   
   const real_t eps0  = eos.range_eps(rho, ye).min();
   const real_t eps   = eps0 + epsth;
@@ -104,7 +107,10 @@ void map_z_b(eos_thermal eos, con2prim_mhd& cv2pv, real_t epsth,
         assert(false);
       }
       assert(!rep.failed());
-      os << setw(20) << z << setw(20) << b <<setw(20) << rep.iters << endl;
+      os << setw(20) << z << setw(20) << b <<setw(20) << rep.iters 
+         << setw(20) << pv.press 
+         << setw(20) << b*sqrt(cv.dens)
+         << endl;
     }
     os << endl;
   }
@@ -144,14 +150,14 @@ int main(int argc, char *argv[])
   eos_thermal eos_ig = get_eos_ig();
   atmosphere atmo_ig = get_atmo(eos_ig, 1e-6);
   const real_t acc          = 1e-8;  
-  con2prim_mhd cv2pv_ig(eos_ig, atmo_ig.rho, false, 2e3, 1e2, 
+  con2prim_mhd cv2pv_ig(eos_ig, atmo_ig.rho, false, 2e3, 5e4, 
                         atmo_ig, acc, 100);
 
 
   auto eos_hyb = load_eos_thermal(PATH_EOS_HYB, units::geom_solar());
 
   atmosphere atmo_hyb = get_atmo(eos_hyb, 0.0);
-  con2prim_mhd cv2pv_hyb(eos_hyb, atmo_hyb.rho, false, 2e3, 1e2, 
+  con2prim_mhd cv2pv_hyb(eos_hyb, atmo_hyb.rho, false, 2e3, 5e4, 
                          atmo_hyb, acc, 100);
 
 

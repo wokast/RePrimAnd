@@ -10,6 +10,9 @@
 namespace EOS_Toolkit {
 namespace detail {
 
+class rarecase;
+class f_rare;
+
 /// Function object representing the root function.
 /** This contains all the fixed parameters defining the function.
     It also remembers intermediate results from the last evaluation,
@@ -45,10 +48,14 @@ class froot {
   static real_t get_eps_raw(real_t mu,  real_t qf, 
                             real_t rfsqr, real_t w);  
   
-   
+  friend class rarecase;
+  friend class f_rare;
+     
   public:
   
   using value_t = real_t; 
+
+
   
   ///Store intermediate results obtained when evaluating function.
   struct cache {
@@ -132,6 +139,43 @@ class f_upper {
   const real_t rsqr;    ///< Fixed parameter \f$ r^2 = \frac{ S_i S^i}{D^2} \f$
   const real_t rbsqr;   ///< Fixed parameter \f$ (r^l b_l)^2 \f$
   const real_t bsqr;    ///< Fixed parameter \f$ b^2 = \frac{B^2}{D} \f$
+};
+
+
+
+
+///Root function used by rarecase class   
+class f_rare {
+  const real_t v2targ;  ///< Target squared velocity   
+  const froot& f;
+
+  public:
+  using value_t = real_t;
+  
+  f_rare(
+    real_t wtarg_,      ///< Target Lorentz factor
+    const froot& f_
+  );
+
+  auto operator()(real_t mu) const -> std::pair<real_t,real_t>;  
+};
+
+///Class for handling rare corner case 
+class rarecase {  
+  public:
+  rarecase(
+    const interval<real_t> bracket,   ///< Initial master root bracket 
+    const interval<real_t> rgrho,     ///< Allowed density range
+    const froot& f                    ///< Master root function
+  );
+
+  /// Root bracket on which solution is unique
+  interval<real_t> bracket;  
+  
+  bool rho_too_big { false };    ///< Density definitely too large
+  bool rho_big { false };        ///< Possibly too large
+  bool rho_too_small { false };  ///< Density definitely too small
+  bool rho_small { false };      ///< Possibly too small
 };
 
 }
