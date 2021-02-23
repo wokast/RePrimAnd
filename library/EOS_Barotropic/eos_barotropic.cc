@@ -1,6 +1,7 @@
 #include "eos_barotropic.h"
 #include <stdexcept>
 #include <cassert>
+#include <limits>
 
 using namespace std;
 using namespace EOS_Toolkit;
@@ -47,7 +48,7 @@ class eos_barotr_invalid: public eos_barotr_impl {
 }
 
 
-eos_barotr_base::spimpl_t eos_barotr_base::pbad{ 
+const eos_barotr_base::spimpl_t eos_barotr_base::pbad{ 
   std::make_shared<eos_barotr_invalid>()
 };
 
@@ -135,5 +136,87 @@ auto eos_barotr::state::ye() const -> real_t
   return impl().ye(gm1_);
 }
 
+auto eos_barotr::gm1_at_rho(real_t rho) const -> real_t
+{
+  auto s = at_rho(rho);
+  return s ? s.gm1() : numeric_limits<real_t>::quiet_NaN();
+}
 
+auto eos_barotr::press_at_rho(real_t rho) const -> real_t
+{
+  auto s = at_rho(rho);
+  return s ? s.press() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::eps_at_rho(real_t rho) const -> real_t
+{
+  auto s = at_rho(rho);
+  return s ? s.eps() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::hm1_at_rho(real_t rho) const -> real_t
+{
+  auto s = at_rho(rho);
+  return s ? s.hm1() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::csnd_at_rho(real_t rho) const -> real_t
+{
+  auto s = at_rho(rho);
+  return s ? s.csnd() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::temp_at_rho(real_t rho) const -> real_t
+{
+  auto s = at_rho(rho);
+  return s ? s.temp() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::ye_at_rho(real_t rho) const -> real_t
+{
+  auto s = at_rho(rho);
+  return s ? s.ye() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::rho_at_gm1(real_t gm1) const -> real_t
+{
+  auto s = at_gm1(gm1);
+  return s ? s.rho() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::press_at_gm1(real_t gm1) const -> real_t
+{
+  auto s = at_gm1(gm1);
+  return s ? s.press() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::eps_at_gm1(real_t gm1) const -> real_t
+{
+  auto s = at_gm1(gm1);
+  return s ? s.eps() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::hm1_at_gm1(real_t gm1) const -> real_t
+{
+  auto s = at_gm1(gm1);
+  return s ? s.hm1() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::csnd_at_gm1(real_t gm1) const -> real_t
+{
+  auto s = at_gm1(gm1);
+  return s ? s.csnd() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::temp_at_gm1(real_t gm1) const -> real_t
+{
+  auto s = at_gm1(gm1);
+  return s ? s.temp() : numeric_limits<real_t>::quiet_NaN();
+}
+
+auto eos_barotr::ye_at_gm1(real_t gm1) const -> real_t
+{
+  auto s = at_gm1(gm1);
+  return s ? s.ye() : numeric_limits<real_t>::quiet_NaN();
+}
 

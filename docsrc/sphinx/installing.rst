@@ -16,6 +16,7 @@ Requirements
 * Doxygen (only for documentation)
 * Sphinx with Breathe extension (only for documentation)
 * Python matplotlib (only for benchmark plots)
+* Python pybind11 package (only for Python bindings)
 
 Building from Source
 --------------------
@@ -32,7 +33,7 @@ To build the library,
 .. code::
 
    cd <repository>
-   meson mbuild --buildtype=release
+   meson mbuild --buildtype=release --prefix=<custom install location>
    cd mbuild
    ninja
    
@@ -47,17 +48,16 @@ Meson usage.
 Installing
 ^^^^^^^^^^
 
-To install the library systemwide,
+To install the library, use
 
 .. code::
 
+   cd mbuild
    ninja install
    
-To install in a user-defined location
+This will install in a user-defined location if the `--prefix` option
+was given during the build setup, otherwise systemwide. 
 
-.. code::
-
-   DESTDIR=<prefix absolute path> ninja install
 
 Using the Library
 ^^^^^^^^^^^^^^^^^
@@ -75,6 +75,24 @@ example) can find it, compilation should be straightforward:
    g++ -lRePrimAnd --std=c++11 minimal.cc
 
 
+Python Bindings
+---------------
+
+The Python bindings are automatically build together with the library
+itself, provided that a Python3 installation is detected which contains
+the pybind11 package. The latter can be easily installed via pip or 
+conda. To disable building the Python bindings and remove the 
+corresponding dependencies, use the build option
+
+.. code::
+
+   meson configure -Dbuild_python_api=false
+
+
+If the Python bindings have been build, they are automatically installed 
+together with the library. The Python extension module is called 
+`pyreprimand`.
+
 
 Creating Documentation
 ----------------------
@@ -87,8 +105,6 @@ To just build the documentation, use the target `documentation`.
 
 The resulting pages can be found in the build directory under
 `docsrc/sphinx/index.html`.
-When installing the library, the documentation is installed as well
-by default, to `<prefix>/usr/local/share/doc/libreprimand/index.html`.
 
 The building of the documentation requires sphinx with the breathe 
 extension as well as doxygen (Note sphinx breathe currently 
@@ -103,6 +119,9 @@ the corresponding dependencies, use the build option
    meson configure -Dbuild_documentation=false
 
 
+If the documentation is build, it is installed automatically when 
+installing the library, by default to 
+`<prefix>/usr/local/share/doc/libreprimand/index.html`.
 
 
 Running Tests

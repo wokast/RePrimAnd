@@ -25,7 +25,7 @@ units units::geom_umass(double umass)
   return geom_ulength(umass*G_SI/(c_SI*c_SI));
 }
 
-units units::operator/(const units &base)
+units units::operator/(const units &base) const
 {
   return {ulength/base.ulength, utime/base.utime, umass/base.umass}; 
 }

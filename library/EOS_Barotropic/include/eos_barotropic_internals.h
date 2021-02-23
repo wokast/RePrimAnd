@@ -57,7 +57,7 @@ class eos_barotr_base {
 
   private:
 
-  static spimpl_t pbad; ///< Dummy implementation that always throws
+  const static spimpl_t pbad; ///< Dummy implementation that always throws
   spimpl_t pimpl{pbad};  ///< Pointer to implementation
 };
 

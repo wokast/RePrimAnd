@@ -54,6 +54,7 @@ Contents
    eos_thermal
    eos_barotr
    little_helpers
+   python_interf
 
 
 Indices and tables

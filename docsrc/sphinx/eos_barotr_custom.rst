@@ -135,8 +135,8 @@ all EOS-type specific information is contained in a HDF5 subgroup
 and the file has a string attribute `eos_type` for the type of the EOS.
 
 When creating a file for a custom EOS `foobar`, the eos type should be 
-named `thermal_custom_foobar` and the group holding EOS data should be 
-named `eos_thermal_custom_foobar`. 
+named `barotr_custom_foobar` and the group holding EOS data should be 
+named `eos_barotr_custom_foobar`. 
 
 To register a reader, one needs to create a translation unit similar
 to the one below. Files with custom EOS can then be loaded via the same

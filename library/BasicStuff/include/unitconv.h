@@ -32,7 +32,7 @@ class units {
   ///Express units in terms of other units
   units operator/(
     const units &base ///<..in terms of those units
-  );
+  ) const;
 
   ///Unit of length
   double length() const {return ulength;}

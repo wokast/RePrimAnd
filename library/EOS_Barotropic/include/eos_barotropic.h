@@ -255,7 +255,151 @@ class eos_barotr : detail::eos_barotr_base {
   **/
   auto is_gm1_valid(real_t gm1) const -> bool;
 
+
+  /**\brief Compute pseudo enthalpy from mass density
+      
+  @param rho  Mass density \f$ \rho \f$
+  @return Pseudo enthalpy \f$ g - 1 \f$ if state is valid else NAN
+
+  \post Guarantees \f$ g \ge 1 \f$  (unless NAN)
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto gm1_at_rho(real_t rho) const -> real_t;
+
+
+  /**\brief Compute pressure from mass density
+      
+  @param rho  Mass density \f$ \rho \f$
+  @returns    Pressure if state is valid else NAN 
   
+  \post Guarantees \f$ P\ge 0 \f$  (unless NAN)
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto press_at_rho(real_t rho) const -> real_t;
+  
+  /**\brief Compute specific energy from mass density
+      
+  @param rho  Mass density \f$ \rho \f$
+  @returns    \f$ \epsilon \f$ if state is valid else NAN
+  
+  \post Guarantees \f$ \epsilon \ge -1 \f$  (unless NAN)
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto eps_at_rho(real_t rho) const -> real_t;
+  
+  /**\brief Compute specific enthalpy from mass density
+      
+  @param rho  Mass density \f$ \rho \f$
+  @returns    \f$ h - 1 \f$ if state is valid else NAN
+  
+  \post Guarantees \f$ h > 0 \f$  (unless NAN)
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto hm1_at_rho(real_t rho) const -> real_t;
+  
+  /**\brief Compute sound speed from mass density
+      
+  @param rho  Mass density \f$ \rho \f$
+  @returns    \f$ c_s \f$ if state is valid else NAN
+  
+  \post Guarantees \f$ 0\le c_s < 1 \f$  (unless NAN)
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto csnd_at_rho(real_t rho) const -> real_t;
+  
+  /**\brief Compute temperature from mass density
+      
+  @param rho  Mass density \f$ \rho \f$
+  @returns    \f$ T \f$ if state is valid else NAN
+  
+  \post Guarantees \f$ T\ge 0 \f$ (unless NAN)
+  \throws std::runtime_error if temperature not available for EOS
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto temp_at_rho(real_t rho) const -> real_t;
+  
+  /**\brief Compute electron fraction from mass density
+      
+  @param rho  Mass density \f$ \rho \f$
+  @returns    \f$ Y_e \f$ if state is valid else NAN
+  
+  \throws std::runtime_error if electron fraction not available for EOS
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto ye_at_rho(real_t rho) const -> real_t;
+  
+  
+  /**\brief Compute mass density from pseudo enthalpy 
+      
+  @param gm1 Pseudo enthalpy \f$ g - 1 \f$ 
+  @return \f$ \rho \f$ if state is valid else NAN
+
+  \post Guarantees \f$ \rho \ge 0 \f$ (unless NAN)
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto rho_at_gm1(real_t gm1) const -> real_t;
+
+  /**\brief Compute pressure from pseudo enthalpy
+      
+  @param gm1 Pseudo enthalpy \f$ g - 1 \f$ 
+  @returns    Pressure if state is valid else NAN 
+  
+  \post Guarantees \f$ P\ge 0 \f$ (unless NAN)
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto press_at_gm1(real_t gm1) const -> real_t;
+  
+  /**\brief Compute specific energy from pseudo enthalpy
+      
+  @param gm1 Pseudo enthalpy \f$ g - 1 \f$ 
+  @returns    \f$ \epsilon \f$ if state is valid else NAN
+  
+  \post Guarantees \f$ \epsilon \ge -1 \f$  (unless NAN)
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto eps_at_gm1(real_t gm1) const -> real_t;
+  
+  /**\brief Compute specific enthalpy  from pseudo enthalpy
+      
+  @param gm1 Pseudo enthalpy \f$ g - 1 \f$ 
+  @returns    \f$ h - 1 \f$ if state is valid else NAN
+  
+  \post Guarantees \f$ h > 0 \f$  (unless NAN)
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto hm1_at_gm1(real_t gm1) const -> real_t;
+  
+  /**\brief Compute sound speed  from pseudo enthalpy
+      
+  @param gm1 Pseudo enthalpy \f$ g - 1 \f$ 
+  @returns    \f$ c_s \f$ if state is valid else NAN
+  
+  \post Guarantees \f$ 0\le c_s < 1 \f$ (unless NAN)
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto csnd_at_gm1(real_t gm1) const -> real_t;
+  
+  /**\brief Compute temperature from  from pseudo enthalpy
+      
+  @param gm1 Pseudo enthalpy \f$ g - 1 \f$ 
+  @returns    \f$ T \f$ if state is valid else NAN
+  
+  \post Guarantees \f$ T\ge 0 \f$ (unless NAN)
+  \throws std::runtime_error if temperature not available for EOS
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto temp_at_gm1(real_t gm1) const -> real_t;
+  
+  /**\brief Compute electron fraction  from pseudo enthalpy
+      
+  @param gm1 Pseudo enthalpy \f$ g - 1 \f$ 
+  @returns    \f$ Y_e \f$ if state is valid else NAN
+  
+  \throws std::runtime_error if electron fraction not available for EOS
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto ye_at_gm1(real_t gm1) const -> real_t;
+
 };
 
 

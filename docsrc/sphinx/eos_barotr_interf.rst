@@ -42,6 +42,14 @@ an exception. The following snipped demonstrates the EOS use:
      auto soundspeed = s.csnd()
    }
    
+   
+The functionality above is also provided by another set of EOS methods 
+with names such as :cpp:func:`~eos_barotr::press_at_rho`, 
+:cpp:func:`~eos_barotr::press_at_gm1`, etc. Those do not throw 
+exceptions when called outside the valid ranges, but instead return
+NANs. When computing several quantities for the same state, the 
+alternative syntax might be less efficient because the validity has to 
+be checked each time instead of only once as for the primary syntax.
 
 The :cpp:class:`~EOS_Toolkit::eos_barotr` class
 also provides methods to query the valid ranges of mass density and 

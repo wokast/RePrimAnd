@@ -75,7 +75,7 @@ class eos_thermal_invalid : public eos_thermal_impl {
 }
 
 
-eos_thermal_base::spimpl_t eos_thermal_base::pbad { 
+const eos_thermal_base::spimpl_t eos_thermal_base::pbad { 
   std::make_shared<eos_thermal_invalid>()
 };
 
@@ -230,6 +230,92 @@ auto eos_thermal::is_rho_temp_ye_valid(real_t rho,
 
 }
 
+auto eos_thermal::press_at_rho_eps_ye(real_t rho, real_t eps, 
+                                      real_t ye) const -> real_t
+{
+  auto s = at_rho_eps_ye(rho, eps, ye);
+  return s ? s.press() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+
+auto eos_thermal::csnd_at_rho_eps_ye(real_t rho, real_t eps, 
+                                      real_t ye) const -> real_t
+{
+  auto s = at_rho_eps_ye(rho, eps, ye);
+  return s ? s.csnd() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+auto eos_thermal::temp_at_rho_eps_ye(real_t rho, real_t eps, 
+                                      real_t ye) const -> real_t
+{
+  auto s = at_rho_eps_ye(rho, eps, ye);
+  return s ? s.temp() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+auto eos_thermal::sentr_at_rho_eps_ye(real_t rho, real_t eps, 
+                                      real_t ye) const -> real_t
+{
+  auto s = at_rho_eps_ye(rho, eps, ye);
+  return s ? s.sentr() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+auto eos_thermal::dpress_drho_at_rho_eps_ye(real_t rho, real_t eps, 
+                                            real_t ye) const -> real_t
+{
+  auto s = at_rho_eps_ye(rho, eps, ye);
+  return s ? s.dpress_drho() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+auto eos_thermal::dpress_deps_at_rho_eps_ye(real_t rho, real_t eps, 
+                                            real_t ye) const -> real_t
+{
+  auto s = at_rho_eps_ye(rho, eps, ye);
+  return s ? s.dpress_deps() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+
+auto eos_thermal::press_at_rho_temp_ye(real_t rho, real_t temp, 
+                                      real_t ye) const -> real_t
+{
+  auto s = at_rho_temp_ye(rho, temp, ye);
+  return s ? s.press() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+
+auto eos_thermal::csnd_at_rho_temp_ye(real_t rho, real_t temp, 
+                                      real_t ye) const -> real_t
+{
+  auto s = at_rho_temp_ye(rho, temp, ye);
+  return s ? s.csnd() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+auto eos_thermal::eps_at_rho_temp_ye(real_t rho, real_t temp, 
+                                      real_t ye) const -> real_t
+{
+  auto s = at_rho_temp_ye(rho, temp, ye);
+  return s ? s.eps() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+auto eos_thermal::sentr_at_rho_temp_ye(real_t rho, real_t temp, 
+                                      real_t ye) const -> real_t
+{
+  auto s = at_rho_temp_ye(rho, temp, ye);
+  return s ? s.sentr() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+auto eos_thermal::dpress_drho_at_rho_temp_ye(real_t rho, real_t temp, 
+                                            real_t ye) const -> real_t
+{
+  auto s = at_rho_temp_ye(rho, temp, ye);
+  return s ? s.dpress_drho() : numeric_limits<real_t>::quiet_NaN();  
+}
+
+auto eos_thermal::dpress_deps_at_rho_temp_ye(real_t rho, real_t temp, 
+                                            real_t ye) const -> real_t
+{
+  auto s = at_rho_temp_ye(rho, temp, ye);
+  return s ? s.dpress_deps() : numeric_limits<real_t>::quiet_NaN();  
+}
 
 
 eos_thermal_impl::~eos_thermal_impl() = default;

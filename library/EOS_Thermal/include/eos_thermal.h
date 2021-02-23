@@ -247,6 +247,183 @@ class eos_thermal : detail::eos_thermal_base {
   **/
   auto is_rho_temp_ye_valid(real_t rho, 
                             real_t temp, real_t ye) const -> bool;
+
+  /**\brief Compute pressure based on density, specific energy, 
+  and electron fraction
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param eps  Specific internal energy \f$ \epsilon \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @returns    Pressure \f$ P \f$ if state is valid, else NAN 
+  
+  \post Guarantees \f$ P\ge 0 \f$ 
+    \throws std::runtime_error if called for unitialized object
+  **/
+  auto press_at_rho_eps_ye(real_t rho, real_t eps, real_t ye) const 
+  -> real_t;
+
+  /**\brief Compute soundspeed based on density, specific energy, 
+  and electron fraction
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param eps  Specific internal energy \f$ \epsilon \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @return Speed of sound \f$ c_s \f$ if state is valid, else NAN
+
+  \post Guarantees \f$ 0\le c_s < 1 \f$ 
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto csnd_at_rho_eps_ye(real_t rho, real_t eps, real_t ye) const 
+  -> real_t;
+
+  /**\brief Compute temperature based on density, specific energy, 
+  and electron fraction
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param eps  Specific internal energy \f$ \epsilon \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @returns    Temperature \f$ T \f$ if state is valid, else NAN 
+  
+  \post Guarantees \f$ T\ge 0 \f$ 
+  \throws std::runtime_error if temperature not available for EOS
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto temp_at_rho_eps_ye(real_t rho, real_t eps, real_t ye) const 
+  -> real_t;
+
+  /**\brief Compute specific entropy based on density, specific energy, 
+  and electron fraction
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param eps  Specific internal energy \f$ \epsilon \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @returns    Specific entropy \f$ s \f$ if state is valid, else NAN 
+    
+  \throws std::runtime_error if entropy not available for EOS
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto sentr_at_rho_eps_ye(real_t rho, real_t eps, real_t ye) const 
+  -> real_t;
+
+  /**\brief Compute partial derivative of pressure with respect to 
+  mass density, \f$ \frac{\partial P}{\partial \rho} \f$,
+  based on density, specific energy, and electron fraction.
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param eps  Specific internal energy \f$ \epsilon \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @returns    Pressure derivative if state is valid, else NAN 
+  
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto dpress_drho_at_rho_eps_ye(real_t rho, real_t eps, 
+                                 real_t ye) const -> real_t;
+
+  /**\brief Compute partial derivative of pressure with respect to 
+  specific energy, \f$ \frac{\partial P}{\partial \epsilon} \f$,
+  based on density, specific energy, and electron fraction.
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param eps  Specific internal energy \f$ \epsilon \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @returns    Pressure derivative if state is valid, else NAN 
+  
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto dpress_deps_at_rho_eps_ye(real_t rho, real_t eps, 
+                                 real_t ye) const -> real_t;
+
+
+  /**\brief Compute pressure based on density, temperature, 
+  and electron fraction
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param temp Temperature \f$ T \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @returns    Pressure \f$ P \f$ if state is valid, else NAN 
+  
+  \post Guarantees \f$ P\ge 0 \f$ 
+  \throws std::runtime_error if temperature not available for EOS
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto press_at_rho_temp_ye(real_t rho, real_t temp, real_t ye) const 
+  -> real_t;
+
+  /**\brief Compute soundspeed based on density, temperature, 
+  and electron fraction
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param temp Temperature \f$ T \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @return Speed of sound \f$ c_s \f$ if state is valid, else NAN
+
+  \post Guarantees \f$ 0\le c_s < 1 \f$ 
+  \throws std::runtime_error if temperature not available for EOS
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto csnd_at_rho_temp_ye(real_t rho, real_t temp, real_t ye) const 
+  -> real_t;
+
+  /**\brief Compute specific energy based on density, temperature, 
+  and electron fraction
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param temp Temperature \f$ T \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @returns    \f$ \epsilon \f$ if state is valid, else NAN 
+  
+  \post Guarantees \f$ \epsilon \ge -1 \f$ 
+  \throws std::runtime_error if temperature not available for EOS
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto eps_at_rho_temp_ye(real_t rho, real_t temp, real_t ye) const 
+  -> real_t;
+
+  /**\brief Compute specific entropy based on density, temperature, 
+  and electron fraction
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param temp Temperature \f$ T \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @returns    Specific entropy \f$ s \f$ if state is valid, else NAN 
+
+  \throws std::runtime_error if temperature not available for EOS    
+  \throws std::runtime_error if entropy not available for EOS
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto sentr_at_rho_temp_ye(real_t rho, real_t temp, real_t ye) const 
+  -> real_t;
+
+  /**\brief Compute partial derivative of pressure with respect to 
+  mass density, \f$ \frac{\partial P}{\partial \rho} \f$,
+  based on density, temperature, and electron fraction.
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param temp Temperature \f$ T \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @returns    Pressure derivative if state is valid, else NAN 
+  
+  \throws std::runtime_error if temperature not available for EOS      
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto dpress_drho_at_rho_temp_ye(real_t rho, real_t temp, 
+                                  real_t ye) const -> real_t;
+
+  /**\brief Compute partial derivative of pressure with respect to 
+  specific energy, \f$ \frac{\partial P}{\partial \epsilon} \f$,
+  based on density, temperature, and electron fraction.
+      
+  @param rho  Mass density \f$ \rho \f$
+  @param temp Temperature \f$ T \f$
+  @param ye   Electron fraction \f$ Y_e \f$
+  @returns    Pressure derivative if state is valid, else NAN 
+  
+  \throws std::runtime_error if temperature not available for EOS      
+  \throws std::runtime_error if called for unitialized object
+  **/
+  auto dpress_deps_at_rho_temp_ye(real_t rho, real_t temp, 
+                                  real_t ye) const -> real_t;
+
  
 };
 
