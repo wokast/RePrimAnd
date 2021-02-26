@@ -44,7 +44,7 @@ valid range.
    eos = pyr.load_eos_barotr("EOS/MS1_PP.eos.h5", units=u)
    
    rho = np.linspace(eos.range_rho.min, eos.range_rho.max, 1000)
-   press = eos.press_from_rho(rho)
+   press = eos.press_at_rho(rho)
    
 
 
