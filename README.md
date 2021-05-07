@@ -1,3 +1,5 @@
+The full documentation can be found [here](https://www.atlas.aei.uni-hannover.de/holohome/wolfgang.kastaun/doc/reprimand/latest/index.html)
+
 # Installation
 
 The main target and devolpment platform is Linux, although the

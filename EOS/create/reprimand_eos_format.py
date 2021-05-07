@@ -74,7 +74,7 @@ def write_barotr_pwpoly_(f, name, comment, rho_poly, rho_max,
     """Write piecewise polytropic EOS data into hdf5 file"""
     eos_type = 'barotr_pwpoly'
     
-    eosfile_common_(f, name, cmt, eos_type)
+    eosfile_common_(f, name, comment, eos_type)
     g   = f.create_group('eos_%s' % eos_type)
 
     def dset(name, data, descr):
@@ -112,7 +112,7 @@ def write_barotr_poly_(f, name, comment, rho_poly, rho_max, n_adiab):
     """Write polytropic EOS data into hdf5 file"""
     eos_type = 'barotr_poly'
     
-    eosfile_common_(f, name, cmt, eos_type)
+    eosfile_common_(f, name, comment, eos_type)
     g   = f.create_group('eos_%s' % eos_type)
     
     g.attrs['rho_poly']     = float(rho_poly)
