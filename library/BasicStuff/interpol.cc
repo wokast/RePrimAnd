@@ -198,7 +198,7 @@ detail::cspline_mono_impl::cspline_mono_impl(
                 std::vector<double> x_, std::vector<double> y_)
 : x{std::move(x_)}, y{std::move(y_)}, interp{x,y}
 {  
-  auto ext = std::minmax_element(x.begin(), x.end());
+  auto ext = std::minmax_element(y.begin(), y.end());
   rgy = {*ext.first, *ext.second};
   rgx = {x.front(), x.back()};
 }

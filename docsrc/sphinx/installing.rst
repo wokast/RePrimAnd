@@ -1,7 +1,7 @@
 Installation
 ============
 
-The main target and devolpment platform is Linux, although the 
+The main target and development platform is Linux, although the 
 library code is not platform-specific and should also work on Macs.
 Windows and AIX are not supported.
 
@@ -38,7 +38,7 @@ To build the library,
    ninja
    
 This will compile with optimization and without debug symbols. Other
-possibilities are `--buildtype=debug` and `--buildtype=debugoptimized`
+possibilities are `--buildtype=debug` and `--buildtype=debugoptimized`.
 To use a different compiler, e.g. clang, prefix the meson command
 with `CC=clang CXX=clang++`.
 See `here <https://mesonbuild.com/Running-Meson.html>`_ for general 
@@ -96,6 +96,18 @@ corresponding dependencies, use the build option
 If the Python bindings have been build, they are automatically installed 
 together with the library. The Python extension module is called 
 `pyreprimand`.
+
+Einstein Toolkit Support
+------------------------
+RePrimAnd does provide an (experimental) thorn that builds the library within
+an EinsteinToolkit (ET) environment, using the ExternalLibraries mechanism. The
+thorn can be found in the folder `ET_interface/thorns/RePrimAnd/`. The thorn
+depends on the HDF5, GSL, and BOOST ExternalLibraries thorns. In addition,
+the meson build system needs to be installed on the build host.
+
+Currently there are no thorns that provide an ET-style interface for using
+this library, although this might change in future versions. ET Thorns can of
+course use the library like any other C++ library.
 
 
 Creating Documentation

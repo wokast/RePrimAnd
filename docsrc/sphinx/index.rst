@@ -15,18 +15,20 @@ and velocity from the variables evolved in quasi-conservative
 formulations. Further, it provides a general framework for handling
 matter equations of state. 
 
-This version of the library was made public together with the article 
-describing the recovery scheme:
+A description of the algorithm and tests of the library is given in 
+the accompanying article:
 
 Wolfgang Kastaun, Jay Vijay Kalinani, Riccardo Ciolfi, 
 "Robust Recovery of Primitive Variables in Relativistic Ideal 
 Magnetohydrodynamics",  
-`arXiv:2005.01821 [gr-qc] <https://arxiv.org/abs/2005.01821>`_ 
-(2020).
+`Phys. Rev. D 103, 023018 (2021) <https://doi.org/10.1103/PhysRevD.103.023018>`_
+`(arXiv:2005.01821) <https://arxiv.org/abs/2005.01821>`_.
 
-Prospective users should be sure to check for updated versions
-that will likely be made available in a public repository.
+The latest public versions can be found on the 
+`github page <https://github.com/wokast/RePrimAnd>`_.
 
+Releases are also archived on Zenodo and can be cited via the   
+`DOI <https://doi.org/10.5281/zenodo.3785074>`_.
 
 Developers
 ^^^^^^^^^^
@@ -41,6 +43,10 @@ License
 
    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
+Please cite the
+`PRD article <https://doi.org/10.1103/PhysRevD.103.023018>`_ 
+and the `DOI on Zenodo <https://doi.org/10.5281/zenodo.3785074>`_
+when publishing results obtained using the library.
 
 Contents
 --------

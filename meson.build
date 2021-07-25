@@ -1,6 +1,6 @@
 
 project('RePrimAnd', ['cpp','c'], default_options : ['cpp_std=c++11'],
-        version : '1.2', license : 'CC BY-NC-SA 4.0')
+        version : '1.3', license : 'CC BY-NC-SA 4.0')
 
 project_headers_dest = 'reprimand'
 

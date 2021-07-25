@@ -92,6 +92,19 @@ together with the library. The Python extension module is called
 `pyreprimand`.
 
 
+## Einstein Toolkit Support
+
+RePrimAnd does provide an (experimental) thorn that builds the library within
+an EinsteinToolkit (ET) environment, using the ExternalLibraries mechanism. The
+thorn can be found in the folder `ET_interface/thorns/RePrimAnd/`. The thorn
+depends on the HDF5, GSL, and BOOST ExternalLibraries thorns. In addition,
+the meson build system needs to be installed on the build host.
+
+Currently there is are no thorns that provide an ET-style interface for using
+this library, although this might change in future versions. ET Thorns can of
+course use the library like any other C++ library.
+
+
 ## Creating Documentation
 
 To just build the documentation, use the target `documentation`.
