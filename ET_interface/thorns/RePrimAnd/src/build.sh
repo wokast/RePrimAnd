@@ -46,7 +46,7 @@ ${TAR?} xJf ${SRCDIR}/../dist/${NAME}.tar.xz
 
 echo "REPRIMAND: Configuring..."
 cd ${NAME}
-meson setup mesonbuild --prefix=${REPRIMAND_DIR} --default-library=static --buildtype=debugoptimized -Dbuild_documentation=false -Dbuild_benchmarks=false -Dbuild_tests=false
+meson setup mesonbuild --libdir=lib --prefix=${REPRIMAND_DIR} --default-library=static --buildtype=debugoptimized -Dbuild_documentation=false -Dbuild_benchmarks=false -Dbuild_tests=false
 
 echo "REPRIMAND: Building..."
 ninja -C mesonbuild
