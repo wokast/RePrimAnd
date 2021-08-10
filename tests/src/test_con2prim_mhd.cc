@@ -1,5 +1,6 @@
 #define BOOST_TEST_MODULE con2prim
 #include <boost/test/unit_test.hpp>
+#include <limits>
 
 #include "test_config.h"
 #include "unitconv.h"

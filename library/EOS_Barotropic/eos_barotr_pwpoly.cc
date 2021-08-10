@@ -2,6 +2,7 @@
 #include "eos_barotr_pwpoly_impl.h"
 #include <stdexcept>
 #include <cmath>
+#include <limits>
 
 using namespace std;
 using namespace EOS_Toolkit;

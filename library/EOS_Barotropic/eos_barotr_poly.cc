@@ -1,6 +1,7 @@
 #include "eos_barotr_poly.h"
 #include "eos_barotr_poly_impl.h"
 #include <cmath>
+#include <limits>
 #include <stdexcept>
 
 using namespace std;

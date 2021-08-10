@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <limits>
 #include <string>
 #include "con2prim_imhd.h"
 #include "eos_thermal_file.h"

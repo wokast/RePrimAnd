@@ -5,6 +5,7 @@
 #include "con2prim_imhd_internals.h"
 #include <cassert>
 #include <cmath>
+#include <limits>
 #include "find_roots.h"
 
 using namespace EOS_Toolkit;
