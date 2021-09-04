@@ -106,9 +106,20 @@ auto f_upper::initial_bracket() const -> interval<real_t>
   real_t mu0       = 1. / h0;
   real_t rfsqr_min = rfsqr_from_mu_x(mu0, x_from_mu(mu0));
   real_t mu_max    = 1.0 / sqrt(h0sqr + rfsqr_min);
+  //mathematically, mu_max >= mu_min as long as r^2,b^2, r^l b_l
+  //respect Schwarz inequality. However, it is possible that 
+  // mu_min=mu_max, which is why we have to account for roundoff 
+  // errors
   real_t margin    = 10*std::numeric_limits<real_t>::epsilon();
   mu_max *= 1.0 + margin;
   mu_min *= 1.0 - margin;
+  // If this ad-hoc margin was not enough, we just use a much wider 
+  // bracket (the original one given in the article).
+  if (mu_max <= mu_min) 
+  { 
+    mu_min = 0;
+    mu_max = mu0 * (1.0 + margin);
+  }
   assert(mu_max > mu_min);
   return {mu_min, mu_max};
 }
