@@ -41,19 +41,18 @@ rm -rf ${BUILD_DIR} ${INSTALL_DIR}
 mkdir ${BUILD_DIR} ${INSTALL_DIR}
 
 echo "REPRIMAND: Unpacking archive..."
-pushd ${BUILD_DIR}
+pushd ${BUILD_DIR} >/dev/null
 ${TAR?} xJf ${SRCDIR}/../dist/${NAME}.tar.xz
 
 echo "REPRIMAND: Configuring..."
-cd ${NAME}
-meson setup mesonbuild --libdir=lib --prefix=${REPRIMAND_DIR} --default-library=static --buildtype=debugoptimized -Dbuild_documentation=false -Dbuild_benchmarks=false -Dbuild_tests=false
+cd ${NAME}/library
 
 echo "REPRIMAND: Building..."
-ninja -C mesonbuild
+${MAKE} -f ${SRCDIR}/../dist/Makefile DESTDIR=${REPRIMAND_DIR}
 
 echo "REPRIMAND: Installing..."
-meson install -C mesonbuild
-popd
+${MAKE} -f ${SRCDIR}/../dist/Makefile DESTDIR=${REPRIMAND_DIR} install
+popd >/dev/null
 
 echo "REPRIMAND: Cleaning up..."
 rm -rf ${BUILD_DIR}
