@@ -69,8 +69,15 @@ echo "REPRIMAND_BUILD       = ${REPRIMAND_BUILD}"
 echo "REPRIMAND_INSTALL_DIR = ${REPRIMAND_INSTALL_DIR}"
 echo "END MAKE_DEFINITION"
 
+# Set default options if not all variables were set by user input
+if [ "${REPRIMAND_DIR}" != 'NO_BUILD' ]; then
+    : ${REPRIMAND_INC_DIRS="${REPRIMAND_DIR}/include"}
+    : ${REPRIMAND_LIB_DIRS="${REPRIMAND_DIR}/lib"}
+fi
+: ${REPRIMAND_LIBS='RePrimAnd'}
 
-set_make_vars "REPRIMAND" "$REPRIMAND_LIBS" "$REPRIMAND_LIB_DIRS" "$REPRIMAND_INC_DIRS"
+REPRIMAND_LIB_DIRS="$(${CCTK_HOME}/lib/sbin/strip-libdirs.sh $REPRIMAND_LIB_DIRS)"
+REPRIMAND_INC_DIRS="$(${CCTK_HOME}/lib/sbin/strip-incdirs.sh $REPRIMAND_INC_DIRS)"
 
 # Pass options to Cactus
 echo "BEGIN MAKE_DEFINITION"
