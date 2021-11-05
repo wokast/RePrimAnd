@@ -36,6 +36,7 @@ class global_registry {
   bool add_(std::string name, const F* f) 
   {
     assert(f != nullptr);
+    // RH: maybe throw an exception if f and the already registered one differ (eg bug when trying to add a new type but using the old name)?
     if (reg.find(name) != reg.end()) {
       return false;
     }
@@ -47,6 +48,7 @@ class global_registry {
   {
     auto i = reg.find(name);
     if (i == reg.end()) {
+      // RH: include known names? There's only a few anyway.
       std::string msg = std::string("GlobalRegistry: entry ") + name 
                          + std:: string(" not found") ;
       throw std::runtime_error(msg);

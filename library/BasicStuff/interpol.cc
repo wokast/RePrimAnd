@@ -12,10 +12,12 @@ namespace {
 real_t get_log_map_offset(real_t a, real_t b, int mags)
 {
   if (mags <= 0) {
+    // RH: output mags value? Could help debug it.
     throw std::range_error("lookup_table_magx: magnitude bound "
                            "not strictly positive");
   }
   if (a<0) {
+    // RH: output a value? Could help debug it.
     throw std::range_error("lookup_table_magx: independent variable "
                            "range includes negative values");
   }
@@ -24,6 +26,7 @@ real_t get_log_map_offset(real_t a, real_t b, int mags)
   real_t ofs = std::max(0.0, (m10*b - a) / (1.0 - m10));
 
   if (a+ofs <= 0) {
+    // RH: output bad range
     throw std::range_error("lookup_table_magx: cannot handle "
                            "magnitude range");
   }
@@ -51,6 +54,7 @@ lookup_table::lookup_table(func_t func, range_t range,
 : y{}, rgx{range}
 {
   if (npoints < 2) {
+    // RH: output bad number of points
     throw std::range_error("lookup_table: need as least two "
                            "sample points");
   }
@@ -71,6 +75,7 @@ lookup_table::lookup_table(func_t func, range_t range,
 If x is outside the tabulated range, the function value at the 
 closest boundary is returned
 */
+// RH: document that this is linerar interpolation?
 real_t lookup_table::operator()(real_t x) const
 {
   x = range_x().limit_to(x);
@@ -88,11 +93,13 @@ real_t lookup_table::operator()(real_t x) const
 
 
 
+// RH: what does this constructor do?
 lookup_table_magx::lookup_table_magx(func_t func, range_t range, 
                                      size_t npoints, int magnitudes)
 : rgx{range},
   x_offs{get_log_map_offset(range.min(), range.max(), magnitudes)}
 {
+  // RH: if speed is an issue, I have found that exp2 (and log2 etc) are faster than exp (presumably b/c the base is "nice"). They are POSIX and C99 functions so in C++11 I think.
   auto gunc = [this, &func] (real_t lgx) {
     return func(exp(lgx) - x_offs);
   };
@@ -128,6 +135,7 @@ cspline_mono::cspline_mono(const std::vector<real_t>& x_,
   
 }
 
+// RH: seems odd that valid() is used to return an object rather than just a bool. Is this use visible?
 auto cspline_mono::valid() const 
 -> const cspline_mono_impl&
 {
@@ -139,6 +147,7 @@ auto cspline_mono::valid() const
 
 auto cspline_mono::range_x() const -> const range_t& 
 {
+  // RH: odd use of valid I have to say.
   return valid().range_x();
 }
 
@@ -157,6 +166,7 @@ wrap_interp_accel::wrap_interp_accel()
 : p{gsl_interp_accel_alloc()}
 {
   if (p==nullptr) {
+    // RH: I would not say that. Rather output gsl_strerror
     throw std::runtime_error("cspline_mono: could not allocate memory");
   }
 }
@@ -171,19 +181,23 @@ detail::wrap_interp_cspline::wrap_interp_cspline(
 {
   const int min_points = 5;
   if (x.size() < min_points) {
+    // RH: spell out minimum required and number provided by user
     throw std::invalid_argument("cspline_mono: not enough "
                                 "interpolation points");
   }
   if (x.size() != y.size()) {
+    // RH: output both x and y size
     throw std::invalid_argument("cspline_mono: array size mismatch");
   }
   if (!is_strictly_increasing(x)) {
+    // RH: show first non-increasing value (and index)?
     throw std::runtime_error("cspline_mono: x-values must be strictly "
                              "increasing");
   }
 
   p = gsl_interp_alloc(gsl_interp_steffen, x.size());
   if (p == nullptr) {
+    // RH: I would not say that. Rather output gsl_strerror
     throw std::runtime_error("cspline_mono: could not allocate memory");
   }
   gsl_interp_init(p, &(x[0]), &(y[0]), x.size());

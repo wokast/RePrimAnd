@@ -212,11 +212,13 @@ class h5ext {
   h5ext(const h5dspc& dspc) {
     if (N != H5Sget_simple_extent_ndims(dspc.use())) 
     {
+      // RH: report the number of dim found
       throw std::runtime_error(
                  "HDF5: wrong number of dataset dimensions.");
     }
     if (N != H5Sget_simple_extent_dims(dspc.use(), &(ext[0]), nullptr)) 
     {
+      // RH: report the extents found
       throw std::runtime_error(
                  "HDF5: problem getting dataset extent.");
     }

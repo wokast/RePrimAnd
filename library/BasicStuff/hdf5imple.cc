@@ -6,6 +6,7 @@ namespace EOS_Toolkit {
 void read(const h5attr& a, bool& b)
 {
   int i;
+  // RH: where is read(hattr& a, int& i) defined?
   read(a,i);
   b = (i != 0);
 }
@@ -24,6 +25,7 @@ void read(const h5attr& a, std::string& d)
   char* buf = nullptr;
   
   if (H5Aread(a.use(), t.use(), &buf) < 0) {
+    // RH: generically when an error is reported, it would be best if the error number was included
     throw std::runtime_error("HDF5: problem reading attribute");
   }
   

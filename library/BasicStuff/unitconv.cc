@@ -5,10 +5,12 @@
 using namespace std;
 using namespace EOS_Toolkit;
 
+// RH: spell out where these come from. In particular G is not terrible constant.
 const double units::c_SI      = 299792458.0;
 const double units::G_SI      = 6.673e-11;
 const double units::M_sun_SI  = 1.98892e30;
 
+// RH: these be in a EOS_Toolkit namespace to avoid conflicts with other objects units
 
 units units::geom_ulength(double ulength)
 {
