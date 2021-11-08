@@ -17,6 +17,7 @@ because it has simpler units than
 \f$ K = \rho_p^{-1/n} \f$.
 */
 class eos_barotr_poly : public eos_barotr_impl {
+  // RH: make all of these const to avoid accidnetially changing them?
   range rgrho;
   range rggm1;
   const real_t min_h{1.0};

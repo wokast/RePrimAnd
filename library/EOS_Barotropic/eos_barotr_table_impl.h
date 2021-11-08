@@ -24,6 +24,7 @@ class eos_barotr_table : public eos_barotr_impl {
   const bool isentropic;  ///< If EOS is isentropic
   const bool hasefrac;    ///< If EOS has electron fraction information
 
+  // RH: make all const?
   const range rgrho;
   const range rggm1;
 

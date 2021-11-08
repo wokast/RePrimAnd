@@ -10,11 +10,14 @@ using namespace EOS_Toolkit::implementations;
 
 void eos_barotr_poly::init(real_t n_, real_t rmd_p_, real_t rho_max_) 
 {
+  // RH: n==0 is invalid since you compute gamm = 1. + 1./n isn't it?
   if (n_<0) {
+    // RH: output invalid value
     throw std::range_error("eos_barotr_poly: "
                            "negative polytropic index"); 
   }
   if (rho_max_ <= 0) {
+    // RH: output invalid value (at least nan or <0 are of interest)
     throw runtime_error("eos_barotr_poly: maximum density must be "
                         "strictly positive");
   }

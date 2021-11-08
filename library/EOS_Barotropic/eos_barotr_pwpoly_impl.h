@@ -10,6 +10,7 @@ namespace implementations {
 ///Class representing a segment of the piecewise polytropic EOS
 class eos_poly_piece {
   public:
+  // RH: make const?
   real_t rmd0;
   real_t dsed;
   real_t gamma;

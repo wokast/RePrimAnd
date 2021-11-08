@@ -94,6 +94,7 @@ real_t eos_poly_piece::rho_max_save(real_t rho_max) const
   if ( n>=1 ) return rho_max;
   const real_t gm1_save{ std::max(gm10, (n + dsed) / (1.0 - n)) };
   const real_t rho_save{ rho_from_gm1(gm1_save) };
+  // RH: document this choice of 10 epsilon? I assume its mostly just a good enough guess?
   const real_t margin { 10*std::numeric_limits<real_t>::epsilon() };
   
   return std::min(rho_max, rho_save * (1.0 - margin));
@@ -102,6 +103,7 @@ real_t eos_poly_piece::rho_max_save(real_t rho_max) const
 bool eos_poly_piece::rho_save_up_to(real_t rho) const
 {
   if (n >= 1) return true;
+  // RH: a cs == 1 would technically still be ok wouldn't it? I have seen EOS with cs==1 proposed.
   return csnd_from_gm1(gm1_from_rho(rho)) < 1;
 }
 
@@ -112,17 +114,21 @@ eos_barotr_pwpoly::eos_barotr_pwpoly(real_t rmdp0,
   real_t rho_max_)
 {
   if (rho_max_ <= 0) {
+    // RH: output bad value
     throw runtime_error("eos_barotr_pwpoly: maximum density must be "
                         "strictly positive");
   }
   if (segm_bound.size() != segm_gamma.size()) {
+    // RH: output bad value
     throw runtime_error("eos_barotr_pwpoly: vector sizes mismatch.");
   }
   if (segm_bound.empty()) {
+    // RH: add "got none"
     throw runtime_error("eos_barotr_pwpoly: need at least one "
                         "segment.");
   }
   if (segm_bound[0] != 0) {
+    // RH: output bad value
     throw runtime_error("eos_barotr_pwpoly: First segment has to "
                         "start at zero density.");
   }
@@ -130,6 +136,7 @@ eos_barotr_pwpoly::eos_barotr_pwpoly(real_t rmdp0,
   for (std::size_t i = 1; i < segm_bound.size(); ++i) 
   {
     if (segm_bound[i] <= segm_bound[i-1]) {
+      // RH: output bad values?
       throw runtime_error("eos_barotr_pwpoly: segment boundary "
                           "densities not strictly increasing.");      
     }
@@ -138,8 +145,10 @@ eos_barotr_pwpoly::eos_barotr_pwpoly(real_t rmdp0,
   auto ibnd = segm_bound.begin();
   auto iga  = segm_gamma.begin();
 
+  // RH: spell out what 0, 0 are?
   segments.emplace_back(0, 0, *iga, rmdp0);
 
+  // RH: add checkit that segm_bound and segm_gamma are same size (or differ by 1 really)?
   while ((++ibnd != segm_bound.end()) 
          && (++iga != segm_gamma.end())) 
   {
@@ -169,6 +178,7 @@ eos_barotr_pwpoly::eos_barotr_pwpoly(real_t rmdp0,
 const eos_poly_piece& 
 eos_barotr_pwpoly::segment_for_rho(real_t rho) const
 {
+  // RH: does speed matter here? Would it then make sense to use bisection?
   auto i = segments.rbegin();
   while (i->rmd0 > rho) {
     if (++i == segments.rend()) return segments[0];
@@ -180,6 +190,7 @@ eos_barotr_pwpoly::segment_for_rho(real_t rho) const
 const eos_poly_piece& 
 eos_barotr_pwpoly::segment_for_gm1(real_t gm1) const
 {
+  // RH: does speed matter here? Would it then make sense to use bisection?
   auto i = segments.rbegin();
   while (i->gm10 > gm1) {
     if (++i == segments.rend()) return segments[0];

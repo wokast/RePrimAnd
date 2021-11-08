@@ -47,6 +47,7 @@ eos_barotr reader_eos_barotr_table::load(const h5grp& g,
       (!v_temp.empty() && v_temp.size() != sz) ||
       (!v_ye.empty() && v_ye.size() != sz))
   {
+    // RH: show bad value
     throw std::runtime_error("Corrupt tabulated barotropic EOS file "
                              "(mismatching table sizes)"); 
   }

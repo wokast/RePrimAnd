@@ -17,6 +17,7 @@ See eos_cold for notation used and eos_cold_api for a description of
 the member functions.
 */
 class eos_barotr_gpoly : public eos_barotr_impl {
+  // RH: make these const members? To avoid ever accidentally changing them?
   range rgrho;
   range rggm1;
   

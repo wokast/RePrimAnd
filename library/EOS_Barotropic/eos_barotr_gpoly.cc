@@ -68,6 +68,7 @@ real_t eos_barotr_gpoly::hm1(real_t gm1) const
 real_t eos_barotr_gpoly::csnd(real_t gm1) const
 {
   //TODO: check
+  //RH: please doe
   real_t h1 = hm1(gm1);
   real_t cs2 = h1/(n*(h1+1));
   return sqrt(cs2);

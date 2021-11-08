@@ -33,17 +33,22 @@ eos_barotr_table::eos_barotr_table(
   if ((rho_gm1.range_y().min() < 0.0) 
         || (gm1_rho.range_x().min() < 0.0)) {
     throw runtime_error("eos_barotr_table: negative mass density");
+    // RH: distinguish between rho_gm1 and gm1_rho in output. Show bad value.
   }
   if (cs2_gm1.range_y().max() >= 1.0) {
+    // RH: show bad value
     throw runtime_error("eos_barotr_table: superluminal sound speed");
   }
   if (cs2_gm1.range_y().min() <= 0.0) {
+    // RH: show bad value (also 0.0 is not imaginary)
     throw runtime_error("eos_barotr_table: imaginary sound speed");
   }
   if (pbr_gm1.range_y().min() <= 0.0) {
+    // RH: show bad value (also add "minimum" to all error messages
     throw runtime_error("eos_barotr_table: pressure <= 0");
   }
   if (gm1_rho.range_y().min() < 0.0) {
+    // RH: show bad value (also add "minimum" to all error messages
     throw runtime_error("eos_barotr_table: encountered g < 1");
   }
   
@@ -51,6 +56,7 @@ eos_barotr_table::eos_barotr_table(
     temp_gm1 = {std::move(temp_), rg_gm1_, nsamples_, magnitudes_};
     temp0    = temp_gm1(rg_gm1_.min());
     if (temp_gm1.range_y().min() < 0.0) {
+      // RH: show bad value (also add "minimum" to all error messages
       throw runtime_error("eos_barotr_table: encountered negative "
                           "temperature");
     }
@@ -136,6 +142,7 @@ eos_barotr EOS_Toolkit::make_eos_barotr_table(
 {
   const size_t tsize = rho.size();
   if (tsize<5) {
+    // RH: show bad value
     throw std::invalid_argument("make_eos_barotr_table: want at least "
                                 "5 sample points");
   }
@@ -144,6 +151,7 @@ eos_barotr EOS_Toolkit::make_eos_barotr_table(
       ((!temp.empty()) && (temp.size() != tsize)) ||
       ((!efrac.empty()) && (efrac.size() != tsize))) 
   {
+    // RH: show bad value
     throw std::invalid_argument("make_eos_barotr_table: number of "
                       "samples for different quantities don't match");
   }
@@ -163,6 +171,7 @@ eos_barotr EOS_Toolkit::make_eos_barotr_table(
   
   assert(ngm1[0]>0);
   
+  // RH: so you are actually attaching a cubic spline and not a generic polynomial?
   cspline_mono sgm1{rho, ngm1};
   cspline_mono srho{ngm1, rho};
   cspline_mono seps{ngm1, eps};
@@ -175,6 +184,7 @@ eos_barotr EOS_Toolkit::make_eos_barotr_table(
   eos_barotr_table::func_t sefrac{nullptr};
   if (!efrac.empty()) sefrac = cspline_mono{ngm1, efrac};
   
+  // RH: will you address the TODO?
   const std::size_t nsample = 10*rho.size(); //TODO: better criterion
   
   const int i50       = int(ceil(rho.size()/2.));
