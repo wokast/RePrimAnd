@@ -7,6 +7,7 @@ namespace EOS_Toolkit {
 namespace implementations {
 
 class eos_hybrid : public eos_thermal_impl {
+  // RH: make these all const?
   eos_barotr eos_c;
   real_t gamma_th, gm1_th, eps_max;
   range rgrho;      ///< Valid range for density \f$ \rho \f$

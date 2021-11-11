@@ -19,6 +19,7 @@ eos_hybrid::eos_hybrid(eos_barotr eos_c_,  real_t gamma_th_,
   if (!eos_c.is_zero_temp())
     throw runtime_error("eos_hybrid: cold EOS not zero temperature");
   if ((gamma_th>2) || (gamma_th<=1)) {
+    // RH: output bad value
     throw runtime_error("eos_hybrid: gamma_thermal must be in the "
                         "range (1,2]");
   }  
