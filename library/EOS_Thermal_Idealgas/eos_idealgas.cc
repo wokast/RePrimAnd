@@ -13,8 +13,10 @@ eos_idealgas::eos_idealgas(real_t n_, real_t max_eps_, real_t max_rho_)
   rgye{0., 1.}, min_h{1.}
 {
   if (n_ < 0) {
+    // RH: output bad value
     throw runtime_error("eos_idealgas: initialized with gamma < 1");
   } 
+  // RH: it's documented but personally I tend to dislike if I provide numbers to sofware which then deicdes "you could not possibly have menat that" and does something else. maybe document the allowed max and abort if violated?
   if (gamma > 2.0) { // Ensure subluminal Soundspeed and P < E
     max_eps_ = min(max_eps_, 1.0 / (gamma*(gamma - 2.0)));
   }
@@ -34,6 +36,7 @@ real_t eos_idealgas::press(real_t rho, real_t eps, real_t ye) const
 /**
 Using the formula 
 \f[ c_s^2 = \frac{\left(\Gamma - 1\right) \epsilon}{\epsilon + 1/\Gamma} \f]
+// RH: add the sqrt to the LaTeX expression above?
 **/
 real_t eos_idealgas::csnd(real_t rho, real_t eps, real_t ye) const
 {
@@ -59,6 +62,7 @@ real_t eos_idealgas::dpress_deps(real_t rho, real_t eps,
 
 real_t eos_idealgas::sentr(real_t rho, real_t eps, real_t ye) const
 {
+  // RH: is the type of the error documented? And match what is thrown?
   throw logic_error("eos_idealgas: entropy not implemented");
 }
 

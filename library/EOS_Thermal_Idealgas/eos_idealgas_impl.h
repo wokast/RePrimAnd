@@ -17,6 +17,7 @@ re-interpretation where it is zero along some polytrope. The entropy is
 currently not implemented.
 **/
 class eos_idealgas : public eos_thermal_impl {
+  // RH: make const?
   real_t gamma, gm1;
   range rgrho;      ///< Valid range for density \f$ \rho \f$
   range rgye;       ///< Valid range for electron fraction \f$ Y_e \f$

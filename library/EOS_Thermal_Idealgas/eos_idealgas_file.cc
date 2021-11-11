@@ -19,6 +19,7 @@ const bool register_reader_eos_thermal_idealgas {
 eos_thermal reader_eos_thermal_idealgas::load(const h5grp& g, 
                                            const units& u) const
 {
+  // RH: (for all EOS actually) are these attributes documented?
   real_t n_adiab   = get_attribute<real_t>(g, "adiab_index");
   real_t eps_max   = get_attribute<real_t>(g, "eps_max");
   real_t rho_max   = get_attribute<real_t>(g, "rho_max") / u.density();
