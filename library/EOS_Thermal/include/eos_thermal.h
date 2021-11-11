@@ -72,6 +72,7 @@ class eos_thermal : detail::eos_thermal_base {
     @return Specific internal energy \f$ \epsilon \f$ 
     
     \post Guarantees \f$ \epsilon \ge -1 \f$ 
+    // RH: different guarantee than given in https://www.atlas.aei.uni-hannover.de/holohome/wolfgang.kastaun/doc/reprimand/latest/eos_thermal_feat.html
     \throws std::runtime_error if state is invalid 
     **/
     auto eps() const -> real_t;
@@ -420,6 +421,7 @@ class eos_thermal : detail::eos_thermal_base {
   
   \throws std::runtime_error if temperature not available for EOS      
   \throws std::runtime_error if called for unitialized object
+  // RH: might be good to define your own error type to distinguish from generic stdc++ errors
   **/
   auto dpress_deps_at_rho_temp_ye(real_t rho, real_t temp, 
                                   real_t ye) const -> real_t;

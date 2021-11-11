@@ -30,6 +30,7 @@ class eos_thermal_impl {
   eos_thermal_impl& operator=(eos_thermal_impl &&)      = delete;
   
   //Virtual destructor
+  // RH: redundant comment. I can tell it's virtual and that it is a destructor. You seem to want to emphasize that a virtual destructor is highly advised for a class with virtual functions (and thus may be destroyed via a pointer to its base class)?
   virtual ~eos_thermal_impl();
 
   /**

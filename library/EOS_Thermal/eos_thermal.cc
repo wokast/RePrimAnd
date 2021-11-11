@@ -97,12 +97,14 @@ auto eos_thermal::state::press() const -> real_t
 {
   real_t p = eos().press(rho(), therm(), ye());  
   assert(p >= 0);
+  // RH: you assert p>=0 but never eg ye>=0 or rho>=0 which I assume ais also an assumed realtion? Only b/c p is computed ubt rho, ye are "given"?
   return p;
 }
 
 auto eos_thermal::state::csnd() const -> real_t 
 {
   real_t cs = eos().csnd(rho(), therm(), ye());  
+  // RH: technically cs == 1.0 would be valid, and I have seen such EOS proposed
   assert(cs < 1.0);
   assert(cs >= 0);
   return cs;
@@ -118,6 +120,7 @@ auto eos_thermal::state::temp() const -> real_t
 auto eos_thermal::state::eps() const -> real_t
 {
   real_t eps = eos().eps(rho(), therm(), ye());  
+  // RH: the docs (https://www.atlas.aei.uni-hannover.de/holohome/wolfgang.kastaun/doc/reprimand/latest/eos_thermal_feat.html) only state eps_min(rho, Ye) < eps without mentioning this limit on eps_min.
   assert(eps >= -1);
   return eps;
 }
@@ -169,9 +172,11 @@ auto eos_thermal::range_ye() const -> const range&
 auto eos_thermal::range_eps(real_t rho, real_t ye) const -> range 
 {
   if (!is_rho_valid(rho))
+    // RH: output bad value
     throw range_error("eos_thermal: specific energy range for "
                       "invalid density requested");
   if (!is_ye_valid(ye))
+    // RH: output bad value
     throw range_error("eos_thermal: specific energy range for "
                       "invalid electron fraction requested");
 
@@ -182,9 +187,11 @@ auto eos_thermal::range_eps(real_t rho, real_t ye) const -> range
 auto eos_thermal::range_temp(real_t rho, real_t ye) const -> range
 {
   if (!is_rho_valid(rho))
+    // RH: output bad value
     throw range_error("eos_thermal: temperature range for "
                       "invalid density requested");
   if (!is_ye_valid(ye))
+    // RH: output bad value
     throw range_error("eos_thermal: temperature range for "
                       "invalid electron fraction requested");
   return impl().range_temp(rho, ye);

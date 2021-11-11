@@ -48,6 +48,7 @@ class eos_thermal_base {
     state_base() = default;
     state_base(const impl_t& i, real_t rho, 
                       real_t therm, real_t ye)
+    // RH: this blindly trusts the user to provide valid data, does it? Eg this is different from calling is_FOO_valid on each of the individual variables in the state.
     : p(i), ok{true}, rho_(rho), therm_(therm), ye_(ye) {}
     
 
