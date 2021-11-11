@@ -1,3 +1,4 @@
+# RH: provide this as an ET utility
 import numpy as np
 import h5py
 
