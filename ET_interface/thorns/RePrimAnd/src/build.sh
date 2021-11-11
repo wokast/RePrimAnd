@@ -28,6 +28,7 @@ fi
 DONE_FILE=${SCRATCH_BUILD}/done/${THORN}
 REPRIMAND_DIR=${INSTALL_DIR}
 
+# RH: remove commented out code
 # Set up environment
 #unset LIBS
 #if echo '' ${ARFLAGS} | grep 64 > /dev/null 2>&1; then
