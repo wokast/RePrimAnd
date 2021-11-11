@@ -23,6 +23,7 @@ auto findroot_using_deriv(F& f,
       int digits, unsigned int max_calls=20) -> T
 {
   if (max_calls < 4) {
+    // RH: output value provided, output minimum allowed, document minimum allowed
     throw std::range_error("Root finding call limit set too low for "
                            "meaningful results");
   }
@@ -30,6 +31,7 @@ auto findroot_using_deriv(F& f,
   T f_left  { f(bracket.min()).first }; 
   T f_right { f(bracket.max()).first }; 
     
+  // RH: this is surprising (and thus may justify a comment). Why reduce by 2?
   max_calls -= 2;
     
   if (f_left * f_right >= 0) {
@@ -72,6 +74,7 @@ template<class F, class T = typename  F::value_t>
 auto findroot_no_deriv(F& f, interval<T> bracket, T tol, 
        unsigned int max_calls, ROOTSTAT& errs) -> interval<T>
 {
+  // RH: output value provided, output minimum allowed, document minimum allowed
   if (max_calls < 10) {
     throw std::range_error("Root finding call limit set too low for "
                       "meaningful results");
@@ -98,6 +101,7 @@ auto findroot_no_deriv(F& f, interval<T> bracket, T tol,
     return f.stopif(l, r-l, tol);
   };
   
+  // RH: this is surprising (and thus may justify a comment). Why reduce by 2?
   max_calls    -= 2;
   boost::uintmax_t iters{ max_calls };
   

@@ -24,6 +24,7 @@ class froot {
   using range   = eos_thermal::range;
   using report  = c2p_mhd_report;
 
+  // RH: it's just whitespace but since you seem to align it... the comments below are not aligned.
   const eos_thermal eos;    ///< The EOS.
   const real_t h0;         ///< Lower bound for enthalpy, \f$ h_0 \f$
   const range rho_range;    ///< Valid density interval of the EOS. 
@@ -45,6 +46,7 @@ class froot {
   real_t qf_from_mu_x(real_t mu, real_t x) const;
   
   ///Computes specific energy from conserved fluid variables and velocity. 
+  // RH: "get" seems an odd name given that it is a static function so cannot "get" anything out of an object, it can only "compute"
   static real_t get_eps_raw(real_t mu,  real_t qf, 
                             real_t rfsqr, real_t w);  
   
@@ -53,6 +55,7 @@ class froot {
      
   public:
   
+  // RH: is this actually used? everything below is explicitly real_t. What *would* happen if real_t and value_t were different?
   using value_t = real_t; 
 
 
@@ -107,6 +110,7 @@ class froot {
 ///Class representing the auxiliary root function 
 class f_upper {
   public:
+  // RH: is this actually used? everything below is explicitly real_t. What *would* happen if real_t and value_t were different?
   using value_t = real_t;
   
   /// Constructor
@@ -150,6 +154,7 @@ class f_rare {
   const froot& f;
 
   public:
+  // RH: is this actually used? everything below is explicitly real_t. What *would* happen if real_t and value_t were different?
   using value_t = real_t;
   
   f_rare(
@@ -161,6 +166,7 @@ class f_rare {
 };
 
 ///Class for handling rare corner case 
+// RH: is this case documented? In the paper?
 class rarecase {  
   public:
   rarecase(

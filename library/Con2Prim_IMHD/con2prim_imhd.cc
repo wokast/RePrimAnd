@@ -20,9 +20,12 @@ con2prim_mhd::con2prim_mhd(eos_thermal eos_, real_t rho_strict_,
   ye_lenient(ye_lenient_), z_lim(z_lim_),
   bsqr_lim(b_lim_*b_lim_), atmo(atmo_), acc(acc_), max_iter(max_iter_)
 {
+  // RH: check that zlim < 1.0 ?
   w_lim = sqrt(1.0 + z_lim*z_lim);
   v_lim = z_lim / w_lim;
 }
+
+// RH: for all of these expressions: refer to equation in paper (and DOI of paper)?
 
 /**
 Requires basic physical constraints
@@ -39,6 +42,7 @@ f_upper::f_upper(real_t h0_, real_t rsqr_,
   real_t rbsqr_, real_t bsqr_)
 : h0(h0_), h0sqr(h0_*h0_), rsqr(rsqr_), rbsqr(rbsqr_), bsqr(bsqr_)
 {
+  // RH: assert is a no-op if NDEBUG is defined, the docs do not state that this is a debug only test (in the sense of the that it can be disabled)
   assert(h0 > 0);
   assert(rsqr >= 0);
   assert(rbsqr >= 0);
@@ -156,6 +160,7 @@ froot::froot(const eos_thermal& eos_, real_t valid_ye,
 
 
 /**
+// RH: these are kind of redundant in that they just cast the code as LaTeX without any explanantion.
 Computes 
 \f[ x = \frac{y}{y+b^2} = \frac{1}{1 + \mu b^2} \f]
 **/
@@ -205,6 +210,7 @@ real_t froot::get_eps_raw(const real_t mu, const real_t qf,
 /**
 This implements the master root function as defined in the 
 article.
+/RH: provide DOI, proper reference, euqaion number in reference
 **/
 real_t froot::operator()(const real_t mu) 
 {
@@ -381,7 +387,7 @@ void con2prim_mhd::operator()(prim_vars_mhd& pv, cons_vars_mhd& cv,
       errs.set_root_conv();
     }
     else if (status == ROOTSTAT::NOT_BRACKETED) {
-      if (nc.rho_big) { //That's why
+      if (nc.rho_big) { //That's why // RH: why comment here and not aboe just under rarecase instantiation?
         errs.set_range_rho(d, d);
         set_to_nan(pv, cv);
         return;
@@ -432,6 +438,7 @@ void con2prim_mhd::operator()(prim_vars_mhd& pv, cons_vars_mhd& cv,
   pv.eps    = sol.eps;
   pv.ye     = sol.ye;
   pv.press  = sol.press;
+  // RH: if possible I would give the equation number from te paper that thsi impelemnts
   pv.vel    = sol.lmu * sol.x  * (ru + (rb * sol.lmu) * bu);
   pv.w_lor  = sol.w;
 
@@ -471,6 +478,7 @@ f_rare::f_rare(real_t wtarg_, const froot& f_)
 
 /**
 This implements a root function for finding mu from W_hat
+// RH: give equation number from paper (and paper of couese)
 **/
 auto f_rare::operator()(const real_t mu) const 
 -> std::pair<real_t, real_t>
@@ -500,6 +508,7 @@ rarecase::rarecase(const interval<real_t> ibracket,
   real_t muc0 = ibracket.min();
   real_t muc1 = ibracket.max();
   const int ndigits = 30;
+  // RH: is there a specific reason to choose ndigits = 30? If so it should be recorded, if not this should also be recorded
           
   
   if (f.d > rgrho.max()) {
@@ -548,6 +557,7 @@ rarecase::rarecase(const interval<real_t> ibracket,
       }
     }
   }
+  // RH: what happens in the case f.d >= f.winfo * rgrho.min()? If that can never happen, why the if statement? At least this code is odd in that it check for the "regular" cases and the ecewptional case (not in range) seems to be the default
 
   bracket = interval<real_t>{muc0, muc1};
 }

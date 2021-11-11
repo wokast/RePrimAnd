@@ -32,6 +32,7 @@ class con2prim_mhd {
 
   /**\brief Constructor
   @param eos_          The EOS
+  // RH: "most corrections" should be documented
   @param  rho_strict_  Density above which most corrections 
                        are forbidden (strict regime)
   @param ye_lenient_   Whether to allow restricting the electron 
@@ -40,6 +41,7 @@ class con2prim_mhd {
   @param z_lim_        Speed limit in terms of \f$ z = W v \f$
   @param b_lim_        Fail for magnetization \f$ b>b_\mathrm{lim} \f$
   @param atmo_         Specifies artificial atmosphere
+  // RH: instead of "article" provide the DOI or spell out the reference
   @param acc_          Required accuracy \f$ \Delta \f$ (see article).
   @param max_iter_     Maximum allowed iterations for root finding.
   **/
@@ -79,6 +81,7 @@ class con2prim_mhd {
   real_t get_v_lim() const {return v_lim;}
 
   /// Get prescribed limit on b
+  // RH: wouldn't it be nicer to return exactly what the user specified rather than squaring and sqrt'ing it? (which can change bits and confuse people)
   real_t get_b_lim() const {return std::sqrt(bsqr_lim);}
   
   /// Get prescribed atmosphere 
@@ -89,6 +92,7 @@ class con2prim_mhd {
   const eos_thermal eos;         
   const real_t rho_strict;       
   const bool ye_lenient;         
+  // RH: these are the only ones not marked as const. Why?
   real_t v_lim;                    
   real_t w_lim;                    
   const real_t z_lim;            

@@ -45,6 +45,7 @@ void c2p_mhd_report::set_nans_in_cons(real_t dens_, real_t qtot_,
   ye          = ye_;
 }
 
+// RH: since hte valid rho and eps range is not a constant but depends on other input, would it make sense to store (and output I assume) the full state.
 void c2p_mhd_report::set_range_rho(real_t dens_, real_t rho_)
 {
   status      = RANGE_RHO;
@@ -152,6 +153,7 @@ string c2p_mhd_report::debug_message() const
       os << "Speed limit exceeded, v=" << vel;
       break;
     case B_LIMIT:
+      // RH: does one have to worry about bsqr < 0. vs. bsqr == NaN?
       os << "Limit for magnetic field exceeded, b=" << std::sqrt(bsqr);
       break;
     case RANGE_YE:
@@ -171,6 +173,7 @@ string c2p_mhd_report::debug_message() const
       os << "Preparatory root finding failed (faulty bracketing)";
       break;
     default:
+      // RH: if you want to tell this to the compiler, then a builtin_notreached is the way to go, assert() can be a no-op if NDEBUG is set. I'd add the error string to the assert eg (0 && "Invalid error type. Should never happen. Code is messed up.")
       assert(false);
       os << "Invalid error type. Should never happen. Code is messed up.";
       break;

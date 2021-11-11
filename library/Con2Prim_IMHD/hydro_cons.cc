@@ -33,6 +33,7 @@ void cons_vars::from_prim(const prim_vars& pv, const sm_metric3& g)
   const sm_vec3l vl   = g.lower(pv.vel);
   const real_t hrho  = pv.rho * (1.0 + pv.eps) + pv.press;
   const real_t v2    = vl * pv.vel;
+  // RH: tabs... (only here it seems)
 	const real_t wl2   = pv.w_lor * pv.w_lor;
   dens                = g.vol_elem * pv.w_lor * pv.rho;
   scon                = (g.vol_elem * wl2 * hrho) * vl;
