@@ -101,17 +101,60 @@
 
 % Add an abstract for this thorn's documentation
 \begin{abstract}
+This thorn provides the RePrimAnd library.
 The RePrimAnd library is a support library for general relativistic
-magnetohydrodynamics, providing:
-\begin{itemize}
-\item An extensible, modular EOS framework (thermal + barotropic)
-\item An algorithm for primitive variable recovery in ideal GRMHD
-\end{itemize}
+magnetohydrodynamics independent of the EinsteinToolkit/Cactus. 
+It currently provides an EOS framework and an ideal GRMHD primitive variable 
+recovery algorithm.
 \end{abstract}
+\section{The RePrimAnd library}
+In detail, the following functionality is provided: 
+\begin{itemize}
+\item An algorithm for primitive variable recovery in ideal GRMHD
+\item Generic EOS interface
+\begin{itemize}
+\item Three-parametric EOS with thermal and composition effects
+\item One-parametric (barotropic) EOS
+\item Validity ranges and strict error handling
+\end{itemize}
+\item Various EOS implementations
+\begin{itemize}
+\item Polytropic
+\item Piecewise polytropic
+\item Tabulated barotropic
+\item Ideal gas
+\item Hybrid EOS
+\item Design allows adding custom EOSs 
+\end{itemize}
+\item Universal EOS file format 
+\end{itemize}
 
-Full documentation is available online at
+
+The algorithm for primitive variable recovery is EOS-agnostic and very robust. 
+The method and tests are described in~\cite{RePrimaAnd_PhysRevD.103.023018}. 
+Full documentation of the library is available online at
 \url{https://www.atlas.aei.uni-hannover.de/holohome/wolfgang.kastaun/doc/reprimand/latest/index.html}.
-The algorithms used are described in~\cite{RePrimaAnd_PhysRevD.103.023018}.
+
+RePrimAnd is written in C++ and completely independent of Cactus/Einstein Toolkit or any other 
+framework. The stand-alone version of the library can be found at
+\url{https://github.com/wokast/RePrimAnd}.
+The stand-alone version also provides unit tests and includes Python bindings. The latter
+could be used for post-processing, making it possible to, e.g., apply an EOS to numpy arrays. 
+
+\section{The RePrimAnd Thorn}
+This thorn simply makes the C++ interface available for use by ET thorns, but provides no further
+integration. In particular, the thorn provides no aliased functions and no Fortran interface.
+At the moment, the thorn also contains no test suite.
+Further thorns providing better integration are planned for the near future.
+
+Some remarks on EOS are in order. 
+First, there are two ways of specifying EOS, either creating them on-the-fly, or by loading 
+from EOS files in the universal format defined by RePrimAnd. At the moment, there is no public repository 
+for such EOS files. Users can however create such files themselves through a dedicated Python-API available in the 
+github repository (see online documentation). The file format will remain backwards-compatible for the foreseeable future.
+Second, the library allows the addition of custom EOS implementations without recompiling the library.
+The same holds for extending the universal EOS file format. It should not be necessary to change the library 
+source code for this. For details, see the online documentation.
 
 \begin{thebibliography}{9}
 \bibitem{RePrimaAnd_PhysRevD.103.023018}
