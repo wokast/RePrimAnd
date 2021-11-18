@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Features &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Interface" href="eos_barotr_interf.html" />
+    <link rel="prev" title="Barotropic EOS" href="eos_barotr.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<p>The library contains different types of one-parametric EOS that can
+be accessed through a generic <a class="reference internal" href="eos_barotr_interf.html#barotr-interface"><span class="std std-ref">interface</span></a>.
+It is quite simple to add custom EOS without modifying the library.</p>
+<p>The interface provides the following functions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(\rho)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon(\rho)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c_s(\rho)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(h(\rho)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_e(\rho)\)</span> (optionally)</p></li>
+<li><p><span class="math notranslate nohighlight">\(T(\rho)\)</span> (optionally)</p></li>
+</ul>
+<p>In addition, the global minimum <span class="math notranslate nohighlight">\(h_0&gt;0\)</span> of the enthalpy over the
+valid range is given for each EOS.</p>
+<p>Providing the electron fraction and temperature as function of mass
+density is mainly intendend for constructing initial data that is later
+evolved with the full EOS including thermal and composition effects.
+For example, <span class="math notranslate nohighlight">\(Y_e(\rho)\)</span> could correspond to beta-equilibrium.
+Specifying a non-zero temperature a function of mass density
+may seem strange, but might be useful to emulate a temperature
+gradient that happens to be aligned with the density gradient.</p>
+<p>We decided to not restrict the framework to isentropic EOS (but
+provide methods to querry this important EOS property).
+However, the temperature and electron fraction profiles are not
+completely unrestricted. The framework requires that</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d} P}{\mathrm{d} \rho} \ge 0\]</div>
+<p>This is required for use in initial data. For hydrostatic equilibrium
+in a gravitational field, the pressure gradient is nonzero. If the
+pressure were allowed to also decrease with density, the density at
+given pressure becomes multi-valued and the intial data ambiguous.</p>
+<p>In order to support constructing initial data, the interface
+also provides functions in terms of pseudo enthalpy</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(g(\rho)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho(g)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(g)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c_s(g)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(h(g)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_e(g)\)</span> (optionally)</p></li>
+<li><p><span class="math notranslate nohighlight">\(T(g)\)</span> (optionally)</p></li>
+</ul>
+<p>Here, the pseudo enthalpy is defined as</p>
+<div class="math notranslate nohighlight">
+\[g(P) = \exp\left(\int_0^P \frac{dP'}{\rho(P')h(P')}\right)
+\qquad \rightarrow g(0)=1\]</div>
+<p>which relies on the requirement that pressure never decreases with mass
+density. Note that if the EOS is isentropic, then <span class="math notranslate nohighlight">\(g=h\)</span> up to a
+constant factor.</p>
+<p>The pseudo enthalpy is useful for initial data, because under
+certain conditions hydrostatic equilibrium reduces to an invariant
+algebraic expression involving spacetime metric and pseudo enthalpy.
+Within a stationary neutron star, <span class="math notranslate nohighlight">\(g\)</span> is continuous, in contrast
+to mass density, which can have discontinuities.</p>
+<p>The pseudo enthalpy is anyway useful for parametrizing an EOS because,
+even if the EOS has phase transitions, <span class="math notranslate nohighlight">\(P(g)\)</span> is always
+continuous as well as invertible. Conversely, <span class="math notranslate nohighlight">\(g(\rho)\)</span> can have
+plateaus and <span class="math notranslate nohighlight">\(\rho(g)\)</span> can have discontinuities.
+Internally, we use <span class="math notranslate nohighlight">\(g\)</span> as independent variable for
+barotropic EOS, and functions based on <span class="math notranslate nohighlight">\(\rho\)</span> internally
+evaluate <span class="math notranslate nohighlight">\(g(\rho)\)</span> first.</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_interf.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_available.html">Available EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_files.html">EOS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_custom.html">Custom EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="eos_barotr.html">Barotropic EOS</a><ul>
+      <li>Previous: <a href="eos_barotr.html" title="previous chapter">Barotropic EOS</a></li>
+      <li>Next: <a href="eos_barotr_interf.html" title="next chapter">Interface</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/eos_barotr_feat.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

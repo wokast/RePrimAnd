@@ -1,0 +1,899 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Reference &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Barotropic EOS" href="eos_barotr.html" />
+    <link rel="prev" title="Custom EOS" href="eos_thermal_custom.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
+<section id="generic-interface">
+<h2>Generic Interface<a class="headerlink" href="#generic-interface" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11eos_thermalE">
+<span id="_CPPv3N11EOS_Toolkit11eos_thermalE"></span><span id="_CPPv2N11EOS_Toolkit11eos_thermalE"></span><span id="EOS_Toolkit::eos_thermal"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">eos_thermal</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">private</span></span><span class="w"> </span><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">eos_thermal_base</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11eos_thermalE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interface for generic thermal EOS. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11eos_thermal5rangeE">
+<span id="_CPPv3N11EOS_Toolkit11eos_thermal5rangeE"></span><span id="_CPPv2N11EOS_Toolkit11eos_thermal5rangeE"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1af84d79b04d0eb7e0ce88cfb8a3bd4eb6"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval"><span class="n"><span class="pre">interval</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11eos_thermal5rangeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Synonym for <a class="reference internal" href="little_helpers.html#classEOS__Toolkit_1_1interval"><span class="std std-ref">interval</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11eos_thermal11eos_thermalEv">
+<span id="_CPPv3N11EOS_Toolkit11eos_thermal11eos_thermalEv"></span><span id="_CPPv2N11EOS_Toolkit11eos_thermal11eos_thermalEv"></span><span id="EOS_Toolkit::eos_thermal::eos_thermal"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a9b6893e232ff03c96a66475e0b2084ff"></span><span class="sig-name descname"><span class="n"><span class="pre">eos_thermal</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11eos_thermal11eos_thermalEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default constructor. </p>
+<p>Creates uninitialized EOS. Any attemt to use resulting object throws an exception. One can use it after copying another EOS to it. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11eos_thermal11eos_thermalE8spimpl_t">
+<span id="_CPPv3N11EOS_Toolkit11eos_thermal11eos_thermalE8spimpl_t"></span><span id="_CPPv2N11EOS_Toolkit11eos_thermal11eos_thermalE8spimpl_t"></span><span id="EOS_Toolkit::eos_thermal::eos_thermal__spimpl_t"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a122a39bf8766b349e7256dde50f6b5b9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eos_thermal</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">spimpl_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eosp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11eos_thermal11eos_thermalE8spimpl_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor from pointer to implementation. </p>
+<p>This is intended for EOS implementors. Users should use the functions provided by a given implementation to obtain the EOS. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>eosp</strong> – Shared pointer to implementation </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11eos_thermal11eos_thermalERK11eos_thermal">
+<span id="_CPPv3N11EOS_Toolkit11eos_thermal11eos_thermalERK11eos_thermal"></span><span id="_CPPv2N11EOS_Toolkit11eos_thermal11eos_thermalERK11eos_thermal"></span><span id="EOS_Toolkit::eos_thermal::eos_thermal__eos_thermalCR"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1ab452d19b14d9eb2fb093ec1e4a6ae2ea"></span><span class="sig-name descname"><span class="n"><span class="pre">eos_thermal</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermal11eos_thermalERK11eos_thermal" title="EOS_Toolkit::eos_thermal::eos_thermal"><span class="n"><span class="pre">eos_thermal</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11eos_thermal11eos_thermalERK11eos_thermal" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copy constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11eos_thermalaSERK11eos_thermal">
+<span id="_CPPv3N11EOS_Toolkit11eos_thermalaSERK11eos_thermal"></span><span id="_CPPv2N11EOS_Toolkit11eos_thermalaSERK11eos_thermal"></span><span id="EOS_Toolkit::eos_thermal::assign-operator__eos_thermalCR"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a5466f80d9521baef8892ccb750357dd3"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><span class="n"><span class="pre">eos_thermal</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><span class="n"><span class="pre">eos_thermal</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11eos_thermalaSERK11eos_thermal" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11eos_thermal11eos_thermalERR11eos_thermal">
+<span id="_CPPv3N11EOS_Toolkit11eos_thermal11eos_thermalERR11eos_thermal"></span><span id="_CPPv2N11EOS_Toolkit11eos_thermal11eos_thermalERR11eos_thermal"></span><span id="EOS_Toolkit::eos_thermal::eos_thermal__eos_thermalRR"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1ab559a3251b872d59e68bce17c79d255f"></span><span class="sig-name descname"><span class="n"><span class="pre">eos_thermal</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermal11eos_thermalERR11eos_thermal" title="EOS_Toolkit::eos_thermal::eos_thermal"><span class="n"><span class="pre">eos_thermal</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11eos_thermal11eos_thermalERR11eos_thermal" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11eos_thermalaSERR11eos_thermal">
+<span id="_CPPv3N11EOS_Toolkit11eos_thermalaSERR11eos_thermal"></span><span id="_CPPv2N11EOS_Toolkit11eos_thermalaSERR11eos_thermal"></span><span id="EOS_Toolkit::eos_thermal::assign-operator__eos_thermalRR"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1ad4e6efb7d5c75a0ab51d08aa55c313b4"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><span class="n"><span class="pre">eos_thermal</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><span class="n"><span class="pre">eos_thermal</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11eos_thermalaSERR11eos_thermal" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11eos_thermalD0Ev">
+<span id="_CPPv3N11EOS_Toolkit11eos_thermalD0Ev"></span><span id="_CPPv2N11EOS_Toolkit11eos_thermalD0Ev"></span><span id="EOS_Toolkit::eos_thermal::~eos_thermal"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a67fdf14490dab1d5ea8005b160172ea9"></span><span class="sig-name descname"><span class="n"><span class="pre">~eos_thermal</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11eos_thermalD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Destructor. </p>
+<p>The EOS implementation will be destructed when no other copy of the EOS is using it (“last person turns off the light”). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal13at_rho_eps_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal13at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal13at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::at_rho_eps_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1ae7d11007517376d84d82d4219f38ec08"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">at_rho_eps_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermal5stateE" title="EOS_Toolkit::eos_thermal::state"><span class="n"><span class="pre">state</span></span></a><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal13at_rho_eps_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Specify a matter state based on density, specific energy, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>eps</strong> – Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Object representing matter <a class="reference internal" href="#classEOS__Toolkit_1_1eos__thermal_1_1state"><span class="std std-ref">state</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal14at_rho_temp_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal14at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal14at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::at_rho_temp_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a2c848d878cbf89535f002408051a9693"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">at_rho_temp_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermal5stateE" title="EOS_Toolkit::eos_thermal::state"><span class="n"><span class="pre">state</span></span></a><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal14at_rho_temp_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Specify a matter state based on density, temperature, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>temp</strong> – Temperature <span class="math notranslate nohighlight">\( T \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if EOS does not support temperature </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Object representing matter <a class="reference internal" href="#classEOS__Toolkit_1_1eos__thermal_1_1state"><span class="std std-ref">state</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal9range_rhoEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal9range_rhoEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal9range_rhoEv"></span><span id="EOS_Toolkit::eos_thermal::range_rhoC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a4a8e11b05108f00d97a0f2b7387b37da"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_rho</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermal5rangeE" title="EOS_Toolkit::eos_thermal::range"><span class="n"><span class="pre">range</span></span></a><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal9range_rhoEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validity <a class="reference internal" href="#classEOS__Toolkit_1_1eos__thermal_1af84d79b04d0eb7e0ce88cfb8a3bd4eb6"><span class="std std-ref">range</span></a> for density</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal8range_yeEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal8range_yeEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal8range_yeEv"></span><span id="EOS_Toolkit::eos_thermal::range_yeC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a67acacb1fcd30c1d18d0ea7a835e12b8"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_ye</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermal5rangeE" title="EOS_Toolkit::eos_thermal::range"><span class="n"><span class="pre">range</span></span></a><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal8range_yeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validity <a class="reference internal" href="#classEOS__Toolkit_1_1eos__thermal_1af84d79b04d0eb7e0ce88cfb8a3bd4eb6"><span class="std std-ref">range</span></a> for electron fraction</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal9range_epsE6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal9range_epsE6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal9range_epsE6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::range_eps__real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a599127d4241847b214c443c445d5f2a7"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_eps</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermal5rangeE" title="EOS_Toolkit::eos_thermal::range"><span class="n"><span class="pre">range</span></span></a><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal9range_epsE6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>validity range for specific energy.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal10range_tempE6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal10range_tempE6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal10range_tempE6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::range_temp__real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a8b3d438c4674f0b390b8e0ba9f4d087d"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_temp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermal5rangeE" title="EOS_Toolkit::eos_thermal::range"><span class="n"><span class="pre">range</span></span></a><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal10range_tempE6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>validity range for temperature</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal9minimal_hEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal9minimal_hEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal9minimal_hEv"></span><span id="EOS_Toolkit::eos_thermal::minimal_hC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a8e1de86a7c75d45c3bc1ebbbb76eda55"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minimal_h</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal9minimal_hEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>global lower bound for relativistic enthalpy.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal12is_rho_validE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal12is_rho_validE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal12is_rho_validE6real_t"></span><span id="EOS_Toolkit::eos_thermal::is_rho_valid__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a41efd3185053ada0a1fdc9804af08589"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rho_valid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal12is_rho_validE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if density is in valid range</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal11is_ye_validE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal11is_ye_validE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal11is_ye_validE6real_t"></span><span id="EOS_Toolkit::eos_thermal::is_ye_valid__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a9ec283e647424273cf90524ffa158982"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_ye_valid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal11is_ye_validE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if electron fraction is in valid range</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal15is_rho_ye_validE6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal15is_rho_ye_validE6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal15is_rho_ye_validE6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::is_rho_ye_valid__real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1abe4cd53a7033c11bacbef2b244cb0740"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rho_ye_valid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal15is_rho_ye_validE6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if density and electron fraction are in valid range</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal19is_rho_eps_ye_validE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal19is_rho_eps_ye_validE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal19is_rho_eps_ye_validE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::is_rho_eps_ye_valid__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a92e57ae6038fd5bf3ece8b83aab99db4"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rho_eps_ye_valid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal19is_rho_eps_ye_validE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>eps</strong> – Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if density, specfic energy, and electron fraction are valid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal20is_rho_temp_ye_validE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal20is_rho_temp_ye_validE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal20is_rho_temp_ye_validE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::is_rho_temp_ye_valid__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a2be75e9bad3176420a630e2f768c7063"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rho_temp_ye_valid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal20is_rho_temp_ye_validE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>temp</strong> – temperature <span class="math notranslate nohighlight">\( T \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if density, temperature, and electron fraction are valid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal19press_at_rho_eps_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal19press_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal19press_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::press_at_rho_eps_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1afd4e7b993ea2816e93b6192306866f3c"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press_at_rho_eps_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal19press_at_rho_eps_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute pressure based on density, specific energy, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>eps</strong> – Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Pressure <span class="math notranslate nohighlight">\( P \)</span> if state is valid, else NAN</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( P\ge 0 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal18csnd_at_rho_eps_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal18csnd_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal18csnd_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::csnd_at_rho_eps_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1ad3ff83508a4a4491f6f11226c6d73f2f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd_at_rho_eps_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal18csnd_at_rho_eps_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute soundspeed based on density, specific energy, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>eps</strong> – Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Speed of sound <span class="math notranslate nohighlight">\( c_s \)</span> if state is valid, else NAN</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( 0\le c_s &lt; 1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal18temp_at_rho_eps_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal18temp_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal18temp_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::temp_at_rho_eps_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1abfd08a6c226dddfc89fba27cd0c0af70"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temp_at_rho_eps_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal18temp_at_rho_eps_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute temperature based on density, specific energy, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>eps</strong> – Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Temperature <span class="math notranslate nohighlight">\( T \)</span> if state is valid, else NAN</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( T\ge 0 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal19sentr_at_rho_eps_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal19sentr_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal19sentr_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::sentr_at_rho_eps_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a9b26ce8144a86b7211b8b1fecf61dcea"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sentr_at_rho_eps_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal19sentr_at_rho_eps_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute specific entropy based on density, specific energy, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>eps</strong> – Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if entropy not available for EOS </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Specific entropy <span class="math notranslate nohighlight">\( s \)</span> if state is valid, else NAN</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal25dpress_drho_at_rho_eps_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal25dpress_drho_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal25dpress_drho_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::dpress_drho_at_rho_eps_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1ad64ba4645d3bf7e6bad6a24ae9e7ee71"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dpress_drho_at_rho_eps_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal25dpress_drho_at_rho_eps_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute partial derivative of pressure with respect to mass density, <span class="math notranslate nohighlight">\( \frac{\partial P}{\partial \rho} \)</span>, based on density, specific energy, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>eps</strong> – Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Pressure derivative if state is valid, else NAN</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal25dpress_deps_at_rho_eps_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal25dpress_deps_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal25dpress_deps_at_rho_eps_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::dpress_deps_at_rho_eps_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a713b227115c791d55a60a59c355179d4"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dpress_deps_at_rho_eps_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal25dpress_deps_at_rho_eps_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute partial derivative of pressure with respect to specific energy, <span class="math notranslate nohighlight">\( \frac{\partial P}{\partial \epsilon} \)</span>, based on density, specific energy, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>eps</strong> – Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Pressure derivative if state is valid, else NAN</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal20press_at_rho_temp_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal20press_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal20press_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::press_at_rho_temp_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a34d319c073318379e5354f5750119c5c"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press_at_rho_temp_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal20press_at_rho_temp_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute pressure based on density, temperature, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>temp</strong> – Temperature <span class="math notranslate nohighlight">\( T \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Pressure <span class="math notranslate nohighlight">\( P \)</span> if state is valid, else NAN</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( P\ge 0 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal19csnd_at_rho_temp_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal19csnd_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal19csnd_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::csnd_at_rho_temp_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a6875af9a152a26bbd3ee26bd2345cc8f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd_at_rho_temp_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal19csnd_at_rho_temp_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute soundspeed based on density, temperature, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>temp</strong> – Temperature <span class="math notranslate nohighlight">\( T \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Speed of sound <span class="math notranslate nohighlight">\( c_s \)</span> if state is valid, else NAN</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( 0\le c_s &lt; 1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal18eps_at_rho_temp_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal18eps_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal18eps_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::eps_at_rho_temp_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a5380438b037da1598eb7f9157e2f67e8"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eps_at_rho_temp_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal18eps_at_rho_temp_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute specific energy based on density, temperature, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>temp</strong> – Temperature <span class="math notranslate nohighlight">\( T \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><span class="math notranslate nohighlight">\( \epsilon \)</span> if state is valid, else NAN</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( \epsilon \ge -1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal20sentr_at_rho_temp_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal20sentr_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal20sentr_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::sentr_at_rho_temp_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a4814099e09c1b6967b120672c3fd1d14"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sentr_at_rho_temp_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal20sentr_at_rho_temp_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute specific entropy based on density, temperature, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>temp</strong> – Temperature <span class="math notranslate nohighlight">\( T \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if entropy not available for EOS </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Specific entropy <span class="math notranslate nohighlight">\( s \)</span> if state is valid, else NAN</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal26dpress_drho_at_rho_temp_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal26dpress_drho_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal26dpress_drho_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::dpress_drho_at_rho_temp_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1a585614d53c5bb1b1fca45f24f9af9e2d"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dpress_drho_at_rho_temp_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal26dpress_drho_at_rho_temp_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute partial derivative of pressure with respect to mass density, <span class="math notranslate nohighlight">\( \frac{\partial P}{\partial \rho} \)</span>, based on density, temperature, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>temp</strong> – Temperature <span class="math notranslate nohighlight">\( T \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Pressure derivative if state is valid, else NAN</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal26dpress_deps_at_rho_temp_yeE6real_t6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal26dpress_deps_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal26dpress_deps_at_rho_temp_yeE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::eos_thermal::dpress_deps_at_rho_temp_ye__real_t.real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1ad3b2ff5c021644eef68344c774d22bf5"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dpress_deps_at_rho_temp_ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal26dpress_deps_at_rho_temp_yeE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute partial derivative of pressure with respect to specific energy, <span class="math notranslate nohighlight">\( \frac{\partial P}{\partial \epsilon} \)</span>, based on density, temperature, and electron fraction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>temp</strong> – Temperature <span class="math notranslate nohighlight">\( T \)</span> </p></li>
+<li><p><strong>ye</strong> – Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Pressure derivative if state is valid, else NAN</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11eos_thermal5stateE">
+<span id="_CPPv3N11EOS_Toolkit11eos_thermal5stateE"></span><span id="_CPPv2N11EOS_Toolkit11eos_thermal5stateE"></span><span id="EOS_Toolkit::eos_thermal::state"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1_1state"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">eos_thermal_base</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">state_base</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11eos_thermal5stateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Class representing the matter state for the <a class="reference internal" href="#classEOS__Toolkit_1_1eos__thermal"><span class="std std-ref">eos_thermal</span></a> interface. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal5statecvbEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal5statecvbEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal5statecvbEv"></span><span id="EOS_Toolkit::eos_thermal::state::castto-b-operatorC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1_1state_1a3fe4dbd43d6ebeefdbf849e659218177"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal5statecvbEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Conversion operator to bool. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If state is valid. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal5state5pressEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal5state5pressEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal5state5pressEv"></span><span id="EOS_Toolkit::eos_thermal::state::pressC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1_1state_1a52941bb089ca0339e6ae7f4b61240cf4"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal5state5pressEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pressure <span class="math notranslate nohighlight">\( P \)</span></p>
+</dd>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( P\ge 0 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal5state4csndEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal5state4csndEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal5state4csndEv"></span><span id="EOS_Toolkit::eos_thermal::state::csndC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1_1state_1acf677ce3a4a78d53baaf6ec33f5e3d55"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal5state4csndEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Speed of sound <span class="math notranslate nohighlight">\( c_s \)</span></p>
+</dd>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( 0\le c_s &lt; 1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal5state4tempEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal5state4tempEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal5state4tempEv"></span><span id="EOS_Toolkit::eos_thermal::state::tempC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1_1state_1a0f6f41ba5063e1c665c60ad3e9b1b788"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal5state4tempEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Temperature <span class="math notranslate nohighlight">\( T\ge 0 \)</span></p>
+</dd>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( T\ge 0 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal5state5sentrEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal5state5sentrEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal5state5sentrEv"></span><span id="EOS_Toolkit::eos_thermal::state::sentrC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1_1state_1a2a9d314d91edd15849a60ebaa93dbf41"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sentr</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal5state5sentrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if entropy not available for EOS </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specific entropy <span class="math notranslate nohighlight">\( s \)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal5state3epsEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal5state3epsEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal5state3epsEv"></span><span id="EOS_Toolkit::eos_thermal::state::epsC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1_1state_1a5225cf16fac32cb6cf896fc9291ec539"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eps</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal5state3epsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span></p>
+</dd>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( \epsilon \ge -1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal5state11dpress_drhoEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal5state11dpress_drhoEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal5state11dpress_drhoEv"></span><span id="EOS_Toolkit::eos_thermal::state::dpress_drhoC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1_1state_1a94ef02407963601edb060c2861777eec"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dpress_drho</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal5state11dpress_drhoEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>partial derivative of pressure with respect to mass density <span class="math notranslate nohighlight">\( \frac{\partial P}{\partial \rho} \)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11eos_thermal5state11dpress_depsEv">
+<span id="_CPPv3NK11EOS_Toolkit11eos_thermal5state11dpress_depsEv"></span><span id="_CPPv2NK11EOS_Toolkit11eos_thermal5state11dpress_depsEv"></span><span id="EOS_Toolkit::eos_thermal::state::dpress_depsC"></span><span class="target" id="classEOS__Toolkit_1_1eos__thermal_1_1state_1ad2a53b209811917e763c84e1a6388132"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dpress_deps</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11eos_thermal5state11dpress_depsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>partial derivative of pressure with respect to specific energy <span class="math notranslate nohighlight">\( \frac{\partial P}{\partial \epsilon} \)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="loading-from-file">
+<h2>Loading from File<a class="headerlink" href="#loading-from-file" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit16load_eos_thermalENSt6stringERK5units">
+<span id="_CPPv3N11EOS_Toolkit16load_eos_thermalENSt6stringERK5units"></span><span id="_CPPv2N11EOS_Toolkit16load_eos_thermalENSt6stringERK5units"></span><span id="EOS_Toolkit::load_eos_thermal__ss.unitsCR"></span><span class="target" id="eos__thermal__file_8cc_1ae2361129834a9cf3143f6daad3fe0c3a"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><span class="n"><span class="pre">eos_thermal</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">load_eos_thermal</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">u</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit16load_eos_thermalENSt6stringERK5units" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Load thermal EOS from hdf5 file. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> – Filename of EOS file </p></li>
+<li><p><strong>Unit</strong> – system the returned EOS should use. The unit system needs to be geometric, i.e. <span class="math notranslate nohighlight">\( G=c=1 \)</span>. Default is to fix the mass unit to <span class="math notranslate nohighlight">\( 1 M_\odot \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Generic interface to the EOS </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="creating-specific-eos">
+<h2>Creating Specific EOS<a class="headerlink" href="#creating-specific-eos" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15make_eos_hybridE10eos_barotr6real_t6real_t6real_t">
+<span id="_CPPv3N11EOS_Toolkit15make_eos_hybridE10eos_barotr6real_t6real_t6real_t"></span><span id="_CPPv2N11EOS_Toolkit15make_eos_hybridE10eos_barotr6real_t6real_t6real_t"></span><span id="EOS_Toolkit::make_eos_hybrid__eos_barotr.real_t.real_t.real_t"></span><span class="target" id="eos__hybrid_8h_1a7614e912c9d8efe126abedd75cf793b9"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><span class="n"><span class="pre">eos_thermal</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_hybrid</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos_c</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gamma_th</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps_max</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_max</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15make_eos_hybridE10eos_barotr6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create Hybrid EOS. </p>
+<p><p>The electron fraction is an unused dummy parameter for this EOS,
+with allowed range <span class="math notranslate nohighlight">\([0,1]\)</span>.</p>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eos_c</strong> – The cold (barotropic) EOS </p></li>
+<li><p><strong>gamma_th</strong> – The adiabatic exponent <span class="math notranslate nohighlight">\( \Gamma_\mathrm{th} \)</span> for the thermal part </p></li>
+<li><p><strong>eps_max</strong> – Maximum allowed specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> </p></li>
+<li><p><strong>rho_max</strong> – Maximum allowed mass density <span class="math notranslate nohighlight">\( \rho \)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference internal" href="#classEOS__Toolkit_1_1eos__thermal"><span class="std std-ref">eos_thermal</span></a> object representing the hybrid EOS</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit17make_eos_idealgasE6real_t6real_t6real_t">
+<span id="_CPPv3N11EOS_Toolkit17make_eos_idealgasE6real_t6real_t6real_t"></span><span id="_CPPv2N11EOS_Toolkit17make_eos_idealgasE6real_t6real_t6real_t"></span><span id="EOS_Toolkit::make_eos_idealgas__real_t.real_t.real_t"></span><span class="target" id="eos__idealgas_8h_1a5144018138cecde8608ee1a8eb028069"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><span class="n"><span class="pre">eos_thermal</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_idealgas</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_eps</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_rho</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit17make_eos_idealgasE6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a classical ideal gas EOS. </p>
+<p><p>The electron fraction is an unused dummy parameter for this EOS,
+with allowed range <span class="math notranslate nohighlight">\([0,1]\)</span>.</p>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – Adiabatic index </p></li>
+<li><p><strong>max_eps</strong> – Maximum allowed specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> </p></li>
+<li><p><strong>max_rho</strong> – Maximum allowed mass density <span class="math notranslate nohighlight">\( \rho \)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference internal" href="#classEOS__Toolkit_1_1eos__thermal"><span class="std std-ref">eos_thermal</span></a> object representing the ideal gas EOS</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_interf.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_available.html">Available EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_files.html">EOS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_custom.html">Custom EOS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="eos_thermal.html">Thermal EOS</a><ul>
+      <li>Previous: <a href="eos_thermal_custom.html" title="previous chapter">Custom EOS</a></li>
+      <li>Next: <a href="eos_barotr.html" title="next chapter">Barotropic EOS</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/eos_thermal_ref.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

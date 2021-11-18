@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Custom EOS &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference" href="eos_barotr_ref.html" />
+    <link rel="prev" title="EOS Files" href="eos_barotr_files.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="custom-eos">
+<h1>Custom EOS<a class="headerlink" href="#custom-eos" title="Permalink to this headline">¶</a></h1>
+<p>It is easy to implement a custom EOS without modifying the
+RePrimAnd library. One simply needs to define a class which
+provides the EOS functions. This class needs to be derived
+from a generic implementation interface
+<a class="reference internal" href="#_CPPv4N11EOS_Toolkit15implementations15eos_barotr_implE" title="EOS_Toolkit::implementations::eos_barotr_impl"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr_impl</span></code></a>
+and override the virtual functions defined by the interface.</p>
+<p>Mostly, the implementation needs to be provide functions
+in terms of the pseudo-enthalpy <span class="math notranslate nohighlight">\(g\)</span>, as well as a
+conversion between <span class="math notranslate nohighlight">\(g\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;g(\rho) \\
+&amp;\rho(g)  \\
+&amp;P(g) \\
+&amp;\epsilon(g) \\
+&amp;h(g) \\
+&amp;c_s(\rho, \theta, Y_e) \\
+&amp;T(g) &amp;\mathrm{(optional)} \\
+&amp;Y_e(g) &amp;\mathrm{(optional)} \\\end{split}\]</div>
+<p>In addition, it has to provide the validity range for
+<span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(g\)</span>,
+and the global minimum <span class="math notranslate nohighlight">\(h_0\)</span> of the enthalpy.
+If temperature and/or electron fraction are not provided, the
+corresponding methods should throw an exception. <strong>Under no
+circumstances</strong> should incorrect “dummy” values or NANs be returned.</p>
+<p>Here is an example declaration of a custom EOS implementation</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef EOS_BARFOO_IMPL_H</span>
+<span class="cp">#define EOS_BARFOO_IMPL_H</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_barotropic_impl.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="k">class</span> <span class="nc">eos_barfoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">eos_barotr_impl</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rggm1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">min_h</span><span class="p">;</span><span class="w"></span>
+
+
+<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">eos_barfoo</span><span class="p">(</span><span class="cm">/* eos parameters */</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">range</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">range_rho</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">range</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">range_gm1</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">rggm1</span><span class="p">;}</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">minimal_h</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">min_h</span><span class="p">;}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_isentropic</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_zero_temp</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">has_temp</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">has_efrac</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">gm1_from_rho</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">rho</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">eps</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w">  </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">press</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">hm1</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">csnd</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">temp</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">ye</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+
+<span class="p">};</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>No function will ever be called outside the validity range, all checks
+are taken care of by the user-facing interface
+<a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code></a>.
+Conversely, the implementation should always return a correct result
+for valid input, including parameters on the boundary of the valid
+region.</p>
+<p>Finally, one has to provide a function to wrap the
+implementation into <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code></a> EOS object,
+like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">eos_barotr</span><span class="w"> </span><span class="nf">EOS_Toolkit::make_eos_barfoo</span><span class="p">(</span><span class="cm">/* &lt;barfoo parameters&gt; */</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">eos_barotr</span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">eos_barfoo</span><span class="o">&gt;</span><span class="p">(</span><span class="cm">/* &lt;barfoo parameters&gt; */</span><span class="p">)</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The custom EOS is then ready to use:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">barfoo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_eos_barfoo</span><span class="p">(</span><span class="cm">/* &lt;barfoo parameters&gt; */</span><span class="p">);</span><span class="w"></span>
+<span class="n">press</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">barfoo</span><span class="p">.</span><span class="n">at_rho</span><span class="p">(</span><span class="n">rho</span><span class="p">).</span><span class="n">press</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>For a real example, we suggest to look at the implementation of
+the polytropic EOS (under <cite>library/EOS_Barotropic</cite>)</p>
+<section id="extending-eos-file-format">
+<h2>Extending EOS file format<a class="headerlink" href="#extending-eos-file-format" title="Permalink to this headline">¶</a></h2>
+<p>The library provides a mechanism to register a file reader for
+custom EOS, without changing the library itself.
+The universal EOS file format is open in the sense that
+all EOS-type specific information is contained in a HDF5 subgroup
+and the file has a string attribute <cite>eos_type</cite> for the type of the EOS.</p>
+<p>When creating a file for a custom EOS <cite>foobar</cite>, the eos type should be
+named <cite>barotr_custom_foobar</cite> and the group holding EOS data should be
+named <cite>eos_barotr_custom_foobar</cite>.</p>
+<p>To register a reader, one needs to create a translation unit similar
+to the one below. Files with custom EOS can then be loaded via the same
+interface as for the types provided by the library.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hdf5imple.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_barotr_file_impl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_barotr_poly.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+
+<span class="k">struct</span> <span class="nc">reader_eos_barfoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reader_eos_barotr</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">eos_barotr</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">register_reader_eos_barfoo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">registry_reader_eos_barotr</span><span class="o">::</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;barotr_custom_barfoo&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                  </span><span class="k">new</span><span class="w"> </span><span class="n">reader_eos_barfoo</span><span class="p">())</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="n">eos_barotr</span><span class="w"> </span><span class="nf">reader_eos_barfoo::load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                        </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// code to read EOS data from HDF5 group g goes here</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">make_eos_barfoo</span><span class="p">(</span><span class="cm">/* barfoo EOS parameters loaded above */</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The header <cite>hdf5imple.h</cite> provides a minimalistic C++ wrapper of the
+HDF5 interface, but one can also use hdf5 directly. To get the hdf5
+handle of the group g, use <cite>g.use()</cite>. The file readers for existing
+EOS are implemented in the same way as above and may serve as examples.</p>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15implementations15eos_barotr_implE">
+<span id="_CPPv3N11EOS_Toolkit15implementations15eos_barotr_implE"></span><span id="_CPPv2N11EOS_Toolkit15implementations15eos_barotr_implE"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">implementations</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">eos_barotr_impl</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15implementations15eos_barotr_implE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Abstract interface for barotropic equation of state implementations. </p>
+<p>Subclassed by EOS_Toolkit::implementations::eos_barotr_gpoly, EOS_Toolkit::implementations::eos_barotr_poly, EOS_Toolkit::implementations::eos_barotr_pwpoly, EOS_Toolkit::implementations::eos_barotr_table</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl13is_isentropicEv">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl13is_isentropicEv"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl13is_isentropicEv"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::is_isentropicC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a8af13b4de2503b9f1848d79df40a1b4b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_isentropic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl13is_isentropicEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whether EOS is isentropic </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl12is_zero_tempEv">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl12is_zero_tempEv"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl12is_zero_tempEv"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::is_zero_tempC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a2ee5afa4b0a177c908af5ee9f8892e15"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_zero_temp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl12is_zero_tempEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whether EOS is for zero temperature </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl8has_tempEv">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl8has_tempEv"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl8has_tempEv"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::has_tempC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a4628e3a91327cf69d9fe82124c9a7c4b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_temp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl8has_tempEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whether EOS can compute temperature </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl9has_efracEv">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl9has_efracEv"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl9has_efracEv"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::has_efracC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a35e8f9254fe5b33f7d13eee0fa1b51d1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_efrac</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl9has_efracEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whether EOS can compute electron fraction </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl9range_rhoEv">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl9range_rhoEv"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl9range_rhoEv"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::range_rhoC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a17b4cb5d11871be2f44869e08a9d6a55"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">range</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">range_rho</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl9range_rhoEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Range of validity for mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl9range_gm1Ev">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl9range_gm1Ev"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl9range_gm1Ev"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::range_gm1C"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1ad08ff99afdbc08218338c112197bcede"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">range</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">range_gm1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl9range_gm1Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Range of validity for <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl9minimal_hEv">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl9minimal_hEv"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl9minimal_hEv"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::minimal_hC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a12dc85ff944fd515933c0a633dc107b3"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minimal_h</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl9minimal_hEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>
+It must be guaranteed that the enthaply computed by the EOS for any valid state is always above this value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Global minimum <span class="math notranslate nohighlight">\( h_0 \)</span> of enthalpy.</p>
+</dd>
+<dt class="field-even">Post</dt>
+<dd class="field-even"><p>The minimum must be strictly positive. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl12gm1_from_rhoE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl12gm1_from_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl12gm1_from_rhoE6real_t"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::gm1_from_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1ac9be8e3fbd1803fa46ed0499407e04b5"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gm1_from_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl12gm1_from_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Rest mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl3rhoE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl3rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl3rhoE6real_t"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a2c8f10e86f619ea152d9dbb90212c7aa"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl3rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Rest mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl3epsE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl3epsE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl3epsE6real_t"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::eps__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a3a6181b227a4e44a43d9b4de8c8c0809"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eps</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl3epsE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specific internal energy <span class="math notranslate nohighlight">\(\epsilon \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl5pressE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl5pressE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl5pressE6real_t"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::press__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1afdf780a00ea526d821a2800ab53f4901"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl5pressE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pressure <span class="math notranslate nohighlight">\( P \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl3hm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl3hm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl3hm1E6real_t"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::hm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1af75a07e6e6c70ccd299436e971f9171a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl3hm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Specific enthalpy <span class="math notranslate nohighlight">\( h-1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl4csndE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl4csndE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl4csndE6real_t"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::csnd__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1af0ec0037144c68af380f1e02c2ad9fdd"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl4csndE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Adiabatic soundspeed <span class="math notranslate nohighlight">\( c_s \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl4tempE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl4tempE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl4tempE6real_t"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::temp__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1adf260515cff03f96e780718ddecf91c9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl4tempE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature is not implemented </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Temperature <span class="math notranslate nohighlight">\( T \)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl2yeE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl2yeE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl2yeE6real_t"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::ye__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a01db1d42fac6d1b888cecd3176909b94"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ye</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl2yeE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if electron fraction is not implemented </p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_interf.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_available.html">Available EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_files.html">EOS Files</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Custom EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="eos_barotr.html">Barotropic EOS</a><ul>
+      <li>Previous: <a href="eos_barotr_files.html" title="previous chapter">EOS Files</a></li>
+      <li>Next: <a href="eos_barotr_ref.html" title="next chapter">Reference</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/eos_barotr_custom.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

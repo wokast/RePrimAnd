@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Interface &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Available EOS" href="eos_thermal_available.html" />
+    <link rel="prev" title="Features" href="eos_thermal_feat.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="interface">
+<span id="thermal-interface"></span><h1>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h1>
+<p>The EOS with thermal+composition degrees of freedom are represented
+by objects of type <a class="reference internal" href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_thermal</span></code></a>.
+These objects
+represent the generic EOS interface and do not implement any EOS.
+Instead, they forward any request to an actual implementation of a
+particular EOS. To obtain an
+<a class="reference internal" href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_thermal</span></code></a>
+object representing a particular EOS, one uses functions such as
+<a class="reference internal" href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit15make_eos_hybridE10eos_barotr6real_t6real_t6real_t" title="EOS_Toolkit::make_eos_hybrid"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_eos_hybrid()</span></code></a>
+provided for each type of EOS, or reads from an universal EOS file
+using <a class="reference internal" href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit16load_eos_thermalENSt6stringERK5units" title="EOS_Toolkit::load_eos_thermal"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_eos_thermal()</span></code></a>.</p>
+<p>Calling the EOS is a two stage process: first, one needs to specify
+the state of matter. This can be done either in terms of mass density,
+specific internal energy, and electron fraction, or in terms of
+mass density, temperature, and electron fraction. For this, use the
+methods
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">at_rho_eps_ye()</span></code> and
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">at_rho_temp_ye()</span></code>.
+Both return an object of type
+<a class="reference internal" href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit11eos_thermal5stateE" title="EOS_Toolkit::eos_thermal::state"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">state</span></code></a>.
+All EOS provide the first form, which is required for numerical
+simulations. The second form based on temperature is optional and
+might not be supported by all EOS implementations.</p>
+<p>Second, one can use methods of this object to obtain pressure,
+soundspeed, internal specific energy, temperature, specific entropy,
+derivatives of pressure with respect to mass density and internal
+specific energy. Further, one can use the state object like a boolean
+variable to check if the state is in the valid regime of the EOS.
+Trying to compute any of the above from an invalid state will throw
+an exception. The following snipped demonstrates the EOS use:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eos</span><span class="p">.</span><span class="n">at_rho_eps_ye</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="n">ye</span><span class="p">);</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">pressure</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">press</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">soundspeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">csnd</span><span class="p">()</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The functionality above is also provided by another set of EOS methods
+with names such as <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">press_at_rho_eps_ye()</span></code>,
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">press_at_rho_temp_ye()</span></code>, etc. Those do not throw
+exceptions when called outside the valid ranges, but instead return
+NANs. When computing several quantities for the same state, the
+alternative syntax might be less efficient because the validity has to
+be checked and the thermal degree of freedom mapped onto the
+EOS-internal representation each time instead of only once as for the
+primary syntax.</p>
+<p>The <a class="reference internal" href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_thermal</span></code></a> class
+also provides methods to query the valid ranges of the independent
+variables. For mass density and electron fraction, the validity region
+is a simple range. For specific internal energy or temperature,
+the valid range depends on mass density and electron fraction.
+For convenience, there are methods to check if given parameter
+combinations are in the valid region.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The interface objects are designed to be used as ordinary variables,
+which can be copied around cheaply and without worrying about ownership
+of any resource allocations. Internally, they just contain a shared
+pointer to an actual (immutable) implementation.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The EOS interface is thread-safe in the sense that the same EOS
+oject can be used in multiple threads. Since the EOS implementations
+are immutable, data-races cannot occur. Copying an EOS object inside
+a thread is save but might affect performance since the copying is
+an atomic operation. Passing the EOS inside an innermost loop should
+better be done by reference instead of value.</p>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_feat.html">Features</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_available.html">Available EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_files.html">EOS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_custom.html">Custom EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="eos_thermal.html">Thermal EOS</a><ul>
+      <li>Previous: <a href="eos_thermal_feat.html" title="previous chapter">Features</a></li>
+      <li>Next: <a href="eos_thermal_available.html" title="next chapter">Available EOS</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/eos_thermal_interf.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

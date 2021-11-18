@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Available EOS &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="EOS Files" href="eos_thermal_files.html" />
+    <link rel="prev" title="Interface" href="eos_thermal_interf.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="available-eos">
+<h1>Available EOS<a class="headerlink" href="#available-eos" title="Permalink to this headline">¶</a></h1>
+<section id="classical-ideal-gas">
+<h2>Classical Ideal Gas<a class="headerlink" href="#classical-ideal-gas" title="Permalink to this headline">¶</a></h2>
+<p>This EOS serves mainly as a toy model useful for debugging.
+It is given by</p>
+<div class="math notranslate nohighlight" id="equation-press-idealgas">
+<span class="eqno">(1)<a class="headerlink" href="#equation-press-idealgas" title="Permalink to this equation">¶</a></span>\[P (\rho,\epsilon,Y_e) = (\Gamma - 1) \rho \epsilon\]</div>
+<p>The adiabatic exponent <span class="math notranslate nohighlight">\(\Gamma = 1 + 1/n\)</span> with <span class="math notranslate nohighlight">\(n&gt;0\)</span>
+is a free parameter. The pressure is independent of
+electron fraction, which is a dummy variable for this EOS.
+The validity range is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}0 \le \rho \le \rho_\mathrm{max} \\
+0 \le \epsilon \le \epsilon_\mathrm{max} \\
+0 \le Y_e \le 1\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho_\mathrm{max}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_\mathrm{max}\)</span>
+are free parameters specified by the user.</p>
+<p>The adiabatic soundspeed is given by</p>
+<div class="math notranslate nohighlight">
+\[c_s^2 = \frac{\left(\Gamma - 1\right) \epsilon}{\epsilon + 1/\Gamma}\]</div>
+<p>In case that <span class="math notranslate nohighlight">\(\Gamma &gt; 2\)</span>, the following restriction is
+automatically applied in order to ensure subluminal speed of sound
+and dominant energy condition.</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_\mathrm{max} \le \frac{1}{\Gamma (\Gamma - 2)}\]</div>
+<p>For the classical ideal gas law, <span class="math notranslate nohighlight">\(T \propto \epsilon\)</span>, and zero
+temperature implies zero pressure.
+However, this law breaks down near zero temperature since it
+leads to a divergence of the entropy. One can avoid this by using a
+different relation for the temperature, which is however not unique.
+Consequently, our implementation
+of this EOS does not provide temperature and specific entropy.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since the pressure is zero at zero temperature, a classical ideal gas
+is not useful for neutron stars and such. One could keep
+<span class="math notranslate nohighlight">\(P (\rho,\epsilon,Y_e)\)</span> but redefine temperature to avoid
+zero pressure, emulating a degeneracy pressure. Since the adiabatic
+curves for Eq. <a class="reference internal" href="#equation-press-idealgas">(1)</a> are given by polytropes,
+<span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span> at zero temperature would follow a
+polytrope as well. The resulting EOS is what is usually called ideal
+gas in numerical relativity. To get such an EOS, use the
+<a class="reference internal" href="#def-hybrid-eos"><span class="std std-ref">Hybrid EOS</span></a> with a polytrope as cold EOS.
+The difference is simply the lower bound for <span class="math notranslate nohighlight">\(\epsilon\)</span>,
+which becomes a strictly positive function of density.</p>
+</div>
+</section>
+<section id="hybrid-eos">
+<span id="def-hybrid-eos"></span><h2>Hybrid EOS<a class="headerlink" href="#hybrid-eos" title="Permalink to this headline">¶</a></h2>
+<p>This EOS is based on an barotropic EOS for zero temperature
+together with a simple analytic prescription for thermal contributions.</p>
+<div class="math notranslate nohighlight" id="equation-def-hybrideos">
+<span class="eqno">(2)<a class="headerlink" href="#equation-def-hybrideos" title="Permalink to this equation">¶</a></span>\[P (\rho,\epsilon,Y_e)
+= P_c(\rho)
+  + (\Gamma_\mathrm{th} - 1) \rho (\epsilon - \epsilon_c(\rho))\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_c(\rho)\)</span> and <span class="math notranslate nohighlight">\(\epsilon_c(\rho)\)</span> defines the
+zero-temperature EOS.
+The pressure is independent of
+electron fraction, which is a dummy variable for this EOS.
+The validity range is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}0 \le \rho \le \rho_\mathrm{max} \\
+\epsilon_c(\rho) \le \epsilon \le \epsilon_\mathrm{max} \\
+0 \le Y_e \le 1\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho_\mathrm{max}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_\mathrm{max}\)</span>
+are free parameters specified by the user.</p>
+<p>Since the thermal contribution in <a class="reference internal" href="#equation-def-hybrideos">(2)</a> is an
+ad-hoc prescription not derived from any nuclear physics model,
+temperature and entropy are not uniquely defined (although one
+can construct both by prescribing a functional dependence of
+entropy and energy at fixed density). In this version of the library,
+temperature and entropy are not implemented.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_interf.html">Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Available EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_files.html">EOS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_custom.html">Custom EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="eos_thermal.html">Thermal EOS</a><ul>
+      <li>Previous: <a href="eos_thermal_interf.html" title="previous chapter">Interface</a></li>
+      <li>Next: <a href="eos_thermal_files.html" title="next chapter">EOS Files</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/eos_thermal_available.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

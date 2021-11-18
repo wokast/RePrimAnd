@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>EOS Files &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Custom EOS" href="eos_thermal_custom.html" />
+    <link rel="prev" title="Available EOS" href="eos_thermal_available.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="eos-files">
+<h1>EOS Files<a class="headerlink" href="#eos-files" title="Permalink to this headline">¶</a></h1>
+<p>The framework contains functions to load thermal EOS from file.
+The type of EOS is determined transparently to the user.
+For this we defined a file format for thermal EOS, based on HDF5.</p>
+<section id="loading-eos">
+<h2>Loading EOS<a class="headerlink" href="#loading-eos" title="Permalink to this headline">¶</a></h2>
+<p>Loading an EOS is simple, after including the header</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_thermal_file.h&quot;</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>one can obtain an EOS via</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">units</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">eos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_eos_thermal</span><span class="p">(</span><span class="s">&quot;path/example.eos.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The EOS files are based on SI units internally, therefore one
+has to specify the geometric <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">unit</span></code></a>
+system the returned EOS object
+should employ. In the example above, we use <span class="math notranslate nohighlight">\(G=c=M_\odot=1\)</span>.</p>
+<p>This version of the library comes with one example file
+<cite>EOS/HYB1.80_MS1_PP.eos.h5</cite>, which is a hybrid EOS based on the MS1
+cold EOS.</p>
+</section>
+<section id="creating-eos-files">
+<h2>Creating EOS Files<a class="headerlink" href="#creating-eos-files" title="Permalink to this headline">¶</a></h2>
+<p>To create EOS files, the library provides a Python interface.
+The EOS file format should not matter to users unless they want to
+extend it with custom EOS types.
+The interface consists of a single-file module
+<cite>EOS/create/reprimand_eos_format.py</cite>.
+The following EOS types are available:</p>
+<section id="hybrid-eos">
+<h3>Hybrid EOS<a class="headerlink" href="#hybrid-eos" title="Permalink to this headline">¶</a></h3>
+<p>To create a hybrid EOS with cold part given by a tabulated barotropic EOS, use the following. See
+<a class="reference internal" href="eos_barotr_available.html#eoscoldtabulated"><span class="std std-ref">Tabulated EOS</span></a> for details on the cold EOS.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="reprimand_eos_format.save_thermal_hybrid_table">
+<span class="sig-prename descclassname"><span class="pre">reprimand_eos_format.</span></span><span class="sig-name descname"><span class="pre">save_thermal_hybrid_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cold_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cold_comment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_th</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poly_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">press</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csnd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gm1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ye</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprimand_eos_format.save_thermal_hybrid_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a file for a hybrid EOS based on a tabulated cold EOS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path of the file to create. Ending should be .eos.h5</p></li>
+<li><p><strong>name</strong> – Name of the EOS</p></li>
+<li><p><strong>cold_name</strong> – Name of the underlying cold barotropic EOS</p></li>
+<li><p><strong>cold_comment</strong> – Description of underlying cold EOS</p></li>
+<li><p><strong>gamma_th</strong> – <span class="math notranslate nohighlight">\(\Gamma_{th}\)</span> defining the thermal part</p></li>
+<li><p><strong>eps_max</strong> – Maximum allowed specific internal energy 
+<span class="math notranslate nohighlight">\(\epsilon\)</span></p></li>
+<li><p><strong>poly_n</strong> – Adiabatic index used for extrapolating below
+lowest tabulated density</p></li>
+<li><p><strong>rho</strong> – Array with baryonic mass density 
+<span class="math notranslate nohighlight">\(\rho\, [\mathrm{kg}/\mathrm{m}^3]\)</span> 
+at the sample points</p></li>
+<li><p><strong>eps</strong> – Array with specific internal energy 
+<span class="math notranslate nohighlight">\(\epsilon\)</span> [dimensionless]
+at sample points</p></li>
+<li><p><strong>press</strong> – Array with pressure <span class="math notranslate nohighlight">\(P\,[\mathrm{Pa}]\)</span> 
+at sample points</p></li>
+<li><p><strong>csnd</strong> – Array with adiabatic sound speed 
+<span class="math notranslate nohighlight">\(c_s\,[\mathrm{m}/\mathrm{s}]\)</span>
+at sample points</p></li>
+<li><p><strong>gm1</strong> – Array with pseudo-enthalpy 
+<span class="math notranslate nohighlight">\(g-1\)</span> [dimensionless]
+at sample points</p></li>
+<li><p><strong>ye</strong> – Optionally, array with electron fraction 
+<span class="math notranslate nohighlight">\(Y_e\)</span> [dimensionless]
+at sample points.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>To create a hybrid EOS with cold part given by a piecewise polytropic EOS, use the following. See
+<a class="reference internal" href="eos_barotr_available.html#eospiecewisepoly"><span class="std std-ref">Piecewise Polytropic EOS</span></a> for details on the cold EOS.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="reprimand_eos_format.save_thermal_hybrid_pwpoly">
+<span class="sig-prename descclassname"><span class="pre">reprimand_eos_format.</span></span><span class="sig-name descname"><span class="pre">save_thermal_hybrid_pwpoly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cold_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_th</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_poly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_bnd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gammas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cold_comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprimand_eos_format.save_thermal_hybrid_pwpoly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a file for a hybrid EOS based on a piecewise polytropic 
+cold EOS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path of the file to create. Ending should be .eos.h5</p></li>
+<li><p><strong>name</strong> – Name of the EOS</p></li>
+<li><p><strong>cold_name</strong> – Name of the underlying cold barotropic EOS</p></li>
+<li><p><strong>gamma_th</strong> – <span class="math notranslate nohighlight">\(\Gamma_{th}\)</span> defining the thermal part</p></li>
+<li><p><strong>eps_max</strong> – Maximum allowed specific internal energy 
+<span class="math notranslate nohighlight">\(\epsilon\)</span></p></li>
+<li><p><strong>rho_poly</strong> – Polytropic density scale 
+<span class="math notranslate nohighlight">\(\rho_p\, [\mathrm{kg}/\mathrm{m}^3]\)</span> 
+of first segment</p></li>
+<li><p><strong>rho_max</strong> – Maximum allowed baryonic mass density
+<span class="math notranslate nohighlight">\(\rho_\mathrm{max} \, [\mathrm{kg}/\mathrm{m}^3]\)</span></p></li>
+<li><p><strong>rho_bnd</strong> – Array with lower boundary 
+<span class="math notranslate nohighlight">\(\rho_{b,i}\, [\mathrm{kg}/\mathrm{m}^3]\)</span> 
+of baryonic mass densities for each segment. 
+Must start at zero.</p></li>
+<li><p><strong>gammas</strong> – Array with adiabatic exponents <span class="math notranslate nohighlight">\(\Gamma_i\)</span>
+for each segment</p></li>
+<li><p><strong>cold_comment</strong> – Optionally, additional description of the 
+cold EOS.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>To create a hybrid EOS with cold part given by a polytropic EOS, use the following. See
+<a class="reference internal" href="eos_barotr_available.html#eospoly"><span class="std std-ref">Polytropic EOS</span></a> for details on the cold EOS.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="reprimand_eos_format.save_thermal_hybrid_poly">
+<span class="sig-prename descclassname"><span class="pre">reprimand_eos_format.</span></span><span class="sig-name descname"><span class="pre">save_thermal_hybrid_poly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cold_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_th</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_poly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_adiab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cold_comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprimand_eos_format.save_thermal_hybrid_poly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a file for a hybrid EOS based on a polytropic cold EOS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path of the file to create. Ending should be .eos.h5</p></li>
+<li><p><strong>name</strong> – Name of the EOS</p></li>
+<li><p><strong>cold_name</strong> – Name of the underlying cold barotropic EOS</p></li>
+<li><p><strong>gamma_th</strong> – <span class="math notranslate nohighlight">\(\Gamma_{th}\)</span> defining the thermal part</p></li>
+<li><p><strong>eps_max</strong> – Maximum allowed specific internal energy 
+<span class="math notranslate nohighlight">\(\epsilon\)</span></p></li>
+<li><p><strong>rho_poly</strong> – Polytropic density scale 
+<span class="math notranslate nohighlight">\(\rho_p\, [\mathrm{kg}/\mathrm{m}^3]\)</span></p></li>
+<li><p><strong>rho_max</strong> – Maximum allowed baryonic mass density
+<span class="math notranslate nohighlight">\(\rho_\mathrm{max} \, [\mathrm{kg}/\mathrm{m}^3]\)</span></p></li>
+<li><p><strong>n_adiab</strong> – Adiabatic index <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p><strong>cold_comment</strong> – Optionally, additional description of the 
+cold EOS.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ideal-gas-eos">
+<h3>Ideal Gas EOS<a class="headerlink" href="#ideal-gas-eos" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="reprimand_eos_format.save_thermal_idealgas">
+<span class="sig-prename descclassname"><span class="pre">reprimand_eos_format.</span></span><span class="sig-name descname"><span class="pre">save_thermal_idealgas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_adiab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprimand_eos_format.save_thermal_idealgas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a file for a classical ideal gas EOS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path of the file to create. Ending should be .eos.h5</p></li>
+<li><p><strong>name</strong> – Name of the EOS</p></li>
+<li><p><strong>n_adiab</strong> – Adiabatic index <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p><strong>eps_max</strong> – Maximum allowed specific internal energy 
+<span class="math notranslate nohighlight">\(\epsilon\)</span></p></li>
+<li><p><strong>rho_max</strong> – Maximum allowed baryonic mass density
+<span class="math notranslate nohighlight">\(\rho_\mathrm{max} \, [\mathrm{kg}/\mathrm{m}^3]\)</span></p></li>
+<li><p><strong>comment</strong> – Optional additional description of the EOS,  
+appended to autogenerated description</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_interf.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_available.html">Available EOS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EOS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_custom.html">Custom EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="eos_thermal.html">Thermal EOS</a><ul>
+      <li>Previous: <a href="eos_thermal_available.html" title="previous chapter">Available EOS</a></li>
+      <li>Next: <a href="eos_thermal_custom.html" title="next chapter">Custom EOS</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/eos_thermal_files.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

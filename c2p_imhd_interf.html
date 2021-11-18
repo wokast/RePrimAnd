@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Interface &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference" href="c2p_imhd_ref.html" />
+    <link rel="prev" title="Features" href="c2p_imhd_feat.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="interface">
+<span id="c2p-imhd-interface"></span><h1>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h1>
+<p>The primitive recovery is provided in form of a function object
+<a class="reference internal" href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit12con2prim_mhdE" title="EOS_Toolkit::con2prim_mhd"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">con2prim_mhd</span></code></a>
+which stores all fixed parameters such as EOS, required accuracy, and
+error policies. Once created, it can be used repeatetly as a function
+to recover primitives. The evolved variables are passed as a
+structure <a class="reference internal" href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit13cons_vars_mhdE" title="EOS_Toolkit::cons_vars_mhd"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">cons_vars_mhd</span></code></a> and the
+recovered primitives are stored in a structure
+<a class="reference internal" href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit13prim_vars_mhdE" title="EOS_Toolkit::prim_vars_mhd"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">prim_vars_mhd</span></code></a>.</p>
+<p>The recovery also
+requires the metric, which is passed in another object. The framework
+provides objects representing tensors (<em>not</em> tensor fields),
+used here to represent co- and contravariant 3-vectors and the
+3-metric. We use the convention that the 3-metric has positive
+signature.</p>
+<p>If the evolved variables are
+invalid, the code checks whether the given error policy allows to apply
+corrections to the conserved variables to make them valid. If yes, the
+structure with the evolved varibles is modified to be consistent with
+the corrected primitives.
+The conserved variables and metric are checked to ensure all values
+are finite (not NAN or INF) and that the metric determinent is
+positive.</p>
+<p>Whether or not the evolved variables are valid after allowed corrections
+is reported via another object
+<a class="reference internal" href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit14c2p_mhd_reportE" title="EOS_Toolkit::c2p_mhd_report"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">c2p_mhd_report</span></code></a>.
+If the evolved variables violate the error policy, this also contains
+the type of violation. In addition, it reports if atmosphere
+was enforced, and if the evolved variables were corrected.
+The object also provides a method to assemble a string with a
+diagnostic message.</p>
+<p>If the recovery fails for any reason the conserved and primitive
+variables are all set to NAN. Otherwise, they are consistent
+up to the root solving accuracy. The quantities <span class="math notranslate nohighlight">\(\rho,W, v^i, D\)</span>
+are always consistent to machiene precision.</p>
+<p>A minimal example can be found in <cite>example/minimal.cc</cite>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since the function operates pointwise and does not need to know
+anything about numerical grids, it is usable in any evolution code
+based on (or able to link to) C++.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is save to use the same function object in multiple threads.
+Copying the function object inside an innermost multithreaded loop
+should be avoided for performance reasons, since copying the EOS is
+an atomic operation.</p>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="c2p_imhd_feat.html">Features</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c2p_imhd_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="c2p_imhd.html">Primitive Recovery</a><ul>
+      <li>Previous: <a href="c2p_imhd_feat.html" title="previous chapter">Features</a></li>
+      <li>Next: <a href="c2p_imhd_ref.html" title="next chapter">Reference</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/c2p_imhd_interf.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Features &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Interface" href="c2p_imhd_interf.html" />
+    <link rel="prev" title="Primitive Recovery" href="c2p_imhd.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<p>The library provides a method to recover primitive variables
+<span class="math notranslate nohighlight">\(\rho, \epsilon, Y_e, P, v^i, W, E^i\)</span> from the evolved
+variables <span class="math notranslate nohighlight">\(D, \tau, S_i, Y_e^T, B^i\)</span> of the conservation-law
+formulation of relativistic ideal magnetohydrodynamics.
+The code implements exactly the algorithm described in the acompanying
+article.</p>
+<p>The implementation determines whether the evolved variables
+correspond to valid primitives or not. Valid means that the matter
+state <span class="math notranslate nohighlight">\(\rho,\epsilon,Y_e\)</span> is in the valid range of the EOS, in
+particular that the fluid internal energy is above the value at zero
+temperature. In addition, one can specify technical restrictions if
+meaningful for the evolution code: a speed limit and bound for
+magnetization.</p>
+<p>Further, the code can project the evolved variables back onto
+the valid regime. The main correction is to set the fluid internal
+energy to the closest value valid at given mass density for the EOS.
+In addition, the velocity can be limited to the speed limit by
+rescaling the momentum, and the electron fraction can be adjusted to
+the valid range of the EOS. The magnetic field is never corrected,
+as this cannot be done locally in a meaningful way.</p>
+<p>If a given correction is applied is decided by a parametrized error
+policy. The implemented policy is geared towards simulations of
+isolated neutron stars, binary neutron mergers, and collapse to black
+hole. It only contains simple conditions, as everything more
+involved is likely specific to the evolution code.</p>
+<p>In detail, the policy is characterized by the following parameters:</p>
+<ol class="arabic simple">
+<li><p>A density above which the only allowed corrections are adjusting
+internal energy below zero temperature value and the electron
+fraction to the allowed range (“strict” regime).</p></li>
+<li><p>A maximum velocity above which failure is reported in the strict
+regime and momentum rescaling applied otherwise.</p></li>
+<li><p>An upper limit for the ratio of magnetic and mass energy densities,
+above which failure is reported (at any density).</p></li>
+<li><p>A flag whether to restrict the electron fraction to the
+allowed range also in the strict regime, or whether to report
+failure.</p></li>
+</ol>
+<p>It is simple to declare different error policies and apply them
+in different regimes. For example, the evolution code could use the
+lapse function to estimate if a point is inside a black hole, and
+then apply a more lenient policy.</p>
+<p>Finally, the implementation can enforce an artificial atmosphere on the
+fluid. In detail, below a given mass density, <span class="math notranslate nohighlight">\(\rho,\epsilon,Y_e\)</span>
+are set to specified values, and the velocity set to zero. For the EM
+part, the electric field is set to zero and the magnetic field is left
+unchanged. The evolved variables are set consistent with those
+primitives. This is a very crude approach that might lead to incorrect
+evolution of the magnetic field in regions with atmosphere. Any
+improvement is specific to the evolution code and should be handled
+there.</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c2p_imhd_interf.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c2p_imhd_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="c2p_imhd.html">Primitive Recovery</a><ul>
+      <li>Previous: <a href="c2p_imhd.html" title="previous chapter">Primitive Recovery</a></li>
+      <li>Next: <a href="c2p_imhd_interf.html" title="next chapter">Interface</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/c2p_imhd_feat.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Python Bindings &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Little Helpers" href="little_helpers.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="python-bindings">
+<span id="python-interface"></span><h1>Python Bindings<a class="headerlink" href="#python-bindings" title="Permalink to this headline">¶</a></h1>
+<p>The <cite>RePrimAnd</cite> library also provides a Python3 extension module
+<cite>pyreprimand</cite> that allows the use of the EOS framework from within
+Python3. The main purpose of this is postprocessing simulation data.
+It is therefore possible to evaluate the EOS methods for <cite>numpy</cite>
+arrays of arbitrary dimension. This should be very efficient since the
+loops are performed in compiled C++ code.</p>
+<p>The Python bindings include the functionality of barotropic and thermal
+EOS, as well as the functions to load these from file. It does not
+expose the low-level infrastructure, such as EOS implementation objects,
+or direct constructors. In addition, the Python bindings include the
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">unit</span></code> objects, which are needed when loading an EOS, but
+should be useful in general for unit conversion.</p>
+<p>The Python bindings expose nearly all EOS methods, using the same naming
+as the C++ interface. One difference is that the Python bindings do not
+include the methods based on matter state objects, as this interface
+is not suitable for work with arrays. Only the C++ methods for direct
+evaluation of a single quantity, such as
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">press_at_rho_eps_ye()</span></code>
+are offered. As with the C++ pendants, they return NAN for invalid
+input. Range-checking methods such as
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">is_rho_valid()</span></code> are also
+exposed and can be used with numpy arrays, resulting in <cite>numpy</cite> arrays
+of type <cite>bool</cite>. Another minor difference is that C++ getter methods
+such as <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">range_rho()</span></code> are mapped to Python
+object properties, so in Python one should not add brackets ().</p>
+<p>The example code below shows how to load a barotropic EOS and evaluate
+the pressure for a numpy array of mass densities spanning the full EOS
+valid range.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyreprimand</span> <span class="k">as</span> <span class="nn">pyr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span>
+<span class="n">eos</span> <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">load_eos_barotr</span><span class="p">(</span><span class="s2">&quot;EOS/MS1_PP.eos.h5&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">u</span><span class="p">)</span>
+
+<span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">eos</span><span class="o">.</span><span class="n">range_rho</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">eos</span><span class="o">.</span><span class="n">range_rho</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">press</span> <span class="o">=</span> <span class="n">eos</span><span class="o">.</span><span class="n">press_at_rho</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="little_helpers.html" title="previous chapter">Little Helpers</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/python_interf.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

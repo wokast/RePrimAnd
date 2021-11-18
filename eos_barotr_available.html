@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Available EOS &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="EOS Files" href="eos_barotr_files.html" />
+    <link rel="prev" title="Interface" href="eos_barotr_interf.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="available-eos">
+<h1>Available EOS<a class="headerlink" href="#available-eos" title="Permalink to this headline">¶</a></h1>
+<section id="polytropic-eos">
+<span id="eospoly"></span><h2>Polytropic EOS<a class="headerlink" href="#polytropic-eos" title="Permalink to this headline">¶</a></h2>
+<p>In terms of mass density <span class="math notranslate nohighlight">\(\rho\)</span> or pseudo-enthalpy <span class="math notranslate nohighlight">\(g\)</span>,
+the EOS is given by</p>
+<div class="math notranslate nohighlight" id="equation-press-polytrope">
+<span class="eqno">(1)<a class="headerlink" href="#equation-press-polytrope" title="Permalink to this equation">¶</a></span>\[\begin{split}P &amp;= \rho_p \left(\frac{\rho}{\rho_p}\right)^\Gamma
+  = \rho_p \left( \frac{g-1}{1+n} \right)^{1+n}  \\
+\epsilon &amp;= n \left(\frac{\rho}{\rho_p}\right)^\frac{1}{n}
+          = \frac{g-1}{\Gamma}\end{split}\]</div>
+<p>whith the adiabatic exponent <span class="math notranslate nohighlight">\(\Gamma = 1 + \frac{1}{n}\)</span>.
+The adiabtic index <span class="math notranslate nohighlight">\(n&gt;0\)</span> and the polytropic density
+scale <span class="math notranslate nohighlight">\(\rho_p&gt;0\)</span> are free parameters of the EOS.
+The parameter <span class="math notranslate nohighlight">\(\rho_p&gt;0\)</span> is more commonly given in terms of
+the polytropic constant <span class="math notranslate nohighlight">\(K=\rho_p^{1-\Gamma}\)</span>.
+The drawback of the latter is that the unit depends on <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p>
+<p>It is easy to show that the EOS is isentropic, and we further define it
+as a zero-temperature EOS.
+Zero-temperature polytropes are
+used frequently as a toy model for degenerate neutron star matter
+and for testing numerical relativity codes.</p>
+<p>The pseudo-enthalpy is simply <span class="math notranslate nohighlight">\(g=h/h_0\)</span>. Further, the minimum
+enthalpy is <span class="math notranslate nohighlight">\(h_0=1\)</span>.
+The following relations apply:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}g(\rho) &amp;=  1 + (n+1) \left(\frac{\rho}{\rho_p}\right)^{1/n} \\
+\rho(g) &amp;=  \rho_p \left( \frac{g-1}{1+n} \right)^n \\
+c_s^2   &amp;=  \frac{g-1}{ng}\end{split}\]</div>
+<p>This EOS does not provide an electron fraction (in contrast to more
+realistic nuclear physics models which compute beta-equilibrium).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If <span class="math notranslate nohighlight">\(n&lt;1\)</span> the soundspeed would exceed the speed of light
+above a critical density. In this case, the validity range specified
+by the user is therefore automatically adjusted to ensure</p>
+<div class="math notranslate nohighlight">
+\[g &lt; \frac{1}{1-n}\]</div>
+</div>
+</section>
+<section id="piecewise-polytropic-eos">
+<span id="eospiecewisepoly"></span><h2>Piecewise Polytropic EOS<a class="headerlink" href="#piecewise-polytropic-eos" title="Permalink to this headline">¶</a></h2>
+<p>The piecewise polytropic EOS consists of polytropic segments with
+different polytropic exponents and an additional offset of specific
+energy.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}P(\rho)
+ &amp;= \rho_{p,i} \left(\frac{\rho}{\rho_{p,i}}\right)^{\Gamma_i}
+ \qquad \mathrm{for}\quad \rho_{b,i} \le \rho &lt; \rho_{b,i+1} \\
+\epsilon(\rho)
+  &amp;= n_i \left(\frac{\rho}{\rho_{p,i}}\right)^\frac{1}{n_i}
+     + \epsilon_i\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho_{b,i}\)</span> denote the mass density at the segment
+boundaries, <span class="math notranslate nohighlight">\(\rho_{p,i}\)</span> and <span class="math notranslate nohighlight">\(\Gamma_i=1+1/n_i\)</span>
+the polytropic
+density scale and polytropic exponent of segment <span class="math notranslate nohighlight">\(i\)</span>.
+Compared to regular polytropes, each segment has an additional
+constant offset <span class="math notranslate nohighlight">\(\epsilon_i\)</span> for the specific energy.</p>
+<p>The EOS is completely determined by the exponents <span class="math notranslate nohighlight">\(\Gamma_i\)</span>,
+the segment boundaries <span class="math notranslate nohighlight">\(\rho_{b,i}\)</span>, and <span class="math notranslate nohighlight">\(\rho_{p,0}\)</span>
+of the first segment. Matching pressure and energy across boundaries
+then determines <span class="math notranslate nohighlight">\(\epsilon_{i&gt;0}\)</span> and <span class="math notranslate nohighlight">\(\rho_{p,i&gt;0}\)</span>.
+Further, we set <span class="math notranslate nohighlight">\(\epsilon_0=0\)</span>.</p>
+<p>It is easy to show that the EOS is isentropic, and we further define it
+as a zero-temperature EOS.</p>
+<p>The minimum enthalpy is <span class="math notranslate nohighlight">\(h_0=1\)</span>.
+Pseudo-entaply and enthalpy are identical, i.e. <span class="math notranslate nohighlight">\(g=h\)</span>.
+In terms of the pseudo-enthalpy, the segments are given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}g(\rho)
+  &amp;= 1 +  \epsilon_i
+       + (n_i+1) \left(\frac{\rho}{\rho_{p,i}}\right)^{1/n_i} \\
+\rho(g)
+  &amp;= \rho_{p,i} \left( \frac{g-1-\epsilon_i}{1+n_i} \right)^{n_i} \\
+P(g)
+ &amp;= \rho_{p,i} \left( \frac{g-1-\epsilon_i}{1+n_i} \right)^{1+n_i} \\
+\epsilon(g)
+ &amp;= \frac{g-1-\epsilon_i}{\Gamma_i} + \epsilon_i \\
+c_s^2(g)
+ &amp;= \frac{g-1-\epsilon_i}{n_ig}\end{split}\]</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Segments with <span class="math notranslate nohighlight">\(n_i&lt;1\)</span> would lead to superluminal soundspeed,
+if the corresponding critical density falls within the segment.
+The user-specified validity range is automatically reduced to
+prevent this, if necessary.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The intended use case for this EOS contains just few (&lt;10) segments.
+It would be very inefficient to approximate arbitrary EOS using
+hundreds of segments. For this, use the tabulated EOS below.</p>
+</div>
+</section>
+<section id="tabulated-eos">
+<span id="eoscoldtabulated"></span><h2>Tabulated EOS<a class="headerlink" href="#tabulated-eos" title="Permalink to this headline">¶</a></h2>
+<p>This is the most general EOS, where all functions are implemented
+as efficient linear lookup tables. Those lookup tables are regularly
+spaced, hence evaluation cost is independent of table resolution.
+The low convergence order of linear lookup can be compensated by
+table resolution.</p>
+<p>To create a tabulated EOS, one provides vectors consisting of data
+at arbitrarily spaced sample points</p>
+<p>The provided sample points are interpolated
+to regularly spaced samples for the lookup tables using
+monotonic cubic spline interpolation. This avoids violation of
+monotonicity conditions by overshoots.</p>
+<p>Since the lookup tables have to cover orders of magnitude, logarithmic
+spacing is employed for the independent variable. However, a constant
+offset is added to prevent wasting many sample points on very low
+values, which could otherwise happen if the lowest sample is very close
+to zero.
+The heuristic algorithm determines the dynamic range spanned from the
+median to the maximum value of the mass density, and
+adjusts the offset such that this range is covered by half of the
+lookup table points. The lookup tables in terms of pseudo-enthalpy
+<span class="math notranslate nohighlight">\(g-1\)</span> adjust the offset such that the shifted value spans the
+same magnitude range as for the density.</p>
+<p>Most functions are tabulated with the pseudo enthalpy <span class="math notranslate nohighlight">\(g\)</span> as
+independent variable, in addition the mapping between <span class="math notranslate nohighlight">\(g\)</span> and
+<span class="math notranslate nohighlight">\(\rho\)</span> is tabulated.</p>
+<p>Temperature and electron fraction can be provided optionally.
+If the temperature is not provided when creating the EOS, it is assumed
+to be a zero-temperature EOS.</p>
+<p>Finally, between zero density and the lowest density covered by the
+lookup table, a polytropic EOS with an additional offset in specific
+energy is attached. The polytropic exponent is a free parameter, offset
+and polytropic density scale are fixed my matching conditions.
+Temperature and electron fraction, if available, are kept constant.
+The motivation is that nuclear physics EOS tables typically do not
+extend down to zero density, but for setting up intial data, such as
+neutron stars, it is convenient not to have to worry about artificial
+cutoffs before reaching the surface. For use in evolution codes, it
+is up to the user to make sure results do not rely on this extension,
+e.g. highly diluted expelled matter.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to the heuristic setup of lookup tables and the required
+interpolation, the provided sample points should have a roughly
+uniform coverage of logarithmic density between median value and
+maximum.</p>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_interf.html">Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Available EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_files.html">EOS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_custom.html">Custom EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="eos_barotr.html">Barotropic EOS</a><ul>
+      <li>Previous: <a href="eos_barotr_interf.html" title="previous chapter">Interface</a></li>
+      <li>Next: <a href="eos_barotr_files.html" title="next chapter">EOS Files</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/eos_barotr_available.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

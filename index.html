@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>RePrimAnd Documentation &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installing.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="reprimand-documentation">
+<h1>RePrimAnd Documentation<a class="headerlink" href="#reprimand-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Recovery of Primitives And EOS framework</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><cite>RePrimAnd</cite> is a support library for numerical simulations of general
+relativistic magnetohydrodynamics.
+If provides methods for recovering primitive variables like pressure
+and velocity from the variables evolved in quasi-conservative
+formulations. Further, it provides a general framework for handling
+matter equations of state.</p>
+<p>A description of the algorithm and tests of the library is given in
+the accompanying article:</p>
+<p>Wolfgang Kastaun, Jay Vijay Kalinani, Riccardo Ciolfi,
+“Robust Recovery of Primitive Variables in Relativistic Ideal
+Magnetohydrodynamics”,
+<a class="reference external" href="https://doi.org/10.1103/PhysRevD.103.023018">Phys. Rev. D 103, 023018 (2021)</a>
+<a class="reference external" href="https://arxiv.org/abs/2005.01821">(arXiv:2005.01821)</a>.</p>
+<p>The latest public versions can be found on the
+<a class="reference external" href="https://github.com/wokast/RePrimAnd">github page</a>.</p>
+<p>Releases are also archived on Zenodo and can be cited via the
+<a class="reference external" href="https://doi.org/10.5281/zenodo.3785074">DOI</a>.</p>
+<section id="developers">
+<h3>Developers<a class="headerlink" href="#developers" title="Permalink to this headline">¶</a></h3>
+<p><cite>RePrimAnd</cite> was written by Dr. Wolfgang Kastaun
+&lt;<a class="reference external" href="mailto:physik&#37;&#52;&#48;fangwolg&#46;de">physik<span>&#64;</span>fangwolg<span>&#46;</span>de</a>&gt;.
+Thanks for additional testing go to Jay Vijay Kalinani.</p>
+</section>
+<section id="license">
+<h3>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h3>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<p>Please cite the
+<a class="reference external" href="https://doi.org/10.1103/PhysRevD.103.023018">PRD article</a>
+and the <a class="reference external" href="https://doi.org/10.5281/zenodo.3785074">DOI on Zenodo</a>
+when publishing results obtained using the library.</p>
+</section>
+</section>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#building-from-source">Building from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#python-bindings">Python Bindings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#einstein-toolkit-support">Einstein Toolkit Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#creating-documentation">Creating Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#running-tests">Running Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notation.html#units">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notation.html#primitive-variables">Primitive variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notation.html#evolved-variables">Evolved Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="c2p_imhd_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c2p_imhd_interf.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c2p_imhd_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_interf.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_available.html">Available EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_files.html">EOS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_custom.html">Custom EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_thermal_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_interf.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_available.html">Available EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_files.html">EOS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_custom.html">Custom EOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eos_barotr_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="little_helpers.html#tensors">Tensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="little_helpers.html#units">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="little_helpers.html#other">Other</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="installing.html" title="next chapter">Installation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

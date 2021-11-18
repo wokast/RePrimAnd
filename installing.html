@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Installation &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Notation" href="notation.html" />
+    <link rel="prev" title="RePrimAnd Documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>The main target and development platform is Linux, although the
+library code is not platform-specific and should also work on Macs.
+Windows and AIX are not supported.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>A C++11 capable compiler (tested with gcc and clang).</p></li>
+<li><p>Meson build system.</p></li>
+<li><p>Boost library.</p></li>
+<li><p>GNU Scientific Library.</p></li>
+<li><p>HDF5 library (Only C-bindings required, not the C++ API).</p></li>
+<li><p>Doxygen (only for documentation)</p></li>
+<li><p>Sphinx with Breathe extension (only for documentation)</p></li>
+<li><p>Python matplotlib (only for benchmark plots)</p></li>
+<li><p>Python pybind11 package &gt;= 2.6.0 (only for Python bindings)</p></li>
+</ul>
+</section>
+<section id="building-from-source">
+<h2>Building from Source<a class="headerlink" href="#building-from-source" title="Permalink to this headline">¶</a></h2>
+<p>The library is build using the modern
+<a class="reference external" href="https://mesonbuild.com">Meson</a>
+build system, which is
+<a class="reference external" href="https://mesonbuild.com/Getting-meson.html">available</a>
+as standard package in most distributions and can also be installed
+via Python’s pip.</p>
+<p>To build the library,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">repository</span><span class="o">&gt;</span>
+<span class="n">meson</span> <span class="n">mbuild</span> <span class="o">--</span><span class="n">buildtype</span><span class="o">=</span><span class="n">release</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=&lt;</span><span class="n">custom</span> <span class="n">install</span> <span class="n">location</span><span class="o">&gt;</span>
+<span class="n">cd</span> <span class="n">mbuild</span>
+<span class="n">ninja</span>
+</pre></div>
+</div>
+<p>This will compile with optimization and without debug symbols. Other
+possibilities are <cite>–buildtype=debug</cite> and <cite>–buildtype=debugoptimized</cite>.
+To use a different compiler, e.g. clang, prefix the meson command
+with <cite>CC=clang CXX=clang++</cite>.
+See <a class="reference external" href="https://mesonbuild.com/Running-Meson.html">here</a> for general
+Meson usage.</p>
+<section id="installing">
+<h3>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h3>
+<p>To install the library, use</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">mbuild</span>
+<span class="n">ninja</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>This will install in a user-defined location if the <cite>–prefix</cite> option
+was given during the build setup, otherwise systemwide.</p>
+</section>
+<section id="using-the-library">
+<h3>Using the Library<a class="headerlink" href="#using-the-library" title="Permalink to this headline">¶</a></h3>
+<p>The various header files needed for using the library are installed
+in a subdirectory <cite>reprimand</cite>. The executables have to be linked
+with library <cite>RePrimAnd</cite>.</p>
+<p>A minimal example can be found in <cite>example/minimal.cc</cite>. Assuming
+the library is installed where the compiler (below we use gcc as
+example) can find it, compilation should be straightforward:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++ -lRePrimAnd --std<span class="o">=</span>c++11 minimal.cc
+</pre></div>
+</div>
+</section>
+</section>
+<section id="python-bindings">
+<h2>Python Bindings<a class="headerlink" href="#python-bindings" title="Permalink to this headline">¶</a></h2>
+<p>The Python bindings are automatically build together with the library
+itself, provided that a Python3 installation is detected which contains
+the pybind11 package. The latter can be easily installed via pip or
+conda. Make sure to install pybind11 version &gt;=2.6.0 or the build will fail.
+When using a conda virtual environment, also set the meson <cite>–prefix</cite> option
+to the root of the environment, even when you only need the python module.</p>
+<p>To disable building the Python bindings and remove the
+corresponding dependencies, use the build option</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meson</span> <span class="n">configure</span> <span class="o">-</span><span class="n">Dbuild_python_api</span><span class="o">=</span><span class="n">false</span>
+</pre></div>
+</div>
+<p>If the Python bindings have been build, they are automatically installed
+together with the library. The Python extension module is called
+<cite>pyreprimand</cite>.</p>
+</section>
+<section id="einstein-toolkit-support">
+<h2>Einstein Toolkit Support<a class="headerlink" href="#einstein-toolkit-support" title="Permalink to this headline">¶</a></h2>
+<p>RePrimAnd does provide an (experimental) thorn that builds the library within
+an EinsteinToolkit (ET) environment, using the ExternalLibraries mechanism. The
+thorn can be found in the folder <cite>ET_interface/thorns/RePrimAnd/</cite>. The thorn
+depends on the HDF5, GSL, and BOOST ExternalLibraries thorns. In addition,
+the meson build system needs to be installed on the build host.</p>
+<p>Currently there are no thorns that provide an ET-style interface for using
+this library, although this might change in future versions. ET Thorns can of
+course use the library like any other C++ library.</p>
+</section>
+<section id="creating-documentation">
+<h2>Creating Documentation<a class="headerlink" href="#creating-documentation" title="Permalink to this headline">¶</a></h2>
+<p>To just build the documentation, use the target <cite>documentation</cite>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ninja</span> <span class="n">documentation</span>
+</pre></div>
+</div>
+<p>The resulting pages can be found in the build directory under
+<cite>docsrc/sphinx/index.html</cite>.</p>
+<p>The building of the documentation requires sphinx with the breathe
+extension as well as doxygen (Note sphinx breathe currently
+has problems with the C++11 trailing
+return type syntax, misreporting return types as <cite>auto</cite>.)</p>
+<p>To disable building documentation and remove
+the corresponding dependencies, use the build option</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meson</span> <span class="n">configure</span> <span class="o">-</span><span class="n">Dbuild_documentation</span><span class="o">=</span><span class="n">false</span>
+</pre></div>
+</div>
+<p>If the documentation is build, it is installed automatically when
+installing the library, by default to
+<cite>&lt;prefix&gt;/usr/local/share/doc/libreprimand/index.html</cite>.</p>
+</section>
+<section id="running-tests">
+<h2>Running Tests<a class="headerlink" href="#running-tests" title="Permalink to this headline">¶</a></h2>
+<section id="unit-tests">
+<h3>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h3>
+<p>Please also take a minute to run the unit tests to ensure
+correct compilation</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ninja</span> <span class="n">test</span>
+</pre></div>
+</div>
+</section>
+<section id="benchmarks">
+<h3>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this headline">¶</a></h3>
+<p>The repository contains code to map the efficiency and accuracy of
+the primitive recovery, producing the plots shown in the
+article. To recreate the data and plots,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ninja</span> <span class="n">benchplots</span>
+<span class="n">ninja</span> <span class="n">accuracyplots</span>
+</pre></div>
+</div>
+<p>The resulting pdf figures are placed in the build directory under
+<cite>tests/benchmarks</cite>.</p>
+<p>This requires Python+matplotlib. To disable building benchmarking and
+remove the corresponding dependencies, use the build option</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">repository</span><span class="o">&gt;/</span><span class="n">mbuild</span>
+<span class="n">meson</span> <span class="n">configure</span> <span class="o">-</span><span class="n">Dbuild_benchmarks</span><span class="o">=</span><span class="n">false</span>
+</pre></div>
+</div>
+</section>
+<section id="visualizing-master-function">
+<h3>Visualizing Master Function<a class="headerlink" href="#visualizing-master-function" title="Permalink to this headline">¶</a></h3>
+<p>In addition, there is code to sample the primitive recovery master
+function (the central ingredient of the scheme) for various cases,
+as shown in the paper.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ninja</span> <span class="n">srootdata</span>
+</pre></div>
+</div>
+<p>The resulting data files are placed in the build directory under
+<cite>tests/sample_root/</cite>.</p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-from-source">Building from Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-bindings">Python Bindings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#einstein-toolkit-support">Einstein Toolkit Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-documentation">Creating Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-tests">Running Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">RePrimAnd Documentation</a></li>
+      <li>Next: <a href="notation.html" title="next chapter">Notation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/installing.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
