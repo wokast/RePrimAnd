@@ -1,6 +1,7 @@
 Available EOS
 =============
 
+.. _EOSPoly:
 
 Polytropic EOS
 --------------
@@ -39,7 +40,7 @@ The following relations apply:
    c_s^2   &=  \frac{g-1}{ng} 
    
 This EOS does not provide an electron fraction (in contrast to more
-realistic on nuclear physics models which compute beta-equilibrium).
+realistic nuclear physics models which compute beta-equilibrium).
 
 .. warning::
 
@@ -50,6 +51,9 @@ realistic on nuclear physics models which compute beta-equilibrium).
    .. math::
 
       g < \frac{1}{1-n}
+
+
+.. _EOSPiecewisePoly:
 
 Piecewise Polytropic EOS
 ------------------------
@@ -110,6 +114,9 @@ In terms of the pseudo-enthalpy, the segments are given by
    The intended use case for this EOS contains just few (<10) segments.
    It would be very inefficient to approximate arbitrary EOS using 
    hundreds of segments. For this, use the tabulated EOS below.
+
+
+.. _EOSColdTabulated:
 
 Tabulated EOS
 -------------

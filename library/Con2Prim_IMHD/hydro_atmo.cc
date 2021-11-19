@@ -40,14 +40,14 @@ void atmosphere::set(prim_vars& pv, cons_vars& cv,
 void atmosphere::set(prim_vars_mhd& pv) const
 {
   set((prim_vars&)pv);
-  //TODO: decide what to do with EM part
+  //primitive B field left unchanged in atmo
   pv.E = ZERO;
 }
 
 void atmosphere::set(cons_vars_mhd& cv, const sm_metric3& g) const
 {
   set((cons_vars&) cv, g);
-  //TODO: decide what to do with EM part
+  // E zero in atmo, b left unchanged. Only need to adjust energy.
   cv.tau += 0.5 * g.norm2(cv.bcons) / g.vol_elem; 
 }
 

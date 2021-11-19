@@ -89,13 +89,16 @@ real_t eos_poly_piece::csnd_from_gm1(real_t gm1) const
   return sqrt(gm1p / ( n * (gm1 + 1.0)));
 }
 
+/**
+\return Maximum density within segment below which soundspeed is zero.
+*/
 real_t eos_poly_piece::rho_max_save(real_t rho_max) const
 {
   if ( n>=1 ) return rho_max;
   const real_t gm1_save{ std::max(gm10, (n + dsed) / (1.0 - n)) };
   const real_t rho_save{ rho_from_gm1(gm1_save) };
   const real_t margin { 10*std::numeric_limits<real_t>::epsilon() };
-  
+  // margin as precaution against rounding errors, 10 is just a guess.
   return std::min(rho_max, rho_save * (1.0 - margin));
 }
 
@@ -120,7 +123,7 @@ eos_barotr_pwpoly::eos_barotr_pwpoly(real_t rmdp0,
   }
   if (segm_bound.empty()) {
     throw runtime_error("eos_barotr_pwpoly: need at least one "
-                        "segment.");
+                        "segment, got zero.");
   }
   if (segm_bound[0] != 0) {
     throw runtime_error("eos_barotr_pwpoly: First segment has to "
@@ -138,6 +141,7 @@ eos_barotr_pwpoly::eos_barotr_pwpoly(real_t rmdp0,
   auto ibnd = segm_bound.begin();
   auto iga  = segm_gamma.begin();
 
+  //First segment starts at rho=0 with eps=0
   segments.emplace_back(0, 0, *iga, rmdp0);
 
   while ((++ibnd != segm_bound.end()) 

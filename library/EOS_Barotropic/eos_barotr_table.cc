@@ -8,12 +8,8 @@
 using namespace std;
 using namespace EOS_Toolkit;
 using namespace EOS_Toolkit::implementations;
-//~ using namespace EOS_Toolkit::detail;
 
 
-/**
-
-*/
 eos_barotr_table::eos_barotr_table(
         range rg_rho_, range rg_gm1_, 
         std::size_t nsamples_, int magnitudes_,
@@ -30,18 +26,23 @@ eos_barotr_table::eos_barotr_table(
   cs2_gm1{std::move(cs2_), rg_gm1_, nsamples_, magnitudes_}, 
   poly{poly_}
 {
-  if ((rho_gm1.range_y().min() < 0.0) 
-        || (gm1_rho.range_x().min() < 0.0)) {
-    throw runtime_error("eos_barotr_table: negative mass density");
+  if (rho_gm1.range_y().min() < 0.0) {
+    throw runtime_error("eos_barotr_table: negative mass density "
+                        "in rho(gm1)");
+  }
+  if (gm1_rho.range_x().min() < 0.0) {
+    throw runtime_error("eos_barotr_table: negative mass density "
+                        "in gm1(rho)");
   }
   if (cs2_gm1.range_y().max() >= 1.0) {
-    throw runtime_error("eos_barotr_table: superluminal sound speed");
+    throw runtime_error("eos_barotr_table: sound speed >= 1");
   }
-  if (cs2_gm1.range_y().min() <= 0.0) {
-    throw runtime_error("eos_barotr_table: imaginary sound speed");
+  if (cs2_gm1.range_y().min() < 0.0) {
+    throw runtime_error("eos_barotr_table: negative "
+                        "squared sound speed");
   }
-  if (pbr_gm1.range_y().min() <= 0.0) {
-    throw runtime_error("eos_barotr_table: pressure <= 0");
+  if (pbr_gm1.range_y().min() < 0.0) {
+    throw runtime_error("eos_barotr_table: negative pressure");
   }
   if (gm1_rho.range_y().min() < 0.0) {
     throw runtime_error("eos_barotr_table: encountered g < 1");
@@ -175,7 +176,9 @@ eos_barotr EOS_Toolkit::make_eos_barotr_table(
   eos_barotr_table::func_t sefrac{nullptr};
   if (!efrac.empty()) sefrac = cspline_mono{ngm1, efrac};
   
-  const std::size_t nsample = 10*rho.size(); //TODO: better criterion
+  // increase number of samples via spline interpolation, to 
+  // somewhat make up for later use of linear lookup. 
+  const std::size_t nsample = 10*rho.size(); 
   
   const int i50       = int(ceil(rho.size()/2.));
   const real_t rho50 = rho.at(i50);

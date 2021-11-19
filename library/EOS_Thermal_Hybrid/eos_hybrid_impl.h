@@ -8,10 +8,10 @@ namespace implementations {
 
 class eos_hybrid : public eos_thermal_impl {
   eos_barotr eos_c;
-  real_t gamma_th, gm1_th, eps_max;
-  range rgrho;      ///< Valid range for density \f$ \rho \f$
-  range rgye;       ///< Valid range for electron fraction \f$ Y_e \f$
-  real_t min_h;    ///< Lower bound for enthalpy \f$ h \ge h_0 > 0 \f$
+  const real_t gamma_th, gm1_th, eps_max;
+  const range rgrho;    ///< Valid range for density \f$ \rho \f$
+  const range rgye;     ///< Valid range for electron fraction \f$ Y_e \f$
+  const real_t min_h;   ///< Lower bound for enthalpy \f$ h \ge h_0 > 0 \f$
 
 
   real_t eps_cold(real_t rho) const;

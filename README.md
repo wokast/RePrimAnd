@@ -1,4 +1,4 @@
-The full documentation can be found [here](https://www.atlas.aei.uni-hannover.de/holohome/wolfgang.kastaun/doc/reprimand/latest/index.html)
+The full documentation can be found [here](https://wokast.github.io/RePrimAnd/index.html)
 
 # Installation
 

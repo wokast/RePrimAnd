@@ -85,6 +85,19 @@ Primitive variables
      - ``E``
      - Electric field in Eularian frame
 
+Magnetic and electric field are defined as 
+
+.. math::
+   E^\mu &= n_\nu F^{\mu\nu}, \\
+   B^\mu &= n_\nu {}^*F^{\mu\nu}
+
+where :math:`F^{\mu\nu}` is the Maxwell tensor and the star denotes the dual. Beware of 
+competing conventions in the literature (rationalized or not). The energy density 
+is given by
+
+.. math::
+   \frac{1}{2} \left( E^2 + B^2 \right)
+
 Evolved Variables
 ^^^^^^^^^^^^^^^^^
 The definition of the evolved (a.k.a. conserved) variables follows 

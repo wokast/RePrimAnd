@@ -10,9 +10,8 @@ using namespace EOS_Toolkit::implementations;
 
 void eos_barotr_poly::init(real_t n_, real_t rmd_p_, real_t rho_max_) 
 {
-  if (n_<0) {
-    throw std::range_error("eos_barotr_poly: "
-                           "negative polytropic index"); 
+  if (n_ <= 0) {
+    throw std::range_error("eos_barotr_poly: polytropic index <= 0"); 
   }
   if (rho_max_ <= 0) {
     throw runtime_error("eos_barotr_poly: maximum density must be "

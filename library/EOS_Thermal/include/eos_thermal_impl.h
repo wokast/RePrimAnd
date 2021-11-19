@@ -29,7 +29,6 @@ class eos_thermal_impl {
   //EOS implementations are not meant to be move-assigned to
   eos_thermal_impl& operator=(eos_thermal_impl &&)      = delete;
   
-  //Virtual destructor
   virtual ~eos_thermal_impl();
 
   /**

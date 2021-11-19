@@ -47,9 +47,18 @@ Hybrid EOS
 
 .. py:currentmodule:: reprimand_eos_format
 
+To create a hybrid EOS with cold part given by a tabulated barotropic EOS, use the following. See
+:ref:`EOSColdTabulated` for details on the cold EOS.
+
 .. autofunction:: save_thermal_hybrid_table
 
+To create a hybrid EOS with cold part given by a piecewise polytropic EOS, use the following. See
+:ref:`EOSPiecewisePoly` for details on the cold EOS.
+
 .. autofunction:: save_thermal_hybrid_pwpoly
+
+To create a hybrid EOS with cold part given by a polytropic EOS, use the following. See
+:ref:`EOSPoly` for details on the cold EOS.
 
 .. autofunction:: save_thermal_hybrid_poly
 

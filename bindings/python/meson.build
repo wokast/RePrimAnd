@@ -8,7 +8,7 @@ if py3_inst.found()
   fnd_pyb11 = run_command(py3_inst.path(), '-m', 'pybind11', 
                             '--cmakedir')
   dep_pyb11 = dependency('pybind11', 
-                         cmake_module_path : fnd_pyb11.stdout())
+                         cmake_module_path : fnd_pyb11.stdout().strip())
   
   py3_binding = py3_inst.extension_module('pyreprimand',
       sources:['pyreprimand.cpp', sources_lib], 

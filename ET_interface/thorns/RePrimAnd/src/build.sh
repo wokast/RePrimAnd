@@ -14,7 +14,7 @@ set -e                          # Abort on errors
 
 # Set locations
 THORN=RePrimAnd
-NAME=RePrimAnd-1.3
+NAME=RePrimAnd
 SRCDIR="$(dirname $0)"
 BUILD_DIR=${SCRATCH_BUILD}/build/${THORN}
 if [ -z "${REPRIMAND_INSTALL_DIR}" ]; then

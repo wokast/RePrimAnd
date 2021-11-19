@@ -83,6 +83,7 @@ real_t f_upper::new_h0w_from_mu_x(const real_t mu,
 
 /**
 This implements the auxiliary root function as defined in the article
+https://doi.org/10.1103/PhysRevD.103.023018
 **/
 auto f_upper::operator()(const real_t mu) const 
 -> std::pair<real_t, real_t>
@@ -204,7 +205,7 @@ real_t froot::get_eps_raw(const real_t mu, const real_t qf,
 
 /**
 This implements the master root function as defined in the 
-article.
+article: https://doi.org/10.1103/PhysRevD.103.023018
 **/
 real_t froot::operator()(const real_t mu) 
 {
@@ -381,7 +382,7 @@ void con2prim_mhd::operator()(prim_vars_mhd& pv, cons_vars_mhd& cv,
       errs.set_root_conv();
     }
     else if (status == ROOTSTAT::NOT_BRACKETED) {
-      if (nc.rho_big) { //That's why
+      if (nc.rho_big) { 
         errs.set_range_rho(d, d);
         set_to_nan(pv, cv);
         return;
@@ -499,7 +500,9 @@ rarecase::rarecase(const interval<real_t> ibracket,
   
   real_t muc0 = ibracket.min();
   real_t muc1 = ibracket.max();
-  const int ndigits = 30;
+  const int ndigits = 30; 
+  //We just assume 30 binary digits for finding adjusted interval should 
+  //be more than enough. Speed is not an issue for this rare case.
           
   
   if (f.d > rgrho.max()) {

@@ -45,8 +45,18 @@ The following EOS types are available:
 
 .. py:currentmodule:: reprimand_eos_format
 
+To create a tabulated barotropic EOS file, use the following. See
+:ref:`EOSColdTabulated` for details on the EOS.
+
 .. autofunction:: save_barotr_poly
 
+
+To create a piecewise polytropic EOS file, use the following. See
+:ref:`EOSPiecewisePoly` for details on the EOS.
+
 .. autofunction:: save_barotr_pwpoly
+
+To create a polytropic EOS file, use the following. See
+:ref:`EOSPoly` for details on the EOS.
 
 .. autofunction:: save_barotr_table
