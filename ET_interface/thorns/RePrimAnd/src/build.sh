@@ -42,7 +42,7 @@ mkdir ${BUILD_DIR} ${INSTALL_DIR}
 
 echo "REPRIMAND: Unpacking archive..."
 pushd ${BUILD_DIR} >/dev/null
-${TAR?} xJf ${SRCDIR}/../dist/${NAME}.tar.xz
+${TAR?} xf ${SRCDIR}/../dist/${NAME}.tar
 
 echo "REPRIMAND: Configuring..."
 cd ${NAME}/library
