@@ -92,7 +92,7 @@ class units {
   }
 
   ///Compute units with G=c=1 and given density unit
-  static constexpr units geom_udensity(double udensity, 
+  static units geom_udensity(double udensity, 
                                        double g_si=G_SI)
   {
     return geom_ulength( c_SI / std::sqrt(g_si * udensity));

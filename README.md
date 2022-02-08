@@ -11,7 +11,7 @@ Windows and AIX are not supported.
 * A C++11 capable compiler (tested with gcc and clang). 
 * Meson build system.
 * Boost library.
-* GNU Scientific Library.
+* GNU Scientific Library version >= 2.0 
 * HDF5 library (Only C-bindings required, not the C++ API).
 * Doxygen (only for documentation)
 * Sphinx with Breathe extension (only for documentation)
@@ -94,11 +94,16 @@ together with the library. The Python extension module is called
 
 ## Einstein Toolkit Support
 
-RePrimAnd does provide an (experimental) thorn that builds the library within
+RePrimAnd does provide a thorn that builds the library within
 an EinsteinToolkit (ET) environment, using the ExternalLibraries mechanism. The
 thorn can be found in the folder `ET_interface/thorns/RePrimAnd/`. The thorn
-depends on the HDF5, GSL, and BOOST ExternalLibraries thorns. In addition,
-the meson build system needs to be installed on the build host.
+depends on the HDF5, GSL, and BOOST ExternalLibraries thorns. Building it via
+the ET build system does not require meseon. Note this only builds the library,
+but not the tests and Python bindings. 
+
+The thorn is also part of the official ET framework. The version in the master 
+brach will typically by ahead of the ET version, but is not guaranteed to be 
+stable or compatible.
 
 Currently there is are no thorns that provide an ET-style interface for using
 this library, although this might change in future versions. ET Thorns can of
