@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Available EOS &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
@@ -34,9 +33,9 @@
 
           <div class="body" role="main">
             
-  <section id="available-eos">
+  <div class="section" id="available-eos">
 <h1>Available EOS<a class="headerlink" href="#available-eos" title="Permalink to this headline">¶</a></h1>
-<section id="polytropic-eos">
+<div class="section" id="polytropic-eos">
 <span id="eospoly"></span><h2>Polytropic EOS<a class="headerlink" href="#polytropic-eos" title="Permalink to this headline">¶</a></h2>
 <p>In terms of mass density <span class="math notranslate nohighlight">\(\rho\)</span> or pseudo-enthalpy <span class="math notranslate nohighlight">\(g\)</span>,
 the EOS is given by</p>
@@ -73,8 +72,8 @@ by the user is therefore automatically adjusted to ensure</p>
 <div class="math notranslate nohighlight">
 \[g &lt; \frac{1}{1-n}\]</div>
 </div>
-</section>
-<section id="piecewise-polytropic-eos">
+</div>
+<div class="section" id="piecewise-polytropic-eos">
 <span id="eospiecewisepoly"></span><h2>Piecewise Polytropic EOS<a class="headerlink" href="#piecewise-polytropic-eos" title="Permalink to this headline">¶</a></h2>
 <p>The piecewise polytropic EOS consists of polytropic segments with
 different polytropic exponents and an additional offset of specific
@@ -127,8 +126,8 @@ prevent this, if necessary.</p>
 It would be very inefficient to approximate arbitrary EOS using
 hundreds of segments. For this, use the tabulated EOS below.</p>
 </div>
-</section>
-<section id="tabulated-eos">
+</div>
+<div class="section" id="tabulated-eos">
 <span id="eoscoldtabulated"></span><h2>Tabulated EOS<a class="headerlink" href="#tabulated-eos" title="Permalink to this headline">¶</a></h2>
 <p>This is the most general EOS, where all functions are implemented
 as efficient linear lookup tables. Those lookup tables are regularly
@@ -176,8 +175,8 @@ interpolation, the provided sample points should have a roughly
 uniform coverage of logarithmic density between median value and
 maximum.</p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
@@ -210,6 +209,7 @@ maximum.</p>
 <li class="toctree-l2"><a class="reference internal" href="eos_barotr_ref.html">Reference</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tov_solver.html">TOV Solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
 </ul>
@@ -251,7 +251,7 @@ maximum.</p>
       &copy;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

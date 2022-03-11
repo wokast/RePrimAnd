@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Features &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Interface" href="tov_solver_interf.html" />
+    <link rel="prev" title="TOV Solver" href="tov_solver.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<p>The library contains functions for computing properties of spherical neutron stars.
+It solves the TOV ODE as well as the ODE for tidal deformability. Models are specified
+by central density and the EOS (via the barotropic EOS interface).
+Basic support for finding models by mass or the maximum mass model
+is also implemented.</p>
+<p>Any barotropic EOS can be used, including ones which are not adiabatic (for example,
+density-dependent arbitrary electron fraction or non-zero temperature).
+One can also employ EOS with phase transitions where the pressure remains constant
+over a density range and the soundspeed drops to zero.
+The TOV solver employs a formulation of the TOV equations suitable also for those cases.</p>
+<p>The following global properties are computed:</p>
+<ul class="simple">
+<li><p>Gravitational (ADM) mass <span class="math notranslate nohighlight">\(M_g\)</span></p></li>
+<li><p>Baryonic mass <span class="math notranslate nohighlight">\(M_b\)</span></p></li>
+<li><p>Circumferential surface radius <span class="math notranslate nohighlight">\(R_c\)</span></p></li>
+<li><p>Proper volume <span class="math notranslate nohighlight">\(V_p\)</span></p></li>
+<li><p>Moment of inertia <span class="math notranslate nohighlight">\(I\)</span></p></li>
+<li><p>Central internal energy <span class="math notranslate nohighlight">\(\epsilon_c\)</span>, pressure <span class="math notranslate nohighlight">\(P_c\)</span>, and
+sound speed <span class="math notranslate nohighlight">\(c_{sc}\)</span></p></li>
+<li><p>Dimensionless tidal deformability <span class="math notranslate nohighlight">\(\Lambda\)</span> and love number <span class="math notranslate nohighlight">\(k_2\)</span></p></li>
+<li><p>Properties of the “bulk” (optional, see below)</p></li>
+</ul>
+<p>The metric can also be obtained. It is expressed as follows</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{d} s^2 = - e^{2\nu(r_c)} \mathrm{d} t^2 + e^{2\lambda(r_c)} \mathrm{d} r^2
+                  + r_c^2 \mathrm{d} \Omega^2\]</div>
+<p>The metric potentials <span class="math notranslate nohighlight">\(\nu(r_c)\)</span> and <span class="math notranslate nohighlight">\(\lambda(r_c)\)</span>
+and the matter state are provided as
+functions of circumferential radius <span class="math notranslate nohighlight">\(r_c\)</span>.</p>
+<p>The tidal deformability formalism is described in
+<a class="footnote-reference brackets" href="#footcite-hinderer-2008-1216" id="id1">1</a><a class="footnote-reference brackets" href="#footcite-han-2019-083014" id="id2">2</a>.
+Since the formalism assumes adiabatic perturbations, the tidal deformability is
+only computed for isentropic EOS, for example zero-temperature stars.
+The library uses a reformulation of the ODE in <a class="footnote-reference brackets" href="#footcite-han-2019-083014" id="id3">2</a> that is well-behaved across phase transitions (currently undocumented).</p>
+<p>The moment of inertia is defined in the slow-rotation approximation following
+<a class="footnote-reference brackets" href="#footcite-hartle-1967-1005" id="id4">3</a>.
+Finally, the library can also compute a relatively new definition of “bulk” properties
+from <a class="footnote-reference brackets" href="#footcite-kastaun-2016" id="id5">4</a>. This definition uses a sort of maximum compactness
+iso-density surface and can also be applied to systems without symmetry or surface,
+such as early merger remnants.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The TOV solver functionality in general is experimental.
+In particular, phase transitions are allowed by design but they
+are currently not tested at all.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since tabulated EOS and piecewise polytropic EOS are not
+differentiable at segment boundaries, for those EOS the convergence
+speed of ODE
+solvers effectively drops to first order with increasing resolution.
+If speed is an issue it is recommended not to request solutions
+with relative errors below <span class="math notranslate nohighlight">\(10^{-10}\)</span>.
+A fully differentiable tabulated EOS is planned.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id6"><dl class="footnote brackets">
+<dt class="label" id="footcite-hinderer-2008-1216"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Tanja Hinderer. Tidal Love Numbers of Neutron Stars. <em>Astrophys. J.</em>, 677(2):1216–1220, April 2008. <a class="reference external" href="https://arxiv.org/abs/0711.2420">arXiv:0711.2420</a>, <a class="reference external" href="https://doi.org/10.1086/533487">doi:10.1086/533487</a>.</p>
+</dd>
+<dt class="label" id="footcite-han-2019-083014"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>)</span></dt>
+<dd><p>Sophia Han and Andrew W. Steiner. Tidal deformability with sharp phase transitions in binary neutron stars. <em>Phys. Rev. D</em>, 99(8):083014, April 2019. <a class="reference external" href="https://arxiv.org/abs/1810.10967">arXiv:1810.10967</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevD.99.083014">doi:10.1103/PhysRevD.99.083014</a>.</p>
+</dd>
+<dt class="label" id="footcite-hartle-1967-1005"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p>James B. Hartle. Slowly Rotating Relativistic Stars. I. Equations of Structure. <em>Astrophys. J.</em>, 150:1005, December 1967. <a class="reference external" href="https://doi.org/10.1086/149400">doi:10.1086/149400</a>.</p>
+</dd>
+<dt class="label" id="footcite-kastaun-2016"><span class="brackets"><a class="fn-backref" href="#id5">4</a></span></dt>
+<dd><p>W. Kastaun, R. Ciolfi, and B. Giacomazzo. Structure of stable binary neutron star merger remnants: a case study. <em>Phys. Rev. D</em>, 94:044060, August 2016. <a class="reference external" href="https://arxiv.org/abs/1607.02186">arXiv:1607.02186</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevD.94.044060">doi:10.1103/PhysRevD.94.044060</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tov_solver.html">TOV Solver</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tov_solver_interf.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tov_solver_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="tov_solver.html">TOV Solver</a><ul>
+      <li>Previous: <a href="tov_solver.html" title="previous chapter">TOV Solver</a></li>
+      <li>Next: <a href="tov_solver_interf.html" title="next chapter">Interface</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/tov_solver_feat.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

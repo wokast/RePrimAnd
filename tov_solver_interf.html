@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interface &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference" href="tov_solver_ref.html" />
+    <link rel="prev" title="Features" href="tov_solver_feat.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="interface">
+<span id="tov-solver-interface"></span><h1>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h1>
+<p>There are two classes to represent spherical neutron stars.
+The most important is <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">spherical_star_properties</span></code></a>,
+which collects scalar measures and the EOS. A derived class,
+<a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14spherical_starE" title="EOS_Toolkit::spherical_star"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">spherical_star</span></code></a>, additionally provides
+the radial profiles describing metric and matter distribution.</p>
+<p>There are different TOV solver functions for different use cases.
+One can either just extract global scalar measures, or also obtain the
+radial profiles found during the solution process. If profiles are not
+needed, one should use the first variant, which saves memory and
+computational costs since no interpolation tables have to be set up.</p>
+<p>The function returning only global properties is called
+<a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb" title="EOS_Toolkit::get_tov_star_properties"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">get_tov_star_properties()</span></code></a>
+and the one returning everything is called
+<a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb" title="EOS_Toolkit::make_tov_star"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_tov_star()</span></code></a>.</p>
+<p>Furthermore, there are two options regarding the accuracy.
+The fast option uses adaptive step size control, trying to archive
+given tolerances but does not guarantee meeting them.
+A second option repeatedly employs the first one with increasingly
+small tolerances until changes fall below given accuracy.</p>
+<p>All solvers take EOS and central baryonic mass density as first arguments.
+The third argument is the accuracy. Passing an object of type
+<a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="EOS_Toolkit::tov_acc_simple"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">tov_acc_simple</span></code></a> allows to specify tolerances
+for the fast adaptive solution. Passing an object of type
+<a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_preciseE" title="EOS_Toolkit::tov_acc_precise"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">tov_acc_precise</span></code></a> instead allows to prescribe absolute
+error bounds for individual properties, such as mass, radius, and tidal deformability.</p>
+<p>Further optional arguments specify whether to compute the “bulk” quantities and the
+tidal deformability. If not needed, computation of those can be turned off to increase
+performance.</p>
+<p>The following example creates an EOS on the fly and computes a single TOV model</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/unitconv.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/eos_barotr_poly.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/spherical_stars.h&quot;</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">n_poly</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rho_poly</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">6.176e+18</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">density</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rhomax_poly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1E40</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">density</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">eos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_eos_barotr_poly</span><span class="p">(</span><span class="n">n_poly</span><span class="p">,</span><span class="w"> </span><span class="n">rho_poly</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                    </span><span class="n">rhomax_poly</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">tov_cnt_rho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">7.9056e+17</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">density</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">tov_acc_simple</span><span class="w"> </span><span class="n">accs</span><span class="p">{</span><span class="mf">1e-8</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">};</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">tov</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_tov_star_properties</span><span class="p">(</span><span class="n">eos</span><span class="p">,</span><span class="w"> </span><span class="n">tov_cnt_rho</span><span class="p">,</span><span class="w"> </span><span class="n">accs</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">gravitational_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tov</span><span class="p">.</span><span class="n">grav_mass</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">circumferential_radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tov</span><span class="p">.</span><span class="n">circ_radius</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">dimless_tidal_deform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tov</span><span class="p">.</span><span class="n">deformability</span><span class="p">().</span><span class="n">lambda</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The library also provides a method to find the maximum mass model
+along a TOV sequence, <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit22find_rhoc_tov_max_massE10eos_barotrK6real_tK6real_tKiK6real_tj" title="EOS_Toolkit::find_rhoc_tov_max_mass"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">find_rhoc_tov_max_mass()</span></code></a>.
+Another function, <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit21find_rhoc_tov_of_massE10eos_barotr6real_tK6real_tK6real_t6real_tj" title="EOS_Toolkit::find_rhoc_tov_of_mass"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">find_rhoc_tov_of_mass()</span></code></a>,
+finds a TOV model with given gravitational mass. Note this is not
+efficient for finding many models for a given EOS since it finds a
+TOV solution for each step of the root finding. For such applications,
+e.g. in GW data parameter estimation, using an interpolation table
+for a TOV sequence would be much faster.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>NSs represented by  <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">spherical_star_properties</span></code></a> or
+<a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14spherical_starE" title="EOS_Toolkit::spherical_star"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">spherical_star</span></code></a> can be copied cheaply, and one
+does not need to worry about memory management.
+Internally, the EOS data and the NS profile are managed by reference counted
+shared pointers.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tov_solver.html">TOV Solver</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tov_solver_feat.html">Features</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tov_solver_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="tov_solver.html">TOV Solver</a><ul>
+      <li>Previous: <a href="tov_solver_feat.html" title="previous chapter">Features</a></li>
+      <li>Next: <a href="tov_solver_ref.html" title="next chapter">Reference</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/tov_solver_interf.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

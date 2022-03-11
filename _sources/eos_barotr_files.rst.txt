@@ -28,10 +28,12 @@ has to specify the geometric :cpp:class:`unit <EOS_Toolkit::units>`
 system the returned EOS object 
 should employ. In the example above, we use :math:`G=c=M_\odot=1`.
 
-This version of the library comes with one example file
-`EOS/MS1_PP.eos.h5`, which is a tabulated EOS created from a piecewise 
+For testing purposes, the library comes with some example EOS files:
+Files named 
+`EOS/*_Read_PP.eos.h5` are some of the analytic (not tabulated) 
+piecewise polytropic EOS from :footcite:p:`Read:2009:124032`.
+The file `EOS/MS1_PP.eos.h5` is a tabulated EOS created from a piecewise 
 polytropic approximation of the `MS1` EOS. 
-
  
 Creating EOS Files
 ------------------
@@ -52,7 +54,8 @@ To create a tabulated barotropic EOS file, use the following. See
 
 
 To create a piecewise polytropic EOS file, use the following. See
-:ref:`EOSPiecewisePoly` for details on the EOS.
+:ref:`EOSPiecewisePoly` for details on the EOS. An example script
+can be found in `EOS/create/make_read_pp`.
 
 .. autofunction:: save_barotr_pwpoly
 
@@ -60,3 +63,11 @@ To create a polytropic EOS file, use the following. See
 :ref:`EOSPoly` for details on the EOS.
 
 .. autofunction:: save_barotr_table
+
+
+
+
+References
+^^^^^^^^^^
+
+.. footbibliography::

@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reference &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Little Helpers" href="little_helpers.html" />
+    <link rel="prev" title="Interface" href="tov_solver_interf.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="computing-tov-solutions">
+<h2>Computing TOV solutions<a class="headerlink" href="#computing-tov-solutions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="full-solution">
+<h3>Full solution<a class="headerlink" href="#full-solution" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb">
+<span id="_CPPv3N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb"></span><span id="_CPPv2N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb"></span><span id="EOS_Toolkit::make_tov_star__eos_barotrC.real_tC.tov_acc_simpleC.bC.bC"></span><span class="target" id="spherical__stars_8h_1a59b65e5cb94b2e43e879c5e920dd6096"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_tov_star</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_center</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="EOS_Toolkit::tov_acc_simple"><span class="n"><span class="pre">tov_acc_simple</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_bulk</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_tidal</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14spherical_starE" title="EOS_Toolkit::spherical_star"><span class="n"><span class="pre">spherical_star</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute spherical neutron star model. </p>
+<p>
+This returns a class providing all global NS properties as well as the stellar profile. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eos</strong> – The (barotropic) EOS of the NS. </p></li>
+<li><p><strong>rho_center</strong> – The central baryonic mass density. Units are the same as used by the EOS. </p></li>
+<li><p><strong>acc</strong> – Tolerances for adaptive ODE solver </p></li>
+<li><p><strong>find_bulk</strong> – Option to also compute the “bulk” properties </p></li>
+<li><p><strong>find_tidal</strong> – Whether to compute the tidal deformability</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Stellar model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK15tov_acc_preciseKbKb">
+<span id="_CPPv3N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK15tov_acc_preciseKbKb"></span><span id="_CPPv2N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK15tov_acc_preciseKbKb"></span><span id="EOS_Toolkit::make_tov_star__eos_barotrC.real_tC.tov_acc_preciseC.bC.bC"></span><span class="target" id="spherical__stars_8h_1a184ce9f92c11bb219d126d72a7a238d1"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_tov_star</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_center</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit15tov_acc_preciseE" title="EOS_Toolkit::tov_acc_precise"><span class="n"><span class="pre">tov_acc_precise</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_bulk</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_tidal</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14spherical_starE" title="EOS_Toolkit::spherical_star"><span class="n"><span class="pre">spherical_star</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK15tov_acc_preciseKbKb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute spherical neutron star model. </p>
+<p>
+This returns a class providing all global NS properties as well as the stellar profile. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eos</strong> – The (barotropic) EOS of the NS. </p></li>
+<li><p><strong>rho_center</strong> – The central baryonic mass density. Units are the same as used by the EOS. </p></li>
+<li><p><strong>acc</strong> – Absolute error bounds for individual stellar properties </p></li>
+<li><p><strong>find_bulk</strong> – Option to also compute the “bulk” properties </p></li>
+<li><p><strong>find_tidal</strong> – Whether to compute the tidal deformability</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Stellar model</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="only-global-properties">
+<h3>Only global properties<a class="headerlink" href="#only-global-properties" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb">
+<span id="_CPPv3N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb"></span><span id="_CPPv2N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb"></span><span id="EOS_Toolkit::get_tov_star_properties__eos_barotrC.real_tC.tov_acc_simpleC.bC.bC"></span><span class="target" id="spherical__stars_8h_1a199d3e4fec620e5851c6883637de20ca"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">get_tov_star_properties</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_center</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="EOS_Toolkit::tov_acc_simple"><span class="n"><span class="pre">tov_acc_simple</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_bulk</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_tidal</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute properties of spherical neutron star. </p>
+<p>
+This returns a class providing all global NS properties but not the stellar profile. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eos</strong> – The (barotropic) EOS of the NS. </p></li>
+<li><p><strong>rho_center</strong> – The central baryonic mass density. Units are the same as used by the EOS. </p></li>
+<li><p><strong>acc</strong> – Tolerances for adaptive ODE solver </p></li>
+<li><p><strong>find_bulk</strong> – Option to also compute the “bulk” properties </p></li>
+<li><p><strong>find_tidal</strong> – Whether to compute the tidal deformability</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Stellar model properties</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK15tov_acc_preciseKbKb">
+<span id="_CPPv3N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK15tov_acc_preciseKbKb"></span><span id="_CPPv2N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK15tov_acc_preciseKbKb"></span><span id="EOS_Toolkit::get_tov_star_properties__eos_barotrC.real_tC.tov_acc_preciseC.bC.bC"></span><span class="target" id="spherical__stars_8h_1a8c6a649d980904b026f11670c86208bc"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">get_tov_star_properties</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_center</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit15tov_acc_preciseE" title="EOS_Toolkit::tov_acc_precise"><span class="n"><span class="pre">tov_acc_precise</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_bulk</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_tidal</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK15tov_acc_preciseKbKb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute properties of spherical neutron star. </p>
+<p>
+This returns a class providing all global NS properties but not the stellar profile. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eos</strong> – The (barotropic) EOS of the NS </p></li>
+<li><p><strong>rho_center</strong> – The central baryonic mass density. Units are the same as used by the EOS </p></li>
+<li><p><strong>acc</strong> – Absolute error bounds for individual stellar properties </p></li>
+<li><p><strong>find_bulk</strong> – Option to also compute the “bulk” properties </p></li>
+<li><p><strong>find_tidal</strong> – Whether to compute the tidal deformability</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Stellar model properties</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="ns-representations">
+<h2>NS representations<a class="headerlink" href="#ns-representations" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit25spherical_star_propertiesE">
+<span id="_CPPv3N11EOS_Toolkit25spherical_star_propertiesE"></span><span id="_CPPv2N11EOS_Toolkit25spherical_star_propertiesE"></span><span id="EOS_Toolkit::spherical_star_properties"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star_properties</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Class to describe a spherical neutron star. </p>
+<p>This collects scalar measures of a spherical neutron star solution, but not the radial profile. It also provides the EOS. All quantities are in the same geometric units used by the EOS. </p>
+<p>Subclassed by <a class="reference internal" href="#classEOS__Toolkit_1_1spherical__star"><span class="std std-ref">EOS_Toolkit::spherical_star</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERK25spherical_star_properties">
+<span id="_CPPv3N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERK25spherical_star_properties"></span><span id="_CPPv2N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERK25spherical_star_properties"></span><span id="EOS_Toolkit::spherical_star_properties::spherical_star_properties__spherical_star_propertiesCR"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1ad51bc408e9fe576c6d0f5ab0f5a13a32"></span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star_properties</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERK25spherical_star_properties" title="EOS_Toolkit::spherical_star_properties::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERK25spherical_star_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copy constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERR25spherical_star_properties">
+<span id="_CPPv3N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERR25spherical_star_properties"></span><span id="_CPPv2N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERR25spherical_star_properties"></span><span id="EOS_Toolkit::spherical_star_properties::spherical_star_properties__spherical_star_propertiesRR"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a7a7cab8462fb489cdbf723726be0e4fa"></span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star_properties</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERR25spherical_star_properties" title="EOS_Toolkit::spherical_star_properties::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERR25spherical_star_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit25spherical_star_propertiesaSERK25spherical_star_properties">
+<span id="_CPPv3N11EOS_Toolkit25spherical_star_propertiesaSERK25spherical_star_properties"></span><span id="_CPPv2N11EOS_Toolkit25spherical_star_propertiesaSERK25spherical_star_properties"></span><span id="EOS_Toolkit::spherical_star_properties::assign-operator__spherical_star_propertiesCR"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a3c97587dd15a73ac566a56959912af16"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesaSERK25spherical_star_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit25spherical_star_propertiesaSERR25spherical_star_properties">
+<span id="_CPPv3N11EOS_Toolkit25spherical_star_propertiesaSERR25spherical_star_properties"></span><span id="_CPPv2N11EOS_Toolkit25spherical_star_propertiesaSERR25spherical_star_properties"></span><span id="EOS_Toolkit::spherical_star_properties::assign-operator__spherical_star_propertiesRR"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1af52640f23464f7f464b9aa2893ed48d3"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesaSERR25spherical_star_properties" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesE10eos_barotr19spherical_star_info8deform_t6bulk_t">
+<span id="_CPPv3N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesE10eos_barotr19spherical_star_info8deform_t6bulk_t"></span><span id="_CPPv2N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesE10eos_barotr19spherical_star_info8deform_t6bulk_t"></span><span id="EOS_Toolkit::spherical_star_properties::spherical_star_properties__eos_barotr.spherical_star_info.deform_t.bulk_t"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1ab5aeb58bf8fd195b036e1039f38204a3"></span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star_properties</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos_</span></span>, <span class="n"><span class="pre">spherical_star_info</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">info_</span></span>, <span class="n"><span class="pre">deform_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">deform_</span></span>, <span class="n"><span class="pre">bulk_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bulk_</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesE10eos_barotr19spherical_star_info8deform_t6bulk_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties12center_stateEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties12center_stateEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties12center_stateEv"></span><span id="EOS_Toolkit::spherical_star_properties::center_stateC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a091129f10374fb5fd0229efd4f31f43d"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">center_state</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><span class="n"><span class="pre">state</span></span></a><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties12center_stateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Central matter state. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties10center_rhoEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties10center_rhoEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties10center_rhoEv"></span><span id="EOS_Toolkit::spherical_star_properties::center_rhoC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a05c50b2586d86c21ce0913d0851382c5"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">center_rho</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties10center_rhoEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Central baryonic mass density. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties10center_gm1Ev">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties10center_gm1Ev"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties10center_gm1Ev"></span><span id="EOS_Toolkit::spherical_star_properties::center_gm1C"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a88a83e9d497048ac57ca8c667b60229f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">center_gm1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties10center_gm1Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Central pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties10center_epsEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties10center_epsEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties10center_epsEv"></span><span id="EOS_Toolkit::spherical_star_properties::center_epsC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1af8e48d60a99d22d87d7f473a3c25f53f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">center_eps</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties10center_epsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Central specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties12center_pressEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties12center_pressEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties12center_pressEv"></span><span id="EOS_Toolkit::spherical_star_properties::center_pressC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a86338fc0adfe1352ba45aa5a8fe2e4e1"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">center_press</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties12center_pressEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Central pressure. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties11center_csndEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties11center_csndEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties11center_csndEv"></span><span id="EOS_Toolkit::spherical_star_properties::center_csndC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a5960b485d5b525334b648a090289dc8b"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">center_csnd</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties11center_csndEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Central sound speed. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties9center_yeEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties9center_yeEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties9center_yeEv"></span><span id="EOS_Toolkit::spherical_star_properties::center_yeC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a9f53a0a3aa1d92dc0e65f79604ff71bd"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">center_ye</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties9center_yeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Central electron fraction. </p>
+<p>This is only available if supported by the EOS, otherwise an exception is thrown. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties9grav_massEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties9grav_massEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties9grav_massEv"></span><span id="EOS_Toolkit::spherical_star_properties::grav_massC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a5898a9ac5abd629f3b8514c51a2f347e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">grav_mass</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties9grav_massEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Gravitational mass <span class="math notranslate nohighlight">\( M_g \)</span>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties9bary_massEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties9bary_massEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties9bary_massEv"></span><span id="EOS_Toolkit::spherical_star_properties::bary_massC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a8713afea45545f6cbbe4a4f6f3ab838a"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bary_mass</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties9bary_massEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Baryonic mass <span class="math notranslate nohighlight">\( M_b \)</span>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties14binding_energyEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties14binding_energyEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties14binding_energyEv"></span><span id="EOS_Toolkit::spherical_star_properties::binding_energyC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a7f792797aef3aca91b71c4fe972eb2ea"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binding_energy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties14binding_energyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Binding energy <span class="math notranslate nohighlight">\( M_b - M_g \)</span>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties11circ_radiusEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties11circ_radiusEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties11circ_radiusEv"></span><span id="EOS_Toolkit::spherical_star_properties::circ_radiusC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a3a55ec3ad5976163dd700b789e1a3ae4"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">circ_radius</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties11circ_radiusEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Circumferential surface radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties13proper_volumeEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties13proper_volumeEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties13proper_volumeEv"></span><span id="EOS_Toolkit::spherical_star_properties::proper_volumeC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a1073f38e2d22abfa9fda079d9a3d230d"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">proper_volume</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties13proper_volumeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Proper volume. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties14moment_inertiaEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties14moment_inertiaEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties14moment_inertiaEv"></span><span id="EOS_Toolkit::spherical_star_properties::moment_inertiaC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1ad6bb246efed1f99f5ec91f93742196e4"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moment_inertia</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties14moment_inertiaEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moment of inertia. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties10has_deformEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties10has_deformEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties10has_deformEv"></span><span id="EOS_Toolkit::spherical_star_properties::has_deformC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a06684194e59bab5a3ef7a356c1b7324a"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_deform</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties10has_deformEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Whether the tidal deformability is known. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties8has_bulkEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties8has_bulkEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties8has_bulkEv"></span><span id="EOS_Toolkit::spherical_star_properties::has_bulkC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a036804d6b302db9773c93bf8ecef97bb"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_bulk</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties8has_bulkEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Whether the bulk properties are known. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties13deformabilityEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties13deformabilityEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties13deformabilityEv"></span><span id="EOS_Toolkit::spherical_star_properties::deformabilityC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1abf786b7036c0f084887c06c1e19e6dc6"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">deformability</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">spherical_star_tidal</span></span><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties13deformabilityEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tidal deformability measures. </p>
+<p>Throws exception if not available </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties4bulkEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties4bulkEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties4bulkEv"></span><span id="EOS_Toolkit::spherical_star_properties::bulkC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a8d53ef6891d006c4ff79c5ca3c9742ad"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bulk</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">spherical_star_bulk</span></span><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties4bulkEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Bulk properties. </p>
+<p>Throws exception if not available </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit25spherical_star_properties3eosEv">
+<span id="_CPPv3NK11EOS_Toolkit25spherical_star_properties3eosEv"></span><span id="_CPPv2NK11EOS_Toolkit25spherical_star_properties3eosEv"></span><span id="EOS_Toolkit::spherical_star_properties::eosC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties_1a686ccf420052e0fb1e15fba6a8c04ee5"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eos</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit25spherical_star_properties3eosEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The EOS. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14spherical_starE">
+<span id="_CPPv3N11EOS_Toolkit14spherical_starE"></span><span id="_CPPv2N11EOS_Toolkit14spherical_starE"></span><span id="EOS_Toolkit::spherical_star"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14spherical_starE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Class representing a spherical neutron star model. </p>
+<p>This provides everything <a class="reference internal" href="#classEOS__Toolkit_1_1spherical__star__properties"><span class="std std-ref">spherical_star_properties</span></a> does, and in addition the radial profiles for metric and matter quantities. The profiles are provided as functions of circumferential radius that can be evaluated both inside and outside the star. All quantities are in the same geometric units used by the EOS. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14spherical_star14spherical_starE19spherical_star_info8deform_t6bulk_t7pprof_t">
+<span id="_CPPv3N11EOS_Toolkit14spherical_star14spherical_starE19spherical_star_info8deform_t6bulk_t7pprof_t"></span><span id="_CPPv2N11EOS_Toolkit14spherical_star14spherical_starE19spherical_star_info8deform_t6bulk_t7pprof_t"></span><span id="EOS_Toolkit::spherical_star::spherical_star__spherical_star_info.deform_t.bulk_t.pprof_t"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1ac45324594fbd2f9b92e852d2278c43a0"></span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">spherical_star_info</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">info_</span></span>, <span class="n"><span class="pre">deform_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">deform_</span></span>, <span class="n"><span class="pre">bulk_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bulk_</span></span>, <span class="n"><span class="pre">pprof_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pprof_</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14spherical_star14spherical_starE19spherical_star_info8deform_t6bulk_t7pprof_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14spherical_star14spherical_starERK14spherical_star">
+<span id="_CPPv3N11EOS_Toolkit14spherical_star14spherical_starERK14spherical_star"></span><span id="_CPPv2N11EOS_Toolkit14spherical_star14spherical_starERK14spherical_star"></span><span id="EOS_Toolkit::spherical_star::spherical_star__spherical_starCR"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a387c0004a66ade3cd06f481afacb2ed7"></span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14spherical_star14spherical_starERK14spherical_star" title="EOS_Toolkit::spherical_star::spherical_star"><span class="n"><span class="pre">spherical_star</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14spherical_star14spherical_starERK14spherical_star" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copy constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14spherical_star14spherical_starERR14spherical_star">
+<span id="_CPPv3N11EOS_Toolkit14spherical_star14spherical_starERR14spherical_star"></span><span id="_CPPv2N11EOS_Toolkit14spherical_star14spherical_starERR14spherical_star"></span><span id="EOS_Toolkit::spherical_star::spherical_star__spherical_starRR"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a8d9de381faeee35cb7a2b2be9254e3e7"></span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14spherical_star14spherical_starERR14spherical_star" title="EOS_Toolkit::spherical_star::spherical_star"><span class="n"><span class="pre">spherical_star</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14spherical_star14spherical_starERR14spherical_star" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14spherical_staraSERK14spherical_star">
+<span id="_CPPv3N11EOS_Toolkit14spherical_staraSERK14spherical_star"></span><span id="_CPPv2N11EOS_Toolkit14spherical_staraSERK14spherical_star"></span><span id="EOS_Toolkit::spherical_star::assign-operator__spherical_starCR"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1aec7115619a1cd4ca55f3f60da6fa2210"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14spherical_starE" title="EOS_Toolkit::spherical_star"><span class="n"><span class="pre">spherical_star</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14spherical_starE" title="EOS_Toolkit::spherical_star"><span class="n"><span class="pre">spherical_star</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14spherical_staraSERK14spherical_star" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14spherical_staraSERR14spherical_star">
+<span id="_CPPv3N11EOS_Toolkit14spherical_staraSERR14spherical_star"></span><span id="_CPPv2N11EOS_Toolkit14spherical_staraSERR14spherical_star"></span><span id="EOS_Toolkit::spherical_star::assign-operator__spherical_starRR"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a6119e83c74e624955a9229455a8797d3"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14spherical_starE" title="EOS_Toolkit::spherical_star"><span class="n"><span class="pre">spherical_star</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14spherical_starE" title="EOS_Toolkit::spherical_star"><span class="n"><span class="pre">spherical_star</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14spherical_staraSERR14spherical_star" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star10nu_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star10nu_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star10nu_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::nu_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a99ee721fe3c48bd8ddb520fa10cebe84"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nu_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star10nu_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Metric potential <span class="math notranslate nohighlight">\( \nu \)</span> at given circumferential radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star14lambda_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star14lambda_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star14lambda_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::lambda_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a2605446868b85fd7ef1d856a87e675e3"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lambda_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star14lambda_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Metric potential <span class="math notranslate nohighlight">\( \lambda \)</span> at given circumferential radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star13mbary_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star13mbary_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star13mbary_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::mbary_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a7715be52ecf540563861a336429e7a50"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mbary_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star13mbary_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Baryonic mass within given circumferential radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star12pvol_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star12pvol_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star12pvol_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::pvol_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a626424b869e21eb3d622883ff0f41950"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pvol_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star12pvol_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Proper volume within given circumferential radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star13state_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star13state_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star13state_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::state_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1aa68f2928e8fb32f234767bbe0bab2f98"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><span class="n"><span class="pre">state</span></span></a><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star13state_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Matter state at circumferential radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star11gm1_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star11gm1_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star11gm1_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::gm1_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a5af8cca571f05ecaab1db00211826b65"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gm1_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star11gm1_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> at circumferential radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star11rho_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star11rho_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star11rho_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::rho_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a44b57e0fe9b503883382f0e9786f2a12"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rho_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star11rho_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Baryonic mass density <span class="math notranslate nohighlight">\( \rho \)</span> at circumferential radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star13press_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star13press_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star13press_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::press_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a8205e278bd3d05a8bc6009d3bfbb800f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star13press_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pressure <span class="math notranslate nohighlight">\( P \)</span> at circumferential radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star11eps_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star11eps_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star11eps_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::eps_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1aa3bc57fd15c7fa2d436334ceaa19938a"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eps_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star11eps_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span> at circumferential radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star12csnd_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star12csnd_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star12csnd_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::csnd_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1aab4548054c9f86db8d7766bc49e670ba"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star12csnd_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sound speed <span class="math notranslate nohighlight">\( c_s \)</span> at circumferential radius. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star10ye_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star10ye_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star10ye_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::ye_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a76a735f88e68c414a0422f8dfc3d981f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ye_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star10ye_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> at circumferential radius. </p>
+<p>This is only available if supported by the EOS, otherwise an exception is thrown. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14spherical_star12temp_from_rcE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit14spherical_star12temp_from_rcE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit14spherical_star12temp_from_rcE6real_t"></span><span id="EOS_Toolkit::spherical_star::temp_from_rc__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star_1a4719859c63f872a967ea7b1c17241e05"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temp_from_rc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14spherical_star12temp_from_rcE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Temperature <span class="math notranslate nohighlight">\( T [MeV] \)</span> at circumferential radius. </p>
+<p>This is only available if supported by the EOS, otherwise an exception is thrown. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="accuracy-specification">
+<h2>Accuracy specification<a class="headerlink" href="#accuracy-specification" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14tov_acc_simpleE">
+<span id="_CPPv3N11EOS_Toolkit14tov_acc_simpleE"></span><span id="_CPPv2N11EOS_Toolkit14tov_acc_simpleE"></span><span id="EOS_Toolkit::tov_acc_simple"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__simple"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">tov_acc_simple</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Class for specifiying heuristic accuracy of TOV solution. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14tov_acc_simple14tov_acc_simpleE6real_t6real_tNSt6size_tE">
+<span id="_CPPv3N11EOS_Toolkit14tov_acc_simple14tov_acc_simpleE6real_t6real_tNSt6size_tE"></span><span id="_CPPv2N11EOS_Toolkit14tov_acc_simple14tov_acc_simpleE6real_t6real_tNSt6size_tE"></span><span id="EOS_Toolkit::tov_acc_simple::tov_acc_simple__real_t.real_t.std::s"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__simple_1a80a4a2742fbd6ac4d27df10f8d695c23"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tov_acc_simple</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc_tov_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-8</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc_deform_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-6</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">minsteps_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">500</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14tov_acc_simple14tov_acc_simpleE6real_t6real_tNSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14tov_acc_simple3tovE">
+<span id="_CPPv3N11EOS_Toolkit14tov_acc_simple3tovE"></span><span id="_CPPv2N11EOS_Toolkit14tov_acc_simple3tovE"></span><span id="EOS_Toolkit::tov_acc_simple::tov__real_tC"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__simple_1ae503ca82aded41c51fa67cd79a0da526"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tov</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14tov_acc_simple3tovE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Accuracy for adaptive solution of TOV ODE. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14tov_acc_simple6deformE">
+<span id="_CPPv3N11EOS_Toolkit14tov_acc_simple6deformE"></span><span id="_CPPv2N11EOS_Toolkit14tov_acc_simple6deformE"></span><span id="EOS_Toolkit::tov_acc_simple::deform__real_tC"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__simple_1a5719fe2783a81429d19676ce6af673ca"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">deform</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14tov_acc_simple6deformE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Accuracy for adaptive solution of tidal ODE. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14tov_acc_simple8minstepsE">
+<span id="_CPPv3N11EOS_Toolkit14tov_acc_simple8minstepsE"></span><span id="_CPPv2N11EOS_Toolkit14tov_acc_simple8minstepsE"></span><span id="EOS_Toolkit::tov_acc_simple::minsteps__std::sC"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__simple_1ad1fa940c1b7b58d188c005ea328389bb"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minsteps</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14tov_acc_simple8minstepsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Minimum number of steps used for solving ODEs. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15tov_acc_preciseE">
+<span id="_CPPv3N11EOS_Toolkit15tov_acc_preciseE"></span><span id="_CPPv2N11EOS_Toolkit15tov_acc_preciseE"></span><span id="EOS_Toolkit::tov_acc_precise"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__precise"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">tov_acc_precise</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15tov_acc_preciseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Class for specifying absolute tolerances for TOV solution. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15tov_acc_precise15tov_acc_preciseE6real_t6real_t6real_t6real_tNSt6size_tE6real_t">
+<span id="_CPPv3N11EOS_Toolkit15tov_acc_precise15tov_acc_preciseE6real_t6real_t6real_t6real_tNSt6size_tE6real_t"></span><span id="_CPPv2N11EOS_Toolkit15tov_acc_precise15tov_acc_preciseE6real_t6real_t6real_t6real_tNSt6size_tE6real_t"></span><span id="EOS_Toolkit::tov_acc_precise::tov_acc_precise__real_t.real_t.real_t.real_t.std::s.real_t"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__precise_1ae4e218f5d3eef841b32365eebccfd1f4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tov_acc_precise</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc_mass_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-8</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc_radius_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-8</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc_minertia_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-8</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc_deform_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-6</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">minsteps_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">500</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc_min_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-14</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15tov_acc_precise15tov_acc_preciseE6real_t6real_t6real_t6real_tNSt6size_tE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15tov_acc_precise4massE">
+<span id="_CPPv3N11EOS_Toolkit15tov_acc_precise4massE"></span><span id="_CPPv2N11EOS_Toolkit15tov_acc_precise4massE"></span><span id="EOS_Toolkit::tov_acc_precise::mass__real_tC"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__precise_1ad68e6c2990815930b28454b0d2461133"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mass</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15tov_acc_precise4massE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tolerance for masses. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15tov_acc_precise6radiusE">
+<span id="_CPPv3N11EOS_Toolkit15tov_acc_precise6radiusE"></span><span id="_CPPv2N11EOS_Toolkit15tov_acc_precise6radiusE"></span><span id="EOS_Toolkit::tov_acc_precise::radius__real_tC"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__precise_1a09f6033a924b157f65dec9afa15e6ccd"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">radius</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15tov_acc_precise6radiusE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tolerance for radius. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15tov_acc_precise8minertiaE">
+<span id="_CPPv3N11EOS_Toolkit15tov_acc_precise8minertiaE"></span><span id="_CPPv2N11EOS_Toolkit15tov_acc_precise8minertiaE"></span><span id="EOS_Toolkit::tov_acc_precise::minertia__real_tC"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__precise_1a392aef46ac6522a1f5eb0230f48c32bb"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minertia</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15tov_acc_precise8minertiaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tolerance for moment of inertia. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15tov_acc_precise6deformE">
+<span id="_CPPv3N11EOS_Toolkit15tov_acc_precise6deformE"></span><span id="_CPPv2N11EOS_Toolkit15tov_acc_precise6deformE"></span><span id="EOS_Toolkit::tov_acc_precise::deform__real_tC"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__precise_1aa3e8b4213d72bc986a9aa377dc39b7a8"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">deform</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15tov_acc_precise6deformE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tolerance for tidal deformability. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15tov_acc_precise8minstepsE">
+<span id="_CPPv3N11EOS_Toolkit15tov_acc_precise8minstepsE"></span><span id="_CPPv2N11EOS_Toolkit15tov_acc_precise8minstepsE"></span><span id="EOS_Toolkit::tov_acc_precise::minsteps__std::sC"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__precise_1a611d9df393fae073c6b0bbf51ca43504"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minsteps</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15tov_acc_precise8minstepsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Minimum number of steps used for solving ODEs. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15tov_acc_precise7acc_minE">
+<span id="_CPPv3N11EOS_Toolkit15tov_acc_precise7acc_minE"></span><span id="_CPPv2N11EOS_Toolkit15tov_acc_precise7acc_minE"></span><span id="EOS_Toolkit::tov_acc_precise::acc_min__real_tC"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__precise_1a2fabeae48fff8764d24435092cd91314"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">acc_min</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15tov_acc_precise7acc_minE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Minimum adaptive tolerance to try before giving up. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="tov-sequences">
+<h2>TOV sequences<a class="headerlink" href="#tov-sequences" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit22find_rhoc_tov_max_massE10eos_barotrK6real_tK6real_tKiK6real_tj">
+<span id="_CPPv3N11EOS_Toolkit22find_rhoc_tov_max_massE10eos_barotrK6real_tK6real_tKiK6real_tj"></span><span id="_CPPv2N11EOS_Toolkit22find_rhoc_tov_max_massE10eos_barotrK6real_tK6real_tKiK6real_tj"></span><span id="EOS_Toolkit::find_rhoc_tov_max_mass__eos_barotr.real_tC.real_tC.iC.real_tC.unsigned-i"></span><span class="target" id="spherical__stars_8h_1ad763ce996283b6655fc680ae21946f91"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">find_rhoc_tov_max_mass</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rhobr0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rhobr1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bits</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">28</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-8</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_steps</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">30</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22find_rhoc_tov_max_massE10eos_barotrK6real_tK6real_tKiK6real_tj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Find maximum mass TOV model. </p>
+<p>
+This finds the model with maximum gravitational mass within a specified range of the central baryonic mass density. The provided range is first limited to the validity range of the EOS. Since the EOS framework guarantees causality, the returned value might be the one for the maximum causal central density, instead of a true maximum (i.e. zero derivative). Similarly, if the provided range does not contain the maximum, the returned value will be at the border. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eos</strong> – The (barotropic) EOS of the NS </p></li>
+<li><p><strong>rhobr0</strong> – Lower bound of central density for search </p></li>
+<li><p><strong>rhobr1</strong> – Upper bound of central density for search </p></li>
+<li><p><strong>bits</strong> – Accuracy of maximum search (number significant bits) </p></li>
+<li><p><strong>acc</strong> – Accuracy for TOV solving </p></li>
+<li><p><strong>max_steps</strong> – Maximum steps for maximum search</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Central baryonic mass density of maximum mass model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit21find_rhoc_tov_of_massE10eos_barotr6real_tK6real_tK6real_t6real_tj">
+<span id="_CPPv3N11EOS_Toolkit21find_rhoc_tov_of_massE10eos_barotr6real_tK6real_tK6real_t6real_tj"></span><span id="_CPPv2N11EOS_Toolkit21find_rhoc_tov_of_massE10eos_barotr6real_tK6real_tK6real_t6real_tj"></span><span id="EOS_Toolkit::find_rhoc_tov_of_mass__eos_barotr.real_t.real_tC.real_tC.real_t.unsigned-i"></span><span class="target" id="spherical__stars_8h_1ad7009fb2029642e58bc72e196925cfcb"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">find_rhoc_tov_of_mass</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mg</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rhobr0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rhobr1</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-8</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_steps</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">30</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit21find_rhoc_tov_of_massE10eos_barotr6real_tK6real_tK6real_t6real_tj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Find TOV model with gravitational mass. </p>
+<p>
+This finds a TOV solution of given gravitational mass. It is up to the user to provide an initial bracket for the central density, such that the mass as function of density is monotonic (beware the different TOV solution branches). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eos</strong> – The (barotropic) EOS of the NS </p></li>
+<li><p><strong>mg</strong> – Gravitational mass </p></li>
+<li><p><strong>rhobr0</strong> – Lower bound of central density for search </p></li>
+<li><p><strong>rhobr1</strong> – Upper bound of central density for search </p></li>
+<li><p><strong>acc</strong> – Accuracy for TOV solving and root finding </p></li>
+<li><p><strong>max_steps</strong> – Maximum steps for root finding</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Central baryonic mass density of TOV model with given mass</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tov_solver.html">TOV Solver</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tov_solver_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tov_solver_interf.html">Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="tov_solver.html">TOV Solver</a><ul>
+      <li>Previous: <a href="tov_solver_interf.html" title="previous chapter">Interface</a></li>
+      <li>Next: <a href="little_helpers.html" title="next chapter">Little Helpers</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/tov_solver_ref.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

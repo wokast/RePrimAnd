@@ -12,7 +12,7 @@ Instead, they forward any request to an actual implementation of a
 particular EOS. To obtain an 
 :cpp:class:`~EOS_Toolkit::eos_barotr`
 object representing a particular EOS, one uses functions such as 
-:cpp:func:`~EOS_Toolkit::make_eos_poly` 
+:cpp:func:`~EOS_Toolkit::make_eos_barotr_poly` 
 provided for each type of EOS.
 
 

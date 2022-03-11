@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Custom EOS &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
@@ -34,7 +33,7 @@
 
           <div class="body" role="main">
             
-  <section id="custom-eos">
+  <div class="section" id="custom-eos">
 <h1>Custom EOS<a class="headerlink" href="#custom-eos" title="Permalink to this headline">¶</a></h1>
 <p>It is easy to implement a custom EOS without modifying the
 RePrimAnd library. One simply needs to define a class which
@@ -69,7 +68,7 @@ circumstances</strong> should incorrect “dummy” values or NANs be returned.<
 <span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">class</span> <span class="nc">eos_barfoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">eos_barotr_impl</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">eos_barfoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">eos_barotr_impl</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rggm1</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">min_h</span><span class="p">;</span><span class="w"></span>
@@ -141,7 +140,7 @@ like this:</p>
 </div>
 <p>For a real example, we suggest to look at the implementation of
 the polytropic EOS (under <cite>library/EOS_Barotropic</cite>)</p>
-<section id="extending-eos-file-format">
+<div class="section" id="extending-eos-file-format">
 <h2>Extending EOS file format<a class="headerlink" href="#extending-eos-file-format" title="Permalink to this headline">¶</a></h2>
 <p>The library provides a mechanism to register a file reader for
 custom EOS, without changing the library itself.
@@ -162,7 +161,7 @@ interface as for the types provided by the library.</p>
 <span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 
-<span class="k">struct</span> <span class="nc">reader_eos_barfoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reader_eos_barotr</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">reader_eos_barfoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reader_eos_barotr</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="n">eos_barotr</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
@@ -189,8 +188,8 @@ interface as for the types provided by the library.</p>
 HDF5 interface, but one can also use hdf5 directly. To get the hdf5
 handle of the group g, use <cite>g.use()</cite>. The file readers for existing
 EOS are implemented in the same way as above and may serve as examples.</p>
-</section>
-<section id="reference">
+</div>
+<div class="section" id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15implementations15eos_barotr_implE">
@@ -387,8 +386,8 @@ It must be guaranteed that the enthaply computed by the EOS for any valid state 
 </div>
 </dd></dl>
 
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
@@ -421,6 +420,7 @@ It must be guaranteed that the enthaply computed by the EOS for any valid state 
 <li class="toctree-l2"><a class="reference internal" href="eos_barotr_ref.html">Reference</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tov_solver.html">TOV Solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
 </ul>
@@ -462,7 +462,7 @@ It must be guaranteed that the enthaply computed by the EOS for any valid state 
       &copy;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

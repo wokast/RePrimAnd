@@ -16,25 +16,18 @@ formulations. Further, it provides a general framework for handling
 matter equations of state. 
 
 A description of the algorithm and tests of the library is given in 
-the accompanying article:
-
-Wolfgang Kastaun, Jay Vijay Kalinani, Riccardo Ciolfi, 
-"Robust Recovery of Primitive Variables in Relativistic Ideal 
-Magnetohydrodynamics",  
-`Phys. Rev. D 103, 023018 (2021) <https://doi.org/10.1103/PhysRevD.103.023018>`_
-`(arXiv:2005.01821) <https://arxiv.org/abs/2005.01821>`_.
+the accompanying article :footcite:p:`Kastaun2021`.
 
 The latest public versions can be found on the 
 `github page <https://github.com/wokast/RePrimAnd>`_.
-
-Releases are also archived on Zenodo and can be cited via the   
-`DOI <https://doi.org/10.5281/zenodo.3785074>`_.
+Releases are also archived on Zenodo :footcite:p:`Zenodo:Reprimand`.
 
 Developers
 ^^^^^^^^^^
 `RePrimAnd` was written by Dr. Wolfgang Kastaun 
 <physik@fangwolg.de>.
 Thanks for additional testing go to Jay Vijay Kalinani.
+
 
 License
 ^^^^^^^
@@ -43,10 +36,17 @@ License
 
    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
-Please cite the
-`PRD article <https://doi.org/10.1103/PhysRevD.103.023018>`_ 
-and the `DOI on Zenodo <https://doi.org/10.5281/zenodo.3785074>`_
+Please cite the PRD article :footcite:p:`Kastaun2021`.
+and the DOI on Zenodo :footcite:p:`Zenodo:Reprimand`
 when publishing results obtained using the library.
+
+
+References
+^^^^^^^^^^
+
+.. footbibliography::
+
+
 
 Contents
 --------
@@ -59,9 +59,9 @@ Contents
    c2p_imhd
    eos_thermal
    eos_barotr
+   tov_solver
    little_helpers
    python_interf
-
 
 Indices and tables
 ==================
