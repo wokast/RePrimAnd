@@ -11,10 +11,10 @@ Requirements
 * A C++11 capable compiler (tested with gcc and clang). 
 * Meson build system.
 * Boost library.
-* GNU Scientific Library.
+* GNU Scientific Library >= 2.0.
 * HDF5 library (Only C-bindings required, not the C++ API).
 * Doxygen (only for documentation)
-* Sphinx with Breathe extension (only for documentation)
+* Sphinx with Breathe and bibtex extensions (only for documentation)
 * Python matplotlib (only for benchmark plots)
 * Python pybind11 package >= 2.6.0 (only for Python bindings)
 
@@ -105,6 +105,10 @@ thorn can be found in the folder `ET_interface/thorns/RePrimAnd/`. The thorn
 depends on the HDF5, GSL, and BOOST ExternalLibraries thorns. In addition,
 the meson build system needs to be installed on the build host.
 
+The thorn is also part of the official ET framework. The version in the master 
+brach will typically by ahead of the ET version, but is not guaranteed to be 
+stable or compatible.
+
 Currently there are no thorns that provide an ET-style interface for using
 this library, although this might change in future versions. ET Thorns can of
 course use the library like any other C++ library.
@@ -123,10 +127,7 @@ The resulting pages can be found in the build directory under
 `docsrc/sphinx/index.html`.
 
 The building of the documentation requires sphinx with the breathe 
-extension as well as doxygen (Note sphinx breathe currently 
-has problems with the C++11 trailing
-return type syntax, misreporting return types as `auto`.)
-
+and sphinxcontrib-bibtex extensions as well as doxygen.
 To disable building documentation and remove 
 the corresponding dependencies, use the build option
 

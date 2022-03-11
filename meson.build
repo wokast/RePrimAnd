@@ -1,16 +1,18 @@
 
 project('RePrimAnd', ['cpp','c'], default_options : ['cpp_std=c++11'],
-        version : '1.3', license : 'CC BY-NC-SA 4.0')
+        version : '1.4', license : 'CC BY-NC-SA 4.0')
 
 project_headers_dest = 'reprimand'
 
 dep_boost = dependency('boost')
-dep_gsl   = dependency('gsl')
+dep_gsl   = dependency('gsl', version : '>=2.0')
 dep_h5    = dependency('hdf5')
 
 subdir('EOS')
 
 subdir('library')
+
+subdir('bindings')
 
 subdir('tests')
 
@@ -18,7 +20,6 @@ if get_option('build_documentation')
   subdir('docsrc')
 endif
 
-subdir('bindings')
 
 clangtidy = find_program('clang-tidy', required: false)
 if clangtidy.found()

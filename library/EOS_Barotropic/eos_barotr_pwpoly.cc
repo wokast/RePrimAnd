@@ -4,6 +4,7 @@
 #include <cmath>
 #include <limits>
 
+
 using namespace std;
 using namespace EOS_Toolkit;
 using namespace EOS_Toolkit::implementations;
@@ -163,7 +164,7 @@ eos_barotr_pwpoly::eos_barotr_pwpoly(real_t rmdp0,
 
     segments.emplace_back(*ibnd, sedc, *iga, rmdp);
   }
-  
+  rho_max_ = segments.back().rho_max_save(rho_max_);
   
   rgrho = {0, rho_max_};
   rggm1 = {0, gm1_from_rho(rho_max_)};

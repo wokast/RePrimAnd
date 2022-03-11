@@ -1,4 +1,6 @@
 #define PATH_EOS "@PATH_EOS@"
 #define PATH_EOS_HYB "@PATH_EOS_HYB@"
+#define PATH_TOV_REF "@PATH_TOV_REF@"
+#define PATH_TOV_EOS "@PATH_TOV_EOS@"
 
 

@@ -72,6 +72,10 @@ def comment_pwpoly_(name, rho_poly, rho_max,
 def write_barotr_pwpoly_(f, name, comment, rho_poly, rho_max,
                          rho_bnd, gammas):
     """Write piecewise polytropic EOS data into hdf5 file"""
+    
+    if len(gammas) != len(rho_bnd):
+        raise RuntimeError("PWPoly mismatch number gammas and boundaries")
+    
     eos_type = 'barotr_pwpoly'
     
     eosfile_common_(f, name, comment, eos_type)

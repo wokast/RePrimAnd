@@ -16,3 +16,8 @@ exe_acc = executable('accuracy_c2p', sources : sources_acc,
                       dependencies : [dep_reprim])
 
 
+sources_bench_tov = ['benchmark_tovsolver.cc']
+
+exe_bench_tov = executable('bench_tov', sources : sources_bench_tov, 
+                           dependencies : [dep_reprim])
+

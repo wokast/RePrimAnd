@@ -3,6 +3,7 @@
 
 #include <boost/math/tools/roots.hpp>
 #include <limits>
+#include <stdexcept>
 #include "intervals.h"
 
 

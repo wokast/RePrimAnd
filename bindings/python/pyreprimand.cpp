@@ -1,12 +1,18 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
+#include <pybind11/stl.h>
 #include <pybind11/numpy.h>
 #include <boost/format.hpp>
 #include <string>
+#include <vector>
 #include "eos_barotropic.h"
 #include "eos_barotr_file.h"
+#include "eos_barotr_table.h"
+#include "eos_barotr_poly.h"
+#include "eos_barotr_pwpoly.h"
 #include "eos_thermal.h"
 #include "eos_thermal_file.h"
+#include "spherical_stars.h"
 
 
 namespace etk = EOS_Toolkit;
@@ -217,7 +223,7 @@ PYBIND11_MODULE(pyreprimand, m) {
              "Compute enthalpy h - 1 from density \n"
              "returns NAN outside EOS validity region.",
              py::arg("rho"))
-        .def("csdn_at_rho", 
+        .def("csnd_at_rho", 
              py::vectorize(&etk::eos_barotr::csnd_at_rho),
              "Compute soundspeed from density \n"
              "returns NAN outside EOS validity region.",
@@ -253,7 +259,7 @@ PYBIND11_MODULE(pyreprimand, m) {
              "Compute enthalpy h - 1 from pseudo enthalpy g-1 \n"
              "returns NAN outside EOS validity region.",
              py::arg("gm1"))
-        .def("csdn_at_gm1", 
+        .def("csnd_at_gm1", 
              py::vectorize(&etk::eos_barotr::csnd_at_gm1),
              "Compute soundspeed from pseudo enthalpy g-1 \n"
              "returns NAN outside EOS validity region.",
@@ -303,5 +309,307 @@ PYBIND11_MODULE(pyreprimand, m) {
           "Load barotropic EOS from file",
           py::arg("path"),
           py::arg("units")=etk::units::geom_solar());
+
+
+    m.def("make_eos_barotr_table",
+          &etk::make_eos_barotr_table,
+          py::arg("gm1"),
+          py::arg("rho"),
+          py::arg("eps"),
+          py::arg("p_by_rho"),
+          py::arg("csndsqr"),
+          py::arg("temp"),
+          py::arg("efrac"), 
+          py::arg("isentropic"),            
+          py::arg("n_poly"));   
+
+    m.def("make_eos_barotr_pwpoly", 
+          &etk::make_eos_barotr_pwpoly,
+          py::arg("rho_poly_0"),
+          py::arg("rho_segm_bounds"),
+          py::arg("segm_gammas"),
+          py::arg("rho_max"));
+
+    m.def("make_eos_barotr_poly",
+          &etk::make_eos_barotr_poly, 
+          py::arg("n_poly"), 
+          py::arg("rho_poly"),
+          py::arg("rho_max"));
+
+
+
+    py::class_<etk::spherical_star_tidal>(m, "spherical_star_tidal")
+        .def_readonly("k2", &etk::spherical_star_tidal::k2)
+        .def_readonly("lambda_tidal", &etk::spherical_star_tidal::lambda);
+
+    
+    py::class_<etk::spherical_star_profile>(m, "spherical_star_profile")
+        .def_property_readonly("eos", 
+             &etk::spherical_star_profile::eos,
+             "Star EOS")
+        .def_property_readonly("center_gm1", 
+             &etk::spherical_star_profile::center_gm1,
+             "Central pseudo enthalpy g - 1")
+        .def_property_readonly("surf_circ_radius", 
+             &etk::spherical_star_profile::surf_circ_radius,
+             "Surface circumferential radius")
+        .def("nu_from_rc", 
+             py::vectorize(&etk::spherical_star_profile::nu_from_rc),
+             "Metric function nu at given circumf. radius",
+             py::arg("rc"))
+        .def("lambda_from_rc", 
+             py::vectorize(&etk::spherical_star_profile::lambda_from_rc),
+             "Metric function lambda at circumf. radius",
+             py::arg("rc"))
+        .def("gm1_from_rc", 
+             py::vectorize(&etk::spherical_star_profile::gm1_from_rc),
+             "Pseudo enthalpy g - 1 at circumf. radius",
+             py::arg("rc"))
+        .def("mbary_from_rc", 
+             py::vectorize(&etk::spherical_star_profile::mbary_from_rc),
+             "Baryonic mass within circumf. radius",
+             py::arg("rc"))
+        .def("pvol_from_rc", 
+             py::vectorize(&etk::spherical_star_profile::pvol_from_rc),
+             "Proper volume within circumf. radius",
+             py::arg("rc"));
+  
+        
+    py::class_<etk::spherical_star_properties>(m, "spherical_star_properties")
+        .def_property_readonly("eos", 
+             &etk::spherical_star_properties::eos,
+             "Star EOS")
+        .def_property_readonly("center_rho", 
+             &etk::spherical_star_properties::center_rho,
+             "Central baryonic mass density")
+        .def_property_readonly("center_eps", 
+             &etk::spherical_star_properties::center_eps,
+             "Central specific internal energy")
+        .def_property_readonly("center_press", 
+             &etk::spherical_star_properties::center_press,
+             "Central pressure")
+        .def_property_readonly("center_csnd", 
+             &etk::spherical_star_properties::center_csnd,
+             "Central sound speed")
+        .def_property_readonly("center_ye", 
+             &etk::spherical_star_properties::center_ye,
+             "Central electron fraction")
+        .def_property_readonly("grav_mass", 
+             &etk::spherical_star_properties::grav_mass,
+             "Star gravitational mass")
+        .def_property_readonly("bary_mass", 
+             &etk::spherical_star_properties::bary_mass,
+             "Star baryonic mass")
+        .def_property_readonly("binding_energy", 
+             &etk::spherical_star_properties::binding_energy,
+             "Star binding energy")
+        .def_property_readonly("circ_radius", 
+             &etk::spherical_star_properties::circ_radius,
+             "Star circumferential radius")
+        .def_property_readonly("proper_volume", 
+             &etk::spherical_star_properties::proper_volume,
+             "Star proper volume")
+        .def_property_readonly("moment_inertia", 
+             &etk::spherical_star_properties::moment_inertia,
+             "Star moment of inertia")
+        .def_property_readonly("has_bulk", 
+             &etk::spherical_star_properties::has_bulk,
+             "Whether bulk properties are available")
+        .def_property_readonly("bulk", 
+             &etk::spherical_star_properties::bulk,
+             "Star bulk properties")
+        .def_property_readonly("has_deform", 
+             &etk::spherical_star_properties::has_deform,
+             "Whether tidal deformability is available")
+        .def_property_readonly("deformability", 
+             &etk::spherical_star_properties::deformability,
+             "Star tidal deformability and love number");
+        
+        
+    py::class_<etk::spherical_star>(m, "spherical_star")
+        .def_property_readonly("eos", 
+             &etk::spherical_star::eos,
+             "Star EOS")
+        .def_property_readonly("center_rho", 
+             &etk::spherical_star::center_rho,
+             "Central baryonic mass density")
+        .def_property_readonly("center_eps", 
+             &etk::spherical_star::center_eps,
+             "Central specific internal energy")
+        .def_property_readonly("center_press", 
+             &etk::spherical_star::center_press,
+             "Central pressure")
+        .def_property_readonly("center_csnd", 
+             &etk::spherical_star::center_csnd,
+             "Central sound speed")
+        .def_property_readonly("center_ye", 
+             &etk::spherical_star::center_ye,
+             "Central electron fraction")
+        .def_property_readonly("grav_mass", 
+             &etk::spherical_star::grav_mass,
+             "Star gravitational mass")
+        .def_property_readonly("bary_mass", 
+             &etk::spherical_star::bary_mass,
+             "Star baryonic mass")
+        .def_property_readonly("binding_energy", 
+             &etk::spherical_star::binding_energy,
+             "Star binding energy")
+        .def_property_readonly("circ_radius", 
+             &etk::spherical_star::circ_radius,
+             "Star circumferential radius")
+        .def_property_readonly("proper_volume", 
+             &etk::spherical_star::proper_volume,
+             "Star proper volume")
+        .def_property_readonly("moment_inertia", 
+             &etk::spherical_star::moment_inertia,
+             "Star moment of inertia")
+        .def_property_readonly("has_bulk", 
+             &etk::spherical_star::has_bulk,
+             "Whether bulk properties are available")
+        .def_property_readonly("bulk", 
+             &etk::spherical_star::bulk,
+             "Star bulk properties")
+        .def_property_readonly("has_deform", 
+             &etk::spherical_star::has_deform,
+             "Whether tidal deformability is available")
+        .def_property_readonly("deformability", 
+             &etk::spherical_star::deformability,
+             "Star tidal deformability and love number")
+        .def("nu_from_rc", 
+             py::vectorize(&etk::spherical_star::nu_from_rc),
+             "Metric function nu at given circumf. radius",
+             py::arg("rc"))
+        .def("lambda_from_rc", 
+             py::vectorize(&etk::spherical_star::lambda_from_rc),
+             "Metric function lambda at circumf. radius",
+             py::arg("rc"))     
+        .def("mbary_from_rc", 
+             py::vectorize(&etk::spherical_star::mbary_from_rc),
+             "Baryonic mass within circumf. radius",
+             py::arg("rc"))
+        .def("pvol_from_rc", 
+             py::vectorize(&etk::spherical_star::pvol_from_rc),
+             "Proper volume within circumf. radius",
+             py::arg("rc"))
+        .def("rho_from_rc", 
+             py::vectorize(&etk::spherical_star::rho_from_rc),
+             "Baryonic mass density at circumf. radius",
+             py::arg("rc"))
+        .def("press_from_rc", 
+             py::vectorize(&etk::spherical_star::press_from_rc),
+             "Pressure at circumf. radius",
+             py::arg("rc"))
+        .def("eps_from_rc", 
+             py::vectorize(&etk::spherical_star::eps_from_rc),
+             "Specific internal energy at circumf. radius",
+             py::arg("rc"))
+        .def("csnd_from_rc", 
+             py::vectorize(&etk::spherical_star::csnd_from_rc),
+             "Soundspeed at circumf. radius",
+             py::arg("rc"))
+        .def("ye_from_rc", 
+             py::vectorize(&etk::spherical_star::ye_from_rc),
+             "Electron fraction at circumf. radius ",
+             py::arg("rc"))
+        .def("temp_from_rc", 
+             py::vectorize(&etk::spherical_star::temp_from_rc),
+             "Temperature at circumf. radius ",
+             py::arg("rc"));
+
+    py::class_<etk::tov_acc_simple>(m, "tov_acc_simple")
+        .def(py::init<real_t, real_t, std::size_t>(),
+             py::arg("tov")=1e-8, 
+             py::arg("deform")=1e-6, 
+             py::arg("minsteps")=500)
+        .def_readonly("tov", &etk::tov_acc_simple::tov)
+        .def_readonly("deform", &etk::tov_acc_simple::deform)
+        .def_readonly("minsteps", &etk::tov_acc_simple::minsteps);
+
+    py::class_<etk::tov_acc_precise>(m, "tov_acc_precise")
+        .def(py::init<real_t, real_t, real_t, real_t, 
+                       std::size_t, real_t>(),
+             py::arg("mass")=1e-8, 
+             py::arg("radius")=1e-8, 
+             py::arg("minertia")=1e-8, 
+             py::arg("deform")=1e-6, 
+             py::arg("minsteps")=500,
+             py::arg("acc_min")=1e-14)
+        .def_readonly("mass", &etk::tov_acc_precise::mass)
+        .def_readonly("radius", &etk::tov_acc_precise::radius)
+        .def_readonly("minertia", &etk::tov_acc_precise::minertia)
+        .def_readonly("deform", &etk::tov_acc_precise::deform)
+        .def_readonly("minsteps", &etk::tov_acc_precise::minsteps)
+        .def_readonly("acc_min", &etk::tov_acc_precise::acc_min);
+            
+    m.def("make_tov_star", 
+          [](etk::eos_barotr eos, const real_t rho_center, 
+             const etk::tov_acc_simple acc, const bool find_bulk,
+             const bool find_tidal) 
+          { 
+             return etk::make_tov_star(eos, rho_center, acc, 
+                                       find_bulk, find_tidal);
+          }, "Compute a TOV solution (including profile)",
+          py::arg("eos"),
+          py::arg("rho_center"),
+          py::arg("acc"),
+          py::arg("find_bulk")=false,
+          py::arg("find_tidal")=true);
+
+    m.def("get_tov_star_properties", 
+          [](etk::eos_barotr eos, const real_t rho_center, 
+             const etk::tov_acc_simple acc, const bool find_bulk,
+             const bool find_tidal) 
+          { 
+             return etk::get_tov_star_properties(eos, rho_center, 
+                                          acc, find_bulk, find_tidal);
+          }, "Compute a TOV solution (without profile)",
+          py::arg("eos"),
+          py::arg("rho_center"),
+          py::arg("acc"),
+          py::arg("find_bulk")=false,
+          py::arg("find_tidal")=true);
+
+    m.def("make_tov_star", 
+          [](etk::eos_barotr eos, const real_t rho_center, 
+             const etk::tov_acc_precise acc, const bool find_bulk) 
+          { 
+             return etk::make_tov_star(eos, rho_center, acc, find_bulk);
+          }, "Compute a TOV solution (including profile)",
+          py::arg("eos"),
+          py::arg("rho_center"),
+          py::arg("acc"),
+          py::arg("find_bulk")=false);
+
+    m.def("get_tov_star_properties", 
+          [](etk::eos_barotr eos, const real_t rho_center, 
+             const etk::tov_acc_precise acc, const bool find_bulk) 
+          { 
+             return etk::get_tov_star_properties(eos, rho_center, 
+                                                 acc, find_bulk);
+          }, "Compute a TOV solution (without profile)",
+          py::arg("eos"),
+          py::arg("rho_center"),
+          py::arg("acc"),
+          py::arg("find_bulk")=false);
+
+    m.def("find_rhoc_tov_max_mass", 
+          &etk::find_rhoc_tov_max_mass, 
+          "Find maximum gravitational mass TOV model",
+          py::arg("eos"),
+          py::arg("rhobr0"),
+          py::arg("rhobr1"),
+          py::arg("nbits"),
+          py::arg("acc"),
+          py::arg("max_steps"));
+
+    m.def("find_rhoc_tov_of_mass", 
+          &etk::find_rhoc_tov_of_mass, 
+          "Find TOV model with given gravitational mass",
+          py::arg("eos"),
+          py::arg("mg"),
+          py::arg("rhobr0"),
+          py::arg("rhobr1"),
+          py::arg("acc"),
+          py::arg("max_steps"));
 
 }

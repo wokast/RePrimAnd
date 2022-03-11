@@ -2,6 +2,8 @@ py3_mod = import('python')
 py3_inst = py3_mod.find_installation('python3', required:false,\
                                      modules:['pybind11'])
 
+pyreprimand_path = meson.current_build_dir()
+
 if py3_inst.found()
   dep_py3 = py3_inst.dependency()
   

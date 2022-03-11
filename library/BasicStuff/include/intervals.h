@@ -79,11 +79,23 @@ bool operator>(T x, const interval<T>& i)
   return x > i.max();  
 }
 
+template<class T>
+bool operator>=(T x, const interval<T>& i) 
+{
+  return x >= i.max();  
+}
+
 ///Test if value is below interval
 template<class T>
 bool operator<(T x, const interval<T>& i) 
 {
   return x < i.min();
+}
+
+template<class T>
+bool operator<=(T x, const interval<T>& i) 
+{
+  return x <= i.min();
 }
 
 

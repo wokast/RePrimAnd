@@ -30,7 +30,8 @@ sys.path.insert(0, os.path.abspath("@SPHINX_AUTODOC@"))
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.mathjax', 'breathe', 'sphinx.ext.autodoc']
+extensions = ['sphinx.ext.mathjax', 'breathe', 'sphinx.ext.autodoc', 
+              'sphinxcontrib.bibtex']
 
 
 autodoc_mock_imports = ["numpy", "h5py"]
@@ -42,6 +43,8 @@ breathe_projects = {
   "RePrimAnd":"@SPHINX_DOXYGEN@",
 }
 
+bibtex_bibfiles = ['refs.bib']
+bibtex_reference_style = 'author_year'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

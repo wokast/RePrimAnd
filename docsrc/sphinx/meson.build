@@ -22,7 +22,9 @@ sphinx_sources = files('index.rst', 'notation.rst', \
   'eos_thermal_files.rst', \
   'c2p_imhd.rst', 'c2p_imhd_feat.rst', 'c2p_imhd_interf.rst', \
   'c2p_imhd_ref.rst', 'little_helpers.rst', 'installing.rst', \
-  'python_interf.rst')
+  'tov_solver_feat.rst', 'tov_solver_interf.rst', \
+  'tov_solver_ref.rst', 'tov_solver.rst', \
+  'python_interf.rst', 'refs.bib')
 
 gen_sphinx = custom_target('sphinxdoc', \
   command : [sphinx, '-b', 'html', \

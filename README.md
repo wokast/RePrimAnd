@@ -14,7 +14,7 @@ Windows and AIX are not supported.
 * GNU Scientific Library version >= 2.0 
 * HDF5 library (Only C-bindings required, not the C++ API).
 * Doxygen (only for documentation)
-* Sphinx with Breathe extension (only for documentation)
+* Sphinx with Breathe and bibtex extensions (only for documentation)
 * Python matplotlib (only for benchmark plots)
 * Python pybind11 package >= 2.6.0 (only for Python bindings)
 
@@ -122,10 +122,7 @@ The resulting pages can be found in the build directory under
 `docsrc/sphinx/index.html`.
 
 The building of the documentation requires sphinx with the breathe 
-extension as well as doxygen (Note sphinx breathe currently 
-has problems with the C++11 trailing
-return type syntax, misreporting return types as `auto`.)
-
+and sphinxcontrib-bibtex extensions as well as doxygen.
 To disable building documentation and remove 
 the corresponding dependencies, use the build option
 
