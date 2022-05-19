@@ -10,7 +10,7 @@ Overview
 
 `RePrimAnd` is a support library for numerical simulations of general 
 relativistic magnetohydrodynamics. 
-If provides methods for recovering primitive variables like pressure
+It provides methods for recovering primitive variables like pressure
 and velocity from the variables evolved in quasi-conservative 
 formulations. Further, it provides a general framework for handling
 matter equations of state. 
