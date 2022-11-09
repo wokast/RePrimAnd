@@ -1,17 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Available EOS &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,10 +36,10 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="available-eos">
-<h1>Available EOS<a class="headerlink" href="#available-eos" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="polytropic-eos">
-<span id="eospoly"></span><h2>Polytropic EOS<a class="headerlink" href="#polytropic-eos" title="Permalink to this headline">¶</a></h2>
+  <section id="available-eos">
+<h1>Available EOS<a class="headerlink" href="#available-eos" title="Permalink to this heading">¶</a></h1>
+<section id="polytropic-eos">
+<span id="eospoly"></span><h2>Polytropic EOS<a class="headerlink" href="#polytropic-eos" title="Permalink to this heading">¶</a></h2>
 <p>In terms of mass density <span class="math notranslate nohighlight">\(\rho\)</span> or pseudo-enthalpy <span class="math notranslate nohighlight">\(g\)</span>,
 the EOS is given by</p>
 <div class="math notranslate nohighlight" id="equation-press-polytrope">
@@ -72,9 +75,9 @@ by the user is therefore automatically adjusted to ensure</p>
 <div class="math notranslate nohighlight">
 \[g &lt; \frac{1}{1-n}\]</div>
 </div>
-</div>
-<div class="section" id="piecewise-polytropic-eos">
-<span id="eospiecewisepoly"></span><h2>Piecewise Polytropic EOS<a class="headerlink" href="#piecewise-polytropic-eos" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="piecewise-polytropic-eos">
+<span id="eospiecewisepoly"></span><h2>Piecewise Polytropic EOS<a class="headerlink" href="#piecewise-polytropic-eos" title="Permalink to this heading">¶</a></h2>
 <p>The piecewise polytropic EOS consists of polytropic segments with
 different polytropic exponents and an additional offset of specific
 energy.</p>
@@ -99,7 +102,7 @@ Further, we set <span class="math notranslate nohighlight">\(\epsilon_0=0\)</spa
 <p>It is easy to show that the EOS is isentropic, and we further define it
 as a zero-temperature EOS.</p>
 <p>The minimum enthalpy is <span class="math notranslate nohighlight">\(h_0=1\)</span>.
-Pseudo-entaply and enthalpy are identical, i.e. <span class="math notranslate nohighlight">\(g=h\)</span>.
+Pseudo-enthaply and enthalpy are identical, i.e. <span class="math notranslate nohighlight">\(g=h\)</span>.
 In terms of the pseudo-enthalpy, the segments are given by</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}g(\rho)
@@ -126,9 +129,67 @@ prevent this, if necessary.</p>
 It would be very inefficient to approximate arbitrary EOS using
 hundreds of segments. For this, use the tabulated EOS below.</p>
 </div>
+</section>
+<section id="interpolation-spline-eos">
+<span id="eoscoldspline"></span><h2>Interpolation Spline EOS<a class="headerlink" href="#interpolation-spline-eos" title="Permalink to this heading">¶</a></h2>
+<p>This EOS implements all functions using monotonic cubic spline
+interpolation. The EOS is therefore differentiable in principle.
+Of course, there can still be steep gradients.</p>
+<p>Internally, most properties are represented in terms of the
+pseudo enthalpy. This has the advantage of avoiding jumps at phase
+transitions. Only the density has a jump.
+When calling the EOS using density as independent variable, another
+interpolation spline is used to first compute the pseudo enthalpy
+(in presence of phase transitions, it has a plateau as function of
+density). The desired quantity is then computed from the pseudo enthalpy
+using the same interpolation splines used for evaluating the EOS as
+function of pseudo enthalpy.
+The monotonic interpolation ensures that the EOS does not produce
+unphysical overshoots.</p>
+<p>The spline sample points are spaced regularly with respect to
+logarithm of pseudo-enthalpy-minus-one  <span class="math notranslate nohighlight">\(\log(g-1)\)</span> or
+mass density <span class="math notranslate nohighlight">\(\rho\)</span>. This allows
+efficient computation with cost nearly independent of the sample
+resolution.
+In order to use the number of sample points efficiently, the spline
+interpolation covers a user-specified range of magnitudes. Below,
+a generalized polytrope (meaning an additional offset in specific
+energy) is matched, with user-specified exponent.</p>
+<p>Temperature and electron fraction can be provided optionally.
+If the temperature is not provided when creating the EOS, it is assumed
+to be a zero-temperature EOS.</p>
+<p>To set up this type of EOS, one provides individual functions which are then
+sampled to create the interpolation splines. In addition, one has to specify
+the maximum validity range, the matching point to the polytrope, and its
+exponent. Note that this polytrope is completely determined by the density,
+energy, and pressure at the matching point. Since the pseudo-enthalpy is an integral
+quantity, changing the low density part of any EOS will also affect the
+pseudo enthalpy at higher densities (by a factor).
+The provided pseudo-enthalpy is therefore adjusted to match the polytrope.</p>
+<p>There are two convenient EOS creation functions for common use cases. One
+case is to specify
+the EOS in terms of sample points wich do not have to be regularly spaced.
+For this, they are first converted to a functions using monotonic non-regular
+spline interpolator functions, which are then used to create the EOS.
+One still needs to specify the maximum and the matching point, which do not
+need to correspond to the range of the sample points. The motivation is that
+it typically makes no sense to cover the range of available samples,
+which might extend arbitrary close to zero. The matching point should be
+chosen small enough to not matter for given applications, but not smaller.
+The other use case is to
+create a sampled version of an EOS of arbirary type. Reasons to
+use a uniform EOS type may be comparability or workflow considerations.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This EOS type is still experimental</p>
 </div>
-<div class="section" id="tabulated-eos">
-<span id="eoscoldtabulated"></span><h2>Tabulated EOS<a class="headerlink" href="#tabulated-eos" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="tabulated-eos">
+<span id="eoscoldtabulated"></span><h2>Tabulated EOS<a class="headerlink" href="#tabulated-eos" title="Permalink to this heading">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This EOS type will be deprecated soon in favor of a successor.</p>
+</div>
 <p>This is the most general EOS, where all functions are implemented
 as efficient linear lookup tables. Those lookup tables are regularly
 spaced, hence evaluation cost is independent of table resolution.
@@ -175,8 +236,8 @@ interpolation, the provided sample points should have a roughly
 uniform coverage of logarithmic density between median value and
 maximum.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -210,6 +271,7 @@ maximum.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tov_solver.html">TOV Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ns_seqs.html">NS Sequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
 </ul>
@@ -234,7 +296,7 @@ maximum.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -251,7 +313,7 @@ maximum.</p>
       &copy;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

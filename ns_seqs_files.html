@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Sequence Files &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference" href="ns_seqs_ref.html" />
+    <link rel="prev" title="Interface" href="ns_seqs_interf.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="sequence-files">
+<span id="ns-seqs-files"></span><h1>Sequence Files<a class="headerlink" href="#sequence-files" title="Permalink to this heading">¶</a></h1>
+<p>The library defines a hdf5-based file format for storing star sequences and branches.
+There is no need for users to deal with those files directly since there is are C++
+and Python interfaces for that.</p>
+<p>To avoid unit confusion, the files use SI units internally. When saving a sequence,
+conversion happens automatically using the unit system stored within the sequence.
+When loading, one has to specify the unit system, which is assumed to be geometric.</p>
+<p>For saving a sequence to a hdf5 file, use
+<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13save_star_seqENSt6stringERK8star_seq" title="EOS_Toolkit::save_star_seq"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">save_star_seq()</span></code></a>, specifying the path
+and the sequence. For saving a branch, use
+<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch" title="EOS_Toolkit::save_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">save_star_branch()</span></code></a> instead.</p>
+<p>To load sequences or branches, use
+<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13load_star_seqENSt6stringERK5units" title="EOS_Toolkit::load_star_seq"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_seq()</span></code></a> or
+<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16load_star_branchENSt6stringERK5units" title="EOS_Toolkit::load_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_branch()</span></code></a>, respectively.</p>
+<p>The following example demonstrates basic use of stable TOV branches.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/unitconv.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_sequence.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_seq_file.h&quot;</span><span class="cp"></span>
+
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">seq1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_star_branch</span><span class="p">(</span><span class="s">&quot;example1.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">);</span><span class="w">    </span>
+<span class="w">    </span><span class="n">save_star_branch</span><span class="p">(</span><span class="s">&quot;copy1.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">seq1</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">seq2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_star_seq</span><span class="p">(</span><span class="s">&quot;example2.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">);</span><span class="w">    </span>
+<span class="w">    </span><span class="n">save_star_seq</span><span class="p">(</span><span class="s">&quot;copy2.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">seq2</span><span class="p">);</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tov_solver.html">TOV Solver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ns_seqs.html">NS Sequences</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ns_seqs_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ns_seqs_interf.html">Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Sequence Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ns_seqs_ref.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="ns_seqs.html">NS Sequences</a><ul>
+      <li>Previous: <a href="ns_seqs_interf.html" title="previous chapter">Interface</a></li>
+      <li>Next: <a href="ns_seqs_ref.html" title="next chapter">Reference</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/ns_seqs_files.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

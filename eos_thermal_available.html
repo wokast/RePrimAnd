@@ -1,17 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Available EOS &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,10 +36,10 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="available-eos">
-<h1>Available EOS<a class="headerlink" href="#available-eos" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="classical-ideal-gas">
-<h2>Classical Ideal Gas<a class="headerlink" href="#classical-ideal-gas" title="Permalink to this headline">¶</a></h2>
+  <section id="available-eos">
+<h1>Available EOS<a class="headerlink" href="#available-eos" title="Permalink to this heading">¶</a></h1>
+<section id="classical-ideal-gas">
+<h2>Classical Ideal Gas<a class="headerlink" href="#classical-ideal-gas" title="Permalink to this heading">¶</a></h2>
 <p>This EOS serves mainly as a toy model useful for debugging.
 It is given by</p>
 <div class="math notranslate nohighlight" id="equation-press-idealgas">
@@ -80,9 +83,9 @@ gas in numerical relativity. To get such an EOS, use the
 The difference is simply the lower bound for <span class="math notranslate nohighlight">\(\epsilon\)</span>,
 which becomes a strictly positive function of density.</p>
 </div>
-</div>
-<div class="section" id="hybrid-eos">
-<span id="def-hybrid-eos"></span><h2>Hybrid EOS<a class="headerlink" href="#hybrid-eos" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="hybrid-eos">
+<span id="def-hybrid-eos"></span><h2>Hybrid EOS<a class="headerlink" href="#hybrid-eos" title="Permalink to this heading">¶</a></h2>
 <p>This EOS is based on an barotropic EOS for zero temperature
 together with a simple analytic prescription for thermal contributions.</p>
 <div class="math notranslate nohighlight" id="equation-def-hybrideos">
@@ -106,8 +109,8 @@ temperature and entropy are not uniquely defined (although one
 can construct both by prescribing a functional dependence of
 entropy and energy at fixed density). In this version of the library,
 temperature and entropy are not implemented.</p>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -141,6 +144,7 @@ temperature and entropy are not implemented.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tov_solver.html">TOV Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ns_seqs.html">NS Sequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
 </ul>
@@ -165,7 +169,7 @@ temperature and entropy are not implemented.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -182,7 +186,7 @@ temperature and entropy are not implemented.</p>
       &copy;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

@@ -4,19 +4,21 @@ Python Bindings
 ---------------
 
 The `RePrimAnd` library also provides a Python3 extension module 
-`pyreprimand` that allows the use of the EOS framework from within
-Python3. The main purpose of this is postprocessing simulation data. 
-It is therefore possible to evaluate the EOS methods for `numpy` 
+`pyreprimand` that allows the use of the library from within
+Python.
+
+
+As an added benefit, functions from the C++ interface are vectorized
+in the Python interface whenever it makes sense, meaning that it is 
+possible to evaluate those functions for `numpy` 
 arrays of arbitrary dimension. This should be very efficient since the 
 loops are performed in compiled C++ code.
 
-The Python bindings include the functionality of barotropic and thermal
-EOS, as well as the functions to load these from file. It does not 
-expose the low-level infrastructure, such as EOS implementation objects,
-or direct constructors. In addition, the Python bindings include the 
-:cpp:class:`EOS_Toolkit::units` objects, which are needed when loading an EOS, but 
-should be useful in general for unit conversion.
+EOS Objects
+^^^^^^^^^^^
 
+The Python bindings include the functionality of barotropic and thermal
+EOS, as well as the functions to load and save these. 
 The Python bindings expose nearly all EOS methods, using the same naming
 as the C++ interface. One difference is that the Python bindings do not 
 include the methods based on matter state objects, as this interface 
@@ -46,6 +48,58 @@ valid range.
    rho = np.linspace(eos.range_rho.min, eos.range_rho.max, 1000)
    press = eos.press_at_rho(rho)
    
+Creating EOS Files
+^^^^^^^^^^^^^^^^^^
+
+One prime use for the Python interface is the creation of EOS files based on
+data from other sources. Polytropic, piecewise polytropic, and tabulated EOS
+are supported directly. Other EOS types can be represented by first sampling
+them.
+
+Creating a piecewise polytropic EOS file is as simple as
+
+.. code-block:: python
+
+   u   = pyr.units.geom_solar
+
+   eos = pyr.make_eos_barotr_pwpoly(rho_poly, 
+                 rho_bounds, gammas, rho_max, uc)
+
+   pyr.save_eos_barotr("example_pp.eos.h5", eos)
+
+The arguments `rho_bounds` and `gammas`, which would be vectors in the C++ interface,
+can be passed as numpy arrays in Python. The dimensionful arguments
+`rho_poly` and `rho_bounds` have to be specified in the unit system desired 
+for the EOS, specified by the `uc` argument with respect to SI units.
+See also :cpp:func:`~EOS_Toolkit::make_eos_barotr_pwpoly`.
+
+For creating an EOS file that represents tabulated data, use the spline-based
+EOS as follows
+
+.. code-block:: python
+
+   u   = pyr.units.geom_solar
+
+   eos = pyr.make_eos_barotr_spline(gm1, rho, eps, press, csnd, 
+                temp, efrac, is_isentropic, range_rho, n_poly, 
+                eos_units, pts_per_mag)
+
+   pyr.save_eos_barotr("example_spline.eos.h5", eos)
+
+where `gm1`, `rho`, `eps`, `press`, `csnd`, `temp`, and `efrac` are numpy 
+arrays with the arbitrarily-spaced tabulated sample points. If temperature 
+and/or electron fraction are not available, pass an empty list instead.
+Any dimensionful arguments have to be specified in the unit system desired 
+for the EOS, specified by the `uc` argument with respect to SI units.
+See also :cpp:func:`~EOS_Toolkit::make_eos_barotr_spline` 
+
+
+.. note:
+   There used to be a seperate Python module for creating EOS files. This is deprecated now.
+   The old tabulated EOS type is also deprecated and cannot be saved via the current
+   library. Use spline-based EOS above instead.
+
+
 
 
 TOV Solver
@@ -74,6 +128,30 @@ will not work. Future versions may contain dedicated functions for TOV sequences
 An example Python script plotting TOV sequences can be found under
 `examples/pwpoly_TOV.py`.
 
+NS Sequences
+^^^^^^^^^^^^
 
- 
+The interface for NS sequences and their (stable) branches is available 
+in Python. In particular, use the function 
+:cpp:func:`~EOS_Toolkit::make_tov_branch_stable` for computing a stable branch
+for TOV solutions, the function :cpp:func:`~EOS_Toolkit::save_star_branch`
+to save it to file, and the function :cpp:func:`~EOS_Toolkit::load_star_branch`
+to load such a file.
 
+The methods of objects :cpp:class:`~EOS_Toolkit::star_branch` (representing stable 
+branches) are vectorized, i.e., they accept `numpy` arrays. If the input is outside 
+the valid range, the result is NAN. The same holds for :cpp:class:`~EOS_Toolkit::star_seq` 
+objects representing a general NS sequence.
+
+Units
+^^^^^
+
+The Python bindings include the :cpp:class:`EOS_Toolkit::units` 
+objects, which are used throughout the interface to specify unit systems
+in a unified consistent way. The unit objects should also be very
+useful on their own, for example in quick interactive calculations.
+The very popular system defined by :math:`G=c=M_\odot=1` is predefined as
+`pyr.units.geom_solar` and provides units as data members such as 
+`u.density` (try Tab-completion for the complete list!).
+Note that temperatures in the EOS framework are always in `MeV` and the unit
+conversion objects do not define a temperature unit.

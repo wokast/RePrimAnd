@@ -1,0 +1,720 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Reference &#8212; RePrimAnd 0.9997 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Little Helpers" href="little_helpers.html" />
+    <link rel="prev" title="Sequence Files" href="ns_seqs_files.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">¶</a></h1>
+<section id="representation-of-sequences">
+<h2>Representation of Sequences<a class="headerlink" href="#representation-of-sequences" title="Permalink to this heading">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit8star_seqE">
+<span id="_CPPv3N11EOS_Toolkit8star_seqE"></span><span id="_CPPv2N11EOS_Toolkit8star_seqE"></span><span id="EOS_Toolkit::star_seq"></span><span class="target" id="classEOS__Toolkit_1_1star__seq"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">star_seq</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Class representing sequences of neutron stars or similar. </p>
+<p>This class allows to store precomputed properties for a sequence of spherical stars and provide those as functions of the central pseudo-enthalpy. For this, regular spaced monotonic spline interpolation is used. The unit system can be chosen when creating sequences, but is assumed to be geometric. It is stored for bookkeeping.</p>
+<p>Sequence objects can be cheaply copied since they only store a reference-counted pointer to the actual (immutable) data. Using the objects is thread-save. </p>
+<p>Subclassed by <a class="reference internal" href="#classEOS__Toolkit_1_1star__branch"><span class="std std-ref">EOS_Toolkit::star_branch</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit8star_seq8star_seqE8spimpl_t">
+<span id="_CPPv3N11EOS_Toolkit8star_seq8star_seqE8spimpl_t"></span><span id="_CPPv2N11EOS_Toolkit8star_seq8star_seqE8spimpl_t"></span><span id="EOS_Toolkit::star_seq::star_seq__spimpl_t"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a8ba9256be88c0f7df901c777247ae0b3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">star_seq</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">spimpl_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">seq</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit8star_seq8star_seqE8spimpl_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor is not intended for direct use. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit8star_seq8star_seqEv">
+<span id="_CPPv3N11EOS_Toolkit8star_seq8star_seqEv"></span><span id="_CPPv2N11EOS_Toolkit8star_seq8star_seqEv"></span><span id="EOS_Toolkit::star_seq::star_seq"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a5d49ba5c2ed4c31a2dd3bde3ef632844"></span><span class="sig-name descname"><span class="n"><span class="pre">star_seq</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit8star_seq8star_seqEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default constructor. </p>
+<p>Creates uninitialized object. Any attemt to use it throws an exception. One can use it after assigning an initialized one to it. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit8star_seq8star_seqERK8star_seq">
+<span id="_CPPv3N11EOS_Toolkit8star_seq8star_seqERK8star_seq"></span><span id="_CPPv2N11EOS_Toolkit8star_seq8star_seqERK8star_seq"></span><span id="EOS_Toolkit::star_seq::star_seq__star_seqCR"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1ae30080b9d6f54c3ff4409fb02716cc40"></span><span class="sig-name descname"><span class="n"><span class="pre">star_seq</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seq8star_seqERK8star_seq" title="EOS_Toolkit::star_seq::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit8star_seq8star_seqERK8star_seq" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copy constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit8star_seq8star_seqERR8star_seq">
+<span id="_CPPv3N11EOS_Toolkit8star_seq8star_seqERR8star_seq"></span><span id="_CPPv2N11EOS_Toolkit8star_seq8star_seqERR8star_seq"></span><span id="EOS_Toolkit::star_seq::star_seq__star_seqRR"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a7c9540650d9476e9dcffdf9cc8b24b31"></span><span class="sig-name descname"><span class="n"><span class="pre">star_seq</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seq8star_seqERR8star_seq" title="EOS_Toolkit::star_seq::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit8star_seq8star_seqERR8star_seq" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit8star_seqaSERK8star_seq">
+<span id="_CPPv3N11EOS_Toolkit8star_seqaSERK8star_seq"></span><span id="_CPPv2N11EOS_Toolkit8star_seqaSERK8star_seq"></span><span id="EOS_Toolkit::star_seq::assign-operator__star_seqCR"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a15b7d6ce29e75db5053a111f9787e5a0"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit8star_seqaSERK8star_seq" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit8star_seqaSERR8star_seq">
+<span id="_CPPv3N11EOS_Toolkit8star_seqaSERR8star_seq"></span><span id="_CPPv2N11EOS_Toolkit8star_seqaSERR8star_seq"></span><span id="EOS_Toolkit::star_seq::assign-operator__star_seqRR"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a7632665361825dfab19a44843e9821d3"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit8star_seqaSERR8star_seq" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8star_seq25grav_mass_from_center_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit8star_seq25grav_mass_from_center_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit8star_seq25grav_mass_from_center_gm1E6real_t"></span><span id="EOS_Toolkit::star_seq::grav_mass_from_center_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a51d54410315c8bfb12f602cec5396af6"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">grav_mass_from_center_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8star_seq25grav_mass_from_center_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute gravitational mass. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gravitational mass of the star </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8star_seq25bary_mass_from_center_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit8star_seq25bary_mass_from_center_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit8star_seq25bary_mass_from_center_gm1E6real_t"></span><span id="EOS_Toolkit::star_seq::bary_mass_from_center_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a6ec794e86185c7f24265df68dc8853c5"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bary_mass_from_center_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8star_seq25bary_mass_from_center_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute baryonic mass. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Baryonic mass of the star </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8star_seq27circ_radius_from_center_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit8star_seq27circ_radius_from_center_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit8star_seq27circ_radius_from_center_gm1E6real_t"></span><span id="EOS_Toolkit::star_seq::circ_radius_from_center_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1afac5290840fcdfddedd49bdf803373a2"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">circ_radius_from_center_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8star_seq27circ_radius_from_center_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute circumferential radius. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Proper circumferential radius of the star </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8star_seq30moment_inertia_from_center_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit8star_seq30moment_inertia_from_center_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit8star_seq30moment_inertia_from_center_gm1E6real_t"></span><span id="EOS_Toolkit::star_seq::moment_inertia_from_center_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a0a74b8b5badcc5a7d001ba13f0edb1c7"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moment_inertia_from_center_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8star_seq30moment_inertia_from_center_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute moment of inertia. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Moment of inertia of the star </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8star_seq28lambda_tidal_from_center_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit8star_seq28lambda_tidal_from_center_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit8star_seq28lambda_tidal_from_center_gm1E6real_t"></span><span id="EOS_Toolkit::star_seq::lambda_tidal_from_center_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a64a54be79a0d77e2819ad67d6ee73210"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lambda_tidal_from_center_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8star_seq28lambda_tidal_from_center_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute dimensionless tidal deformability. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dimensionless tidal deformability </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8star_seq16range_center_gm1Ev">
+<span id="_CPPv3NK11EOS_Toolkit8star_seq16range_center_gm1Ev"></span><span id="_CPPv2NK11EOS_Toolkit8star_seq16range_center_gm1Ev"></span><span id="EOS_Toolkit::star_seq::range_center_gm1C"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a74e3a7f5fb8afc1f98029bd109b3449e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_center_gm1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">range_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8star_seq16range_center_gm1Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Range of central pseudo-enthalpy. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The avaialable range of the pseudo-enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8star_seq12contains_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit8star_seq12contains_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit8star_seq12contains_gm1E6real_t"></span><span id="EOS_Toolkit::star_seq::contains_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1adc57e3aa8efbd38e4a153caf38893399"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contains_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8star_seq12contains_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check if given central pseudo enthalpy is within available range. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If it is covered by the sequence </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8star_seq4saveE8datasink">
+<span id="_CPPv3NK11EOS_Toolkit8star_seq4saveE8datasink"></span><span id="_CPPv2NK11EOS_Toolkit8star_seq4saveE8datasink"></span><span id="EOS_Toolkit::star_seq::save__datasinkC"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1af46bc6a22bf392108b5ce747d42201fb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">save</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">datasink</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8star_seq4saveE8datasink" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Save sequence to a datastore. </p>
+<p>Helper function used internally by the sequence file functionality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8star_seq11units_to_SIEv">
+<span id="_CPPv3NK11EOS_Toolkit8star_seq11units_to_SIEv"></span><span id="_CPPv2NK11EOS_Toolkit8star_seq11units_to_SIEv"></span><span id="EOS_Toolkit::star_seq::units_to_SIC"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1af9ef33a9839596cfee8a0e9b3c8abfda"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">units_to_SI</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8star_seq11units_to_SIEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Obtain unit system of sequence. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The (geometric) unit system used for the sequence. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit8star_seq15from_datasourceE10datasource5units">
+<span id="_CPPv3N11EOS_Toolkit8star_seq15from_datasourceE10datasource5units"></span><span id="_CPPv2N11EOS_Toolkit8star_seq15from_datasourceE10datasource5units"></span><span id="EOS_Toolkit::star_seq::from_datasource__datasource.units"></span><span class="target" id="classEOS__Toolkit_1_1star__seq_1a6618dd00ebd6b68b12460e156d7b535b"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">from_datasource</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">datasource</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">u</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">spimpl_t</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit8star_seq15from_datasourceE10datasource5units" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Load sequence from a datastore. </p>
+<p>Helper function used internally by the sequence file functionality. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11star_branchE">
+<span id="_CPPv3N11EOS_Toolkit11star_branchE"></span><span id="_CPPv2N11EOS_Toolkit11star_branchE"></span><span id="EOS_Toolkit::star_branch"></span><span class="target" id="classEOS__Toolkit_1_1star__branch"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">star_branch</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11star_branchE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Class representing a stable branch of a star sequence. </p>
+<p>It inherits the interface of <a class="reference internal" href="#classEOS__Toolkit_1_1star__seq"><span class="std std-ref">star_seq</span></a>. In addition, it provides star properties as function of gravitational mass. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11star_branch11star_branchEN8star_seq8spimpl_tE8spimpl_t">
+<span id="_CPPv3N11EOS_Toolkit11star_branch11star_branchEN8star_seq8spimpl_tE8spimpl_t"></span><span id="_CPPv2N11EOS_Toolkit11star_branch11star_branchEN8star_seq8spimpl_tE8spimpl_t"></span><span id="EOS_Toolkit::star_branch::star_branch__star_seq::spimpl_t.spimpl_t"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a68003a0ef620ef0dbdb872bc2dfbb448"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">star_branch</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">spimpl_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">seq</span></span>, <span class="n"><span class="pre">spimpl_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">brnch</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11star_branch11star_branchEN8star_seq8spimpl_tE8spimpl_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor is not intended for direct use. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11star_branch11star_branchEv">
+<span id="_CPPv3N11EOS_Toolkit11star_branch11star_branchEv"></span><span id="_CPPv2N11EOS_Toolkit11star_branch11star_branchEv"></span><span id="EOS_Toolkit::star_branch::star_branch"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a276b87a2109e1e65b6bab9dc3fa6b65e"></span><span class="sig-name descname"><span class="n"><span class="pre">star_branch</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11star_branch11star_branchEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default constructor. </p>
+<p>Creates uninitialized object. Any attemt to use it throws an exception. One can use it after assigning an initialized one to it. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11star_branch11star_branchERK11star_branch">
+<span id="_CPPv3N11EOS_Toolkit11star_branch11star_branchERK11star_branch"></span><span id="_CPPv2N11EOS_Toolkit11star_branch11star_branchERK11star_branch"></span><span id="EOS_Toolkit::star_branch::star_branch__star_branchCR"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1ad1c56dcb43fc7457d1337072bba3caae"></span><span class="sig-name descname"><span class="n"><span class="pre">star_branch</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11star_branch11star_branchERK11star_branch" title="EOS_Toolkit::star_branch::star_branch"><span class="n"><span class="pre">star_branch</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11star_branch11star_branchERK11star_branch" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copy constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11star_branch11star_branchERR11star_branch">
+<span id="_CPPv3N11EOS_Toolkit11star_branch11star_branchERR11star_branch"></span><span id="_CPPv2N11EOS_Toolkit11star_branch11star_branchERR11star_branch"></span><span id="EOS_Toolkit::star_branch::star_branch__star_branchRR"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a76d1cbf6777eaeca671c0e0935af5c97"></span><span class="sig-name descname"><span class="n"><span class="pre">star_branch</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11star_branch11star_branchERR11star_branch" title="EOS_Toolkit::star_branch::star_branch"><span class="n"><span class="pre">star_branch</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11star_branch11star_branchERR11star_branch" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11star_branchaSERK11star_branch">
+<span id="_CPPv3N11EOS_Toolkit11star_branchaSERK11star_branch"></span><span id="_CPPv2N11EOS_Toolkit11star_branchaSERK11star_branch"></span><span id="EOS_Toolkit::star_branch::assign-operator__star_branchCR"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a1b247f551568e345d20334c90bbfdf10"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11star_branchE" title="EOS_Toolkit::star_branch"><span class="n"><span class="pre">star_branch</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11star_branchE" title="EOS_Toolkit::star_branch"><span class="n"><span class="pre">star_branch</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11star_branchaSERK11star_branch" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11star_branchaSERR11star_branch">
+<span id="_CPPv3N11EOS_Toolkit11star_branchaSERR11star_branch"></span><span id="_CPPv2N11EOS_Toolkit11star_branchaSERR11star_branch"></span><span id="EOS_Toolkit::star_branch::assign-operator__star_branchRR"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a349ad8155b9ff9285040cf6a56ae0651"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11star_branchE" title="EOS_Toolkit::star_branch"><span class="n"><span class="pre">star_branch</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11star_branchE" title="EOS_Toolkit::star_branch"><span class="n"><span class="pre">star_branch</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11star_branchaSERR11star_branch" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move assignment operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch25center_gm1_from_grav_massE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch25center_gm1_from_grav_massE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch25center_gm1_from_grav_massE6real_t"></span><span id="EOS_Toolkit::star_branch::center_gm1_from_grav_mass__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a091e2f7d0ec3cd1853fd5f06f2c4688e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">center_gm1_from_grav_mass</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mg</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch25center_gm1_from_grav_massE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute central pseudo enthalpy from gravitational mass. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mg</strong> – Gravitational mass </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch24bary_mass_from_grav_massE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch24bary_mass_from_grav_massE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch24bary_mass_from_grav_massE6real_t"></span><span id="EOS_Toolkit::star_branch::bary_mass_from_grav_mass__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a3402a91eddbec8b16642bbe5ae4e8e6e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bary_mass_from_grav_mass</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mg</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch24bary_mass_from_grav_massE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute baryonic mass from gravitational mass. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mg</strong> – Gravitational mass </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Baryonic mass </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch26circ_radius_from_grav_massE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch26circ_radius_from_grav_massE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch26circ_radius_from_grav_massE6real_t"></span><span id="EOS_Toolkit::star_branch::circ_radius_from_grav_mass__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a4113d0869c7d1032bf30a0f425c8006e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">circ_radius_from_grav_mass</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mg</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch26circ_radius_from_grav_massE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute circumferential radius from gravitational mass. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mg</strong> – Gravitational mass </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Proper circumferential radius </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch29moment_inertia_from_grav_massE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch29moment_inertia_from_grav_massE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch29moment_inertia_from_grav_massE6real_t"></span><span id="EOS_Toolkit::star_branch::moment_inertia_from_grav_mass__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a056323849953bfded974d4c3793f2fc3"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moment_inertia_from_grav_mass</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mg</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch29moment_inertia_from_grav_massE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute moment of inertia from gravitational mass. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mg</strong> – Gravitational mass </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Moment of inertia </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch27lambda_tidal_from_grav_massE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch27lambda_tidal_from_grav_massE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch27lambda_tidal_from_grav_massE6real_t"></span><span id="EOS_Toolkit::star_branch::lambda_tidal_from_grav_mass__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a843ee866a13ef322d2aa6cfc97dc4627"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lambda_tidal_from_grav_mass</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mg</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch27lambda_tidal_from_grav_massE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute tidal deformability from gravitational mass. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mg</strong> – Gravitational mass </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dimensionless tidal deformability </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch16range_center_gm1Ev">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch16range_center_gm1Ev"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch16range_center_gm1Ev"></span><span id="EOS_Toolkit::star_branch::range_center_gm1C"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1aeba1f4333928b5dee384a68ae864a282"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_center_gm1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">range_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch16range_center_gm1Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Range of central pseudo-enthalpy. </p>
+<p>The upper bound is the central pseudo-enthalpy of the maximum mass model unless it was not within the EOS validity range. This can be checked with includes_maximum().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The avaialable range of the pseudo-enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch12contains_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch12contains_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch12contains_gm1E6real_t"></span><span id="EOS_Toolkit::star_branch::contains_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a12618583a6de55c5f85c764d4d5bac82"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contains_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch12contains_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check if given central pseudo enthalpy is within available range. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If it is covered by the sequence </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch25grav_mass_from_center_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch25grav_mass_from_center_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch25grav_mass_from_center_gm1E6real_t"></span><span id="EOS_Toolkit::star_branch::grav_mass_from_center_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a4d04479e4c800c49a1cd15f38e5b0f49"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">grav_mass_from_center_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch25grav_mass_from_center_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute gravitational mass from central pseudo enthalpy. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gravitational mass of the star </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch25bary_mass_from_center_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch25bary_mass_from_center_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch25bary_mass_from_center_gm1E6real_t"></span><span id="EOS_Toolkit::star_branch::bary_mass_from_center_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a7f66b0c2f2df6f06fa21291e4ac9dc51"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bary_mass_from_center_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch25bary_mass_from_center_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute baryonic mass from central pseudo enthalpy. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Baryonic mass of the star </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch27circ_radius_from_center_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch27circ_radius_from_center_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch27circ_radius_from_center_gm1E6real_t"></span><span id="EOS_Toolkit::star_branch::circ_radius_from_center_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a445631f02f8b70ae2e8bf66a29ac6d9a"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">circ_radius_from_center_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch27circ_radius_from_center_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute circumferential radius from central pseudo enthalpy. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Proper circumferential radius of the star </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch30moment_inertia_from_center_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch30moment_inertia_from_center_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch30moment_inertia_from_center_gm1E6real_t"></span><span id="EOS_Toolkit::star_branch::moment_inertia_from_center_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1af181fa8d9094f186fe241524d72c67bf"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moment_inertia_from_center_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch30moment_inertia_from_center_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute moment of inertia from central pseudo enthalpy. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Moment of inertia of the star </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch28lambda_tidal_from_center_gm1E6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch28lambda_tidal_from_center_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch28lambda_tidal_from_center_gm1E6real_t"></span><span id="EOS_Toolkit::star_branch::lambda_tidal_from_center_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a8920b0825139c2b539f9b05279eb1aa8"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lambda_tidal_from_center_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch28lambda_tidal_from_center_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute dimensionless tidal deformability from central pseudo enthalpy. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gm1c</strong> – Central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dimensionless tidal deformability </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch15range_grav_massEv">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch15range_grav_massEv"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch15range_grav_massEv"></span><span id="EOS_Toolkit::star_branch::range_grav_massC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a1dab9ae6ae41d6653b7910808549ab6a"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_grav_mass</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">range_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch15range_grav_massEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Available range of gravitational mass. </p>
+<p>The upper bound is the maximum mass unless the maximum mass model central density was not within the EOS validity range. This can be checked with includes_maximum().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gravitational mass range </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch18contains_grav_massE6real_t">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch18contains_grav_massE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch18contains_grav_massE6real_t"></span><span id="EOS_Toolkit::star_branch::contains_grav_mass__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a047059aa6a99544034ad887187726938"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contains_grav_mass</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mg</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch18contains_grav_massE6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check if given gravitational mass is within available range. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mg</strong> – Gravitational mass </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If it is covered by the sequence </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit11star_branch4saveE8datasink">
+<span id="_CPPv3NK11EOS_Toolkit11star_branch4saveE8datasink"></span><span id="_CPPv2NK11EOS_Toolkit11star_branch4saveE8datasink"></span><span id="EOS_Toolkit::star_branch::save__datasinkC"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a8a9ea4a33f7fa7ab7ec5a47d47b32065"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">save</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">datasink</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit11star_branch4saveE8datasink" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Save branch to a datastore. </p>
+<p>Helper function used internally by the sequence file functionality. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit11star_branch15from_datasourceE10datasource5units">
+<span id="_CPPv3N11EOS_Toolkit11star_branch15from_datasourceE10datasource5units"></span><span id="_CPPv2N11EOS_Toolkit11star_branch15from_datasourceE10datasource5units"></span><span id="EOS_Toolkit::star_branch::from_datasource__datasource.units"></span><span class="target" id="classEOS__Toolkit_1_1star__branch_1a1f9dee622c933377765880e602584edf"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">from_datasource</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">datasource</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">u</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">spimpl_t</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit11star_branch15from_datasourceE10datasource5units" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Load branch from a datastore. </p>
+<p>Helper function used internally by the sequence file functionality. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="creating-star-sequences">
+<h2>Creating star sequences<a class="headerlink" href="#creating-star-sequences" title="Permalink to this heading">¶</a></h2>
+<section id="computing-tov-sequences">
+<h3>Computing TOV Sequences<a class="headerlink" href="#computing-tov-sequences" title="Permalink to this heading">¶</a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit12make_tov_seqE10eos_barotr14tov_acc_simple8intervalI6real_tEj">
+<span id="_CPPv3N11EOS_Toolkit12make_tov_seqE10eos_barotr14tov_acc_simple8intervalI6real_tEj"></span><span id="_CPPv2N11EOS_Toolkit12make_tov_seqE10eos_barotr14tov_acc_simple8intervalI6real_tEj"></span><span id="EOS_Toolkit::make_tov_seq__eos_barotr.tov_acc_simple.interval:real_t:.unsigned-i"></span><span class="target" id="star__sequence_8h_1a87fe523532dbab63873ab3967ce105ea"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_tov_seq</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="EOS_Toolkit::tov_acc_simple"><span class="n"><span class="pre">tov_acc_simple</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval"><span class="n"><span class="pre">interval</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rg_gm1</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_samp</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">500</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit12make_tov_seqE10eos_barotr14tov_acc_simple8intervalI6real_tEj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute sequence of TOV solutions. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eos</strong> – The (barotropic) EOS of the NSs. </p></li>
+<li><p><strong>acc</strong> – Tolerances for adaptive ODE solver. </p></li>
+<li><p><strong>rg_gm1</strong> – Range of central pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p></li>
+<li><p><strong>num_samp</strong> – Sample resolution of the sequence.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#classEOS__Toolkit_1_1star__seq"><span class="std std-ref">star_seq</span></a> object describing the TOV sequence. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit22make_tov_branch_stableE10eos_barotr14tov_acc_simple6real_tj6real_t6real_t">
+<span id="_CPPv3N11EOS_Toolkit22make_tov_branch_stableE10eos_barotr14tov_acc_simple6real_tj6real_t6real_t"></span><span id="_CPPv2N11EOS_Toolkit22make_tov_branch_stableE10eos_barotr14tov_acc_simple6real_tj6real_t6real_t"></span><span id="EOS_Toolkit::make_tov_branch_stable__eos_barotr.tov_acc_simple.real_t.unsigned-i.real_t.real_t"></span><span class="target" id="star__sequence_8h_1a1482b58eaf353c97bd67b2bb178057df"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_tov_branch_stable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="EOS_Toolkit::tov_acc_simple"><span class="n"><span class="pre">tov_acc_simple</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mgrav_min</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0.5</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_samp</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">500</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1_initial</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1.2</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_margin</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-2</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11star_branchE" title="EOS_Toolkit::star_branch"><span class="n"><span class="pre">star_branch</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22make_tov_branch_stableE10eos_barotr14tov_acc_simple6real_tj6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute stable branch of TOV solutions. </p>
+<p>
+This function employs heuristic algorithm to find the stable branch of TOV solutions. Since there may be more than one such branch, one has to provide a central pseudo-enthalpy to indicate the correct one. By increasing/decreasing this value successively by some factor, a search interval is expanded until it brackets the maximum mass or until the upper bound exceeds the EOS validity range. The initial guess is not required to be within a stable branch, and the default value should work for any remotely realistic NS EOS. In a similar fashion, a central pseudo-enthalpy for which the NS mass falls below the parameter mgrav_min is determined. Next, the maximum is determined using a maximum search. This maximum may be close to the EOS validity bound. To determine if such a maxmimum should be considerd physical, a model some distance right of the maximum but limited to the EOS range is computed. If its mass is smaller than (1 - max_margin) times the maximum mass, the latter is considered physical (as can be checked later using the includes_maximum() method of the branch object). Finally, the branch is then sampled with resolution given by num_samp. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eos</strong> – The (barotropic) EOS of the NSs. </p></li>
+<li><p><strong>acc</strong> – Tolerances for adaptive ODE solver. </p></li>
+<li><p><strong>mgrav_min</strong> – Minimum mass which sequence should cover. </p></li>
+<li><p><strong>num_samp</strong> – Sample resolution of the sequence. </p></li>
+<li><p><strong>gm1_initial</strong> – Central enthalpy to indicate desired branch. </p></li>
+<li><p><strong>max_margin</strong> – Defines when maximum is considerd physical.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#classEOS__Toolkit_1_1star__branch"><span class="std std-ref">star_branch</span></a> onject describing the TOV stable branch.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="create-from-existing-data">
+<h3>Create from existing data<a class="headerlink" href="#create-from-existing-data" title="Permalink to this heading">¶</a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit13make_star_seqENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEEN8star_seq7range_tE5units">
+<span id="_CPPv3N11EOS_Toolkit13make_star_seqENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEEN8star_seq7range_tE5units"></span><span id="_CPPv2N11EOS_Toolkit13make_star_seqENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEEN8star_seq7range_tE5units"></span><span id="EOS_Toolkit::make_star_seq__std::vector:real_t:.std::vector:real_t:.std::vector:real_t:.std::vector:real_t:.std::vector:real_t:.star_seq::range_t.units"></span><span class="target" id="star__sequence_8h_1a666c59b8836c656a545876ab45b9e73e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_star_seq</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mg</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mb</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rc</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mi</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">lt</span></span>, <a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">range_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rg_gm1</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">u</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit13make_star_seqENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEEN8star_seq7range_tE5units" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create sequence of NS properties from existing data. </p>
+<p>
+for this function, the sample points must be uniformly spaced in the central pseudo enthalpy. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mg</strong> – Sample points of gravitational mass </p></li>
+<li><p><strong>mb</strong> – Sample points of baryonic mass </p></li>
+<li><p><strong>rc</strong> – Sample points of proper circumferential radius </p></li>
+<li><p><strong>mi</strong> – Sample points of moment of inertia </p></li>
+<li><p><strong>lt</strong> – Sample points of dimensionless tidal deformability </p></li>
+<li><p><strong>rg_gm2</strong> – Range of central pseudo enthalpy </p></li>
+<li><p><strong>u</strong> – Unit system of the sequence, assumed geometric.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference internal" href="#classEOS__Toolkit_1_1star__seq"><span class="std std-ref">star_seq</span></a> object describing a NS sequence.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="sequence-files">
+<h2>Sequence Files<a class="headerlink" href="#sequence-files" title="Permalink to this heading">¶</a></h2>
+<section id="file-operations">
+<h3>File operations<a class="headerlink" href="#file-operations" title="Permalink to this heading">¶</a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit13save_star_seqENSt6stringERK8star_seq">
+<span id="_CPPv3N11EOS_Toolkit13save_star_seqENSt6stringERK8star_seq"></span><span id="_CPPv2N11EOS_Toolkit13save_star_seqENSt6stringERK8star_seq"></span><span id="EOS_Toolkit::save_star_seq__ss.star_seqCR"></span><span class="target" id="star__seq__file_8h_1a22f046cbc335d3d484f50fbd02c417f4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">save_star_seq</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">seq</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit13save_star_seqENSt6stringERK8star_seq" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Save NS sequence to file. </p>
+<p>
+This will save the sequence to file. Internally, the file format uses SI units. Conversion is preformed using the units stored in the sequence object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> – File name </p></li>
+<li><p><strong>seq</strong> – Sequence to save</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch">
+<span id="_CPPv3N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch"></span><span id="_CPPv2N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch"></span><span id="EOS_Toolkit::save_star_branch__ss.star_branchCR"></span><span class="target" id="star__seq__file_8h_1a86c3ca90b1022febee8763b4c96d35ba"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">save_star_branch</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11star_branchE" title="EOS_Toolkit::star_branch"><span class="n"><span class="pre">star_branch</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">seq</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Save NS branch to file. </p>
+<p>
+This will save the branch to file. Internally, the file format uses SI units. Conversion is preformed using the units stored in the branch object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> – File name </p></li>
+<li><p><strong>seq</strong> – Branch to save</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit13load_star_seqENSt6stringERK5units">
+<span id="_CPPv3N11EOS_Toolkit13load_star_seqENSt6stringERK5units"></span><span id="_CPPv2N11EOS_Toolkit13load_star_seqENSt6stringERK5units"></span><span id="EOS_Toolkit::load_star_seq__ss.unitsCR"></span><span class="target" id="star__seq__file_8h_1af14e8adf48217339422e02d13f860f7f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">load_star_seq</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">u</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><span class="n"><span class="pre">star_seq</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit13load_star_seqENSt6stringERK5units" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Load NS sequence from file. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> – File name of sequence file </p></li>
+<li><p><strong>Unit</strong> – system the returned sequence should use. The unit system needs to be geometric, i.e. <span class="math notranslate nohighlight">\( G=c=1 \)</span>. Default is to fix the mass unit to <span class="math notranslate nohighlight">\( 1 M_\odot \)</span>. Note this does not refer to the units in the file, which is always in SI units.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Star sequence </p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit16load_star_branchENSt6stringERK5units">
+<span id="_CPPv3N11EOS_Toolkit16load_star_branchENSt6stringERK5units"></span><span id="_CPPv2N11EOS_Toolkit16load_star_branchENSt6stringERK5units"></span><span id="EOS_Toolkit::load_star_branch__ss.unitsCR"></span><span class="target" id="star__seq__file_8h_1ad18c258db32b02dce2fdeca52e7dbf40"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">load_star_branch</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">u</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit11star_branchE" title="EOS_Toolkit::star_branch"><span class="n"><span class="pre">star_branch</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit16load_star_branchENSt6stringERK5units" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Load NS branch sequence from file. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> – Filename of branch sequence file </p></li>
+<li><p><strong>Unit</strong> – system the returned sequence should use. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Star sequence branch </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RePrimAnd</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c2p_imhd.html">Primitive Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tov_solver.html">TOV Solver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ns_seqs.html">NS Sequences</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ns_seqs_feat.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ns_seqs_interf.html">Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ns_seqs_files.html">Sequence Files</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="ns_seqs.html">NS Sequences</a><ul>
+      <li>Previous: <a href="ns_seqs_files.html" title="previous chapter">Sequence Files</a></li>
+      <li>Next: <a href="little_helpers.html" title="next chapter">Little Helpers</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Wolfgang Kastaun.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/ns_seqs_ref.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

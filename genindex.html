@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,9 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
    
@@ -74,6 +76,8 @@
       <li><a href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit14c2p_mhd_report8err_code12INVALID_DETGE">EOS_Toolkit::c2p_mhd_report::err_code::INVALID_DETG (C++ enumerator)</a>
 </li>
       <li><a href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit14c2p_mhd_report8err_code12NANS_IN_CONSE">EOS_Toolkit::c2p_mhd_report::err_code::NANS_IN_CONS (C++ enumerator)</a>
+</li>
+      <li><a href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit14c2p_mhd_report8err_code8NEG_BSQRE">EOS_Toolkit::c2p_mhd_report::err_code::NEG_BSQR (C++ enumerator)</a>
 </li>
       <li><a href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit14c2p_mhd_report8err_code22PREP_ROOT_FAIL_BRACKETE">EOS_Toolkit::c2p_mhd_report::err_code::PREP_ROOT_FAIL_BRACKET (C++ enumerator)</a>
 </li>
@@ -203,6 +207,8 @@
 </li>
       <li><a href="eos_barotr_ref.html#_CPPv4NK11EOS_Toolkit10eos_barotr10rho_at_gm1E6real_t">EOS_Toolkit::eos_barotr::rho_at_gm1 (C++ function)</a>
 </li>
+      <li><a href="eos_barotr_ref.html#_CPPv4NK11EOS_Toolkit10eos_barotr4saveE8datasink">EOS_Toolkit::eos_barotr::save (C++ function)</a>
+</li>
       <li><a href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotr5stateE">EOS_Toolkit::eos_barotr::state (C++ class)</a>
 </li>
       <li><a href="eos_barotr_ref.html#_CPPv4NK11EOS_Toolkit10eos_barotr5state4csndEv">EOS_Toolkit::eos_barotr::state::csnd (C++ function)</a>
@@ -230,6 +236,8 @@
       <li><a href="eos_barotr_ref.html#_CPPv4NK11EOS_Toolkit10eos_barotr11temp_at_gm1E6real_t">EOS_Toolkit::eos_barotr::temp_at_gm1 (C++ function)</a>
 </li>
       <li><a href="eos_barotr_ref.html#_CPPv4NK11EOS_Toolkit10eos_barotr11temp_at_rhoE6real_t">EOS_Toolkit::eos_barotr::temp_at_rho (C++ function)</a>
+</li>
+      <li><a href="eos_barotr_ref.html#_CPPv4NK11EOS_Toolkit10eos_barotr11units_to_SIEv">EOS_Toolkit::eos_barotr::units_to_SI (C++ function)</a>
 </li>
       <li><a href="eos_barotr_ref.html#_CPPv4NK11EOS_Toolkit10eos_barotr9ye_at_gm1E6real_t">EOS_Toolkit::eos_barotr::ye_at_gm1 (C++ function)</a>
 </li>
@@ -287,6 +295,8 @@
 </li>
       <li><a href="eos_thermal_ref.html#_CPPv4NK11EOS_Toolkit11eos_thermal8range_yeEv">EOS_Toolkit::eos_thermal::range_ye (C++ function)</a>
 </li>
+      <li><a href="eos_thermal_ref.html#_CPPv4NK11EOS_Toolkit11eos_thermal4saveE8datasink">EOS_Toolkit::eos_thermal::save (C++ function)</a>
+</li>
       <li><a href="eos_thermal_ref.html#_CPPv4NK11EOS_Toolkit11eos_thermal19sentr_at_rho_eps_yeE6real_t6real_t6real_t">EOS_Toolkit::eos_thermal::sentr_at_rho_eps_ye (C++ function)</a>
 </li>
       <li><a href="eos_thermal_ref.html#_CPPv4NK11EOS_Toolkit11eos_thermal20sentr_at_rho_temp_yeE6real_t6real_t6real_t">EOS_Toolkit::eos_thermal::sentr_at_rho_temp_ye (C++ function)</a>
@@ -310,6 +320,8 @@
       <li><a href="eos_thermal_ref.html#_CPPv4NK11EOS_Toolkit11eos_thermal5state4tempEv">EOS_Toolkit::eos_thermal::state::temp (C++ function)</a>
 </li>
       <li><a href="eos_thermal_ref.html#_CPPv4NK11EOS_Toolkit11eos_thermal18temp_at_rho_eps_yeE6real_t6real_t6real_t">EOS_Toolkit::eos_thermal::temp_at_rho_eps_ye (C++ function)</a>
+</li>
+      <li><a href="eos_thermal_ref.html#_CPPv4NK11EOS_Toolkit11eos_thermal11units_to_SIEv">EOS_Toolkit::eos_thermal::units_to_SI (C++ function)</a>
 </li>
       <li><a href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit11eos_thermalD0Ev">EOS_Toolkit::eos_thermal::~eos_thermal (C++ function)</a>
 </li>
@@ -365,8 +377,6 @@
 </li>
       <li><a href="eos_thermal_custom.html#_CPPv4NK11EOS_Toolkit15implementations16eos_thermal_impl5pressE6real_t6real_t6real_t">EOS_Toolkit::implementations::eos_thermal_impl::press (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="eos_thermal_custom.html#_CPPv4NK11EOS_Toolkit15implementations16eos_thermal_impl9range_epsE6real_t6real_t">EOS_Toolkit::implementations::eos_thermal_impl::range_eps (C++ function)</a>
 </li>
       <li><a href="eos_thermal_custom.html#_CPPv4NK11EOS_Toolkit15implementations16eos_thermal_impl9range_rhoEv">EOS_Toolkit::implementations::eos_thermal_impl::range_rho (C++ function)</a>
@@ -385,7 +395,7 @@
 </li>
       <li><a href="little_helpers.html#_CPPv4I0EN11EOS_Toolkit8intervalE">EOS_Toolkit::interval (C++ class)</a>
 </li>
-      <li><a href="little_helpers.html#_CPPv4NK11EOS_Toolkit8interval8containsERK1T">EOS_Toolkit::interval::contains (C++ function)</a>
+      <li><a href="little_helpers.html#_CPPv4NK11EOS_Toolkit8interval8containsERK1T">EOS_Toolkit::interval::contains (C++ function)</a>, <a href="little_helpers.html#_CPPv4NK11EOS_Toolkit8interval8containsERK8intervalI1TE">[1]</a>
 </li>
       <li><a href="little_helpers.html#_CPPv4N11EOS_Toolkit8interval8intervalE1T1T">EOS_Toolkit::interval::interval (C++ function)</a>, <a href="little_helpers.html#_CPPv4N11EOS_Toolkit8interval8intervalEv">[1]</a>
 </li>
@@ -401,15 +411,29 @@
 </li>
       <li><a href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit16load_eos_thermalENSt6stringERK5units">EOS_Toolkit::load_eos_thermal (C++ function)</a>
 </li>
-      <li><a href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t">EOS_Toolkit::make_eos_barotr_poly (C++ function)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16load_star_branchENSt6stringERK5units">EOS_Toolkit::load_star_branch (C++ function)</a>
 </li>
-      <li><a href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t">EOS_Toolkit::make_eos_barotr_pwpoly (C++ function)</a>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13load_star_seqENSt6stringERK5units">EOS_Toolkit::load_star_seq (C++ function)</a>
 </li>
-      <li><a href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit21make_eos_barotr_tableERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb6real_t">EOS_Toolkit::make_eos_barotr_table (C++ function)</a>
+      <li><a href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t5units">EOS_Toolkit::make_eos_barotr_poly (C++ function)</a>
+</li>
+      <li><a href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units">EOS_Toolkit::make_eos_barotr_pwpoly (C++ function)</a>
+</li>
+      <li><a href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERK10eos_barotr8intervalI6real_tE6real_tNSt6size_tE">EOS_Toolkit::make_eos_barotr_spline (C++ function)</a>, <a href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE">[1]</a>
+</li>
+      <li><a href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit21make_eos_barotr_tableERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb6real_t5units">EOS_Toolkit::make_eos_barotr_table (C++ function)</a>
 </li>
       <li><a href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit15make_eos_hybridE10eos_barotr6real_t6real_t6real_t">EOS_Toolkit::make_eos_hybrid (C++ function)</a>
 </li>
-      <li><a href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit17make_eos_idealgasE6real_t6real_t6real_t">EOS_Toolkit::make_eos_idealgas (C++ function)</a>
+      <li><a href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit17make_eos_idealgasE6real_t6real_t6real_t5units">EOS_Toolkit::make_eos_idealgas (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13make_star_seqENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEEN8star_seq7range_tE5units">EOS_Toolkit::make_star_seq (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit22make_tov_branch_stableE10eos_barotr14tov_acc_simple6real_tj6real_t6real_t">EOS_Toolkit::make_tov_branch_stable (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit12make_tov_seqE10eos_barotr14tov_acc_simple8intervalI6real_tEj">EOS_Toolkit::make_tov_seq (C++ function)</a>
 </li>
       <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb">EOS_Toolkit::make_tov_star (C++ function)</a>, <a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK15tov_acc_preciseKbKb">[1]</a>
 </li>
@@ -448,6 +472,10 @@
       <li><a href="c2p_imhd_ref.html#_CPPv4NK11EOS_Toolkit13prim_vars_mhd7scatterER6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_t">EOS_Toolkit::prim_vars_mhd::scatter (C++ function)</a>
 </li>
       <li><a href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit13prim_vars_mhd10set_to_nanEv">EOS_Toolkit::prim_vars_mhd::set_to_nan (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch">EOS_Toolkit::save_star_branch (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13save_star_seqENSt6stringERK8star_seq">EOS_Toolkit::save_star_seq (C++ function)</a>
 </li>
       <li><a href="little_helpers.html#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE">EOS_Toolkit::sm_metric (C++ class)</a>
 </li>
@@ -611,6 +639,70 @@
 </li>
       <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesE10eos_barotr19spherical_star_info8deform_t6bulk_t">EOS_Toolkit::spherical_star_properties::spherical_star_properties (C++ function)</a>, <a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERK25spherical_star_properties">[1]</a>, <a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERR25spherical_star_properties">[2]</a>
 </li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branchE">EOS_Toolkit::star_branch (C++ class)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch25bary_mass_from_center_gm1E6real_t">EOS_Toolkit::star_branch::bary_mass_from_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch24bary_mass_from_grav_massE6real_t">EOS_Toolkit::star_branch::bary_mass_from_grav_mass (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch25center_gm1_from_grav_massE6real_t">EOS_Toolkit::star_branch::center_gm1_from_grav_mass (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch27circ_radius_from_center_gm1E6real_t">EOS_Toolkit::star_branch::circ_radius_from_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch26circ_radius_from_grav_massE6real_t">EOS_Toolkit::star_branch::circ_radius_from_grav_mass (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch12contains_gm1E6real_t">EOS_Toolkit::star_branch::contains_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch18contains_grav_massE6real_t">EOS_Toolkit::star_branch::contains_grav_mass (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branch15from_datasourceE10datasource5units">EOS_Toolkit::star_branch::from_datasource (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch25grav_mass_from_center_gm1E6real_t">EOS_Toolkit::star_branch::grav_mass_from_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch28lambda_tidal_from_center_gm1E6real_t">EOS_Toolkit::star_branch::lambda_tidal_from_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch27lambda_tidal_from_grav_massE6real_t">EOS_Toolkit::star_branch::lambda_tidal_from_grav_mass (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch30moment_inertia_from_center_gm1E6real_t">EOS_Toolkit::star_branch::moment_inertia_from_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch29moment_inertia_from_grav_massE6real_t">EOS_Toolkit::star_branch::moment_inertia_from_grav_mass (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branchaSERK11star_branch">EOS_Toolkit::star_branch::operator= (C++ function)</a>, <a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branchaSERR11star_branch">[1]</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch16range_center_gm1Ev">EOS_Toolkit::star_branch::range_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch15range_grav_massEv">EOS_Toolkit::star_branch::range_grav_mass (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch4saveE8datasink">EOS_Toolkit::star_branch::save (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branch11star_branchEN8star_seq8spimpl_tE8spimpl_t">EOS_Toolkit::star_branch::star_branch (C++ function)</a>, <a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branch11star_branchERK11star_branch">[1]</a>, <a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branch11star_branchERR11star_branch">[2]</a>, <a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branch11star_branchEv">[3]</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seqE">EOS_Toolkit::star_seq (C++ class)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq25bary_mass_from_center_gm1E6real_t">EOS_Toolkit::star_seq::bary_mass_from_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq27circ_radius_from_center_gm1E6real_t">EOS_Toolkit::star_seq::circ_radius_from_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq12contains_gm1E6real_t">EOS_Toolkit::star_seq::contains_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seq15from_datasourceE10datasource5units">EOS_Toolkit::star_seq::from_datasource (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq25grav_mass_from_center_gm1E6real_t">EOS_Toolkit::star_seq::grav_mass_from_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq28lambda_tidal_from_center_gm1E6real_t">EOS_Toolkit::star_seq::lambda_tidal_from_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq30moment_inertia_from_center_gm1E6real_t">EOS_Toolkit::star_seq::moment_inertia_from_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seqaSERK8star_seq">EOS_Toolkit::star_seq::operator= (C++ function)</a>, <a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seqaSERR8star_seq">[1]</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq16range_center_gm1Ev">EOS_Toolkit::star_seq::range_center_gm1 (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq4saveE8datasink">EOS_Toolkit::star_seq::save (C++ function)</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seq8star_seqE8spimpl_t">EOS_Toolkit::star_seq::star_seq (C++ function)</a>, <a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seq8star_seqERK8star_seq">[1]</a>, <a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seq8star_seqERR8star_seq">[2]</a>, <a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seq8star_seqEv">[3]</a>
+</li>
+      <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq11units_to_SIEv">EOS_Toolkit::star_seq::units_to_SI (C++ function)</a>
+</li>
       <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_preciseE">EOS_Toolkit::tov_acc_precise (C++ struct)</a>
 </li>
       <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_precise7acc_minE">EOS_Toolkit::tov_acc_precise::acc_min (C++ member)</a>
@@ -697,18 +789,12 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="eos_barotr_files.html#reprimand_eos_format.save_barotr_poly">save_barotr_poly() (in module reprimand_eos_format)</a>
-</li>
-      <li><a href="eos_barotr_files.html#reprimand_eos_format.save_barotr_pwpoly">save_barotr_pwpoly() (in module reprimand_eos_format)</a>
-</li>
-      <li><a href="eos_barotr_files.html#reprimand_eos_format.save_barotr_table">save_barotr_table() (in module reprimand_eos_format)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="eos_thermal_files.html#reprimand_eos_format.save_thermal_hybrid_poly">save_thermal_hybrid_poly() (in module reprimand_eos_format)</a>
 </li>
       <li><a href="eos_thermal_files.html#reprimand_eos_format.save_thermal_hybrid_pwpoly">save_thermal_hybrid_pwpoly() (in module reprimand_eos_format)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="eos_thermal_files.html#reprimand_eos_format.save_thermal_hybrid_table">save_thermal_hybrid_table() (in module reprimand_eos_format)</a>
 </li>
       <li><a href="eos_thermal_files.html#reprimand_eos_format.save_thermal_idealgas">save_thermal_idealgas() (in module reprimand_eos_format)</a>
@@ -741,6 +827,7 @@
 <li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tov_solver.html">TOV Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ns_seqs.html">NS Sequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
 </ul>
@@ -761,7 +848,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -778,7 +865,7 @@
       &copy;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

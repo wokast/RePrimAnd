@@ -1,17 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>EOS Files &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,13 +36,13 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="eos-files">
-<h1>EOS Files<a class="headerlink" href="#eos-files" title="Permalink to this headline">¶</a></h1>
+  <section id="eos-files">
+<h1>EOS Files<a class="headerlink" href="#eos-files" title="Permalink to this heading">¶</a></h1>
 <p>The framework contains functions to load thermal EOS from file.
 The type of EOS is determined transparently to the user.
 For this we defined a file format for thermal EOS, based on HDF5.</p>
-<div class="section" id="loading-eos">
-<h2>Loading EOS<a class="headerlink" href="#loading-eos" title="Permalink to this headline">¶</a></h2>
+<section id="loading-eos">
+<h2>Loading EOS<a class="headerlink" href="#loading-eos" title="Permalink to this heading">¶</a></h2>
 <p>Loading an EOS is simple, after including the header</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_thermal_file.h&quot;</span><span class="cp"></span>
 
@@ -58,17 +61,17 @@ should employ. In the example above, we use <span class="math notranslate nohigh
 <p>This version of the library comes with one example file
 <cite>EOS/HYB1.80_MS1_PP.eos.h5</cite>, which is a hybrid EOS based on the MS1
 cold EOS.</p>
-</div>
-<div class="section" id="creating-eos-files">
-<h2>Creating EOS Files<a class="headerlink" href="#creating-eos-files" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="creating-eos-files">
+<h2>Creating EOS Files<a class="headerlink" href="#creating-eos-files" title="Permalink to this heading">¶</a></h2>
 <p>To create EOS files, the library provides a Python interface.
 The EOS file format should not matter to users unless they want to
 extend it with custom EOS types.
 The interface consists of a single-file module
 <cite>EOS/create/reprimand_eos_format.py</cite>.
 The following EOS types are available:</p>
-<div class="section" id="hybrid-eos">
-<h3>Hybrid EOS<a class="headerlink" href="#hybrid-eos" title="Permalink to this headline">¶</a></h3>
+<section id="hybrid-eos">
+<h3>Hybrid EOS<a class="headerlink" href="#hybrid-eos" title="Permalink to this heading">¶</a></h3>
 <p>To create a hybrid EOS with cold part given by a tabulated barotropic EOS, use the following. See
 <a class="reference internal" href="eos_barotr_available.html#eoscoldtabulated"><span class="std std-ref">Tabulated EOS</span></a> for details on the cold EOS.</p>
 <dl class="py function">
@@ -76,7 +79,7 @@ The following EOS types are available:</p>
 <span class="sig-prename descclassname"><span class="pre">reprimand_eos_format.</span></span><span class="sig-name descname"><span class="pre">save_thermal_hybrid_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cold_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cold_comment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_th</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poly_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">press</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csnd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gm1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ye</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprimand_eos_format.save_thermal_hybrid_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a file for a hybrid EOS based on a tabulated cold EOS</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> – Path of the file to create. Ending should be .eos.h5</p></li>
 <li><p><strong>name</strong> – Name of the EOS</p></li>
@@ -117,7 +120,7 @@ at sample points.</p></li>
 <dd><p>Create a file for a hybrid EOS based on a piecewise polytropic 
 cold EOS</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> – Path of the file to create. Ending should be .eos.h5</p></li>
 <li><p><strong>name</strong> – Name of the EOS</p></li>
@@ -150,7 +153,7 @@ cold EOS.</p></li>
 <span class="sig-prename descclassname"><span class="pre">reprimand_eos_format.</span></span><span class="sig-name descname"><span class="pre">save_thermal_hybrid_poly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cold_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_th</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_poly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_adiab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cold_comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprimand_eos_format.save_thermal_hybrid_poly" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a file for a hybrid EOS based on a polytropic cold EOS</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> – Path of the file to create. Ending should be .eos.h5</p></li>
 <li><p><strong>name</strong> – Name of the EOS</p></li>
@@ -170,15 +173,15 @@ cold EOS.</p></li>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="ideal-gas-eos">
-<h3>Ideal Gas EOS<a class="headerlink" href="#ideal-gas-eos" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="ideal-gas-eos">
+<h3>Ideal Gas EOS<a class="headerlink" href="#ideal-gas-eos" title="Permalink to this heading">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="reprimand_eos_format.save_thermal_idealgas">
 <span class="sig-prename descclassname"><span class="pre">reprimand_eos_format.</span></span><span class="sig-name descname"><span class="pre">save_thermal_idealgas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_adiab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprimand_eos_format.save_thermal_idealgas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a file for a classical ideal gas EOS</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> – Path of the file to create. Ending should be .eos.h5</p></li>
 <li><p><strong>name</strong> – Name of the EOS</p></li>
@@ -194,9 +197,9 @@ appended to autogenerated description</p></li>
 </dl>
 </dd></dl>
 
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
           </div>
@@ -230,6 +233,7 @@ appended to autogenerated description</p></li>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tov_solver.html">TOV Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ns_seqs.html">NS Sequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
 </ul>
@@ -254,7 +258,7 @@ appended to autogenerated description</p></li>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -271,7 +275,7 @@ appended to autogenerated description</p></li>
       &copy;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

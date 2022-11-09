@@ -1,17 +1,21 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Python Bindings &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Little Helpers" href="little_helpers.html" />
@@ -31,21 +35,21 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="python-bindings">
-<span id="python-interface"></span><h1>Python Bindings<a class="headerlink" href="#python-bindings" title="Permalink to this headline">¶</a></h1>
+  <section id="python-bindings">
+<span id="python-interface"></span><h1>Python Bindings<a class="headerlink" href="#python-bindings" title="Permalink to this heading">¶</a></h1>
 <p>The <cite>RePrimAnd</cite> library also provides a Python3 extension module
-<cite>pyreprimand</cite> that allows the use of the EOS framework from within
-Python3. The main purpose of this is postprocessing simulation data.
-It is therefore possible to evaluate the EOS methods for <cite>numpy</cite>
+<cite>pyreprimand</cite> that allows the use of the library from within
+Python.</p>
+<p>As an added benefit, functions from the C++ interface are vectorized
+in the Python interface whenever it makes sense, meaning that it is
+possible to evaluate those functions for <cite>numpy</cite>
 arrays of arbitrary dimension. This should be very efficient since the
 loops are performed in compiled C++ code.</p>
+<section id="eos-objects">
+<h2>EOS Objects<a class="headerlink" href="#eos-objects" title="Permalink to this heading">¶</a></h2>
 <p>The Python bindings include the functionality of barotropic and thermal
-EOS, as well as the functions to load these from file. It does not
-expose the low-level infrastructure, such as EOS implementation objects,
-or direct constructors. In addition, the Python bindings include the
-<a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">EOS_Toolkit::units</span></code></a> objects, which are needed when loading an EOS, but
-should be useful in general for unit conversion.</p>
-<p>The Python bindings expose nearly all EOS methods, using the same naming
+EOS, as well as the functions to load and save these.
+The Python bindings expose nearly all EOS methods, using the same naming
 as the C++ interface. One difference is that the Python bindings do not
 include the methods based on matter state objects, as this interface
 is not suitable for work with arrays. Only the C++ methods for direct
@@ -71,8 +75,47 @@ valid range.</p>
 <span class="n">press</span> <span class="o">=</span> <span class="n">eos</span><span class="o">.</span><span class="n">press_at_rho</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="tov-solver">
-<h2>TOV Solver<a class="headerlink" href="#tov-solver" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="creating-eos-files">
+<h2>Creating EOS Files<a class="headerlink" href="#creating-eos-files" title="Permalink to this heading">¶</a></h2>
+<p>One prime use for the Python interface is the creation of EOS files based on
+data from other sources. Polytropic, piecewise polytropic, and tabulated EOS
+are supported directly. Other EOS types can be represented by first sampling
+them.</p>
+<p>Creating a piecewise polytropic EOS file is as simple as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span>
+
+<span class="n">eos</span> <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">make_eos_barotr_pwpoly</span><span class="p">(</span><span class="n">rho_poly</span><span class="p">,</span>
+              <span class="n">rho_bounds</span><span class="p">,</span> <span class="n">gammas</span><span class="p">,</span> <span class="n">rho_max</span><span class="p">,</span> <span class="n">uc</span><span class="p">)</span>
+
+<span class="n">pyr</span><span class="o">.</span><span class="n">save_eos_barotr</span><span class="p">(</span><span class="s2">&quot;example_pp.eos.h5&quot;</span><span class="p">,</span> <span class="n">eos</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The arguments <cite>rho_bounds</cite> and <cite>gammas</cite>, which would be vectors in the C++ interface,
+can be passed as numpy arrays in Python. The dimensionful arguments
+<cite>rho_poly</cite> and <cite>rho_bounds</cite> have to be specified in the unit system desired
+for the EOS, specified by the <cite>uc</cite> argument with respect to SI units.
+See also <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units" title="EOS_Toolkit::make_eos_barotr_pwpoly"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_eos_barotr_pwpoly()</span></code></a>.</p>
+<p>For creating an EOS file that represents tabulated data, use the spline-based
+EOS as follows</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span>
+
+<span class="n">eos</span> <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">make_eos_barotr_spline</span><span class="p">(</span><span class="n">gm1</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">csnd</span><span class="p">,</span>
+             <span class="n">temp</span><span class="p">,</span> <span class="n">efrac</span><span class="p">,</span> <span class="n">is_isentropic</span><span class="p">,</span> <span class="n">range_rho</span><span class="p">,</span> <span class="n">n_poly</span><span class="p">,</span>
+             <span class="n">eos_units</span><span class="p">,</span> <span class="n">pts_per_mag</span><span class="p">)</span>
+
+<span class="n">pyr</span><span class="o">.</span><span class="n">save_eos_barotr</span><span class="p">(</span><span class="s2">&quot;example_spline.eos.h5&quot;</span><span class="p">,</span> <span class="n">eos</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <cite>gm1</cite>, <cite>rho</cite>, <cite>eps</cite>, <cite>press</cite>, <cite>csnd</cite>, <cite>temp</cite>, and <cite>efrac</cite> are numpy
+arrays with the arbitrarily-spaced tabulated sample points. If temperature
+and/or electron fraction are not available, pass an empty list instead.
+Any dimensionful arguments have to be specified in the unit system desired
+for the EOS, specified by the <cite>uc</cite> argument with respect to SI units.
+See also <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE" title="EOS_Toolkit::make_eos_barotr_spline"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_eos_barotr_spline()</span></code></a></p>
+</section>
+<section id="tov-solver">
+<h2>TOV Solver<a class="headerlink" href="#tov-solver" title="Permalink to this heading">¶</a></h2>
 <p>The C++ TOV solver functionality is also accessible from Python. The functions
 <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb" title="EOS_Toolkit::make_tov_star"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_tov_star()</span></code></a> and <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb" title="EOS_Toolkit::get_tov_star_properties"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">get_tov_star_properties()</span></code></a>
 allow the creation of a single star with and without profile information, respectively.
@@ -92,8 +135,33 @@ Note that computing TOV solutions is not vectorized, so passing a numpy array as
 will not work. Future versions may contain dedicated functions for TOV sequences.</p>
 <p>An example Python script plotting TOV sequences can be found under
 <cite>examples/pwpoly_TOV.py</cite>.</p>
-</div>
-</div>
+</section>
+<section id="ns-sequences">
+<h2>NS Sequences<a class="headerlink" href="#ns-sequences" title="Permalink to this heading">¶</a></h2>
+<p>The interface for NS sequences and their (stable) branches is available
+in Python. In particular, use the function
+<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit22make_tov_branch_stableE10eos_barotr14tov_acc_simple6real_tj6real_t6real_t" title="EOS_Toolkit::make_tov_branch_stable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_tov_branch_stable()</span></code></a> for computing a stable branch
+for TOV solutions, the function <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch" title="EOS_Toolkit::save_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">save_star_branch()</span></code></a>
+to save it to file, and the function <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16load_star_branchENSt6stringERK5units" title="EOS_Toolkit::load_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_branch()</span></code></a>
+to load such a file.</p>
+<p>The methods of objects <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branchE" title="EOS_Toolkit::star_branch"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">star_branch</span></code></a> (representing stable
+branches) are vectorized, i.e., they accept <cite>numpy</cite> arrays. If the input is outside
+the valid range, the result is NAN. The same holds for <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">star_seq</span></code></a>
+objects representing a general NS sequence.</p>
+</section>
+<section id="units">
+<h2>Units<a class="headerlink" href="#units" title="Permalink to this heading">¶</a></h2>
+<p>The Python bindings include the <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">EOS_Toolkit::units</span></code></a>
+objects, which are used throughout the interface to specify unit systems
+in a unified consistent way. The unit objects should also be very
+useful on their own, for example in quick interactive calculations.
+The very popular system defined by <span class="math notranslate nohighlight">\(G=c=M_\odot=1\)</span> is predefined as
+<cite>pyr.units.geom_solar</cite> and provides units as data members such as
+<cite>u.density</cite> (try Tab-completion for the complete list!).
+Note that temperatures in the EOS framework are always in <cite>MeV</cite> and the unit
+conversion objects do not define a temperature unit.</p>
+</section>
+</section>
 
 
           </div>
@@ -119,9 +187,14 @@ will not work. Future versions may contain dedicated functions for TOV sequences
 <li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tov_solver.html">TOV Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ns_seqs.html">NS Sequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python Bindings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#eos-objects">EOS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-eos-files">Creating EOS Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tov-solver">TOV Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ns-sequences">NS Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#units">Units</a></li>
 </ul>
 </li>
 </ul>
@@ -143,7 +216,7 @@ will not work. Future versions may contain dedicated functions for TOV sequences
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -160,7 +233,7 @@ will not work. Future versions may contain dedicated functions for TOV sequences
       &copy;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

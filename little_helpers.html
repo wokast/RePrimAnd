@@ -1,22 +1,25 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Little Helpers &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Python Bindings" href="python_interf.html" />
-    <link rel="prev" title="Reference" href="tov_solver_ref.html" />
+    <link rel="prev" title="Reference" href="ns_seqs_ref.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,10 +36,10 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="little-helpers">
-<h1>Little Helpers<a class="headerlink" href="#little-helpers" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="tensors">
-<h2>Tensors<a class="headerlink" href="#tensors" title="Permalink to this headline">¶</a></h2>
+  <section id="little-helpers">
+<h1>Little Helpers<a class="headerlink" href="#little-helpers" title="Permalink to this heading">¶</a></h1>
+<section id="tensors">
+<h2>Tensors<a class="headerlink" href="#tensors" title="Permalink to this heading">¶</a></h2>
 <p>The library contains classes representing fixed-size tensors (not
 tensor fields). The functionality is limited mostly to the needs
 of the primitive recovery algorithm, but might also be useful
@@ -61,10 +64,10 @@ indices is enforced at compile time, e.g. one cannot add an upper index
 and a lower index vector.</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E">
-<span id="_CPPv3I0_i_bEN11EOS_Toolkit10sm_tensor1E"></span><span id="_CPPv2I0_i_bEN11EOS_Toolkit10sm_tensor1E"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">N</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UP</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classEOS__Toolkit_1_1sm__tensor1"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">sm_tensor1</span></span></span><a class="headerlink" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3I0_i_bEN11EOS_Toolkit10sm_tensor1E"></span><span id="_CPPv2I0_i_bEN11EOS_Toolkit10sm_tensor1E"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">N</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UP</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classEOS__Toolkit_1_1sm__tensor1"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sm_tensor1</span></span></span><a class="headerlink" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Class representing rank-1 tensor. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Template Parameters</dt>
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> – Underlying scalar data type </p></li>
 <li><p><strong>N</strong> – Dimensionality </p></li>
@@ -199,10 +202,10 @@ and a lower index vector.</p>
 
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE">
-<span id="_CPPv3I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE"></span><span id="_CPPv2I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">N</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UP1</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UP2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classEOS__Toolkit_1_1sm__tensor2__sym"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">sm_tensor2_sym</span></span></span><a class="headerlink" href="#_CPPv4I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE"></span><span id="_CPPv2I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">N</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UP1</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UP2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classEOS__Toolkit_1_1sm__tensor2__sym"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sm_tensor2_sym</span></span></span><a class="headerlink" href="#_CPPv4I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Class representing symmetric rank-2 tensor. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Template Parameters</dt>
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> – Data type of components </p></li>
 <li><p><strong>N</strong> – Dimensionality </p></li>
@@ -351,7 +354,7 @@ and a lower index vector.</p>
 <span id="_CPPv3NK11EOS_Toolkit14sm_tensor2_sym8contractERK10sm_tensor1I1T1NXnt3UP1EERK10sm_tensor1I1T1NXnt3UP2EE"></span><span id="_CPPv2NK11EOS_Toolkit14sm_tensor2_sym8contractERK10sm_tensor1I1T1NX!UP1EERK10sm_tensor1I1T1NX!UP2EE"></span><span id="EOS_Toolkit::sm_tensor2_sym::contract__sm_tensor1:T.N.!UP1:CR.sm_tensor1:T.N.!UP2:CRC"></span><span class="target" id="classEOS__Toolkit_1_1sm__tensor2__sym_1adabe85d708530ff1ee7f2d16c43578eb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE" title="EOS_Toolkit::sm_tensor2_sym::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contract</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="EOS_Toolkit::sm_tensor1"><span class="n"><span class="pre">sm_tensor1</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE" title="EOS_Toolkit::sm_tensor2_sym::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE" title="EOS_Toolkit::sm_tensor2_sym::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="o"><span class="pre">!</span></span><a class="reference internal" href="#_CPPv4I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE" title="EOS_Toolkit::sm_tensor2_sym::UP1"><span class="n"><span class="pre">UP1</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="EOS_Toolkit::sm_tensor1"><span class="n"><span class="pre">sm_tensor1</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE" title="EOS_Toolkit::sm_tensor2_sym::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE" title="EOS_Toolkit::sm_tensor2_sym::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="o"><span class="pre">!</span></span><a class="reference internal" href="#_CPPv4I0_i_b_bEN11EOS_Toolkit14sm_tensor2_symE" title="EOS_Toolkit::sm_tensor2_sym::UP2"><span class="n"><span class="pre">UP2</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">w</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14sm_tensor2_sym8contractERK10sm_tensor1I1T1NXnt3UP1EERK10sm_tensor1I1T1NXnt3UP2EE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute contraction with two rank-1 tensors. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>v</strong> – Rank-1 tensor to contract first index with </p></li>
 <li><p><strong>w</strong> – Rank-1 tensor to contract second index with </p></li>
@@ -371,11 +374,11 @@ and a lower index vector.</p>
 
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4I0_iEN11EOS_Toolkit9sm_metricE">
-<span id="_CPPv3I0_iEN11EOS_Toolkit9sm_metricE"></span><span id="_CPPv2I0_iEN11EOS_Toolkit9sm_metricE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">N</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classEOS__Toolkit_1_1sm__metric"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">sm_metric</span></span></span><a class="headerlink" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3I0_iEN11EOS_Toolkit9sm_metricE"></span><span id="_CPPv2I0_iEN11EOS_Toolkit9sm_metricE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">N</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classEOS__Toolkit_1_1sm__metric"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sm_metric</span></span></span><a class="headerlink" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Class representing a metric. </p>
 <p>This allows raising, lowering, and contraction of vectors. Consists of upper- and lower-index metric tensors and the metric determinant.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Template Parameters</dt>
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>T</strong> – Data type of metric components </p></li>
 <li><p><strong>N</strong> – Dimensionality </p></li>
@@ -395,7 +398,7 @@ and a lower index vector.</p>
 <span id="_CPPv3N11EOS_Toolkit9sm_metric9sm_metricE4lo_t4up_t1T"></span><span id="_CPPv2N11EOS_Toolkit9sm_metric9sm_metricE4lo_t4up_t1T"></span><span id="EOS_Toolkit::sm_metric::sm_metric__lo_t.up_t.T"></span><span class="target" id="classEOS__Toolkit_1_1sm__metric_1a218933b9b669d79b5233ff1ae0630aed"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sm_metric</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">lo_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">lo_</span></span>, <span class="n"><span class="pre">up_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">up_</span></span>, <a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">det_</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit9sm_metric9sm_metricE4lo_t4up_t1T" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Construct metric. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lo_</strong> – Lower-index metric tensor </p></li>
 <li><p><strong>up_</strong> – Upper-index metric tensor </p></li>
@@ -415,7 +418,7 @@ and a lower index vector.</p>
 <p>Only implemented for N=2,3</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lo_</strong> – Lower-index metric tensor </p>
 </dd>
 </dl>
@@ -426,7 +429,7 @@ and a lower index vector.</p>
 <span id="_CPPv3NK11EOS_Toolkit9sm_metric5raiseER10sm_tensor1I1T1NXL1EEERK10sm_tensor1I1T1NXL0EEE"></span><span id="_CPPv2NK11EOS_Toolkit9sm_metric5raiseER10sm_tensor1I1T1NXtrueEERK10sm_tensor1I1T1NXfalseEE"></span><span id="EOS_Toolkit::sm_metric::raise__sm_tensor1:T.N.true:R.sm_tensor1:T.N.false:CRC"></span><span class="target" id="classEOS__Toolkit_1_1sm__metric_1a17d94e03bbdd0b0917723221c4f71a03"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">raise</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="EOS_Toolkit::sm_tensor1"><span class="n"><span class="pre">sm_tensor1</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">erg</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="EOS_Toolkit::sm_tensor1"><span class="n"><span class="pre">sm_tensor1</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit9sm_metric5raiseER10sm_tensor1I1T1NXL1EEERK10sm_tensor1I1T1NXL0EEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Raise index of vector. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>erg</strong> – Reference to upper-index vector for storing result </p></li>
 <li><p><strong>v</strong> – Lower-index vector to be raised. </p></li>
@@ -440,10 +443,10 @@ and a lower index vector.</p>
 <span id="_CPPv3NK11EOS_Toolkit9sm_metric5raiseERK10sm_tensor1I1T1NXL0EEE"></span><span id="_CPPv2NK11EOS_Toolkit9sm_metric5raiseERK10sm_tensor1I1T1NXfalseEE"></span><span id="EOS_Toolkit::sm_metric::raise__sm_tensor1:T.N.false:CRC"></span><span class="target" id="classEOS__Toolkit_1_1sm__metric_1adc76f61f17437b5d9e9bc4dfee442416"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="EOS_Toolkit::sm_tensor1"><span class="n"><span class="pre">sm_tensor1</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">raise</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="EOS_Toolkit::sm_tensor1"><span class="n"><span class="pre">sm_tensor1</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit9sm_metric5raiseERK10sm_tensor1I1T1NXL0EEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Raise index of vector. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>v</strong> – Lower-index vector to be raised. </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Upper-index vector </p>
 </dd>
 </dl>
@@ -454,7 +457,7 @@ and a lower index vector.</p>
 <span id="_CPPv3NK11EOS_Toolkit9sm_metric5lowerER10sm_tensor1I1T1NXL0EEERK10sm_tensor1I1T1NXL1EEE"></span><span id="_CPPv2NK11EOS_Toolkit9sm_metric5lowerER10sm_tensor1I1T1NXfalseEERK10sm_tensor1I1T1NXtrueEE"></span><span id="EOS_Toolkit::sm_metric::lower__sm_tensor1:T.N.false:R.sm_tensor1:T.N.true:CRC"></span><span class="target" id="classEOS__Toolkit_1_1sm__metric_1a6a893c544983232a818814531db74f22"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lower</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="EOS_Toolkit::sm_tensor1"><span class="n"><span class="pre">sm_tensor1</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">erg</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="EOS_Toolkit::sm_tensor1"><span class="n"><span class="pre">sm_tensor1</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit9sm_metric5lowerER10sm_tensor1I1T1NXL0EEERK10sm_tensor1I1T1NXL1EEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Lower index of vector. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>erg</strong> – Reference to lower-index vector for storing result </p></li>
 <li><p><strong>v</strong> – Upper-index vector to be lowered. </p></li>
@@ -468,10 +471,10 @@ and a lower index vector.</p>
 <span id="_CPPv3NK11EOS_Toolkit9sm_metric5lowerERK10sm_tensor1I1T1NXL1EEE"></span><span id="_CPPv2NK11EOS_Toolkit9sm_metric5lowerERK10sm_tensor1I1T1NXtrueEE"></span><span id="EOS_Toolkit::sm_metric::lower__sm_tensor1:T.N.true:CRC"></span><span class="target" id="classEOS__Toolkit_1_1sm__metric_1a829b80c84e4a505e6cefbcd8cede9b6b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="EOS_Toolkit::sm_tensor1"><span class="n"><span class="pre">sm_tensor1</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lower</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_i_bEN11EOS_Toolkit10sm_tensor1E" title="EOS_Toolkit::sm_tensor1"><span class="n"><span class="pre">sm_tensor1</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_iEN11EOS_Toolkit9sm_metricE" title="EOS_Toolkit::sm_metric::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit9sm_metric5lowerERK10sm_tensor1I1T1NXL1EEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Lower index of vector. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>v</strong> – Upper-index vector to be lowered. </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Lower-index vector </p>
 </dd>
 </dl>
@@ -513,7 +516,7 @@ and a lower index vector.</p>
 <dd><p>Compute cross-product of 3-vectors. </p>
 <p>This is ony defined if N=3, i.e. 3-metric.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( \epsilon_{ijk} a^j b^k \)</span> where <span class="math notranslate nohighlight">\( \epsilon \)</span> is the Levi-Civita tensor </p>
 </dd>
 </dl>
@@ -558,12 +561,12 @@ and a lower index vector.</p>
 <dd><p>3-dimensional positive definite metric </p>
 </dd></dl>
 
-</div>
-<div class="section" id="units">
-<h2>Units<a class="headerlink" href="#units" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="units">
+<h2>Units<a class="headerlink" href="#units" title="Permalink to this heading">¶</a></h2>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit5unitsE">
-<span id="_CPPv3N11EOS_Toolkit5unitsE"></span><span id="_CPPv2N11EOS_Toolkit5unitsE"></span><span id="EOS_Toolkit::units"></span><span class="target" id="classEOS__Toolkit_1_1units"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">units</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit5unitsE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit5unitsE"></span><span id="_CPPv2N11EOS_Toolkit5unitsE"></span><span id="EOS_Toolkit::units"></span><span class="target" id="classEOS__Toolkit_1_1units"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">units</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit5unitsE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Class to represent physical unit systems. </p>
 <p>This class describes a system of units, by storing base units for time, length and mass, and computes derived units. The unit system in which to specify the new units is not fixed, so that this class may be used to convert between any two systems of units. The unit object can also be used to absolutely specify a unit system. In that case, the convention is that the units are expressed in SI units. There are predefined unit objects which express different geometric unit systems (and SI units) in terms of the SI units. </p>
 <div class="breathe-sectiondef docutils container">
@@ -585,7 +588,7 @@ and a lower index vector.</p>
 <span id="_CPPv3NK11EOS_Toolkit5unitsdvERK5units"></span><span id="_CPPv2NK11EOS_Toolkit5unitsdvERK5units"></span><span id="EOS_Toolkit::units::div-operator__unitsCRCCE"></span><span class="target" id="classEOS__Toolkit_1_1units_1abbb94b86613f739d420d00fd543d1c49"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">/</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">base</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit5unitsdvERK5units" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Express units in terms of other units. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>base</strong> – ..in terms of those units </p>
 </dd>
 </dl>
@@ -744,15 +747,15 @@ and a lower index vector.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="other">
-<h2>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="other">
+<h2>Other<a class="headerlink" href="#other" title="Permalink to this heading">¶</a></h2>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN11EOS_Toolkit8intervalE">
-<span id="_CPPv3I0EN11EOS_Toolkit8intervalE"></span><span id="_CPPv2I0EN11EOS_Toolkit8intervalE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classEOS__Toolkit_1_1interval"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">interval</span></span></span><a class="headerlink" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3I0EN11EOS_Toolkit8intervalE"></span><span id="_CPPv2I0EN11EOS_Toolkit8intervalE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classEOS__Toolkit_1_1interval"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">interval</span></span></span><a class="headerlink" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Class representing a closed interval</p>
 <dl class="field-list simple">
-<dt class="field-odd">Template Parameters</dt>
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>T</strong> – the underlying numerical type, e.g. double </p>
 </dd>
 </dl>
@@ -769,16 +772,16 @@ and a lower index vector.</p>
 <span id="_CPPv3N11EOS_Toolkit8interval8intervalE1T1T"></span><span id="_CPPv2N11EOS_Toolkit8interval8intervalE1T1T"></span><span id="EOS_Toolkit::interval::interval__T.T"></span><span class="target" id="classEOS__Toolkit_1_1interval_1abf5fea7ed3a497fef5ccf57a79aaf85b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">interval</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">min</span></span>, <a class="reference internal" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">max</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit8interval8intervalE1T1T" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Construct from minimum and maximum. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>min</strong> – Lower boundary of interval </p></li>
 <li><p><strong>max</strong> – Upper boundary of interval</p></li>
 </ul>
 </dd>
-<dt class="field-even">Pre</dt>
+<dt class="field-even">Pre<span class="colon">:</span></dt>
 <dd class="field-even"><p>Aborts unless max &gt;= min </p>
 </dd>
-<dt class="field-odd">Pre</dt>
+<dt class="field-odd">Pre<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Aborts unless max and min are both finite values </p>
 </dd>
 </dl>
@@ -792,11 +795,24 @@ and a lower index vector.</p>
 <p>Returns false if x is NAN or INF. </p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>x</strong> – Value to test </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>If value is contained in closed interval <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8interval8containsERK8intervalI1TE">
+<span id="_CPPv3NK11EOS_Toolkit8interval8containsERK8intervalI1TE"></span><span id="_CPPv2NK11EOS_Toolkit8interval8containsERK8intervalI1TE"></span><span id="EOS_Toolkit::interval::contains__interval:T:CRC"></span><span class="target" id="classEOS__Toolkit_1_1interval_1a0b03c62c95fcd7f158812661d474340e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">contains</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval"><span class="n"><span class="pre">interval</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">r</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8interval8containsERK8intervalI1TE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>r</strong> – Interval to test </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If Interval is contained in closed interval <span class="math notranslate nohighlight">\([a,b]\)</span>. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -806,10 +822,10 @@ and a lower index vector.</p>
 <span id="_CPPv3NK11EOS_Toolkit8interval8limit_toERK1T"></span><span id="_CPPv2NK11EOS_Toolkit8interval8limit_toERK1T"></span><span id="EOS_Toolkit::interval::limit_to__TCRC"></span><span class="target" id="classEOS__Toolkit_1_1interval_1ae69f65aea0fa7b80252070b1e1b9ee88"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">limit_to</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8interval8limit_toERK1T" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Limit value to interval. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>x</strong> – Value to constrain </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>x if it inside interval, else the closest boundary </p>
 </dd>
 </dl>
@@ -819,7 +835,7 @@ and a lower index vector.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8interval3minEv">
 <span id="_CPPv3NK11EOS_Toolkit8interval3minEv"></span><span id="_CPPv2NK11EOS_Toolkit8interval3minEv"></span><span id="EOS_Toolkit::interval::minC"></span><span class="target" id="classEOS__Toolkit_1_1interval_1a4c929c034a17b37ffa575ef8070bec07"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">min</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8interval3minEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Lower boundary </p>
 </dd>
 </dl>
@@ -829,7 +845,7 @@ and a lower index vector.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8interval3maxEv">
 <span id="_CPPv3NK11EOS_Toolkit8interval3maxEv"></span><span id="_CPPv2NK11EOS_Toolkit8interval3maxEv"></span><span id="EOS_Toolkit::interval::maxC"></span><span class="target" id="classEOS__Toolkit_1_1interval_1addcc13911b2199b1173ae8dd8fb67aba"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8interval3maxEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Upper boundary </p>
 </dd>
 </dl>
@@ -839,7 +855,7 @@ and a lower index vector.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit8interval6lengthEv">
 <span id="_CPPv3NK11EOS_Toolkit8interval6lengthEv"></span><span id="_CPPv2NK11EOS_Toolkit8interval6lengthEv"></span><span id="EOS_Toolkit::interval::lengthC"></span><span class="target" id="classEOS__Toolkit_1_1interval_1a84f27317b600f657ad82ea74e91e7069"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">length</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit8interval6lengthEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Length of interval </p>
 </dd>
 </dl>
@@ -848,8 +864,8 @@ and a lower index vector.</p>
 </div>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -875,6 +891,7 @@ and a lower index vector.</p>
 <li class="toctree-l1"><a class="reference internal" href="eos_thermal.html">Thermal EOS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eos_barotr.html">Barotropic EOS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tov_solver.html">TOV Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ns_seqs.html">NS Sequences</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Little Helpers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#tensors">Tensors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#units">Units</a></li>
@@ -888,7 +905,7 @@ and a lower index vector.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="tov_solver_ref.html" title="previous chapter">Reference</a></li>
+      <li>Previous: <a href="ns_seqs_ref.html" title="previous chapter">Reference</a></li>
       <li>Next: <a href="python_interf.html" title="next chapter">Python Bindings</a></li>
   </ul></li>
 </ul>
@@ -902,7 +919,7 @@ and a lower index vector.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -919,7 +936,7 @@ and a lower index vector.</p>
       &copy;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

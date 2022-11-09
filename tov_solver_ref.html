@@ -1,21 +1,24 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Reference &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Little Helpers" href="little_helpers.html" />
+    <link rel="next" title="NS Sequences" href="ns_seqs.html" />
     <link rel="prev" title="Interface" href="tov_solver_interf.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -33,12 +36,12 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="reference">
-<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="computing-tov-solutions">
-<h2>Computing TOV solutions<a class="headerlink" href="#computing-tov-solutions" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="full-solution">
-<h3>Full solution<a class="headerlink" href="#full-solution" title="Permalink to this headline">¶</a></h3>
+  <section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">¶</a></h1>
+<section id="computing-tov-solutions">
+<h2>Computing TOV solutions<a class="headerlink" href="#computing-tov-solutions" title="Permalink to this heading">¶</a></h2>
+<section id="full-solution">
+<h3>Full solution<a class="headerlink" href="#full-solution" title="Permalink to this heading">¶</a></h3>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb">
 <span id="_CPPv3N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb"></span><span id="_CPPv2N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb"></span><span id="EOS_Toolkit::make_tov_star__eos_barotrC.real_tC.tov_acc_simpleC.bC.bC"></span><span class="target" id="spherical__stars_8h_1a59b65e5cb94b2e43e879c5e920dd6096"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_tov_star</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_center</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="EOS_Toolkit::tov_acc_simple"><span class="n"><span class="pre">tov_acc_simple</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_bulk</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_tidal</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14spherical_starE" title="EOS_Toolkit::spherical_star"><span class="n"><span class="pre">spherical_star</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb" title="Permalink to this definition">¶</a><br /></dt>
@@ -46,7 +49,7 @@
 <p>
 This returns a class providing all global NS properties as well as the stellar profile. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>eos</strong> – The (barotropic) EOS of the NS. </p></li>
 <li><p><strong>rho_center</strong> – The central baryonic mass density. Units are the same as used by the EOS. </p></li>
@@ -55,7 +58,7 @@ This returns a class providing all global NS properties as well as the stellar p
 <li><p><strong>find_tidal</strong> – Whether to compute the tidal deformability</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Stellar model</p>
 </dd>
 </dl>
@@ -71,7 +74,7 @@ This returns a class providing all global NS properties as well as the stellar p
 <p>
 This returns a class providing all global NS properties as well as the stellar profile. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>eos</strong> – The (barotropic) EOS of the NS. </p></li>
 <li><p><strong>rho_center</strong> – The central baryonic mass density. Units are the same as used by the EOS. </p></li>
@@ -80,15 +83,15 @@ This returns a class providing all global NS properties as well as the stellar p
 <li><p><strong>find_tidal</strong> – Whether to compute the tidal deformability</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Stellar model</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="only-global-properties">
-<h3>Only global properties<a class="headerlink" href="#only-global-properties" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="only-global-properties">
+<h3>Only global properties<a class="headerlink" href="#only-global-properties" title="Permalink to this heading">¶</a></h3>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb">
 <span id="_CPPv3N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb"></span><span id="_CPPv2N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb"></span><span id="EOS_Toolkit::get_tov_star_properties__eos_barotrC.real_tC.tov_acc_simpleC.bC.bC"></span><span class="target" id="spherical__stars_8h_1a199d3e4fec620e5851c6883637de20ca"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">get_tov_star_properties</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_center</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="EOS_Toolkit::tov_acc_simple"><span class="n"><span class="pre">tov_acc_simple</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_bulk</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">find_tidal</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb" title="Permalink to this definition">¶</a><br /></dt>
@@ -96,7 +99,7 @@ This returns a class providing all global NS properties as well as the stellar p
 <p>
 This returns a class providing all global NS properties but not the stellar profile. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>eos</strong> – The (barotropic) EOS of the NS. </p></li>
 <li><p><strong>rho_center</strong> – The central baryonic mass density. Units are the same as used by the EOS. </p></li>
@@ -105,7 +108,7 @@ This returns a class providing all global NS properties but not the stellar prof
 <li><p><strong>find_tidal</strong> – Whether to compute the tidal deformability</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Stellar model properties</p>
 </dd>
 </dl>
@@ -121,7 +124,7 @@ This returns a class providing all global NS properties but not the stellar prof
 <p>
 This returns a class providing all global NS properties but not the stellar profile. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>eos</strong> – The (barotropic) EOS of the NS </p></li>
 <li><p><strong>rho_center</strong> – The central baryonic mass density. Units are the same as used by the EOS </p></li>
@@ -130,19 +133,19 @@ This returns a class providing all global NS properties but not the stellar prof
 <li><p><strong>find_tidal</strong> – Whether to compute the tidal deformability</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Stellar model properties</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="ns-representations">
-<h2>NS representations<a class="headerlink" href="#ns-representations" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="ns-representations">
+<h2>NS representations<a class="headerlink" href="#ns-representations" title="Permalink to this heading">¶</a></h2>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit25spherical_star_propertiesE">
-<span id="_CPPv3N11EOS_Toolkit25spherical_star_propertiesE"></span><span id="_CPPv2N11EOS_Toolkit25spherical_star_propertiesE"></span><span id="EOS_Toolkit::spherical_star_properties"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star_properties</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit25spherical_star_propertiesE"></span><span id="_CPPv2N11EOS_Toolkit25spherical_star_propertiesE"></span><span id="EOS_Toolkit::spherical_star_properties"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star__properties"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star_properties</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Class to describe a spherical neutron star. </p>
 <p>This collects scalar measures of a spherical neutron star solution, but not the radial profile. It also provides the EOS. All quantities are in the same geometric units used by the EOS. </p>
 <p>Subclassed by <a class="reference internal" href="#classEOS__Toolkit_1_1spherical__star"><span class="std std-ref">EOS_Toolkit::spherical_star</span></a></p>
@@ -297,7 +300,7 @@ This returns a class providing all global NS properties but not the stellar prof
 </div>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14spherical_starE">
-<span id="_CPPv3N11EOS_Toolkit14spherical_starE"></span><span id="_CPPv2N11EOS_Toolkit14spherical_starE"></span><span id="EOS_Toolkit::spherical_star"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14spherical_starE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit14spherical_starE"></span><span id="_CPPv2N11EOS_Toolkit14spherical_starE"></span><span id="EOS_Toolkit::spherical_star"></span><span class="target" id="classEOS__Toolkit_1_1spherical__star"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spherical_star</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit25spherical_star_propertiesE" title="EOS_Toolkit::spherical_star_properties"><span class="n"><span class="pre">spherical_star_properties</span></span></a><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14spherical_starE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Class representing a spherical neutron star model. </p>
 <p>This provides everything <a class="reference internal" href="#classEOS__Toolkit_1_1spherical__star__properties"><span class="std std-ref">spherical_star_properties</span></a> does, and in addition the radial profiles for metric and matter quantities. The profiles are provided as functions of circumferential radius that can be evaluated both inside and outside the star. All quantities are in the same geometric units used by the EOS. </p>
 <div class="breathe-sectiondef docutils container">
@@ -409,12 +412,12 @@ This returns a class providing all global NS properties but not the stellar prof
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="accuracy-specification">
-<h2>Accuracy specification<a class="headerlink" href="#accuracy-specification" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="accuracy-specification">
+<h2>Accuracy specification<a class="headerlink" href="#accuracy-specification" title="Permalink to this heading">¶</a></h2>
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14tov_acc_simpleE">
-<span id="_CPPv3N11EOS_Toolkit14tov_acc_simpleE"></span><span id="_CPPv2N11EOS_Toolkit14tov_acc_simpleE"></span><span id="EOS_Toolkit::tov_acc_simple"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__simple"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">tov_acc_simple</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit14tov_acc_simpleE"></span><span id="_CPPv2N11EOS_Toolkit14tov_acc_simpleE"></span><span id="EOS_Toolkit::tov_acc_simple"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__simple"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tov_acc_simple</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Class for specifiying heuristic accuracy of TOV solution. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
@@ -453,7 +456,7 @@ This returns a class providing all global NS properties but not the stellar prof
 </div>
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15tov_acc_preciseE">
-<span id="_CPPv3N11EOS_Toolkit15tov_acc_preciseE"></span><span id="_CPPv2N11EOS_Toolkit15tov_acc_preciseE"></span><span id="EOS_Toolkit::tov_acc_precise"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__precise"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">tov_acc_precise</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15tov_acc_preciseE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit15tov_acc_preciseE"></span><span id="_CPPv2N11EOS_Toolkit15tov_acc_preciseE"></span><span id="EOS_Toolkit::tov_acc_precise"></span><span class="target" id="structEOS__Toolkit_1_1tov__acc__precise"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tov_acc_precise</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15tov_acc_preciseE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Class for specifying absolute tolerances for TOV solution. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
@@ -505,9 +508,9 @@ This returns a class providing all global NS properties but not the stellar prof
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="tov-sequences">
-<h2>TOV sequences<a class="headerlink" href="#tov-sequences" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="tov-sequences">
+<h2>TOV sequences<a class="headerlink" href="#tov-sequences" title="Permalink to this heading">¶</a></h2>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit22find_rhoc_tov_max_massE10eos_barotrK6real_tK6real_tKiK6real_tj">
 <span id="_CPPv3N11EOS_Toolkit22find_rhoc_tov_max_massE10eos_barotrK6real_tK6real_tKiK6real_tj"></span><span id="_CPPv2N11EOS_Toolkit22find_rhoc_tov_max_massE10eos_barotrK6real_tK6real_tKiK6real_tj"></span><span id="EOS_Toolkit::find_rhoc_tov_max_mass__eos_barotr.real_tC.real_tC.iC.real_tC.unsigned-i"></span><span class="target" id="spherical__stars_8h_1ad763ce996283b6655fc680ae21946f91"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">find_rhoc_tov_max_mass</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rhobr0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rhobr1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bits</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">28</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1e-8</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_steps</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">30</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22find_rhoc_tov_max_massE10eos_barotrK6real_tK6real_tKiK6real_tj" title="Permalink to this definition">¶</a><br /></dt>
@@ -515,7 +518,7 @@ This returns a class providing all global NS properties but not the stellar prof
 <p>
 This finds the model with maximum gravitational mass within a specified range of the central baryonic mass density. The provided range is first limited to the validity range of the EOS. Since the EOS framework guarantees causality, the returned value might be the one for the maximum causal central density, instead of a true maximum (i.e. zero derivative). Similarly, if the provided range does not contain the maximum, the returned value will be at the border. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>eos</strong> – The (barotropic) EOS of the NS </p></li>
 <li><p><strong>rhobr0</strong> – Lower bound of central density for search </p></li>
@@ -525,7 +528,7 @@ This finds the model with maximum gravitational mass within a specified range of
 <li><p><strong>max_steps</strong> – Maximum steps for maximum search</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Central baryonic mass density of maximum mass model</p>
 </dd>
 </dl>
@@ -541,7 +544,7 @@ This finds the model with maximum gravitational mass within a specified range of
 <p>
 This finds a TOV solution of given gravitational mass. It is up to the user to provide an initial bracket for the central density, such that the mass as function of density is monotonic (beware the different TOV solution branches). </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>eos</strong> – The (barotropic) EOS of the NS </p></li>
 <li><p><strong>mg</strong> – Gravitational mass </p></li>
@@ -551,14 +554,14 @@ This finds a TOV solution of given gravitational mass. It is up to the user to p
 <li><p><strong>max_steps</strong> – Maximum steps for root finding</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Central baryonic mass density of TOV model with given mass</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -589,6 +592,7 @@ This finds a TOV solution of given gravitational mass. It is up to the user to p
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Reference</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="ns_seqs.html">NS Sequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="little_helpers.html">Little Helpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_interf.html">Python Bindings</a></li>
 </ul>
@@ -599,7 +603,7 @@ This finds a TOV solution of given gravitational mass. It is up to the user to p
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="tov_solver.html">TOV Solver</a><ul>
       <li>Previous: <a href="tov_solver_interf.html" title="previous chapter">Interface</a></li>
-      <li>Next: <a href="little_helpers.html" title="next chapter">Little Helpers</a></li>
+      <li>Next: <a href="ns_seqs.html" title="next chapter">NS Sequences</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -613,7 +617,7 @@ This finds a TOV solution of given gravitational mass. It is up to the user to p
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -630,7 +634,7 @@ This finds a TOV solution of given gravitational mass. It is up to the user to p
       &copy;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
