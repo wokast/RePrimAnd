@@ -10,7 +10,8 @@ eos_barotr make_eos_barotr_gpoly(
   real_t n_,                          ///<Adiabatic index \f$ n \f$
   real_t rmd_p_,                      ///<Density scale \f$ \rho_p \f$
   real_t sed0_,                       ///< \f$ \epsilon_0 \f$    
-  real_t rho_max_                     ///<Max valid density 
+  real_t rho_max_,                    ///<Max valid density 
+  units units_=units::geom_solar()    ///<Unit system (geometric)
 );
 
 

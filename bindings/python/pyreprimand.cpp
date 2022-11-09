@@ -5,14 +5,18 @@
 #include <boost/format.hpp>
 #include <string>
 #include <vector>
-#include "eos_barotropic.h"
-#include "eos_barotr_file.h"
-#include "eos_barotr_table.h"
-#include "eos_barotr_poly.h"
-#include "eos_barotr_pwpoly.h"
-#include "eos_thermal.h"
-#include "eos_thermal_file.h"
-#include "spherical_stars.h"
+#include "reprimand/interpol.h"
+#include "reprimand/eos_barotropic.h"
+#include "reprimand/eos_barotr_file.h"
+#include "reprimand/eos_barotr_table.h"
+#include "reprimand/eos_barotr_spline.h"
+#include "reprimand/eos_barotr_poly.h"
+#include "reprimand/eos_barotr_pwpoly.h"
+#include "reprimand/eos_thermal.h"
+#include "reprimand/eos_thermal_file.h"
+#include "reprimand/spherical_stars.h"
+#include "reprimand/star_sequence.h"
+#include "reprimand/star_seq_file.h"
 
 
 namespace etk = EOS_Toolkit;
@@ -39,7 +43,10 @@ PYBIND11_MODULE(pyreprimand, m) {
              py::arg("min")=0, py::arg("max")=0)
         .def("limit_to", py::vectorize(&range::limit_to),
              "Limit values to range")
-        .def("contains", py::vectorize(&range::contains),
+        .def("contains", 
+             py::vectorize([](const range* that, real_t x) { 
+               return that->contains(x); 
+             }),
              "Test if values are within interval [min,max]")
         .def_property_readonly("min", &range::min)
         .def_property_readonly("max", &range::max)
@@ -194,7 +201,10 @@ PYBIND11_MODULE(pyreprimand, m) {
              "Validity range for electron fraction")
         .def_property_readonly("minimal_h", 
               &etk::eos_thermal::minimal_h,
-             "Lower bound for enthalpy");
+             "Lower bound for enthalpy")
+        .def_property_readonly("units_to_SI", 
+              &etk::eos_thermal::units_to_SI,
+             "Unit system");
 
     m.def("load_eos_thermal", &etk::load_eos_thermal, 
           "Load thermal EOS from file",
@@ -303,12 +313,21 @@ PYBIND11_MODULE(pyreprimand, m) {
              py::arg("rho"))
         .def_property_readonly("minimal_h", 
               &etk::eos_barotr::minimal_h,
-             "Lower bound for enthalpy");
+             "Lower bound for enthalpy")
+        .def_property_readonly("units_to_SI", 
+              &etk::eos_barotr::units_to_SI,
+             "Unit system");
              
     m.def("load_eos_barotr", &etk::load_eos_barotr, 
           "Load barotropic EOS from file",
           py::arg("path"),
           py::arg("units")=etk::units::geom_solar());
+
+    m.def("save_eos_barotr", &etk::save_eos_barotr, 
+          "Save barotropic EOS to file",
+          py::arg("path"),
+          py::arg("eos"),
+          py::arg("info")="");
 
 
     m.def("make_eos_barotr_table",
@@ -321,22 +340,134 @@ PYBIND11_MODULE(pyreprimand, m) {
           py::arg("temp"),
           py::arg("efrac"), 
           py::arg("isentropic"),            
-          py::arg("n_poly"));   
+          py::arg("n_poly"),
+          py::arg("units")=etk::units::geom_solar());   
+
+    m.def("make_eos_barotr_spline",
+          [] (const std::vector<real_t>& gm1,
+              const std::vector<real_t>& rho,
+              const std::vector<real_t>& eps,
+              const std::vector<real_t>& press,
+              const std::vector<real_t>& csnd,
+              const std::vector<real_t>& temp,
+              const std::vector<real_t>& efrac, 
+              bool isentr, range rg_rho,
+              real_t n_poly, etk::units uc,
+              std::size_t pts_per_mag) {
+                return etk::make_eos_barotr_spline(gm1, rho, eps,
+                press, csnd, temp, efrac, isentr, rg_rho, n_poly, 
+                uc, pts_per_mag);
+              },
+          py::arg("gm1"),
+          py::arg("rho"),
+          py::arg("eps"),
+          py::arg("press"),
+          py::arg("csnd"),
+          py::arg("temp"),
+          py::arg("efrac"), 
+          py::arg("isentropic"),
+          py::arg("rg_rho"),            
+          py::arg("n_poly"),
+          py::arg("units")=etk::units::geom_solar(),
+          py::arg("pts_per_mag")=200);   
+
+    m.def("make_eos_barotr_spline",
+          [] (etk::eos_barotr eos, 
+              range rg_rho, real_t n_poly, 
+              std::size_t pts_per_mag) {
+                return etk::make_eos_barotr_spline(eos, rg_rho, 
+                n_poly, pts_per_mag);
+              },
+          py::arg("eos"),
+          py::arg("rg_rho"),            
+          py::arg("n_poly"),
+          py::arg("pts_per_mag")=200);   
 
     m.def("make_eos_barotr_pwpoly", 
           &etk::make_eos_barotr_pwpoly,
           py::arg("rho_poly_0"),
           py::arg("rho_segm_bounds"),
           py::arg("segm_gammas"),
-          py::arg("rho_max"));
+          py::arg("rho_max"),
+          py::arg("units")=etk::units::geom_solar());
 
     m.def("make_eos_barotr_poly",
           &etk::make_eos_barotr_poly, 
           py::arg("n_poly"), 
           py::arg("rho_poly"),
-          py::arg("rho_max"));
+          py::arg("rho_max"),
+          py::arg("units")=etk::units::geom_solar());
+
+    py::class_<etk::interpolator>(m, "interpolator")
+        .def("__call__", py::vectorize(&etk::interpolator::operator()))
+        .def_property_readonly("range_x", 
+             &etk::interpolator::range_x,
+             "Valid range")
+        .def_property_readonly("range_y", 
+             &etk::interpolator::range_y,
+             "Value range");
+        
+    m.def("make_interpol_regspl",
+          [] (std::vector<real_t> y, etk::interval<real_t> rg) {
+            return etk::make_interpol_regspl(y,rg);
+          },
+          py::arg("y"),
+          py::arg("rg"));
 
 
+    m.def("make_interpol_regspl",
+          [] (const etk::interpolator f, etk::interval<real_t> rg, 
+              std::size_t ns) {
+            return etk::make_interpol_regspl(f,rg,ns);
+          },
+          py::arg("f"),
+          py::arg("rg"),
+          py::arg("nsamp"));
+
+    m.def("make_interpol_logspl",
+          [] (std::vector<real_t> y, etk::interval<real_t> rg) {
+            return etk::make_interpol_logspl(y,rg);
+          },
+          py::arg("y"),
+          py::arg("rg"));
+
+
+    m.def("make_interpol_logspl",
+          [] (const etk::interpolator f, etk::interval<real_t> rg, 
+              std::size_t ns) {
+            return etk::make_interpol_logspl(f,rg,ns);
+          },
+          py::arg("f"),
+          py::arg("rg"),
+          py::arg("nsamp"));
+
+
+    m.def("make_interpol_llogspl",
+          [] (std::vector<real_t> y, etk::interval<real_t> rg) {
+            return etk::make_interpol_llogspl(y,rg);
+          },
+          py::arg("y"),
+          py::arg("rg"));
+
+
+    m.def("make_interpol_llogspl",
+          [] (const etk::interpolator f, etk::interval<real_t> rg, 
+              std::size_t ns) {
+            return etk::make_interpol_llogspl(f,rg,ns);
+          },
+          py::arg("f"),
+          py::arg("rg"),
+          py::arg("nsamp"));
+
+
+    m.def("make_interpol_pchip_spline",
+          [] (const std::vector<real_t>& x, 
+              const std::vector<real_t>& y) 
+          {
+            return etk::make_interpol_pchip_spline(x,y);
+          },
+          py::arg("x"),
+          py::arg("y"));
 
     py::class_<etk::spherical_star_tidal>(m, "spherical_star_tidal")
         .def_readonly("k2", &etk::spherical_star_tidal::k2)
@@ -540,6 +671,122 @@ PYBIND11_MODULE(pyreprimand, m) {
         .def_readonly("deform", &etk::tov_acc_precise::deform)
         .def_readonly("minsteps", &etk::tov_acc_precise::minsteps)
         .def_readonly("acc_min", &etk::tov_acc_precise::acc_min);
+
+    py::class_<etk::star_seq>(m, "star_seq")
+        .def("grav_mass_from_center_gm1",  
+             py::vectorize(&etk::star_seq::grav_mass_from_center_gm1),
+             "Gravitational mass from central pseudo enthalpy",
+             py::arg("gm1"))
+        .def("bary_mass_from_center_gm1",  
+             py::vectorize(&etk::star_seq::bary_mass_from_center_gm1),
+             "Baryonic mass from central pseudo enthalpy",
+             py::arg("gm1"))
+        .def("circ_radius_from_center_gm1",  
+             py::vectorize(&etk::star_seq::circ_radius_from_center_gm1),
+             "Circumferential radius from central pseudo enthalpy",
+             py::arg("gm1"))
+        .def("moment_inertia_from_center_gm1",  
+             py::vectorize(&etk::star_seq::moment_inertia_from_center_gm1),
+             "Moment of inertia from central pseudo enthalpy",
+             py::arg("gm1"))
+        .def("lambda_tidal_from_center_gm1",  
+             py::vectorize(&etk::star_seq::lambda_tidal_from_center_gm1),
+             "Tidal deformability from central pseudo enthalpy",
+             py::arg("gm1"))
+        .def("contains_gm1",  
+             py::vectorize(&etk::star_seq::contains_gm1),
+             "If sequence contains a given central pseudo enthalpy",
+             py::arg("gm1"))
+        .def_property_readonly("range_center_gm1", 
+             &etk::star_seq::range_center_gm1,
+             "Range of central pseudo enthalpy g - 1")
+        .def_property_readonly("units_to_SI", 
+             &etk::star_seq::units_to_SI,
+             "Unit system");
+
+    py::class_<etk::star_branch, etk::star_seq>(m, "star_branch")
+        .def("grav_mass_from_center_gm1",  
+             py::vectorize(
+               &etk::star_branch::grav_mass_from_center_gm1),
+             "Gravitational mass from central pseudo enthalpy",
+             py::arg("gm1"))
+        .def("bary_mass_from_center_gm1",  
+             py::vectorize(
+               &etk::star_branch::bary_mass_from_center_gm1),
+             "Baryonic mass from central pseudo enthalpy",
+             py::arg("gm1"))
+        .def("circ_radius_from_center_gm1",  
+             py::vectorize(
+               &etk::star_branch::circ_radius_from_center_gm1),
+             "Circumferential radius from central pseudo enthalpy",
+             py::arg("gm1"))
+        .def("moment_inertia_from_center_gm1",  
+             py::vectorize(
+               &etk::star_branch::moment_inertia_from_center_gm1),
+             "Moment of inertia from central pseudo enthalpy",
+             py::arg("gm1"))
+        .def("lambda_tidal_from_center_gm1",  
+             py::vectorize(
+               &etk::star_branch::lambda_tidal_from_center_gm1),
+             "Tidal deformability from central pseudo enthalpy",
+             py::arg("gm1"))
+        .def("center_gm1_from_grav_mass",  
+             py::vectorize(
+               &etk::star_branch::center_gm1_from_grav_mass),
+             "Tidal deformability from grav. mass",
+             py::arg("mg"))
+        .def("bary_mass_from_grav_mass",  
+             py::vectorize(
+               &etk::star_branch::bary_mass_from_grav_mass),
+             "Baryonic mass from grav. mass",
+             py::arg("mg"))
+        .def("circ_radius_from_grav_mass",  
+             py::vectorize(
+               &etk::star_branch::circ_radius_from_grav_mass),
+             "Circumferential radius from grav. mass",
+             py::arg("mg"))
+        .def("moment_inertia_from_grav_mass",  
+             py::vectorize(
+               &etk::star_branch::moment_inertia_from_grav_mass),
+             "Moment of inertia from grav. mass",
+             py::arg("mg"))
+        .def("lambda_tidal_from_grav_mass",  
+             py::vectorize(
+               &etk::star_branch::lambda_tidal_from_grav_mass),
+             "Tidal deformability  from grav. mass",
+             py::arg("mg"))
+        .def_property_readonly("range_grav_mass", 
+             &etk::star_branch::range_grav_mass,
+             "Range of gravitational masses")
+        .def("contains_grav_mass",  
+             py::vectorize(
+               &etk::star_branch::contains_grav_mass),
+             "If sequence contains a given grav. mass.",
+             py::arg("gm1"))
+        .def_property_readonly("range_center_gm1", 
+             &etk::star_branch::range_center_gm1,
+             "Range of central pseudo enthalpy g - 1")
+        .def("contains_gm1",  
+             py::vectorize(&etk::star_branch::contains_gm1),
+             "If sequence contains a given central pseudo enthalpy",
+             py::arg("gm1"))
+        .def_property_readonly("includes_maximum", 
+             &etk::star_branch::includes_maximum,
+             "If sequence includes maximum mass model")
+        .def_property_readonly("grav_mass_maximum", 
+             &etk::star_branch::grav_mass_maximum,
+             "Maximum gravitational mass")
+        .def_property_readonly("bary_mass_maximum", 
+             &etk::star_branch::bary_mass_maximum,
+             "Baryonic mass of model with maximum gravitational mass")
+        .def_property_readonly("center_gm1_maximum", 
+             &etk::star_branch::center_gm1_maximum,
+             "Central pseudo enthalpy of model with maximum "
+             "gravitational mass")
+        .def_property_readonly("units_to_SI", 
+             &etk::star_seq::units_to_SI,
+             "Unit system");
+
             
     m.def("make_tov_star", 
           [](etk::eos_barotr eos, const real_t rho_center, 
@@ -611,5 +858,61 @@ PYBIND11_MODULE(pyreprimand, m) {
           py::arg("rhobr1"),
           py::arg("acc"),
           py::arg("max_steps"));
+
+    m.def("make_tov_seq", 
+          &etk::make_tov_seq, 
+          "Compute sequence of TOV models",
+          py::arg("eos"),
+          py::arg("acc"),
+          py::arg("rg_gm1"),
+          py::arg("num_samp")=500);
+
+    m.def("make_star_seq", 
+          &etk::make_star_seq, 
+          "Create star sequence from arrays with star properties",
+          py::arg("mg"),
+          py::arg("mb"),
+          py::arg("rc"),
+          py::arg("mi"),
+          py::arg("lt"),
+          py::arg("range_gm1"),
+          py::arg("seq_units"));
+
+    m.def("load_star_seq", 
+          &etk::load_star_seq, 
+          "Load sequence from file",
+          py::arg("path"),
+          py::arg("units"));
+
+    m.def("save_star_seq", 
+          &etk::save_star_seq, 
+          "Save sequence to file",
+          py::arg("path"),
+          py::arg("seq"));
+
+    m.def("load_star_branch", 
+          &etk::load_star_branch, 
+          "Load sequence branch from file",
+          py::arg("path"),
+          py::arg("units"));
+
+    m.def("save_star_branch", 
+          &etk::save_star_branch, 
+          "Save sequence branch to file",
+          py::arg("path"),
+          py::arg("seq"));
+
+
+
+    m.def("make_tov_branch_stable", 
+          &etk::make_tov_branch_stable, 
+          "Compute a stable branch TOV sequence",
+          py::arg("eos"),
+          py::arg("acc"),
+          py::arg("mgrav_min")=0.5,
+          py::arg("num_samp")=500,
+          py::arg("gm1_initial")=1.2,
+          py::arg("max_margin")=1e-2);
+
 
 }

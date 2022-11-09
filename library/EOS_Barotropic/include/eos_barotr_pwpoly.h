@@ -12,6 +12,9 @@ The valid range always starts at zero density up to user specified
 maximum. If the polytropic index of some segments is less than one, 
 the valid range is reduced, if necessary, to avoid superluminal 
 soundspeed.
+The parameters are w.r.t EOS units. The EOS units given in the 
+last parameter are stored for bookkeeping.
+
 
 @param rmdp0 Polytropic density scale \f$\rho_{p,0} > 0\f$ 
              of first segment
@@ -19,12 +22,15 @@ soundspeed.
 @param segm_gamma Polytropic exponents \f$ \Gamma_i > 1 \f$ for all
                   segments
 @param rho_max_   Maximum allowed mass density 
+@param units   Unit system (w.r.t. SI) of the EOS
+
 @return eos_barotr generic interface employing piecewise polytropic EOS
 **/
 eos_barotr make_eos_barotr_pwpoly(real_t rmdp0,
   const std::vector<real_t>& segm_bound,
   const std::vector<real_t>& segm_gamma,
-  real_t rho_max_   
+  real_t rho_max_,
+  units units_=units::geom_solar()   
 );
 
 

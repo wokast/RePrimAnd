@@ -7,69 +7,55 @@
 #include<string>
 
 #include "test_utils.h"
-#include <boost/format.hpp>
-#include <boost/json.hpp>
 #include "test_config.h"
 
 #include "unitconv.h"
+#include "hdf5store.h"
 #include "eos_barotropic.h"
 #include "eos_barotr_poly.h"
 #include "eos_barotr_file.h"
 #include "spherical_stars.h"
 
 
-using boost::format;
 
 using namespace std;
 using namespace EOS_Toolkit;
 
 
-auto load_json(std::string path) -> boost::json::value
-{
-  std::ifstream f(path);
-  std::string s;
-  if (f) {
-    std::ostringstream ss;
-    ss << f.rdbuf();
-    s = ss.str();
-  }
-  return boost::json::parse(s);
-}
-
-auto check_tov_close(const boost::json::object& ref, 
+auto check_tov_close(datasource s, 
                      const spherical_star& tov, 
                      real_t tol_tov, real_t tol_def) -> bool
 {
   failcount hope("TOV solutions agree within tolerance");
   
-  hope.isclose(tov.grav_mass(), ref.at("grav_mass").get_double(), 
+  hope.isclose(tov.grav_mass(), real_t(s["grav_mass"]), 
                tol_tov, 0, "grav. mass");
 
-  hope.isclose(tov.bary_mass(), ref.at("bary_mass").get_double(), 
+  hope.isclose(tov.bary_mass(), real_t(s["bary_mass"]), 
                tol_tov, 0, "bary. mass");
-  hope.isclose(tov.circ_radius(), ref.at("circ_radius").get_double(), 
+  hope.isclose(tov.circ_radius(), real_t(s["circ_radius"]), 
                tol_tov, 0, "circ. radius");
-  hope.isclose(tov.proper_volume(), ref.at("proper_volume").get_double(), 
+  hope.isclose(tov.proper_volume(), real_t(s["proper_volume"]), 
                3. * tol_tov, 0, "proper volume");
   hope.isclose(tov.moment_inertia(), 
-               ref.at("moment_inertia").get_double(), 
+               real_t(s["moment_inertia"]), 
                tol_tov, 0, "moment of inertia");
                
   hope.isclose(tov.deformability().lambda,  
-               ref.at("tidal_lambda").get_double(), 
+               real_t(s["tidal_lambda"]), 
                tol_def, 0, "tidal deformability");
   hope.isclose(tov.deformability().k2,  
-               ref.at("tidal_k2").get_double(), 
+               real_t(s["tidal_k2"]), 
                tol_def, 0, "love number");
                
-  hope.isclose(tov.bulk().circ_radius, ref.at("bulk_radius").get_double(), 
+  hope.isclose(tov.bulk().circ_radius, real_t(s["bulk_radius"]), 
                tol_tov, 0, "bulk radius");
 
-  hope.isclose(tov.bulk().bary_mass, ref.at("bulk_bary_mass").get_double(), 
+  hope.isclose(tov.bulk().bary_mass, real_t(s["bulk_bary_mass"]), 
                4. * tol_tov, 0, "bulk baryonic mass");
                
   hope.isclose(tov.bulk().proper_volume, 
-               ref.at("bulk_proper_volume").get_double(), 
+               real_t(s["bulk_proper_volume"]), 
                3. * tol_tov, 0, "bulk proper volume");
 
   return hope;
@@ -77,15 +63,15 @@ auto check_tov_close(const boost::json::object& ref,
 
 
 
-bool check_ref_tov(std::string eospath, std::string jsonpath)
+bool check_ref_tov(std::string eospath, std::string refpath)
 {
 
-  auto ref{ load_json(jsonpath).get_object() };
+  auto ref{ make_hdf5_file_source(refpath) };
 
   auto uc{ units::geom_solar() };
   
   eos_barotr eos{ load_eos_barotr(eospath, uc) };
-  const real_t rho_cen{ ref["rho_cen"].get_double() };
+  const real_t rho_cen{ real_t(ref["rho_cen"]) };
 
 
   const tov_acc_simple accs{1e-8, 1e-6, 500}; 
@@ -106,6 +92,7 @@ BOOST_AUTO_TEST_CASE( test_tovsol_tabeos )
 
   std::string eoslist[] = {
     "H4_Read_PP", 
+    "H4_Read_PP.spline", 
     "WFF1_Read_PP", 
     "APR4_Read_PP", 
     "MPA1_Read_PP",
@@ -116,7 +103,7 @@ BOOST_AUTO_TEST_CASE( test_tovsol_tabeos )
     std::string eos_path{ std::string(PATH_TOV_EOS) + "/" 
                            + s + ".eos.h5" };
     std::string tov_path14{ std::string(PATH_TOV_REF) + "/ref_tov_m14_" 
-                           + s + ".json" };
+                           + s + ".h5" };
     if (!hope(check_ref_tov(eos_path, tov_path14), 
        "Good accuracy solution within tolerance to reference")) 
     {

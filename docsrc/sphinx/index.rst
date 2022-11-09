@@ -10,12 +10,13 @@ Overview
 
 `RePrimAnd` is a support library for numerical simulations of general 
 relativistic magnetohydrodynamics. 
-If provides methods for recovering primitive variables like pressure
+It provides methods for recovering primitive variables like pressure
 and velocity from the variables evolved in quasi-conservative 
 formulations. Further, it provides a general framework for handling
-matter equations of state. 
+matter equations of state, a TOV solver, and tools for precomputed
+NS sequences.
 
-A description of the algorithm and tests of the library is given in 
+A description of the recovery algorithm and tests of the library is given in 
 the accompanying article :footcite:p:`Kastaun2021`.
 
 The latest public versions can be found on the 
@@ -60,6 +61,7 @@ Contents
    eos_thermal
    eos_barotr
    tov_solver
+   ns_seqs
    little_helpers
    python_interf
 

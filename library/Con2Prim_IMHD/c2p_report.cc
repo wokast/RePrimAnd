@@ -31,6 +31,13 @@ void c2p_mhd_report::set_invalid_detg(real_t detg_)
   detg        = detg_;
 }
 
+void c2p_mhd_report::set_neg_bsqr(real_t bsqr_)
+{
+  status      = NEG_BSQR;
+  adjust_cons = true;
+  bsqr        = bsqr_;
+}
+
 void c2p_mhd_report::set_nans_in_cons(real_t dens_, real_t qtot_, 
   real_t rsqr_, real_t rbsqr_, real_t bsqr_, real_t ye_)
 {
@@ -131,6 +138,9 @@ string c2p_mhd_report::debug_message() const
       break;
     case INVALID_DETG:
       os << "Invalid metric determinant (" << detg << ")";
+      break;
+    case NEG_BSQR:
+      os << "3-metric not positive, negative B^2 (" << bsqr << ")";
       break;
     case NANS_IN_CONS:
       os << "NAN in conserved variables"

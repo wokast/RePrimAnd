@@ -24,6 +24,10 @@ range will start at zero up to the largest provided sample point.
 Between zero and the lowest sample point, a polytropic EOS will be 
 used. 
 
+The parameters are w.r.t EOS units. The EOS units given in the 
+last parameter are stored for bookkeeping.
+
+
 @param gm1 Samples for pseudo enthalpy \f$ g-1 \f$. Must be strictly 
            increasing.
 @param rho Samples for mass density \f$ \rho \f$. Must be strictly 
@@ -40,6 +44,7 @@ used.
 @param isentropic_ Whether the EOS is isentropic, e.g. for degenerate 
                     matter.
 @param n_poly_ Polytropic index used to extent EOS to zero density.
+@param units   Unit system (w.r.t. SI) of the EOS
 
 @return Generic interface employing tabulated barotropic EOS
 **/
@@ -52,7 +57,8 @@ eos_barotr make_eos_barotr_table(
   const std::vector<real_t>& temp,
   const std::vector<real_t>& efrac, 
   bool isentropic_,            
-  real_t n_poly_              
+  real_t n_poly_,
+  units units_=units::geom_solar()              
 );
 
 

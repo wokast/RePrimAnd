@@ -17,6 +17,8 @@ namespace {
 
 class eos_thermal_invalid : public eos_thermal_impl {
   public:
+  
+  eos_thermal_invalid() : eos_thermal_impl{units{}} {}
     
   static std::runtime_error nope() 
   {
@@ -317,6 +319,21 @@ auto eos_thermal::dpress_deps_at_rho_temp_ye(real_t rho, real_t temp,
   return s ? s.dpress_deps() : numeric_limits<real_t>::quiet_NaN();  
 }
 
+void eos_thermal::save(datasink s) const
+{
+  impl().save(s);
+}
+
+auto eos_thermal::units_to_SI() const -> const units&
+{
+  return impl().units_to_SI();
+}
+
+
+void eos_thermal_impl::save(datasink s) const
+{
+  throw  std::runtime_error("Saving not implemented for EOS type");
+}
 
 eos_thermal_impl::~eos_thermal_impl() = default;
 

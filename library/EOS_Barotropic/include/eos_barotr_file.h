@@ -3,7 +3,7 @@
 
 #include "eos_barotropic.h"
 #include "unitconv.h"
-#include "hdf5imple.h"
+#include "datastore.h"
 #include <string>
 
 
@@ -21,11 +21,29 @@ to be geometric, i.e. \f$ G=c=1 \f$. Default is to fix the mass unit to
 eos_barotr load_eos_barotr(std::string fname, 
                            const units& u=units::geom_solar());
 
+/**\brief Save barotropic EOS to hdf5 file. 
+
+@param fname Filename of EOS file
+@param eos EOS object to save
+@param info Free-form description text (optional)
+**/ 
+void save_eos_barotr(std::string fname,  eos_barotr eos, 
+                     std::string info="");
+
+
+
+
 namespace detail {
 eos_barotr load_eos_barotr(
-  const h5grp& g,                     ///< Group to load from
+  const datasource g,                 ///< Source to load from
   const units& u=units::geom_solar()  ///< Unit system to be used by EOS
 );
+
+void save_eos_barotr(
+  datasink g, 
+  eos_barotr eos
+);
+
 }
 
 }

@@ -24,7 +24,10 @@ sphinx_sources = files('index.rst', 'notation.rst', \
   'c2p_imhd_ref.rst', 'little_helpers.rst', 'installing.rst', \
   'tov_solver_feat.rst', 'tov_solver_interf.rst', \
   'tov_solver_ref.rst', 'tov_solver.rst', \
-  'python_interf.rst', 'refs.bib')
+  'ns_seqs_feat.rst', 'ns_seqs_interf.rst', \
+  'ns_seqs_files.rst', 'ns_seqs_ref.rst', 'ns_seqs.rst', \
+  'python_interf.rst', 'refs.bib', \
+  'minimal_tov.cc', 'minimal_seq.cc')
 
 gen_sphinx = custom_target('sphinxdoc', \
   command : [sphinx, '-b', 'html', \

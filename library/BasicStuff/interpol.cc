@@ -1,8 +1,90 @@
-#include "interpol_impl.h"
+#include "interpol.h"
 #include <cmath>
 #include <limits>
 #include <algorithm>
 #include <stdexcept>
+
+namespace EOS_Toolkit {
+//~ namespace detail {
+  
+interpolator::interpolator(std::shared_ptr<interpolator_impl> pimpl_)
+: pimpl{pimpl_}
+{}
+
+auto interpolator::valid() const 
+-> const interpolator_impl&
+{
+  if (!pimpl) {
+    throw std::logic_error("interpolator: uninitialized use.");
+  }
+  return *pimpl;
+}
+
+auto interpolator::range_x() const -> const range_t& 
+{
+  return valid().range_x();
+}
+
+auto interpolator::range_y() const ->const range_t&
+{
+  return valid().range_y();
+}
+
+
+auto interpolator::transformed(func_t f) const ->interpolator
+{
+  return interpolator{make_transform(f)};
+}
+
+auto interpolator::make_transform(func_t f) const
+->std::shared_ptr<interpolator_impl>
+{
+  return valid().make_transform(f);
+}
+
+auto interpolator::rescale_x(real_t scale) const
+-> interpolator
+{
+  return interpolator{make_rescale_x(scale)};
+}
+
+auto interpolator::make_rescale_x(real_t scale) const
+->std::shared_ptr<interpolator_impl>
+{
+  return valid().make_rescale_x(scale);  
+}
+
+  
+//~ }
+
+
+auto operator*(real_t a, interpolator i)
+->interpolator
+{
+  return i.transformed([a](real_t y) {return a*y;});
+}
+
+auto operator*(interpolator i, real_t a)
+->interpolator
+{
+  return a*i;
+}
+
+auto operator/(interpolator i, real_t a)
+->interpolator
+{
+  return i * (1.0/a);
+}
+
+auto operator/(real_t a, interpolator i)
+->interpolator
+{
+  return i.transformed([a](real_t y) {return a/y;});
+}
+
+}
+
+
 
 using namespace EOS_Toolkit;
 using namespace EOS_Toolkit::detail;
@@ -41,6 +123,7 @@ bool is_strictly_increasing(const std::vector<T>& v)
 }
 
 }
+
 
 /**
 Sample from arbitrary function over a given range with given
@@ -112,106 +195,6 @@ real_t lookup_table_magx::operator()(real_t x) const
   x = range_x().limit_to(x);
   return tbl(log(x + x_offs));
 }
-
-
-
-cspline_mono::cspline_mono(const std::vector<real_t>& x_, 
-                           const std::vector<real_t>& y_)
-{
-  std::vector<double> x;
-  std::vector<double> y;
-  std::copy(x_.begin(), x_.end(), std::back_inserter(x));
-  std::copy(y_.begin(), y_.end(), std::back_inserter(y));
-    
-  pimpl = std::make_shared<cspline_mono_impl>(
-                         std::move(x), std::move(y));  
-  
-}
-
-auto cspline_mono::valid() const 
--> const cspline_mono_impl&
-{
-  if (!pimpl) {
-    throw std::logic_error("cspline_mono: uninitialized use.");
-  }
-  return *pimpl;
-}
-
-auto cspline_mono::range_x() const -> const range_t& 
-{
-  return valid().range_x();
-}
-
-auto cspline_mono::range_y() const -> const range_t& 
-{
-  return valid().range_y();
-}
-
-real_t cspline_mono::operator()(real_t x) const
-{
-  return valid()(x);
-}
-
-
-wrap_interp_accel::wrap_interp_accel()
-: p{gsl_interp_accel_alloc()}
-{
-  if (p==nullptr) {
-    throw std::runtime_error("cspline_mono: could not allocate memory");
-  }
-}
-
-wrap_interp_accel::~wrap_interp_accel()
-{
-  gsl_interp_accel_free(p);
-}
-
-detail::wrap_interp_cspline::wrap_interp_cspline( 
-  const std::vector<double>& x, const std::vector<double>& y)
-{
-  const int min_points = 5;
-  if (x.size() < min_points) {
-    throw std::invalid_argument("cspline_mono: not enough "
-                                "interpolation points");
-  }
-  if (x.size() != y.size()) {
-    throw std::invalid_argument("cspline_mono: array size mismatch");
-  }
-  if (!is_strictly_increasing(x)) {
-    throw std::runtime_error("cspline_mono: x-values must be strictly "
-                             "increasing");
-  }
-
-  p = gsl_interp_alloc(gsl_interp_steffen, x.size());
-  if (p == nullptr) {
-    throw std::runtime_error("cspline_mono: could not allocate memory");
-  }
-  gsl_interp_init(p, &(x[0]), &(y[0]), x.size());
-}
-
-wrap_interp_cspline::~wrap_interp_cspline()
-{
-  gsl_interp_free(p);
-}
-
-detail::cspline_mono_impl::cspline_mono_impl(
-                std::vector<double> x_, std::vector<double> y_)
-: x{std::move(x_)}, y{std::move(y_)}, interp{x,y}
-{  
-  auto ext = std::minmax_element(y.begin(), y.end());
-  rgy = {*ext.first, *ext.second};
-  rgx = {x.front(), x.back()};
-}
-
-real_t cspline_mono_impl::operator()(real_t t) const
-{
-  t = range_x().limit_to(t);
-  return gsl_interp_eval(interp.p, &(x[0]), &(y[0]), t, acc.p);
-}
-
-
-
-
 
 
 

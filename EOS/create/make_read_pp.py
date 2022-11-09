@@ -1,6 +1,6 @@
 #!/bin/env python
 import numpy as np
-import reprimand_eos_format as eosfmt
+import pyreprimand as pyr
 
 C_SI = 299792458.0
 CGS_DENS = 1e3
@@ -64,9 +64,22 @@ def make_read_eos(name, p1_cgs, ga, rho_max_si=1e20):
    
     path     = f"{name}.eos.h5"
     
-    eosfmt.save_barotr_pwpoly(path, name, sly_ds_si[0], rho_max_si,
-                              rho_b_si, ga) 
+    uc = pyr.units.geom_solar
+    rho_poly = sly_ds_si[0] / uc.density
+    rho_b    = rho_b_si / uc.density 
+    rho_max = rho_max_si / uc.density
     
+    eos = pyr.make_eos_barotr_pwpoly(rho_poly, rho_b, ga, rho_max, uc)
+    pyr.save_eos_barotr(path, eos, "A piecewise polytropic EOS from [Read et al]")
+    
+    rgrho2 = pyr.range(rho_b[1] / 2, eos.range_rho.max / 1.0000001)
+    polyn2 =  1./ (ga[0] - 1.)
+    ppm2   = 200
+    eos2   = pyr.make_eos_barotr_spline(eos, rgrho2, polyn2, ppm2) 
+    path2  = f"{name}.spline.eos.h5"
+    pyr.save_eos_barotr(path2, eos2, "A spline representation of a piecewise polytropic EOS from [Read et al]")
+    
+#    
 
 def make_read_cat():
     params = {

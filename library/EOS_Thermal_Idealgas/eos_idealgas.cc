@@ -8,8 +8,10 @@ using namespace EOS_Toolkit;
 using namespace EOS_Toolkit::implementations;
 using namespace std;
 
-eos_idealgas::eos_idealgas(real_t n_, real_t max_eps_, real_t max_rho_) 
-: gamma{1.0 + 1.0/n_}, gm1{1.0/n_}, rgrho{0., max_rho_}, 
+eos_idealgas::eos_idealgas(real_t n_, real_t max_eps_, real_t max_rho_,
+                           units units_) 
+: eos_thermal_impl{units_},
+  n_index{n_}, gamma{1.0 + 1.0/n_}, gm1{1.0/n_}, rgrho{0., max_rho_}, 
   rgye{0., 1.}, min_h{1.}
 {
   if (n_ < 0) {
@@ -79,8 +81,9 @@ auto eos_idealgas::range_temp(real_t rho, real_t ye) const -> range
 }
 
 eos_thermal EOS_Toolkit::make_eos_idealgas(real_t n,  
-    real_t max_eps, real_t max_rho)
+    real_t max_eps, real_t max_rho, units eos_units)
 {
-  return eos_thermal{make_shared<eos_idealgas>(n, max_eps, max_rho)};
+  return eos_thermal{make_shared<eos_idealgas>(n, max_eps, max_rho,
+                                               eos_units)};
 }
 

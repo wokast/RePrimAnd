@@ -160,7 +160,9 @@ auto tov_ode::initial_data() const -> state_t
 void tov_ode::operator()(const state_t &s , state_t &dsdx, 
                          const real_t x) const
 {
-  auto e{ eos.at_gm1(gm1_from_x(x)) };
+  //limit to range because to prevent roundoff errors causing trouble
+  //when central density is at maximum of validity range
+  auto e{ eos.at_gm1(eos.range_gm1().limit_to(gm1_from_x(x))) };
   assert(e);
   
   const real_t press{ e.press() };

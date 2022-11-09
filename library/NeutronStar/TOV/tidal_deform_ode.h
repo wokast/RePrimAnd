@@ -14,9 +14,9 @@ class tidal_ode {
   const real_t gm1_center;
   const real_t rho_stop;
   
-  cspline_mono dnu_rho;
-  cspline_mono lambda_rho;
-  cspline_mono rsqr_rho;
+  interpolator dnu_rho;
+  interpolator lambda_rho;
+  interpolator rsqr_rho;
   
   auto gm1_from_dnu(real_t dnu) const -> real_t;
 
@@ -55,9 +55,9 @@ class tidal_ode2 {
   const real_t dnu0;
   real_t yhat0;
   
-  cspline_mono deltay_rho;
-  cspline_mono rsqr_dnu;
-  cspline_mono lambda_dnu;
+  interpolator deltay_rho;
+  interpolator rsqr_dnu;
+  interpolator lambda_dnu;
   
   auto gm1_from_dnu(real_t dnu) const -> real_t;
 

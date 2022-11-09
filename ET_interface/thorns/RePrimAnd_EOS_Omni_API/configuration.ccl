@@ -1,0 +1,9 @@
+
+REQUIRES RePrimAnd_Global_EOS
+
+PROVIDES EOS_Omni
+{
+  SCRIPT
+  LANG
+}
+

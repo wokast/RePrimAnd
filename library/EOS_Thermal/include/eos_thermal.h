@@ -5,6 +5,9 @@
 #ifndef EOSTHERMAL_H
 #define EOSTHERMAL_H
 
+#include "unitconv.h"
+#include "datastore.h"
+
 #include "eos_thermal_internals.h"
 
 #include <string>
@@ -424,7 +427,20 @@ class eos_thermal : detail::eos_thermal_base {
   auto dpress_deps_at_rho_temp_ye(real_t rho, real_t temp, 
                                   real_t ye) const -> real_t;
 
- 
+  /**\brief Save EOS to a datastore
+  
+  Allows saving the EOS to a datastore. This is intended mainly
+  for internal use by the EOS file functionality.
+  **/
+  void save(datasink s) const;
+
+  /**\brief Return the EOS units
+  
+  This returns the conversion factors to express the units used by 
+  the EOS into SI units. The units are specified by the user when
+  creating the EOS and stored for bookkeeping.
+  **/
+  auto units_to_SI() const -> const units&;
 };
 
 

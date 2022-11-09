@@ -39,7 +39,8 @@ class eos_barotr_poly : public eos_barotr_impl {
   eos_barotr_poly(
     real_t n_,                          ///<Adiabatic index \f$ n \f$
     real_t rmd_p_,                      ///<Density scale \f$ \rho_p \f$
-    real_t rho_max_                     ///<Max valid density 
+    real_t rho_max_,                    ///<Max valid density 
+    units units_                        ///<Unit system (geometric)
   );
 
   ///Alternative constructor
@@ -47,7 +48,8 @@ class eos_barotr_poly : public eos_barotr_impl {
     real_t rmd_m, ///<Rest mass density \f$ \rho \f$ at matching point
     real_t sed_m, ///<Specific internal energy \f$ \epsilon \f$ at matching point
     real_t p_m,   ///<Pressure \f$ P \f$ at matching point
-    real_t rho_max_ ///<Max valid density 
+    real_t rho_max_, ///<Max valid density 
+    units units_  ///<Unit system (geometric)    
   );
 
 
@@ -123,6 +125,10 @@ class eos_barotr_poly : public eos_barotr_impl {
     real_t gm1      ///< \f$ g-1 \f$
   ) const final;
 
+  void save(datasink s) const final;
+
+  const static bool file_handler_registered;
+  static const std::string datastore_id;
 };
 
 }// namespace implementations

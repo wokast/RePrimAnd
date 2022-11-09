@@ -27,6 +27,7 @@ struct c2p_mhd_report  {
     SUCCESS,       /*!<Recovery succeeded (possibly after 
                        allowed corrections) */
     INVALID_DETG,  ///<3-metric determinant not positive or NAN/INF
+    NEG_BSQR,      ///<Negative B square, metric not positive definite 
     NANS_IN_CONS,  ///<One or more evolved variables is NAN/INF
     RANGE_RHO,     ///<Mass density outside EOS range
     RANGE_EPS,     ///<Fluid internal energy outside EOS range
@@ -42,7 +43,7 @@ struct c2p_mhd_report  {
     PREP_ROOT_FAIL_BRACKET,/*!<Bracketing of auxiliary root 
                                failed (this should never happen) */ 
     ERR_CODE_NOT_SET
-    };
+  };
   
   ///Default constructor, resulting object invalid.
   c2p_mhd_report() = default;
@@ -85,6 +86,9 @@ struct c2p_mhd_report  {
   
   /// Set error invalid metric determinant. 
   void set_invalid_detg(real_t detg_);
+  
+  /// Set error negative B square. 
+  void set_neg_bsqr(real_t bsqr_);
   
   /// Set error NANs in conserved variables. 
   void set_nans_in_cons(real_t dens_, real_t qtot_, real_t rsqr_,

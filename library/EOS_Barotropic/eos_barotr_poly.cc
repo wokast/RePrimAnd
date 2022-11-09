@@ -37,7 +37,8 @@ void eos_barotr_poly::init(real_t n_, real_t rmd_p_, real_t rho_max_)
 
 
 eos_barotr_poly::eos_barotr_poly(real_t n_, real_t rmd_p_, 
-                             real_t rho_max_) 
+                             real_t rho_max_, units units_) 
+: eos_barotr_impl{units_}
 {
   init(n_, rmd_p_, rho_max_);
 }
@@ -51,7 +52,8 @@ at a given density \f$ \rho \f$, using the formulas
 \f}
 */
 eos_barotr_poly::eos_barotr_poly(real_t rmd_m, real_t sed_m, real_t p_m, 
-                             real_t rho_max_) 
+                             real_t rho_max_, units units_)
+: eos_barotr_impl{units_}                              
 {
   real_t n_     = sed_m * rmd_m / p_m;
   real_t rmd_p_ = rmd_m * pow(rmd_m / p_m, n_);
@@ -119,8 +121,8 @@ real_t eos_barotr_poly::ye(real_t gm1) const
 
   
 eos_barotr EOS_Toolkit::make_eos_barotr_poly(real_t n, real_t rmd_p, 
-                                             real_t rho_max)
+                                  real_t rho_max, units units_)
 {
   return eos_barotr{std::make_shared<eos_barotr_poly>(n, 
-                                           rmd_p, rho_max)};
+                                           rmd_p, rho_max, units_)};
 }

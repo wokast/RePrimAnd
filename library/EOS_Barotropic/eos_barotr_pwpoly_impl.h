@@ -61,7 +61,8 @@ class eos_barotr_pwpoly : public eos_barotr_impl {
     real_t rmdp0,                           ///<First segment polytropic density scale
     const std::vector<real_t>& segm_bound,  ///<Densities of segment boundaries
     const std::vector<real_t>& segm_gamma,  ///<Segment gammas
-    real_t rho_max_                         ///<EOS max valid density
+    real_t rho_max_,                        ///<EOS max valid density
+    units units_                            ///<Unit system (geometric)
   );
 
   
@@ -137,6 +138,10 @@ class eos_barotr_pwpoly : public eos_barotr_impl {
     real_t gm1      ///< \f$ g-1 \f$
   ) const final;
 
+  void save(datasink s) const final;
+
+  const static bool file_handler_registered;
+  static const std::string datastore_id;
 };
 
 }//namespace implementations

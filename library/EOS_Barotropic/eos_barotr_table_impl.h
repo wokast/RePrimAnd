@@ -37,7 +37,7 @@ class eos_barotr_table : public eos_barotr_impl {
   real_t temp0{0.};
   
   eos_barotr_gpoly poly;
-   
+
   public:
 
   using func_t  = std::function<real_t(real_t)>;
@@ -57,7 +57,7 @@ class eos_barotr_table : public eos_barotr_impl {
     func_t temp_,  ///< \f$ T \f$ from \f$ g - 1 \f$ (or nullptr) 
     func_t efrac_, ///< \f$ Y_e \f$ from \f$ g - 1 \f$ (or nullptr)
     bool isentropic_,  ///< Whether EOS is isentropic
-    const eos_barotr_gpoly& poly_  ///< Polytropic EOS for low densities
+    const eos_barotr_gpoly& poly_ ///< Polytropic EOS for low densities
   );
 
   
@@ -135,6 +135,8 @@ class eos_barotr_table : public eos_barotr_impl {
     real_t gm1      ///< \f$ g-1 \f$
   ) const final;
 
+  const static bool file_handler_registered;
+  static const std::string datastore_id;
 };
 
 }//namespace implementations 

@@ -1,0 +1,8 @@
+# Interface definition for thorn RePrimAnd_Global_EOS
+# $Header:$
+
+implements: RePrimAnd_Global_EOS
+
+INCLUDES HEADER: reprimand_global_eos.h in reprimand_global_eos.h
+USES INCLUDE: reprimand_global_eos.h
+

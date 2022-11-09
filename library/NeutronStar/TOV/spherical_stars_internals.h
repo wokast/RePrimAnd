@@ -11,10 +11,10 @@ namespace details {
   
   
 class tov_profile : public spherical_star_profile {
-  const cspline_mono lambda_rsqr;
-  const cspline_mono delta_nu_rsqr;
-  const cspline_mono ybnd_rsqr;
-  const cspline_mono yvol_rsqr;
+  const interpolator lambda_rsqr;
+  const interpolator delta_nu_rsqr;
+  const interpolator ybnd_rsqr;
+  const interpolator yvol_rsqr;
   const real_t gm1_c;
   const real_t nu_c;
   const real_t mgrav;

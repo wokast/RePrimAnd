@@ -1,0 +1,8 @@
+
+PROVIDES RePrimAnd_Global_EOS
+{
+  SCRIPT
+  LANG
+}
+
+REQUIRES RePrimAnd RePrimAnd_Global_EOS

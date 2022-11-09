@@ -5,6 +5,8 @@
 #include <memory>
 #include "eos_barotropic_internals.h"
 #include "intervals.h"
+#include "unitconv.h"
+#include "datastore.h"
 
 namespace EOS_Toolkit {
 
@@ -400,6 +402,20 @@ class eos_barotr : detail::eos_barotr_base {
   **/
   auto ye_at_gm1(real_t gm1) const -> real_t;
 
+  /**\brief Return the EOS units
+  
+  This returns the conversion factors to express the units used by 
+  the EOS into SI units. The units are specified by the user when
+  creating the EOS and stored for bookkeeping.
+  **/
+  auto units_to_SI() const -> const units&;
+
+  /**\brief Save EOS to a datastore
+  
+  This allows saving the EOS to a datastore. This is also used 
+  internally by the EOS file functionality.
+  **/
+  void save(datasink s) const;
 };
 
 

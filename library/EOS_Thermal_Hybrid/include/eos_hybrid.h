@@ -6,6 +6,10 @@
 namespace EOS_Toolkit {
 
 /**\brief Create Hybrid EOS
+
+The parameters are w.r.t EOS units. The EOS units are taken from
+the cold EOS and stored for bookkeeping.
+
 @return eos_thermal object representing the hybrid EOS
 
 @param eos_c    The cold (barotropic) EOS

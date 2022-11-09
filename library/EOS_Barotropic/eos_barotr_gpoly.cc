@@ -10,8 +10,10 @@ using namespace EOS_Toolkit::implementations;
 
 
 eos_barotr_gpoly::eos_barotr_gpoly(real_t n_, real_t rmd_p_, 
-                                   real_t sed0_, real_t rho_max_) 
-: rgrho(0, rho_max_), n(n_), rmd_p(rmd_p_), np1(n + 1), 
+                                   real_t sed0_, real_t rho_max_,
+                                   units units_) 
+: eos_barotr_impl{units_},
+  rgrho(0, rho_max_), n(n_), rmd_p(rmd_p_), np1(n + 1), 
   gamma(1.0 + 1.0 / n), invn(1.0 / n), sed0(sed0_), h0(1.0 + sed0_)
 {
   rggm1 = {0, gm1_from_rho(rho_max_)};
@@ -94,15 +96,18 @@ real_t eos_barotr_gpoly::eps0_from_p_rho_eps_n(real_t p,
 
 eos_barotr_gpoly 
 eos_barotr_gpoly::from_boundary(real_t rho0, real_t eps0,
-                                real_t p0, real_t n, real_t rho_max)
+                                real_t p0, real_t n, real_t rho_max,
+                                units units_)
 {
   return {n, rmd_p_from_p_rho_n(p0, rho0, n), 
-          eps0_from_p_rho_eps_n(p0, rho0, eps0, n), rho_max};
+          eps0_from_p_rho_eps_n(p0, rho0, eps0, n), rho_max,
+          units_};
 }
 
 eos_barotr EOS_Toolkit::make_eos_barotr_gpoly(real_t n, real_t rmd_p, 
-                                   real_t sed0, real_t rho_max)
+                                   real_t sed0, real_t rho_max,
+                                   units units_)
 {
   return eos_barotr{std::make_shared<eos_barotr_gpoly>(n, rmd_p,
-                                                  sed0, rho_max)};
+                                            sed0, rho_max, units_)};
 }

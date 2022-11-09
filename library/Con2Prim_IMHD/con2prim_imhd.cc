@@ -336,6 +336,13 @@ void con2prim_mhd::operator()(prim_vars_mhd& pv, cons_vars_mhd& cv,
     return;
   }     
 
+  if (bsqr < 0) 
+  {
+    errs.set_neg_bsqr(bsqr);
+    set_to_nan(pv, cv);
+    return;
+  }
+
   if (bsqr > bsqr_lim) 
   {
     errs.set_b_limit(bsqr);

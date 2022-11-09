@@ -24,18 +24,36 @@ exe_tst_eos = executable('test_eos', sources : src_tst_eos,
 
 test('EOS', exe_tst_eos)
 
+src_tst_interp = ['test_interpol.cc', 'test_utils.cc']
+
+exe_tst_interp = executable('test_interp', sources : src_tst_interp, 
+                      dependencies : [dep_reprim, dep_utf], 
+                      cpp_args : '-DBOOST_TEST_DYN_LINK')
+
+test('INTERP', exe_tst_interp)
+
 src_tst_tovsol = ['test_tovsol.cc', 'test_utils.cc']
 
 exe_tst_tovsol = executable('test_tovsol', sources : src_tst_tovsol, 
-                      dependencies : [dep_reprim, dep_utf, dep_json])
+                      dependencies : [dep_reprim, dep_utf, dep_json], 
+                      cpp_args : '-DBOOST_TEST_DYN_LINK')
 
 test('TOVSOL', exe_tst_tovsol)
+
+src_tst_nsseqs = ['test_nsseqs.cc', 'test_utils.cc']
+
+exe_tst_nsseqs = executable('test_nsseqs', sources : src_tst_nsseqs, 
+                      dependencies : [dep_reprim, dep_utf], 
+                      cpp_args : '-DBOOST_TEST_DYN_LINK')
+
+test('NSSEQS', exe_tst_nsseqs)
 
 
 src_gen_tov = ['gen_tov_ref_data.cc']
 
 exe_gen_tov = executable('gen_tov_ref_data', sources : src_gen_tov, 
                       dependencies : [dep_reprim, dep_json])
+
 
 if get_option('build_python_api')
   if py3_inst.found()

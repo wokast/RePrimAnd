@@ -26,13 +26,13 @@ class mapped_spacing {
   
   class rangeit {
     size_t i;
-    const T y0,dy;
+    const T y0,dy,x1;
     
     public:
-    constexpr rangeit(size_t i_, T y0_=0., T dy_=0.)
-    : i{i_}, y0{y0_}, dy{dy_} {}
+    constexpr rangeit(size_t i_, T y0_=0., T dy_=0., T x1_=0.)
+    : i{i_}, y0{y0_}, dy{dy_}, x1{x1_} {}
 
-    T operator*() const { return M::x(y0 + i*dy); }
+    T operator*() const { return std::min(x1, M::x(y0 + i*dy)); }
 
     rangeit& operator++() {
         ++i;
@@ -43,7 +43,7 @@ class mapped_spacing {
   };
   
   constexpr mapped_spacing(T x0, T x1, size_t size)
-  : itbegin{0, M::y(x0), (M::y(x1)-M::y(x0)) / size}, 
+  : itbegin{0, M::y(x0), (M::y(x1)-M::y(x0)) / size, x1}, 
     itend{size+1} {}
 
   rangeit begin() const { return itbegin; }

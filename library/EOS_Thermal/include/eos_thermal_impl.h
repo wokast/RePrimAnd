@@ -6,6 +6,7 @@ all EOS implementations are derived.
 #ifndef EOSTHERMAL_IMPL_H
 #define EOSTHERMAL_IMPL_H
 
+#include "datastore.h"
 #include "eos_thermal.h"
 
 
@@ -14,6 +15,8 @@ namespace implementations {
 
 /// Virtual abstract base class defining Thermal EOS implementation API.
 class eos_thermal_impl {
+  units eos_units;
+
   public:
   using range  = eos_thermal::range;
 
@@ -162,12 +165,13 @@ class eos_thermal_impl {
   **/
   virtual real_t minimal_h() const=0;
 
+  virtual void save(datasink s) const;
+
+  const units& units_to_SI() const {return eos_units;}
 
   protected:
   
-  eos_thermal_impl() = default;
-
-
+  eos_thermal_impl(units units_) : eos_units{units_} {}
 };
 
 

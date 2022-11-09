@@ -1,4 +1,5 @@
 #include "eos_barotropic.h"
+#include "datastore.h"
 #include <stdexcept>
 #include <cassert>
 #include <limits>
@@ -25,7 +26,8 @@ class eos_barotr_invalid: public eos_barotr_impl {
   }
 
 
-  eos_barotr_invalid() = default;
+  //~ eos_barotr_invalid() = default;
+  eos_barotr_invalid() : eos_barotr_impl{units{}} {}
   [[ noreturn ]] const range& range_rho() const final {throw(nope());}
   [[ noreturn ]] const range& range_gm1() const final {throw(nope());}
   [[ noreturn ]] real_t minimal_h() const final {throw(nope());}
@@ -220,3 +222,17 @@ auto eos_barotr::ye_at_gm1(real_t gm1) const -> real_t
   return s ? s.ye() : numeric_limits<real_t>::quiet_NaN();
 }
 
+auto eos_barotr::units_to_SI() const -> const units&
+{
+  return impl().units_to_SI();
+}
+
+void eos_barotr::save(datasink s) const
+{
+  impl().save(s);
+}
+
+void eos_barotr_impl::save(datasink s) const
+{
+  throw  std::runtime_error("Saving not implemented for EOS type");
+}

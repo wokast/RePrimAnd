@@ -1,0 +1,57 @@
+# Schedule definitions for thorn RePrimAnd_Global_EOS
+# $Header:$
+
+
+schedule group RePrimAnd_Initial_EOS_Register at Startup
+{
+} "Group for initial data EOS creation"
+
+
+schedule group RePrimAnd_Evol_EOS_Register at Startup after RePrimAnd_Initial_EOS_Register
+{
+} "Group for Evolution EOS creation"
+
+
+if (CCTK_Equals(evolution_eos, "IdealGas"))
+{
+  schedule RePrimAnd_Evol_EOS_Register_IdealGas in RePrimAnd_Evol_EOS_Register
+  {
+    LANG: C
+  } "Register ideal gas EOS as global evolution EOS"
+}
+
+if (CCTK_Equals(evolution_eos, "Hybrid"))
+{
+  schedule RePrimAnd_Evol_EOS_Register_Hybrid in RePrimAnd_Evol_EOS_Register
+  {
+    LANG: C
+  } "Register hybrid EOS as global evolution EOS"
+}
+
+if (CCTK_Equals(evolution_eos, "FromFile"))
+{
+  schedule RePrimAnd_Evol_EOS_Register_FromFile in RePrimAnd_Evol_EOS_Register
+  {
+    LANG: C
+  } "Register EOS from file as global evolution EOS"
+}
+
+if (CCTK_Equals(initial_data_eos, "Polytrope"))
+{
+  schedule RePrimAnd_Initial_EOS_Register_Polytrope in RePrimAnd_Initial_EOS_Register
+  {
+    LANG: C
+  } "Register polytropic EOS as global initial data EOS"
+}
+
+if (CCTK_Equals(initial_data_eos, "FromFile"))
+{
+  schedule RePrimAnd_Initial_EOS_Register_FromFile in RePrimAnd_Initial_EOS_Register
+  {
+    LANG: C
+  } "Register EOS from file as global initial data EOS"
+}
+
+
+
+

@@ -3,7 +3,7 @@
 
 #include <string>
 #include "global_registry.h"
-#include "hdf5imple.h"
+#include "datastore.h"
 #include "eos_barotropic.h"
 #include "unitconv.h"
  
@@ -14,7 +14,7 @@ namespace EOS_Toolkit {
 namespace implementations {
 
 struct reader_eos_barotr {
-  virtual eos_barotr load(const h5grp& f, const units& u) const = 0;
+  virtual eos_barotr load(const datasource f, const units& u) const = 0;
   virtual ~reader_eos_barotr() {} 
 };
 

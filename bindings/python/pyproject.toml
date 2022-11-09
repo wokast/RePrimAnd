@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "pybind11~=2.6.1"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+  name = "RePrimAnd"
+  version = "1.5beta"
+  authors = [
+    { name = "Wolfgang Kastaun", email = "physik@fangwolg.de" }
+  ]  
+  description = "Library for handling equations of state for supranuclear matter, computing neutron star properties, and utilities for numerical relativity"
+  readme = "README.md" 
+  license = { file = "LICENSE" }
+  requires-python = '>=3.7, <3.11'
+  dependencies = [
+    "numpy"
+  ]
+
+[project.urls]
+  homepage = "https://github.com/wokast/RePrimAnd"
+  documentation = "https://wokast.github.io/RePrimAnd/index.html"
+  repository = "https://github.com"
+
+
+[tool.cibuildwheel]
+
+  archs = ["x86_64"]
+  skip="cp311-manylinux_x86_64 cp311-musllinux_x86_64"
+
+  before-all = "/project/docker/cibw_prepare.sh"
+  
+  container-engine = "podman"
+
+  manylinux-x86_64-image = "localhost/cibw_reprimand_manylinux2014_x86_64"
+  musllinux-x86_64-image = "localhost/cibw_reprimand_musllinux_1_1_x86_64"

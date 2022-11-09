@@ -1,10 +1,17 @@
+# Overview
+
+RePrimAnd is a support library for numerical simulations of general 
+relativistic magnetohydrodynamics and other neutron star related
+problems, written in C++ (a Python interface is also available)
+
 The full documentation can be found [here](https://wokast.github.io/RePrimAnd/index.html)
 
-# Installation
+## Installation
 
 The main target and devolpment platform is Linux, although the
 library code is not platform-specific and should also work on Macs.
-Windows and AIX are not supported.
+Windows and AIX are not supported. Binary packages are currently not available, but a conda
+package is planned.
 
 ## Requirements
 
@@ -16,7 +23,6 @@ Windows and AIX are not supported.
 * Doxygen (only for documentation)
 * Sphinx with Breathe and bibtex extensions (only for documentation)
 * Python matplotlib (only for benchmark plots)
-* Python pybind11 package >= 2.6.0 (only for Python bindings)
 
 ## Building from Source
 
@@ -73,23 +79,28 @@ g++ -lRePrimAnd --std=c++11 minimal.cc
 
 ## Python Bindings
 
-The Python bindings are automatically build together with the library
-itself, provided that a Python3 installation is detected which contains
-the pybind11 package. The latter can be easily installed via pip or 
-conda. Make sure to install pybind11 version >=2.6.0 or the build will fail. 
-When using a conda virtual environment, also set the meson `--prefix` option
-to the root of the environment, even when you only need the python module.
-
-To disable building the Python bindings and remove the 
-corresponding dependencies, use the build option
+If only the Python interface is required on a Linux platform, 
+it is easiest to install from pypi
 
 ```bash
-meson configure -Dbuild_python_api=false
+pip install pyreprimand
 ```
 
-If the Python bindings have been build, they are automatically installed 
-together with the library. The Python extension module is called 
-`pyreprimand`.
+Otherwise, one first has to buid and install the C++ library as shown above.
+
+To build and install the Python interface, do
+
+```bash
+cd bindings/python
+pip install .
+```
+
+This will also pip install packages numpy and pybind11>=2.6.0. 
+When using conda environment, it may be better to install those 
+first using conda.
+
+
+The Python extension module is called  `pyreprimand`.
 
 
 ## Einstein Toolkit Support
@@ -105,14 +116,26 @@ The thorn is also part of the official ET framework. The version in the master
 brach will typically by ahead of the ET version, but is not guaranteed to be 
 stable or compatible.
 
-Currently there is are no thorns that provide an ET-style interface for using
-this library, although this might change in future versions. ET Thorns can of
-course use the library like any other C++ library.
+There are two experimental (and largely undocumented for now) thorns 
+that aim to simplifying the usage.
+`RePrimAnd_Global_EOS` provides a centralized selection of a global thermal 
+EOS (e.g. for evolution and analysis) and a global barotropic EOS (e.g. for 
+initial data).
+`RePrimAnd_EOS_Omni_API` provides the most important subset of the `EOS_Omni` thorn 
+interface, forwarding EOS calls to the reprimand EOS set by `RePrimAnd_Global_EOS`.
+It is intended for transitioning existing code to the new interface.
 
 
 ## Creating Documentation
 
-To just build the documentation, use the target `documentation`.
+Building the documentation is deactivated by default. 
+To build it, specify
+
+```bash
+meson configure -Dbuild_documentation=true
+```
+
+and then build the target `documentation`.
 
 ```bash
 ninja documentation
@@ -123,12 +146,6 @@ The resulting pages can be found in the build directory under
 
 The building of the documentation requires sphinx with the breathe 
 and sphinxcontrib-bibtex extensions as well as doxygen.
-To disable building documentation and remove 
-the corresponding dependencies, use the build option
-
-```bash
-meson configure -Dbuild_documentation=false
-```
 
 If the documentation is build, it is installed automatically when 
 installing the library, by default to 
@@ -139,12 +156,20 @@ installing the library, by default to
 
 ### Unit tests
 
-Please also take a minute to run the unit tests to ensure 
-correct compilation
+
+Building the unit tests is deactivated by default. 
+To build them, specify
+
+```bash
+meson configure -Dbuild_tests=true
+```
+and then
 
 ```bash
 ninja test
 ```
+
+Please report errors on the issue tracker.
 
 ### Benchmarks
 
@@ -154,6 +179,7 @@ article. To recreate the data and plots,
 
 
 ```bash
+meson configure -Dbuild_benchmarks=true
 ninja benchplots
 ninja accuracyplots
 ```
@@ -161,13 +187,7 @@ ninja accuracyplots
 The resulting pdf figures are placed in the build directory under
 `tests/benchmarks`.
 
-This requires Python+matplotlib. To disable building benchmarking and 
-remove the corresponding dependencies, use the build option
-
-```bash
-cd <repository>/mbuild
-meson configure -Dbuild_benchmarks=false
-```
+This requires Python+matplotlib. 
 
 ### Visualizing Master Function
 
@@ -176,6 +196,7 @@ function (the central ingredient of the scheme) for various cases,
 as shown in the paper.
 
 ```bash
+meson configure -Dbuild_benchmarks=true
 ninja srootdata
 ```
 

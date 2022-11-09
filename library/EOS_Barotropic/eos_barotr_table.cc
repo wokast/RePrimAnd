@@ -1,9 +1,11 @@
-#include "eos_barotr_table.h"
-#include "eos_barotr_table_impl.h"
 #include <cmath>
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
+
+#include "eos_barotr_table.h"
+#include "eos_barotr_table_impl.h"
+#include "interpol.h"
 
 using namespace std;
 using namespace EOS_Toolkit;
@@ -16,7 +18,8 @@ eos_barotr_table::eos_barotr_table(
         func_t gm1_, func_t rho_, func_t eps_,  func_t pbr_,   
         func_t cs2_, func_t temp_, func_t efrac_, 
         bool isentropic_, const eos_barotr_gpoly& poly_)
-: isentropic{isentropic_}, hasefrac{efrac_},
+: eos_barotr_impl{poly_.units_to_SI()},
+  isentropic{isentropic_}, hasefrac{efrac_},
   rgrho{0, rg_rho_.max()},
   rggm1{0, rg_gm1_.max()},
   gm1_rho{std::move(gm1_), rg_rho_ , nsamples_, magnitudes_}, 
@@ -133,7 +136,8 @@ eos_barotr EOS_Toolkit::make_eos_barotr_table(
   const std::vector<real_t>& gm1, const std::vector<real_t>& rho,
   const std::vector<real_t>& eps, const std::vector<real_t>& pbr, 
   const std::vector<real_t>& cs2, const std::vector<real_t>& temp, 
-  const std::vector<real_t>& efrac, bool isentropic, real_t n_poly)
+  const std::vector<real_t>& efrac, bool isentropic, real_t n_poly,
+  units units_)
 {
   const size_t tsize = rho.size();
   if (tsize<5) {
@@ -154,7 +158,7 @@ eos_barotr EOS_Toolkit::make_eos_barotr_table(
   }
   
   auto poly = eos_barotr_gpoly::from_boundary(rho[0], eps[0], 
-                                      pbr[0]*rho[0], n_poly, rho[1]);
+                               pbr[0]*rho[0], n_poly, rho[1], units_);
                                        
   const real_t gsc = (poly.gm1_from_rho(rho[0]) - gm1[0]) 
                       / (1.0 + gm1[0]);
@@ -164,17 +168,18 @@ eos_barotr EOS_Toolkit::make_eos_barotr_table(
   
   assert(ngm1[0]>0);
   
-  cspline_mono sgm1{rho, ngm1};
-  cspline_mono srho{ngm1, rho};
-  cspline_mono seps{ngm1, eps};
-  cspline_mono spbr{ngm1, pbr};
-  cspline_mono scs2{ngm1, cs2};
+  auto sgm1{ make_interpol_pchip_spline(rho, ngm1) };
+  auto srho{ make_interpol_pchip_spline(ngm1, rho) };
+  auto seps{ make_interpol_pchip_spline(ngm1, eps) };
+  auto spbr{ make_interpol_pchip_spline(ngm1, pbr) };
+  auto scs2{ make_interpol_pchip_spline(ngm1, cs2) };
+  
   
   eos_barotr_table::func_t stemp{nullptr};
-  if (!temp.empty()) stemp = cspline_mono{ngm1, temp};
+  if (!temp.empty()) stemp = make_interpol_pchip_spline(ngm1, temp);
   
   eos_barotr_table::func_t sefrac{nullptr};
-  if (!efrac.empty()) sefrac = cspline_mono{ngm1, efrac};
+  if (!efrac.empty()) sefrac = make_interpol_pchip_spline(ngm1, efrac);
   
   // increase number of samples via spline interpolation, to 
   // somewhat make up for later use of linear lookup. 

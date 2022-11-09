@@ -51,6 +51,16 @@ class interval {
   {
     return (x >= min_) && (x <= max_);
   }
+
+  /**
+  @param r Interval to test
+  @return If Interval is contained in closed interval \f$[a,b]\f$.   
+  **/
+
+  bool contains(const interval<T>& r) const 
+  {
+    return (contains(r.min()) && contains(r.max()));
+  }
   
   /**\brief Limit value to interval
   
@@ -96,6 +106,22 @@ template<class T>
 bool operator<=(T x, const interval<T>& i) 
 {
   return x <= i.min();
+}
+
+
+template<class T>
+auto intersect(const interval<T>& a, const interval<T>& b)
+-> interval<T>
+{
+  return {std::max(a.min(), b.min()), std::min(a.max(), b.max())};
+}
+
+template<class T, class... C>
+auto intersect(const interval<T>& a, const interval<T>& b, 
+               const C&... c)
+-> interval<T>
+{
+  return intersect(intersect(a,b), c...);
 }
 
 

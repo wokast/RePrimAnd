@@ -3,7 +3,7 @@
 
 #include "eos_thermal.h"
 #include "unitconv.h"
-#include "hdf5imple.h"
+#include "datastore.h"
 #include <string>
 
 
@@ -22,10 +22,20 @@ to be geometric, i.e. \f$ G=c=1 \f$. Default is to fix the mass unit to
 eos_thermal load_eos_thermal(std::string fname, 
                              const units& u=units::geom_solar());
 
+/**\brief Save thermal EOS to hdf5 file. 
+
+@param fname Filename of EOS file
+@param eos EOS object to save
+@param info Free-form description text (optional)
+**/ 
+void save_eos_thermal(std::string fname,  eos_thermal eos, 
+                     std::string info="");
+
+
 namespace detail {
 
 eos_thermal load_eos_thermal(
-  const h5grp& g,                     ///< Group to load from
+  const datasource g,                 ///< Source to load from
   const units& u=units::geom_solar()  ///< Unit system to be used by EOS
 );
 

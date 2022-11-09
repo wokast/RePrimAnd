@@ -88,7 +88,7 @@ It is easy to show that the EOS is isentropic, and we further define it
 as a zero-temperature EOS.
 
 The minimum enthalpy is :math:`h_0=1`.
-Pseudo-entaply and enthalpy are identical, i.e. :math:`g=h`. 
+Pseudo-enthaply and enthalpy are identical, i.e. :math:`g=h`. 
 In terms of the pseudo-enthalpy, the segments are given by
 
 .. math::
@@ -116,10 +116,77 @@ In terms of the pseudo-enthalpy, the segments are given by
    hundreds of segments. For this, use the tabulated EOS below.
 
 
+
+.. _EOSColdSpline:
+
+Interpolation Spline EOS
+------------------------
+
+This EOS implements all functions using monotonic cubic spline 
+interpolation. The EOS is therefore differentiable in principle. 
+Of course, there can still be steep gradients.
+
+Internally, most properties are represented in terms of the 
+pseudo enthalpy. This has the advantage of avoiding jumps at phase 
+transitions. Only the density has a jump.
+When calling the EOS using density as independent variable, another 
+interpolation spline is used to first compute the pseudo enthalpy
+(in presence of phase transitions, it has a plateau as function of 
+density). The desired quantity is then computed from the pseudo enthalpy
+using the same interpolation splines used for evaluating the EOS as 
+function of pseudo enthalpy.
+The monotonic interpolation ensures that the EOS does not produce 
+unphysical overshoots.
+
+The spline sample points are spaced regularly with respect to 
+logarithm of pseudo-enthalpy-minus-one  :math:`\log(g-1)` or 
+mass density :math:`\rho`. This allows 
+efficient computation with cost nearly independent of the sample 
+resolution.
+In order to use the number of sample points efficiently, the spline 
+interpolation covers a user-specified range of magnitudes. Below,
+a generalized polytrope (meaning an additional offset in specific
+energy) is matched, with user-specified exponent.
+
+Temperature and electron fraction can be provided optionally.
+If the temperature is not provided when creating the EOS, it is assumed
+to be a zero-temperature EOS.
+
+To set up this type of EOS, one provides individual functions which are then
+sampled to create the interpolation splines. In addition, one has to specify 
+the maximum validity range, the matching point to the polytrope, and its 
+exponent. Note that this polytrope is completely determined by the density,
+energy, and pressure at the matching point. Since the pseudo-enthalpy is an integral
+quantity, changing the low density part of any EOS will also affect the
+pseudo enthalpy at higher densities (by a factor).
+The provided pseudo-enthalpy is therefore adjusted to match the polytrope.
+
+There are two convenient EOS creation functions for common use cases. One 
+case is to specify
+the EOS in terms of sample points wich do not have to be regularly spaced.
+For this, they are first converted to a functions using monotonic non-regular
+spline interpolator functions, which are then used to create the EOS.
+One still needs to specify the maximum and the matching point, which do not 
+need to correspond to the range of the sample points. The motivation is that
+it typically makes no sense to cover the range of available samples, 
+which might extend arbitrary close to zero. The matching point should be 
+chosen small enough to not matter for given applications, but not smaller.
+The other use case is to
+create a sampled version of an EOS of arbirary type. Reasons to 
+use a uniform EOS type may be comparability or workflow considerations.
+
+
+.. warning::
+   This EOS type is still experimental
+
+
 .. _EOSColdTabulated:
 
 Tabulated EOS
 -------------
+
+.. warning::
+   This EOS type will be deprecated soon in favor of a successor.
 
 This is the most general EOS, where all functions are implemented
 as efficient linear lookup tables. Those lookup tables are regularly 

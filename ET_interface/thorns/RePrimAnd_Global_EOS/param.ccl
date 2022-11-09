@@ -1,0 +1,123 @@
+# Parameter definitions for thorn RePrimAnd_Global_EOS
+# $Header:$
+
+restricted:
+
+# Specify a single EOS with thermal and composition degrees of freedom
+# for use by evolution and analysis thorns
+#  
+KEYWORD evolution_eos "Name of active EOS for evolution" STEERABLE=RECOVER
+{
+  "none" :: "You forgot to specify evolution EOS"
+  "FromFile" :: "From File"
+  "IdealGas" :: "Ideal Gas"
+  "Hybrid" :: "Hybrid"
+} "none"
+# Choices above are EOS available from reprimand.
+# Thorns providing custom EOS need to extend the keyword and
+# register an EOS object at startup if requested.
+
+
+#  Specify a single barotropic EOS used for use by initial data thorns
+#  
+KEYWORD initial_data_eos "Name of active EOS for initial data" STEERABLE=RECOVER
+{
+  "none" :: "You forgot to specify initial data EOS"
+  "FromFile" :: "From File"
+  "Polytrope" :: "Polytrope"
+} "none"
+# Choices above are EOS available from reprimand.
+# Thorns providing custom EOS need to extend the keyword and
+# register an EOS object at startup if requested.
+# initial_data_eos also used as cold part of hybrid evolution EOS 
+
+
+restricted:
+
+
+# Applies to initial data EOS FromFile
+# ------------------------------------
+
+CCTK_STRING cold_eos_file "Path of EOS file (universal reprimand barotropic EOS format)" STEERABLE=RECOVER
+{
+  ".+" :: "Filename"
+} "cold_eos_file.h5"
+
+# Applies to initial data EOS Polytrope
+# -------------------------------------
+
+# Polytropic density scale
+# NOT polytropic constant (see reprimand documentation) 
+CCTK_REAL poly_rho "Polytrope: density scale" STEERABLE=RECOVER
+{
+  0:* :: "kg/m^3"
+} 1e19
+
+CCTK_REAL poly_n "Polytrope: adiabatic index n" STEERABLE=RECOVER
+{
+  0:* :: ""
+} 2.0
+
+
+
+# Applies to thermal EOS FromFile
+# -------------------------------
+
+CCTK_STRING thermal_eos_file "Path of EOS file (universal reprimand thermal EOS format)" STEERABLE=RECOVER
+{
+  ".+" :: "Filename"
+} "thermal_eos_file.h5"
+
+
+
+# Applies to thermal EOS Hybrid
+# -----------------------------
+
+CCTK_REAL hybrid_gamma_th "Thermal component gamma" STEERABLE=RECOVER
+{
+  0:* :: ""
+} 1.8
+
+
+# Applies to thermal EOS IdealGas
+# -------------------------------
+
+# Adiabatic exponent gamma = 1 + 1/n
+CCTK_REAL idealgas_n "Ideal gas index n" STEERABLE=RECOVER
+{
+  0:* :: ""
+} 2.0
+
+
+# Applies to EOS IdealGas, Hybrid, Polytrope
+# ------------------------------------------
+#
+# Maximum allowed baryonic mass density
+CCTK_REAL rho_max "Validity region: max density" STEERABLE=RECOVER
+{
+  0:* :: ""
+} 1.0
+# No effect on EOS from file
+
+
+# Applies to EOS IdealGas, Hybrid
+# -------------------------------
+
+CCTK_REAL eps_max "Validity region: max internal specific energy" STEERABLE=RECOVER
+{
+  0:* :: ""
+} 2.0
+
+# No effect on EOS from file
+
+
+# Applies everywhere
+# ------------------
+
+CCTK_REAL geom_units_length "Length unit of geometric units for EOS" 
+{
+  0:* :: "meter"
+} 1476.7161818921163
+
+
+

@@ -68,7 +68,7 @@ tidal_ode::tidal_ode(eos_barotr eos_, real_t gm1_center_,
   for (auto i = dnu_.rbegin(); i != dnu_.rend(); ++i) 
   {
     real_t gm1{ gm1_from_dnu(*i) };
-    auto s{ eos.at_gm1(gm1) };
+    auto s{ eos.at_gm1(eos.range_gm1().limit_to(gm1)) };
     assert(s);
     revrho.push_back(s.rho());
   }
@@ -79,11 +79,11 @@ tidal_ode::tidal_ode(eos_barotr eos_, real_t gm1_center_,
   const std::vector<real_t> revlambda(lambda_.rbegin(), lambda_.rend());
   const std::vector<real_t> revrsqr(rsqr_.rbegin(), rsqr_.rend());
   
-  dnu_rho = cspline_mono(revrho, revdnu);
+  dnu_rho = make_interpol_pchip_spline(revrho, revdnu);
   
-  lambda_rho = cspline_mono(revrho, revlambda);
+  lambda_rho = make_interpol_pchip_spline(revrho, revlambda);
 
-  rsqr_rho = cspline_mono(revrho, revrsqr);
+  rsqr_rho = make_interpol_pchip_spline(revrho, revrsqr);
   assert(x_start()>x_end());
 }
 
@@ -98,9 +98,11 @@ auto tidal_ode::m_by_r3(real_t rsqr, real_t lambda,
   return -0.5 * std::expm1(-2.0 * lambda) / rsqr;   
 }
 
-auto tidal_ode::drho_y(real_t rho, real_t ym2) const -> real_t
+auto tidal_ode::drho_y(real_t rho_, real_t ym2) const -> real_t
 {
-  assert(rho>0);
+  assert(rho_>0);
+  const real_t rho{ eos.range_rho().limit_to(rho_) };
+  
   auto s{ eos.at_rho(rho) };
   assert(s);
   real_t h{ s.hm1() + 1. }; 
@@ -183,7 +185,7 @@ tidal_ode2::tidal_ode2(eos_barotr eos_, real_t gm1_center_,
   for (std::size_t k = dnu_.size()-1; k > 0; --k) 
   {
     real_t gm1{ gm1_from_dnu(dnu_[k]) };
-    auto s{ eos.at_gm1(gm1) };
+    auto s{ eos.at_gm1(eos.range_gm1().limit_to(gm1)) };
     assert(s);
     
     rrho.push_back( s.rho() );
@@ -203,12 +205,14 @@ tidal_ode2::tidal_ode2(eos_barotr eos_, real_t gm1_center_,
     rdy[k] = rdy[k-1] + 0.5 * (rddy[k] + rddy[k-1]) * drho;
   }
   
-  deltay_rho = cspline_mono(rrho, rdy);
+  deltay_rho = make_interpol_pchip_spline(rrho, rdy);
 
-  rsqr_dnu   = cspline_mono(dnu_, rsqr_);
-  lambda_dnu = cspline_mono(dnu_, lambda_);
+  rsqr_dnu   = make_interpol_pchip_spline(dnu_, rsqr_);
+  lambda_dnu = make_interpol_pchip_spline(dnu_, lambda_);
 
-  real_t rho0{ eos.at_gm1(gm1_from_dnu(dnu0)).rho() }; 
+  real_t rho0{ 
+    eos.at_gm1(eos.range_gm1().limit_to(gm1_from_dnu(dnu0))).rho() 
+  }; 
   yhat0 = y0_ - deltay_rho(rho0);
 }
 
@@ -219,7 +223,9 @@ auto tidal_ode2::dlnh_yhat(real_t dnu, real_t yhat) const -> real_t
   real_t lambda{ lambda_dnu(dnu) };
   real_t rsqr{ rsqr_dnu(dnu) };
   
-  auto s{ eos.at_gm1(gm1) };
+  //limit to range because to prevent roundoff errors causing trouble
+  //when central density is at maximum of validity range
+  auto s{ eos.at_gm1(eos.range_gm1().limit_to(gm1)) };
   assert(s);
   
   real_t rho{ s.rho() };
@@ -282,7 +288,7 @@ const -> spherical_star_tidal
   real_t gm1{ gm1_from_dnu(dnu) };
   real_t lambda{ lambda_dnu(dnu) };
   
-  auto s{ eos.at_gm1(gm1) };
+  auto s{ eos.at_gm1(eos.range_gm1().limit_to(gm1)) };
   assert(s);  
   real_t rho{ s.rho() };
 

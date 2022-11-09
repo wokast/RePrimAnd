@@ -3,6 +3,8 @@
 
 #include "config.h"
 #include "intervals.h"
+#include "unitconv.h"
+#include "datastore.h"
 
 namespace EOS_Toolkit {
 namespace implementations {
@@ -10,10 +12,11 @@ namespace implementations {
 
 ///Abstract interface for barotropic equation of state implementations.
 class eos_barotr_impl {
+  units eos_units;
   public:
   using range  = interval<real_t>;
 
-  eos_barotr_impl()          = default;
+  eos_barotr_impl(const units& u) : eos_units(u) {};
   eos_barotr_impl(const eos_barotr_impl&) = default;
   eos_barotr_impl(eos_barotr_impl&&) = default;
   eos_barotr_impl& operator=(const eos_barotr_impl&) = delete;
@@ -113,7 +116,10 @@ class eos_barotr_impl {
   @throws std::runtime_error if electron fraction is not implemented
   **/
   virtual real_t ye(real_t gm1) const =0;
-
+  
+  virtual void save(datasink s) const;
+  
+  const units& units_to_SI() const {return eos_units;}
 };
 
 }// namespace implementations

@@ -68,8 +68,10 @@ tov_profile::tov_profile(eos_barotr eos_, const spherical_star_info &p_,
                          vec_t rsqr_, vec_t delta_nu_, vec_t lambda_,
                          vec_t ybnd_, vec_t yvol_)
 : spherical_star_profile{std::move(eos_), std::sqrt(rsqr_.back())}, 
-  lambda_rsqr{rsqr_, lambda_}, delta_nu_rsqr{rsqr_, delta_nu_}, 
-  ybnd_rsqr{rsqr_, ybnd_}, yvol_rsqr{rsqr_, yvol_}, 
+  lambda_rsqr{make_interpol_pchip_spline(rsqr_, lambda_)}, 
+  delta_nu_rsqr{make_interpol_pchip_spline(rsqr_, delta_nu_)}, 
+  ybnd_rsqr{make_interpol_pchip_spline(rsqr_, ybnd_)}, 
+  yvol_rsqr{make_interpol_pchip_spline(rsqr_, yvol_)}, 
   gm1_c{p_.center_gm1}, nu_c{p_.center_nu}, 
   mgrav{p_.grav_mass}, ebind{p_.binding_energy}
 {}

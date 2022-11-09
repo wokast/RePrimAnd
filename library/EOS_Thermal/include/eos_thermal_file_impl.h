@@ -3,7 +3,7 @@
 
 #include <string>
 #include "global_registry.h"
-#include "hdf5imple.h"
+#include "datastore.h"
 #include "eos_thermal.h"
 #include "unitconv.h"
  
@@ -14,7 +14,8 @@ namespace EOS_Toolkit {
 namespace implementations {
 
 struct reader_eos_thermal {
-  virtual eos_thermal load(const h5grp& f, const units& u) const = 0;
+  virtual eos_thermal load(const datasource f, 
+                           const units& u) const = 0;
   virtual ~reader_eos_thermal() {} 
 };
 

@@ -1,0 +1,8 @@
+# Main make.code.defn file for thorn RePrimAnd_EOS_Omni_API
+# $Header:$
+
+# Source files in this directory
+SRCS = reprimand_eos_omni_api.cc
+
+# Subdirectories containing source files
+SUBDIRS = 

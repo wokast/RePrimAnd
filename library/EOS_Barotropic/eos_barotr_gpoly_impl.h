@@ -1,7 +1,8 @@
 #ifndef EOS_BAROTR_GPOLY_IMPL_H
 #define EOS_BAROTR_GPOLY_IMPL_H
-
+#include <memory>
 #include "eos_barotropic_impl.h"
+#include "datastore.h"
 
 namespace EOS_Toolkit {
 namespace implementations {
@@ -28,7 +29,6 @@ class eos_barotr_gpoly : public eos_barotr_impl {
   real_t sed0;    ///< \f$ \epsilon_0 \f$
   real_t h0;      ///< \f$ h_0 = 1 + \epsilon_0 \f$
 
-
   public:
 
 ///Constructor
@@ -36,7 +36,8 @@ class eos_barotr_gpoly : public eos_barotr_impl {
     real_t n_,                          ///<Adiabatic index \f$ n \f$
     real_t rmd_p_,                      ///<Density scale \f$ \rho_p \f$
     real_t sed0_,                       ///< \f$ \epsilon_0 \f$    
-    real_t rho_max_                     ///<Max valid density 
+    real_t rho_max_,                    ///<Max valid density 
+    units units_                        ///< Unit system (geometric)
   );
   
   eos_barotr_gpoly(const eos_barotr_gpoly&)            = default;
@@ -118,14 +119,21 @@ class eos_barotr_gpoly : public eos_barotr_impl {
     real_t gm1      ///< \f$ g-1 \f$
   ) const final;
 
+  void save(datasink s) const final;
+
   static real_t rmd_p_from_p_rho_n(real_t p, real_t rho, real_t n);
   static real_t eps0_from_p_rho_eps_n(real_t p, real_t rho, 
                                       real_t eps, real_t n);
 
   static eos_barotr_gpoly 
   from_boundary(real_t rho0, real_t eps0, real_t p0, 
-                real_t n_poly, real_t rho_max);
- 
+                real_t n_poly, real_t rho_max, units units_);
+
+  static eos_barotr_gpoly 
+  from_datasource(datasource, units);
+  
+  const static bool file_handler_registered;
+  static const std::string datastore_id;  
 };
 
 }// namespace implementations 

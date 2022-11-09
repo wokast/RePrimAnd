@@ -1,0 +1,18 @@
+# Parameter definitions for thorn RePrimAnd_EOS_Omni_API
+
+
+restricted:
+
+CCTK_INT verbosity "Verbosity in case of errors" STEERABLE=always
+{
+  0:2 :: "0 = silence"
+} 1
+
+BOOLEAN sloppy_eps "Limit epsilon to valid range instead returning NAN" STEERABLE=always
+{
+} "no"
+
+BOOLEAN sloppy_temp "Limit T to valid range instead returning NAN" STEERABLE=always
+{
+} "no"
+

@@ -113,7 +113,8 @@ bool eos_poly_piece::rho_save_up_to(real_t rho) const
 eos_barotr_pwpoly::eos_barotr_pwpoly(real_t rmdp0, 
   const vector<real_t>& segm_bound, 
   const  vector<real_t>& segm_gamma,
-  real_t rho_max_)
+  real_t rho_max_, units units_)
+: eos_barotr_impl{units_}
 {
   if (rho_max_ <= 0) {
     throw runtime_error("eos_barotr_pwpoly: maximum density must be "
@@ -266,9 +267,11 @@ real_t eos_barotr_pwpoly::ye(real_t gm1) const
 EOS_Toolkit::eos_barotr 
 EOS_Toolkit::make_eos_barotr_pwpoly(real_t rmdp0,  
   const std::vector<real_t>& segm_bound,  
-  const std::vector<real_t>& segm_gamma,  real_t rho_max)
+  const std::vector<real_t>& segm_gamma,  real_t rho_max,
+  units units_)
 {
   return eos_barotr{std::make_shared<eos_barotr_pwpoly>(rmdp0, 
-                                segm_bound, segm_gamma, rho_max)};
+                                segm_bound, segm_gamma, rho_max, 
+                                units_)};
 }
 

@@ -12,7 +12,8 @@ using namespace std;
 
 eos_hybrid::eos_hybrid(eos_barotr eos_c_,  real_t gamma_th_, 
                   real_t eps_max_, real_t rho_max_)
-: eos_c{eos_c_}, gamma_th{gamma_th_}, gm1_th{gamma_th - 1}, 
+: eos_thermal_impl{eos_c_.units_to_SI()},
+  eos_c{eos_c_}, gamma_th{gamma_th_}, gm1_th{gamma_th - 1}, 
   eps_max{eps_max_}, rgrho{0.0, rho_max_}, rgye{0.,1.}, 
   min_h{eos_c_.minimal_h()}
 {
@@ -116,7 +117,7 @@ eos_thermal EOS_Toolkit::make_eos_hybrid(EOS_Toolkit::eos_barotr eos_c,
              real_t gamma_th, real_t eps_max, real_t rho_max)
 {
   return eos_thermal{std::make_shared<eos_hybrid>(eos_c, gamma_th, 
-                                                  eps_max, rho_max)};
+                                         eps_max, rho_max)};
 }
 
 

@@ -1,5 +1,5 @@
 
-option('build_documentation', type : 'boolean', value : true)
-option('build_benchmarks', type : 'boolean', value : true)
-option('build_tests', type : 'boolean', value : true)
-option('build_python_api', type : 'boolean', value : true)
+option('build_documentation', type : 'boolean', value : false)
+option('build_benchmarks', type : 'boolean', value : false)
+option('build_tests', type : 'boolean', value : false)
+option('build_python_api', type : 'boolean', value : false)
