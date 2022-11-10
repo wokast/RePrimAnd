@@ -84,7 +84,7 @@ it is easiest to install from pypi
 
 .. code::
 
-   pip install pyreprimand
+   pip install reprimand
 
 
 Otherwise, one first has to buid and install the C++ library as shown above.
