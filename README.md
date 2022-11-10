@@ -83,7 +83,7 @@ If only the Python interface is required on a Linux platform,
 it is easiest to install from pypi
 
 ```bash
-pip install pyreprimand
+pip install reprimand
 ```
 
 Otherwise, one first has to buid and install the C++ library as shown above.
