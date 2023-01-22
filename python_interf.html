@@ -68,7 +68,7 @@ valid range.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyreprimand</span> <span class="k">as</span> <span class="nn">pyr</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span>
+<span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span><span class="p">()</span>
 <span class="n">eos</span> <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">load_eos_barotr</span><span class="p">(</span><span class="s2">&quot;EOS/MS1_PP.eos.h5&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">u</span><span class="p">)</span>
 
 <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">eos</span><span class="o">.</span><span class="n">range_rho</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">eos</span><span class="o">.</span><span class="n">range_rho</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
@@ -79,11 +79,11 @@ valid range.</p>
 <section id="creating-eos-files">
 <h2>Creating EOS Files<a class="headerlink" href="#creating-eos-files" title="Permalink to this heading">¶</a></h2>
 <p>One prime use for the Python interface is the creation of EOS files based on
-data from other sources. Polytropic, piecewise polytropic, and tabulated EOS
-are supported directly. Other EOS types can be represented by first sampling
-them.</p>
+data from other sources. Polytropic, piecewise polytropic, and spline-based
+EOS for tabulated data are supported directly. Other EOS types can be represented
+by first sampling them.</p>
 <p>Creating a piecewise polytropic EOS file is as simple as</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span><span class="p">()</span>
 
 <span class="n">eos</span> <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">make_eos_barotr_pwpoly</span><span class="p">(</span><span class="n">rho_poly</span><span class="p">,</span>
               <span class="n">rho_bounds</span><span class="p">,</span> <span class="n">gammas</span><span class="p">,</span> <span class="n">rho_max</span><span class="p">,</span> <span class="n">uc</span><span class="p">)</span>
@@ -98,16 +98,16 @@ for the EOS, specified by the <cite>uc</cite> argument with respect to SI units.
 See also <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units" title="EOS_Toolkit::make_eos_barotr_pwpoly"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_eos_barotr_pwpoly()</span></code></a>.</p>
 <p>For creating an EOS file that represents tabulated data, use the spline-based
 EOS as follows</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span><span class="p">()</span>
 
-<span class="n">eos</span> <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">make_eos_barotr_spline</span><span class="p">(</span><span class="n">gm1</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">csnd</span><span class="p">,</span>
+<span class="n">eos</span> <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">make_eos_barotr_spline</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">csnd</span><span class="p">,</span>
              <span class="n">temp</span><span class="p">,</span> <span class="n">efrac</span><span class="p">,</span> <span class="n">is_isentropic</span><span class="p">,</span> <span class="n">range_rho</span><span class="p">,</span> <span class="n">n_poly</span><span class="p">,</span>
              <span class="n">eos_units</span><span class="p">,</span> <span class="n">pts_per_mag</span><span class="p">)</span>
 
 <span class="n">pyr</span><span class="o">.</span><span class="n">save_eos_barotr</span><span class="p">(</span><span class="s2">&quot;example_spline.eos.h5&quot;</span><span class="p">,</span> <span class="n">eos</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>where <cite>gm1</cite>, <cite>rho</cite>, <cite>eps</cite>, <cite>press</cite>, <cite>csnd</cite>, <cite>temp</cite>, and <cite>efrac</cite> are numpy
+<p>where <cite>rho</cite>, <cite>eps</cite>, <cite>press</cite>, <cite>csnd</cite>, <cite>temp</cite>, and <cite>efrac</cite> are numpy
 arrays with the arbitrarily-spaced tabulated sample points. If temperature
 and/or electron fraction are not available, pass an empty list instead.
 Any dimensionful arguments have to be specified in the unit system desired
@@ -132,9 +132,7 @@ is called <cite>tov.deformability.lambda_tidal</cite> compared to
 <a class="reference internal" href="tov_solver_ref.html#_CPPv4NK11EOS_Toolkit14spherical_star13press_from_rcE6real_t" title="EOS_Toolkit::spherical_star::press_from_rc"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">press_from_rc()</span></code></a>
 are vectorized and accept a numpy array as argument for the radius.
 Note that computing TOV solutions is not vectorized, so passing a numpy array as central density
-will not work. Future versions may contain dedicated functions for TOV sequences.</p>
-<p>An example Python script plotting TOV sequences can be found under
-<cite>examples/pwpoly_TOV.py</cite>.</p>
+will not work. See below for working with TOV sequences.</p>
 </section>
 <section id="ns-sequences">
 <h2>NS Sequences<a class="headerlink" href="#ns-sequences" title="Permalink to this heading">¶</a></h2>
@@ -148,6 +146,8 @@ to load such a file.</p>
 branches) are vectorized, i.e., they accept <cite>numpy</cite> arrays. If the input is outside
 the valid range, the result is NAN. The same holds for <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">star_seq</span></code></a>
 objects representing a general NS sequence.</p>
+<p>An example Python script plotting TOV sequences can be found under
+<cite>examples/pwpoly_TOV.py</cite>.</p>
 </section>
 <section id="units">
 <h2>Units<a class="headerlink" href="#units" title="Permalink to this heading">¶</a></h2>
@@ -156,7 +156,10 @@ objects, which are used throughout the interface to specify unit systems
 in a unified consistent way. The unit objects should also be very
 useful on their own, for example in quick interactive calculations.
 The very popular system defined by <span class="math notranslate nohighlight">\(G=c=M_\odot=1\)</span> is predefined as
-<cite>pyr.units.geom_solar</cite> and provides units as data members such as
+<cite>pyr.units.geom_solar()</cite>. Note this is a function; when setting up
+geometric units, the default values for <span class="math notranslate nohighlight">\(G\)</span> and/or <span class="math notranslate nohighlight">\(M_\odot\)</span>
+can be overridden by parameters msun_si, g_si.
+Unit objects provide specific units via data members such as
 <cite>u.density</cite> (try Tab-completion for the complete list!).
 Note that temperatures in the EOS framework are always in <cite>MeV</cite> and the unit
 conversion objects do not define a temperature unit.</p>

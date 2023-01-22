@@ -38,714 +38,11 @@
             
   <section id="reference">
 <h1>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">¶</a></h1>
-<section id="generic-interface">
-<h2>Generic Interface<a class="headerlink" href="#generic-interface" title="Permalink to this heading">¶</a></h2>
-<dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotrE">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotrE"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotrE"></span><span id="EOS_Toolkit::eos_barotr"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eos_barotr</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">private</span></span><span class="w"> </span><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">eos_barotr_base</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Interface for generic barotropic EOS. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
-<dl class="cpp type">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotr5rangeE">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotr5rangeE"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotr5rangeE"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a64b2da58a5fdb2858b1a22178b2ef1ab"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval"><span class="n"><span class="pre">interval</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotr5rangeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Synonym for <a class="reference internal" href="little_helpers.html#classEOS__Toolkit_1_1interval"><span class="std std-ref">interval</span></a>. </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotr10eos_barotrE8spimpl_t">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotr10eos_barotrE8spimpl_t"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotr10eos_barotrE8spimpl_t"></span><span id="EOS_Toolkit::eos_barotr::eos_barotr__spimpl_t"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1aa795df4bb8fde23896bfaa49dfb44a27"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eos_barotr</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">spimpl_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotr10eos_barotrE8spimpl_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Constructor from pointer to implementation. </p>
-<p>This is intended for EOS implementors. Users should use the functions provided by a given implementation to obtain the EOS.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>eos</strong> – Shared pointer to implementation </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotr10eos_barotrEv">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotr10eos_barotrEv"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotr10eos_barotrEv"></span><span id="EOS_Toolkit::eos_barotr::eos_barotr"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1aa02fbeee90c61942e393c3fe2146c65e"></span><span class="sig-name descname"><span class="n"><span class="pre">eos_barotr</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotr10eos_barotrEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Default constructor. </p>
-<p>Creates uninitialized EOS. Any attemt to use resulting object throws an exception. One can use it after copying another EOS to it. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotr10eos_barotrERK10eos_barotr">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotr10eos_barotrERK10eos_barotr"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotr10eos_barotrERK10eos_barotr"></span><span id="EOS_Toolkit::eos_barotr::eos_barotr__eos_barotrCR"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a6a4734274fc9f5d6468e0e42acb47307"></span><span class="sig-name descname"><span class="n"><span class="pre">eos_barotr</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr10eos_barotrERK10eos_barotr" title="EOS_Toolkit::eos_barotr::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotr10eos_barotrERK10eos_barotr" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Copy constructor. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotr10eos_barotrERR10eos_barotr">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotr10eos_barotrERR10eos_barotr"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotr10eos_barotrERR10eos_barotr"></span><span id="EOS_Toolkit::eos_barotr::eos_barotr__eos_barotrRR"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a38c1f758f5b529d85503e39b78fc685c"></span><span class="sig-name descname"><span class="n"><span class="pre">eos_barotr</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr10eos_barotrERR10eos_barotr" title="EOS_Toolkit::eos_barotr::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotr10eos_barotrERR10eos_barotr" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Move constructor. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotraSERK10eos_barotr">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotraSERK10eos_barotr"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotraSERK10eos_barotr"></span><span id="EOS_Toolkit::eos_barotr::assign-operator__eos_barotrCR"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ac2764aa2c4256a9760b98cd52f39f3e1"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotraSERK10eos_barotr" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Assignment operator. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotraSERR10eos_barotr">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotraSERR10eos_barotr"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotraSERR10eos_barotr"></span><span id="EOS_Toolkit::eos_barotr::assign-operator__eos_barotrRR"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ac85f99084d80f45ac4a96184928299f8"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotraSERR10eos_barotr" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Move assignment operator. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotrD0Ev">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotrD0Ev"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotrD0Ev"></span><span id="EOS_Toolkit::eos_barotr::~eos_barotr"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a5bd310494889329931aa1b1b8bc198d0"></span><span class="sig-name descname"><span class="n"><span class="pre">~eos_barotr</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Destructor. </p>
-<p>The EOS implementation will be destructed when no other copy of the EOS is using it (“last person turns off the light”). </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr6at_rhoE6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr6at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr6at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1acb6068568f6d79d3e8e091903b69d12d"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><span class="n"><span class="pre">state</span></span></a><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr6at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Specify a matter state based on mass density. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Object representing matter <a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr_1_1state"><span class="std std-ref">state</span></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr6at_gm1E6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr6at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr6at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a8567a2364c32bf51075c54a0896179ed"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><span class="n"><span class="pre">state</span></span></a><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr6at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Specify a matter state based on pseudo enthalpy. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Object representing matter <a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr_1_1state"><span class="std std-ref">state</span></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr13is_isentropicEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr13is_isentropicEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr13is_isentropicEv"></span><span id="EOS_Toolkit::eos_barotr::is_isentropicC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a28de7bc8c675748f43571b6dc6066fe9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_isentropic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr13is_isentropicEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether EOS is isentropic</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr12is_zero_tempEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr12is_zero_tempEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr12is_zero_tempEv"></span><span id="EOS_Toolkit::eos_barotr::is_zero_tempC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ae6f2dd44da52fddb4a1e1f4ffb9513c2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_zero_temp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr12is_zero_tempEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether EOS is zero-temperature (or false if temperature not implemented)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr8has_tempEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr8has_tempEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr8has_tempEv"></span><span id="EOS_Toolkit::eos_barotr::has_tempC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a7c4ab973cd4cccf39763b0d3d61910b7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_temp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr8has_tempEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether EOS provides temperature</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr9has_efracEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr9has_efracEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9has_efracEv"></span><span id="EOS_Toolkit::eos_barotr::has_efracC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a069aca82b7162c37ff92c856d826a306"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_efrac</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9has_efracEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Whether EOS provides electron fraction</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr9range_rhoEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr9range_rhoEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9range_rhoEv"></span><span id="EOS_Toolkit::eos_barotr::range_rhoC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1adb137cfbb94492875e621919c929e3fd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_rho</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5rangeE" title="EOS_Toolkit::eos_barotr::range"><span class="n"><span class="pre">range</span></span></a><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9range_rhoEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Validity <a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr_1a64b2da58a5fdb2858b1a22178b2ef1ab"><span class="std std-ref">range</span></a> for mass density</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr9range_gm1Ev">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr9range_gm1Ev"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9range_gm1Ev"></span><span id="EOS_Toolkit::eos_barotr::range_gm1C"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1adca75096a94ad8b27468f401c186c8f0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_gm1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5rangeE" title="EOS_Toolkit::eos_barotr::range"><span class="n"><span class="pre">range</span></span></a><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9range_gm1Ev" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Validity <a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr_1a64b2da58a5fdb2858b1a22178b2ef1ab"><span class="std std-ref">range</span></a> for pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr9minimal_hEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr9minimal_hEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9minimal_hEv"></span><span id="EOS_Toolkit::eos_barotr::minimal_hC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a694ff074e81de69405c88476b335495a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minimal_h</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9minimal_hEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Global lower bound for relativistic enthalpy.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr12is_rho_validE6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr12is_rho_validE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr12is_rho_validE6real_t"></span><span id="EOS_Toolkit::eos_barotr::is_rho_valid__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a8b0119ff5913c27f4b73247d26c32ded"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rho_valid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr12is_rho_validE6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Wether density is in valid range</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr12is_gm1_validE6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr12is_gm1_validE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr12is_gm1_validE6real_t"></span><span id="EOS_Toolkit::eos_barotr::is_gm1_valid__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a1ec152ec6c14077ecb40177e33462fdf"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_gm1_valid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr12is_gm1_validE6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Whether pseudo enthalpy is in valid range</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr10gm1_at_rhoE6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr10gm1_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10gm1_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::gm1_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a205a67e0ae3e2d1928e40cb9bfb9b027"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gm1_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10gm1_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute pseudo enthalpy from mass density. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( g \ge 1 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr12press_at_rhoE6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr12press_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr12press_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::press_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ae20132d4dd62e06e0ae08381e685d64e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr12press_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute pressure from mass density. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Pressure if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( P\ge 0 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr10eps_at_rhoE6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr10eps_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10eps_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::eps_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ac2ee22eb74c9991abedadf7c4e264704"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eps_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10eps_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute specific energy from mass density. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( \epsilon \)</span> if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( \epsilon \ge -1 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr10hm1_at_rhoE6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr10hm1_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10hm1_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::hm1_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ab43dfa2de980d25aac7cfd8c9d3874e9"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hm1_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10hm1_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute specific enthalpy from mass density. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( h - 1 \)</span> if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( h &gt; 0 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr11csnd_at_rhoE6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr11csnd_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr11csnd_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::csnd_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1aa479848362a361a37d727d2ca7625d2a"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr11csnd_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute sound speed from mass density. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( c_s \)</span> if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( 0\le c_s &lt; 1 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr11temp_at_rhoE6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr11temp_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr11temp_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::temp_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1accb56e197b9172aa5b1b09e0a2b3e7a9"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temp_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr11temp_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute temperature from mass density. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
-</ul>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( T \)</span> if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( T\ge 0 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr9ye_at_rhoE6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr9ye_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9ye_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::ye_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a8bdac63bcf18d8883a71059600e60a59"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ye_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9ye_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute electron fraction from mass density. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if electron fraction not available for EOS </p></li>
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
-</ul>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( Y_e \)</span> if state is valid else NAN</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr10rho_at_gm1E6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr10rho_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10rho_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::rho_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a77b4c6df702d28635e345537d9a66963"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rho_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10rho_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute mass density from pseudo enthalpy. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( \rho \)</span> if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( \rho \ge 0 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr12press_at_gm1E6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr12press_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr12press_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::press_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a25fd5864c2ee2465d53d0b262772e48b"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr12press_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute pressure from pseudo enthalpy. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Pressure if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( P\ge 0 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr10eps_at_gm1E6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr10eps_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10eps_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::eps_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a052a745f637fe049ac320f496e441959"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eps_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10eps_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute specific energy from pseudo enthalpy. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( \epsilon \)</span> if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( \epsilon \ge -1 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr10hm1_at_gm1E6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr10hm1_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10hm1_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::hm1_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a646c7e15649a09b4c860b68a21b8b0cd"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hm1_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10hm1_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute specific enthalpy from pseudo enthalpy. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( h - 1 \)</span> if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( h &gt; 0 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr11csnd_at_gm1E6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr11csnd_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr11csnd_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::csnd_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a58caa65259f9923166c3ad4c93c72db9"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr11csnd_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute sound speed from pseudo enthalpy. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( c_s \)</span> if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( 0\le c_s &lt; 1 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr11temp_at_gm1E6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr11temp_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr11temp_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::temp_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a60c846fb350ee2b603fca2f52c0435b8"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temp_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr11temp_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute temperature from from pseudo enthalpy. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
-</ul>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( T \)</span> if state is valid else NAN</p>
-</dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
-<dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( T\ge 0 \)</span> (unless NAN) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr9ye_at_gm1E6real_t">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr9ye_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9ye_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::ye_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ab4f759d3924e6b446b83ffaa6c1b3a5f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ye_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9ye_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute electron fraction from pseudo enthalpy. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
-</dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if electron fraction not available for EOS </p></li>
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
-</ul>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="math notranslate nohighlight">\( Y_e \)</span> if state is valid else NAN</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr11units_to_SIEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr11units_to_SIEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr11units_to_SIEv"></span><span id="EOS_Toolkit::eos_barotr::units_to_SIC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1aeb4b1eba4bb0b19e385bddb83266c85f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">units_to_SI</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr11units_to_SIEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return the EOS units. </p>
-<p>This returns the conversion factors to express the units used by the EOS into SI units. The units are specified by the user when creating the EOS and stored for bookkeeping. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr4saveE8datasink">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr4saveE8datasink"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr4saveE8datasink"></span><span id="EOS_Toolkit::eos_barotr::save__datasinkC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a4c1b6adf35f068f4ca6614cca9a6dfc3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">save</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">datasink</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr4saveE8datasink" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Save EOS to a datastore. </p>
-<p>This allows saving the EOS to a datastore. This is also used internally by the EOS file functionality. </p>
-</dd></dl>
-
-</div>
-<dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotr5stateE">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotr5stateE"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotr5stateE"></span><span id="EOS_Toolkit::eos_barotr::state"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">private</span></span><span class="w"> </span><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">eos_barotr_base</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">state_base</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Class representing the matter state for the <a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr"><span class="std std-ref">eos_barotr</span></a> interface. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotr5state5stateERK5state">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotr5state5stateERK5state"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotr5state5stateERK5state"></span><span id="EOS_Toolkit::eos_barotr::state::state__stateCR"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a2d45d7eb65842d5c929c37237328ca5d"></span><span class="sig-name descname"><span class="n"><span class="pre">state</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5state5stateERK5state" title="EOS_Toolkit::eos_barotr::state::state"><span class="n"><span class="pre">state</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotr5state5stateERK5state" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Copy constructor. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotr5state5stateERR5state">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotr5state5stateERR5state"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotr5state5stateERR5state"></span><span id="EOS_Toolkit::eos_barotr::state::state__stateRR"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a4175b051b710b180f292ee23322c82ea"></span><span class="sig-name descname"><span class="n"><span class="pre">state</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5state5stateERR5state" title="EOS_Toolkit::eos_barotr::state::state"><span class="n"><span class="pre">state</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotr5state5stateERR5state" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Move constructor. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotr5stateaSERK5state">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotr5stateaSERK5state"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotr5stateaSERK5state"></span><span id="EOS_Toolkit::eos_barotr::state::assign-operator__stateCR"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a6c0604d3be0344a6013f96c7daed20f5"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><span class="n"><span class="pre">state</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><span class="n"><span class="pre">state</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateaSERK5state" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Objects not meant to be assigned. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit10eos_barotr5stateaSERR5state">
-<span id="_CPPv3N11EOS_Toolkit10eos_barotr5stateaSERR5state"></span><span id="_CPPv2N11EOS_Toolkit10eos_barotr5stateaSERR5state"></span><span id="EOS_Toolkit::eos_barotr::state::assign-operator__stateRR"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a14348ef4f4e351cc638249e9e2abba60"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><span class="n"><span class="pre">state</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><span class="n"><span class="pre">state</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateaSERR5state" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Objects not meant to be assigned. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5statecvbEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr5statecvbEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5statecvbEv"></span><span id="EOS_Toolkit::eos_barotr::state::castto-b-operatorC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1afc4ee02cf77f55ac363477a53a0e0ed9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5statecvbEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Conversion operator to bool. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>If state is valid. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state3gm1Ev">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state3gm1Ev"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state3gm1Ev"></span><span id="EOS_Toolkit::eos_barotr::state::gm1C"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a42cf58d4e463afea9de13b415a7b8d2e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gm1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state3gm1Ev" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
-</dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( g \ge 1 \)</span> </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state3rhoEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state3rhoEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state3rhoEv"></span><span id="EOS_Toolkit::eos_barotr::state::rhoC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a6deefaaac0a526d0f37d8711ebb1d81b"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rho</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state3rhoEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
-</dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( \rho \ge 0 \)</span> </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state5pressEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state5pressEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state5pressEv"></span><span id="EOS_Toolkit::eos_barotr::state::pressC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a4ad3696b17160187f1f6de1b2f2d6836"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state5pressEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Pressure <span class="math notranslate nohighlight">\( P \)</span></p>
-</dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( P\ge 0 \)</span> </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state3epsEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state3epsEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state3epsEv"></span><span id="EOS_Toolkit::eos_barotr::state::epsC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a08ae08e42d87ec2988f465a06d101c8c"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eps</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state3epsEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span></p>
-</dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( \epsilon \ge -1 \)</span> </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state3hm1Ev">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state3hm1Ev"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state3hm1Ev"></span><span id="EOS_Toolkit::eos_barotr::state::hm1C"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a91340d4f8dd5c1ce7d4e55e9e355d2fa"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hm1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state3hm1Ev" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Specific enthalpy <span class="math notranslate nohighlight">\( h - 1 \)</span></p>
-</dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( h &gt; 0 \)</span> (<em>not</em> <span class="math notranslate nohighlight">\( h &gt;= 1 \)</span>) </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state4csndEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state4csndEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state4csndEv"></span><span id="EOS_Toolkit::eos_barotr::state::csndC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a7331727210f0e93fc9a974c1aba797b6"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state4csndEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Speed of sound <span class="math notranslate nohighlight">\( c_s \)</span></p>
-</dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( 0\le c_s &lt; 1 \)</span> </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state4tempEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state4tempEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state4tempEv"></span><span id="EOS_Toolkit::eos_barotr::state::tempC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1afce7299632be2835d5e82592edf241bf"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state4tempEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p></li>
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Temperature <span class="math notranslate nohighlight">\( T \)</span></p>
-</dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( T\ge 0 \)</span> </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state2yeEv">
-<span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state2yeEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state2yeEv"></span><span id="EOS_Toolkit::eos_barotr::state::yeC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a393286232926afb8d6d21c6eed2f78e6"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ye</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state2yeEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p></li>
-<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if composition not available for EOS </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span></p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-</dd></dl>
-
-</section>
 <section id="loading-from-file">
 <h2>Loading from File<a class="headerlink" href="#loading-from-file" title="Permalink to this heading">¶</a></h2>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units">
-<span id="_CPPv3N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units"></span><span id="_CPPv2N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units"></span><span id="EOS_Toolkit::load_eos_barotr__ss.unitsCR"></span><span class="target" id="eos__barotr__file_8cc_1a1fe3fda0acd4caf448b062a4826c61ec"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">load_eos_barotr</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">u</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units"></span><span id="_CPPv2N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units"></span><span id="EOS_Toolkit::load_eos_barotr__ss.unitsCR"></span><span class="target" id="eos__barotr__file_8cc_1a1fe3fda0acd4caf448b062a4826c61ec"></span><span class="n"><span class="pre">eos_barotr</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">load_eos_barotr</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">u</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Load barotropic EOS from hdf5 file. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -761,30 +58,35 @@
 </dd></dl>
 
 </section>
-<section id="creating-specific-eos">
-<h2>Creating Specific EOS<a class="headerlink" href="#creating-specific-eos" title="Permalink to this heading">¶</a></h2>
+<section id="creating-eos-from-sampled-data">
+<h2>Creating EOS from sampled data<a class="headerlink" href="#creating-eos-from-sampled-data" title="Permalink to this heading">¶</a></h2>
+<p>To create a EOS based on spline interpolation from given sample points,
+there are three options.
+Depending on whether the pseudo-enthalpy and/or specific energy are
+known accurately, one should use one of the following.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE">
-<span id="_CPPv3N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE"></span><span id="_CPPv2N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE"></span><span id="EOS_Toolkit::make_eos_barotr_spline__std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.b.interval:real_t:.real_t.units.std::s"></span><span class="target" id="eos__barotr__spline_8h_1a941177685e693dbdf9ea53623c358cbc"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_spline</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">gm1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">press</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">csnd</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">efrac</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isentropic_</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval"><span class="n"><span class="pre">interval</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rg_rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_poly_</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">units_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pts_per_mag</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">200</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE"></span><span id="_CPPv2N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE"></span><span id="EOS_Toolkit::make_eos_barotr_spline__std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.b.interval:real_t:.real_t.units.std::s"></span><span class="target" id="eos__barotr__spline_8h_1aa783070f0d3cb9717535f2590f9d0e3b"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_spline</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">gm1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">press</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">csnd</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">efrac</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isentropic</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval"><span class="n"><span class="pre">interval</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rg_rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_poly</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">u</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pts_per_mag</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">200</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">eos_barotr</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create barotropic EOS based on splines. </p>
-<p>The internally used regularly log-spaced cardinal cubic splines are set up from irregularly spaced sample points provided as vectors, using cubic monotonic spline interpolation.</p>
-<p>One can specify whether the EOS is isentropic. If the temperature is zero, the EOS must be specified as isentropic or an exception is thrown. Even for isentropic EOS, it is still necessary to provide specific energy and pseudo-enthalpy, even though they become redundant. Consistency is not checked and in the responsibility of the user.</p>
-<p>The validity range will start at zero up to the largest provided sample point. Between zero and a matching point specified by the user, a polytropic EOS will be used. Between the matching point and the largest sample point, the EOS will be sampled regularly in log-space with a given number of points per decade.</p>
-<p>The parameters are w.r.t EOS units. The EOS units given in the last parameter are stored for bookkeeping.</p>
+<p>This EOS type internally uses regularly-spaced cardinal cubic splines. The regular spacing implies that the evaluation cost is independent from the table resolution. All quantities are interpolated with respect to logarithmic pseudo-enthalpy. In addition there is an interpolation spline that computes logarithmic pseudo-enthalpy from logarithmic density, which is used when the EOS is evaluated based on density.</p>
+<p>The samples used for creating the EOS need to provide both pseudo-enthalpy and density, but may be arbitrarily spaced. They are resampled to the required spacing using monotonic spline interpolation.</p>
+<p>The range of the internal interpolation spline of the EOS has to be specified. It can span less than the range of the provided points. Below the interpolation range, the EOS will use a matching generalised polytropic EOS with the specified adiabatic index. The density range that needs to be covered by the interpolation range naturally depends on the application. It might therefore make sense to not use the full density range provided by the original EOS source.</p>
+<p>One can specify whether the EOS is isentropic. If the temperature is zero, the EOS must be specified as isentropic or an exception is thrown. Note that physically, the pseudo-enthalpy is already determined by pressure, density, and specific energy. For isentropic EOS, energy density follows from density and pressure. The consistency of the provided samples is not checked and in the responsibility of the user. There are however similar functions which computes the pseudo-enthalpy itself using numerical integration, or both pseudo enthalpy and specific energy (only possible for isentropic case).</p>
+<p>The parameters are w.r.t EOS units, which have to be provided as a parameter and will be stored with the EOS for bookkeeping.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>gm1</strong> – Samples for pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span>. Must be strictly increasing. </p></li>
-<li><p><strong>rho</strong> – Samples for mass density <span class="math notranslate nohighlight">\( \rho \)</span>. Must be strictly increasing. </p></li>
+<li><p><strong>rho</strong> – Samples for mass density <span class="math notranslate nohighlight">\( \rho \)</span>. Must be strictly increasing and strictly positive. </p></li>
 <li><p><strong>eps</strong> – Samples for specific energy <span class="math notranslate nohighlight">\( \epsilon \)</span>. Must be strictly increasing and obey <span class="math notranslate nohighlight">\( \epsilon &gt; -1 \)</span> </p></li>
-<li><p><strong>pbr</strong> – Samples for <span class="math notranslate nohighlight">\( P / \rho \ge 0 \)</span>. </p></li>
+<li><p><strong>press</strong> – Samples for pressure <span class="math notranslate nohighlight">\( P \ge 0 \)</span>. </p></li>
 <li><p><strong>csnd</strong> – Samples for soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s &lt; 1 \)</span> </p></li>
 <li><p><strong>temp</strong> – Samples for temperature or empty vector (equivalent to all-zero). Must obey <span class="math notranslate nohighlight">\( T\ge 0 \)</span>. </p></li>
 <li><p><strong>efrac</strong> – Electron fraction or empty vector (in which case the EOS will not provide electron fraction). </p></li>
-<li><p><strong>isentropic_</strong> – Whether the EOS is isentropic, e.g. for degenerate matter. </p></li>
+<li><p><strong>isentropic</strong> – Whether the EOS is isentropic, e.g. for degenerate matter. </p></li>
 <li><p><strong>rg_rho</strong> – Range of <span class="math notranslate nohighlight">\( \rho \)</span> where EOS is computed from sample points. Below, a polytrope is used. Range must be within the provided sample points. </p></li>
-<li><p><strong>n_poly_</strong> – Polytropic index used to extent EOS to zero density. </p></li>
-<li><p><strong>units</strong> – Unit system (w.r.t. SI) of the EOS </p></li>
+<li><p><strong>n_poly</strong> – Polytropic index used to extent EOS to zero density. </p></li>
+<li><p><strong>u</strong> – Unit system (w.r.t. SI) of the EOS </p></li>
 <li><p><strong>pts_per_mag</strong> – Sample points per magnitude to be used internally for EOS splines</p></li>
 </ul>
 </dd>
@@ -798,8 +100,80 @@
 <div class="line"><br /></div>
 </div>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE">
+<span id="_CPPv3N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE"></span><span id="_CPPv2N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE"></span><span id="EOS_Toolkit::make_eos_barotr_spline__std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.b.interval:real_t:.real_t.units.std::s"></span><span class="target" id="eos__barotr__spline_8h_1a6898a026fcc95a1bac33464b4861550e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_spline</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">press</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">csnd</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">efrac</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isentropic</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval"><span class="n"><span class="pre">interval</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rg_rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_poly</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">u</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pts_per_mag</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">200</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">eos_barotr</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create barotropic EOS based on splines. </p>
+<p>This EOS type internally uses regularly-spaced cardinal cubic splines. The regular spacing implies that the evaluation cost is independent from the table resolution. All quantities are interpolated with respect to logarithmic pseudo-enthalpy. In addition there is an interpolation spline that computes logarithmic pseudo-enthalpy from logarithmic density, which is used when the EOS is evaluated based on density.</p>
+<p>The sample points provided for creating the EOS do not have to be regularly spaced. They are resampled to the required spacing using (arbitrary spaced) monotonic spline interpolation.</p>
+<p>The samples are provided with respect to density. The pseudo-enthalpy does not have to be provided, but is computed using numerical integration via the trapezoidal rule. If sample points of density are further apart than the specified minimum points per magnitude, additional sample points are inserted via cubic monotonic spline interpolation before the numerical integration. This ensures that the final EOS is a consistent representation of a cubic monotonic spline interpolation of the sample points with respect to density.</p>
+<p>Note there is a similar function where the pseudo-enthalpy is provided as samples as well. This should be used if it is know accurately, e.g for EOS based on analytic expressions. Another function specially for isentropic EOS recomputes the specific energy as well as the pseudo enthalpy.</p>
+<p>The range of the internal interpolation spline of the final EOS has to be specified. It can span less than the range of the provided points. Below the interpolation range, the EOS will use a matching generalised polytropic EOS with the specified adiabatic index. The density range that needs to be covered by the interpolation range naturally depends on the application. It might therefore make sense to not use the full density range provided by the original EOS source.</p>
+<p>One can specify whether the EOS is isentropic. If the temperature is zero, the EOS must be specified as isentropic or an exception is thrown. Note that physically, energy density follows from density and pressure for the case of isentropic EOS. The consistency of the provided samples is not checked and in the responsibility of the user.</p>
+<p>The parameters are w.r.t EOS units, which have to be provided as a parameter and will be stored with the EOS for bookkeeping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Samples for mass density <span class="math notranslate nohighlight">\( \rho \)</span>. Must be strictly increasing and strictly positive. </p></li>
+<li><p><strong>eps</strong> – Samples for specific energy <span class="math notranslate nohighlight">\( \epsilon \)</span>. Must be strictly increasing and obey <span class="math notranslate nohighlight">\( \epsilon &gt; -1 \)</span> </p></li>
+<li><p><strong>press</strong> – Samples for pressure <span class="math notranslate nohighlight">\( P \ge 0 \)</span>. </p></li>
+<li><p><strong>csnd</strong> – Samples for soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s &lt; 1 \)</span> </p></li>
+<li><p><strong>temp</strong> – Samples for temperature or empty vector (equivalent to all-zero). Must obey <span class="math notranslate nohighlight">\( T\ge 0 \)</span>. </p></li>
+<li><p><strong>efrac</strong> – Electron fraction or empty vector (in which case the EOS will not provide electron fraction). </p></li>
+<li><p><strong>isentropic</strong> – Whether the EOS is isentropic, e.g. for degenerate matter. </p></li>
+<li><p><strong>rg_rho</strong> – Range of <span class="math notranslate nohighlight">\( \rho \)</span> where EOS is computed from sample points. Below, a polytrope is used. Range must be within the provided sample points. </p></li>
+<li><p><strong>n_poly</strong> – Polytropic index used to extent EOS to zero density. </p></li>
+<li><p><strong>u</strong> – Unit system (w.r.t. SI) of the EOS </p></li>
+<li><p><strong>pts_per_mag</strong> – Sample points per magnitude to be used internally for EOS splines</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Generic interface employing tabulated barotropic EOS </p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE8intervalI6real_tE6real_t6real_t5unitsNSt6size_tE">
+<span id="_CPPv3N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE8intervalI6real_tE6real_t6real_t5unitsNSt6size_tE"></span><span id="_CPPv2N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE8intervalI6real_tE6real_t6real_t5unitsNSt6size_tE"></span><span id="EOS_Toolkit::make_eos_barotr_spline__std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.interval:real_t:.real_t.real_t.units.std::s"></span><span class="target" id="eos__barotr__spline_8h_1a407c254b4916f3127700549d3fc64930"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_spline</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">press</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">csnd</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">efrac</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval"><span class="n"><span class="pre">interval</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rg_rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_poly</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps0</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">u</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pts_per_mag</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">200</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">eos_barotr</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE8intervalI6real_tE6real_t6real_t5unitsNSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create barotropic EOS based on splines. </p>
+<p>This EOS type internally uses regularly-spaced cardinal cubic splines. The regular spacing implies that the evaluation cost is independent from the table resolution. All quantities are interpolated with respect to logarithmic pseudo-enthalpy. In addition there is an interpolation spline that computes logarithmic pseudo-enthalpy from logarithmic density, which is used when the EOS is evaluated based on density.</p>
+<p>The sample points provided for creating the EOS do not have to be regularly spaced. They are resampled to the required spacing using (arbitrary spaced) monotonic spline interpolation.</p>
+<p>The samples are provided with respect to density. The pseudo-enthalpy does not have to be provided, but is computed using numerical integration via the trapezoidal rule. It is assumed that the EOS is isentropic. The specific energy is recomputed from the pressure and density samples under this assumption. If sample points of density are further apart than the specified minimum points per magnitude, additional sample points are inserted via cubic monotonic spline interpolation before the numerical integrations of pseudo-enthalpy and specific energy. This ensures that the final EOS is a consistent representation of a cubic monotonic spline interpolation of the sample points with respect to density.</p>
+<p>Note there are similar functions where specific energy or specific energy and pseudo-enthalpy are provided as samples as well. This should be used if they are know accurately, e.g, for EOS based on analytic expressions.</p>
+<p>The range of the internal interpolation spline of the final EOS has to be specified. It can span less than the range of the provided points. Below the interpolation range, the EOS will use a matching generalised polytropic EOS with the specified adiabatic index. The density range that needs to be covered by the interpolation range naturally depends on the application. It might therefore make sense to not use the full density range provided by the original EOS source.</p>
+<p>If a temperature is given, its consistency with the assumption of isentropy cannot be checked and is in the responsability of the user.</p>
+<p>The parameters are w.r.t EOS units, which have to be provided as a parameter and will be stored with the EOS for bookkeeping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Samples for mass density <span class="math notranslate nohighlight">\( \rho \)</span>. Must be strictly increasing and strictly positive. </p></li>
+<li><p><strong>press</strong> – Samples for pressure <span class="math notranslate nohighlight">\( P \ge 0 \)</span>. </p></li>
+<li><p><strong>csnd</strong> – Samples for soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s &lt; 1 \)</span> </p></li>
+<li><p><strong>temp</strong> – Samples for temperature or empty vector (equivalent to all-zero). Must obey <span class="math notranslate nohighlight">\( T\ge 0 \)</span>. </p></li>
+<li><p><strong>efrac</strong> – Electron fraction or empty vector (in which case the EOS will not provide electron fraction). </p></li>
+<li><p><strong>rg_rho</strong> – Range of <span class="math notranslate nohighlight">\( \rho \)</span> where EOS is computed from sample points. Below, a polytrope is used. Range must be within the provided sample points. </p></li>
+<li><p><strong>n_poly</strong> – Polytropic index used to extent EOS to zero density. </p></li>
+<li><p><strong>eps0</strong> – Specific energy at zero density </p></li>
+<li><p><strong>u</strong> – Unit system (w.r.t. SI) of the EOS </p></li>
+<li><p><strong>pts_per_mag</strong> – Sample points per magnitude to be used internally for EOS splines</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Generic interface employing tabulated barotropic EOS </p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>It is also possible to sample an existing EOS:</p>
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERK10eos_barotr8intervalI6real_tE6real_tNSt6size_tE">
-<span id="_CPPv3N11EOS_Toolkit22make_eos_barotr_splineERK10eos_barotr8intervalI6real_tE6real_tNSt6size_tE"></span><span id="_CPPv2N11EOS_Toolkit22make_eos_barotr_splineERK10eos_barotr8intervalI6real_tE6real_tNSt6size_tE"></span><span id="EOS_Toolkit::make_eos_barotr_spline__eos_barotrCR.interval:real_t:.real_t.std::s"></span><span class="target" id="eos__barotr__spline_8h_1a9dd0a2117b6d9e7e0edcb3ff626f9484"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_spline</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">eos</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval"><span class="n"><span class="pre">interval</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rg_rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_poly</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pts_per_mag</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">200</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERK10eos_barotr8intervalI6real_tE6real_tNSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit22make_eos_barotr_splineERK10eos_barotr8intervalI6real_tE6real_tNSt6size_tE"></span><span id="_CPPv2N11EOS_Toolkit22make_eos_barotr_splineERK10eos_barotr8intervalI6real_tE6real_tNSt6size_tE"></span><span id="EOS_Toolkit::make_eos_barotr_spline__eos_barotrCR.interval:real_t:.real_t.std::s"></span><span class="target" id="eos__barotr__spline_8h_1a16da4a7a68cf523517c91782f3076a88"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_spline</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">eos_barotr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">eos</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4I0EN11EOS_Toolkit8intervalE" title="EOS_Toolkit::interval"><span class="n"><span class="pre">interval</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rg_rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_poly</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pts_per_mag</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">200</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">eos_barotr</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERK10eos_barotr8intervalI6real_tE6real_tNSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create barotropic EOS based on splines. </p>
 <p>This allows to represent existing EOS objects of any type as a spline EOS by sampling them it.</p>
 <dl class="field-list simple">
@@ -820,9 +194,12 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+</section>
+<section id="creating-polytropic-eos">
+<h2>Creating Polytropic EOS<a class="headerlink" href="#creating-polytropic-eos" title="Permalink to this heading">¶</a></h2>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t5units">
-<span id="_CPPv3N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t5units"></span><span id="_CPPv2N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t5units"></span><span id="EOS_Toolkit::make_eos_barotr_poly__real_t.real_t.real_t.units"></span><span class="target" id="eos__barotr__poly_8h_1a5afa568927caed03eb8b81498e679a30"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_poly</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rmd_p</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_max</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">units_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t5units" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t5units"></span><span id="_CPPv2N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t5units"></span><span id="EOS_Toolkit::make_eos_barotr_poly__real_t.real_t.real_t.units"></span><span class="target" id="eos__barotr__poly_8h_1a5afa568927caed03eb8b81498e679a30"></span><span class="n"><span class="pre">eos_barotr</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_poly</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rmd_p</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_max</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">units_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t5units" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create a polytropic EOS. </p>
 <p>The valid range always starts at zero density up to user specified maximum. If the polytropic index is less than one, the valid range is reduced avoid superluminal soundspeed, if necessary. The parameters are w.r.t EOS units. The EOS units given in the last parameter are stored for bookkeeping.</p>
 <dl class="field-list simple">
@@ -835,7 +212,7 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr"><span class="std std-ref">eos_barotr</span></a> generic interface employing polytropic EOS </p>
+<dd class="field-even"><p>eos_barotr generic interface employing polytropic EOS </p>
 </dd>
 </dl>
 </dd></dl>
@@ -843,9 +220,12 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+</section>
+<section id="creating-piecewise-polytropic-eos">
+<h2>Creating Piecewise Polytropic EOS<a class="headerlink" href="#creating-piecewise-polytropic-eos" title="Permalink to this heading">¶</a></h2>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units">
-<span id="_CPPv3N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units"></span><span id="_CPPv2N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units"></span><span id="EOS_Toolkit::make_eos_barotr_pwpoly__real_t.std::vector:real_t:CR.std::vector:real_t:CR.real_t.units"></span><span class="target" id="eos__barotr__pwpoly_8h_1ab212daa4fe3d01a38416f8c8d04fed63"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_pwpoly</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rmdp0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">segm_bound</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">segm_gamma</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_max_</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">units_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units"></span><span id="_CPPv2N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units"></span><span id="EOS_Toolkit::make_eos_barotr_pwpoly__real_t.std::vector:real_t:CR.std::vector:real_t:CR.real_t.units"></span><span class="target" id="eos__barotr__pwpoly_8h_1ab212daa4fe3d01a38416f8c8d04fed63"></span><span class="n"><span class="pre">eos_barotr</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_pwpoly</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rmdp0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">segm_bound</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">segm_gamma</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_max_</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">units_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create piecewise polytropic EOS. </p>
 <p>The valid range always starts at zero density up to user specified maximum. If the polytropic index of some segments is less than one, the valid range is reduced, if necessary, to avoid superluminal soundspeed. The parameters are w.r.t EOS units. The EOS units given in the last parameter are stored for bookkeeping.</p>
 <dl class="field-list simple">
@@ -859,20 +239,27 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr"><span class="std std-ref">eos_barotr</span></a> generic interface employing piecewise polytropic EOS </p>
+<dd class="field-even"><p>eos_barotr generic interface employing piecewise polytropic EOS </p>
 </dd>
 </dl>
 </dd></dl>
 
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+</section>
+<section id="generic-interface">
+<h2>Generic Interface<a class="headerlink" href="#generic-interface" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="deprecated-eos">
+<h2>Deprecated EOS<a class="headerlink" href="#deprecated-eos" title="Permalink to this heading">¶</a></h2>
+<p>In older versions, there was no spline based EOS. Instead
+there was eos_barotr_table based on linear interpolation. This type
+can still be used for sake of reproducing old results, but for new
+EOS its use is discouraged.</p>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version 1.5: </span>Use make_eos_barotr_spline instead make_eos_barotr_table</p>
 </div>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit21make_eos_barotr_tableERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb6real_t5units">
-<span id="_CPPv3N11EOS_Toolkit21make_eos_barotr_tableERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb6real_t5units"></span><span id="_CPPv2N11EOS_Toolkit21make_eos_barotr_tableERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb6real_t5units"></span><span id="EOS_Toolkit::make_eos_barotr_table__std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.b.real_t.units"></span><span class="target" id="eos__barotr__table_8h_1a7cf700df90a7b5706910970fa23645f0"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_table</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">gm1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pbr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cs2</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">efrac</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isentropic_</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_poly_</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">units_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit21make_eos_barotr_tableERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb6real_t5units" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit21make_eos_barotr_tableERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb6real_t5units"></span><span id="_CPPv2N11EOS_Toolkit21make_eos_barotr_tableERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb6real_t5units"></span><span id="EOS_Toolkit::make_eos_barotr_table__std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.std::vector:real_t:CR.b.real_t.units"></span><span class="target" id="eos__barotr__table_8h_1a7cf700df90a7b5706910970fa23645f0"></span><span class="n"><span class="pre">eos_barotr</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">make_eos_barotr_table</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">gm1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">eps</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pbr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cs2</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">temp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">real_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">efrac</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">isentropic_</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_poly_</span></span>, <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">units_</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit21make_eos_barotr_tableERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb6real_t5units" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Create tabulated barotropic EOS. </p>
 <p>The internally used regularly log-spaced lookup tables are set up from irregularly spaced sample points provided as vectors, using cubic monotonic spline interpolation.</p>
 <p>One can specify whether the EOS is isentropic. If the temperature is zero, the EOS must be specified as isentropic or an exception is thrown. Even for isentropic EOS, it is still necessary to provide specific energy and pseudo-enthalpy, even though they become redundant. Consistency is not checked and in the responsibility of the user.</p>

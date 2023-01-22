@@ -39,8 +39,11 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h1>
 <p>The main target and devolpment platform is Linux, although the
 library code is not platform-specific and should also work on Macs.
-Windows and AIX are not supported. Binary packages are currently not available, but a conda
-package is planned.</p>
+Windows and AIX are not supported. For use in HPC, users need to build
+the library from source. For use in postprocessing, the Python intferface
+can also be installed via pip (binary wheel of the library available for
+Linux). Conda packages for the C++ library and Python interface are planned
+but not available yet.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
@@ -102,7 +105,7 @@ example) can find it, compilation should be straightforward:</p>
 <h2>Python Bindings<a class="headerlink" href="#python-bindings" title="Permalink to this heading">¶</a></h2>
 <p>If only the Python interface is required on a Linux platform,
 it is easiest to install from pypi</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">reprimand</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pyreprimand</span>
 </pre></div>
 </div>
 <p>Otherwise, one first has to buid and install the C++ library as shown above.</p>

@@ -122,12 +122,12 @@ circumstances</strong> should incorrect “dummy” values or NANs be returned.<
 </div>
 <p>No function will ever be called outside the validity range, all checks
 are taken care of by the user-facing interface
-<a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code></a>.
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code>.
 Conversely, the implementation should always return a correct result
 for valid input, including parameters on the boundary of the valid
 region.</p>
 <p>Finally, one has to provide a function to wrap the
-implementation into <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code></a> EOS object,
+implementation into <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code> EOS object,
 like this:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">eos_barotr</span><span class="w"> </span><span class="nf">EOS_Toolkit::make_eos_barfoo</span><span class="p">(</span><span class="cm">/* &lt;barfoo parameters&gt; */</span><span class="p">)</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
@@ -336,7 +336,7 @@ It must be guaranteed that the enthaply computed by the EOS for any valid state 
 <dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Specific enthalpy <span class="math notranslate nohighlight">\( h-1 \)</span> </p>
+<dd class="field-even"><p>Specific enthalpy <span class="math notranslate nohighlight">\( h-1  \)</span> </p>
 </dd>
 </dl>
 </dd></dl>
@@ -382,6 +382,35 @@ It must be guaranteed that the enthaply computed by the EOS for any valid state 
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl4saveE8datasink">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl4saveE8datasink"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl4saveE8datasink"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::save__datasinkC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a78993af4e388ac7710ffb1d5a8fee2db"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">save</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">datasink</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl4saveE8datasink" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Save EOS to a datastore. </p>
+<p>This allows saving the EOS to a datastore. Used internally by the EOS file functionality. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl11units_to_SIEv">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl11units_to_SIEv"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl11units_to_SIEv"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::units_to_SIC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a4a74f653290791df941e2e6b9aba388b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">units_to_SI</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl11units_to_SIEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the EOS units. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Unit object with the geometric unit system of the EOS with respect to SI units </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl9descr_strEv">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl9descr_strEv"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl9descr_strEv"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::descr_strC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1ac1904083001fd70822b038ca6adae51e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">descr_str</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl9descr_strEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Short description string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EOS type-specific description string </p>
 </dd>
 </dl>
 </dd></dl>
