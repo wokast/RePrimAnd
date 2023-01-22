@@ -441,6 +441,12 @@ class eos_thermal : detail::eos_thermal_base {
   creating the EOS and stored for bookkeeping.
   **/
   auto units_to_SI() const -> const units&;
+  
+  /**\brief Short description string 
+  
+  @returns Short auto-generated EOS type-specific description string 
+  **/
+  auto descr_str() const -> std::string;
 };
 
 

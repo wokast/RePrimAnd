@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
   name = "RePrimAnd"
-  version = "1.5beta"
+  version = "1.5"
   authors = [
     { name = "Wolfgang Kastaun", email = "physik@fangwolg.de" }
   ]  

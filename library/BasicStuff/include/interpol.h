@@ -11,8 +11,6 @@ namespace EOS_Toolkit {
 
 
 namespace detail {
-  class cspline_mono_impl;
-  class cspline_cardinal_impl;
 
 
 class interpolator_impl {

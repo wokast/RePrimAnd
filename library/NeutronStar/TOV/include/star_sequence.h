@@ -378,20 +378,19 @@ guess is not required to be within a stable branch, and the default
 value should work for any remotely realistic NS EOS.
 In a similar fashion, a central pseudo-enthalpy for which the NS mass 
 falls below the parameter mgrav_min is determined. Next, the maximum
-is determined using a maximum search. This maximum may be close to the 
-EOS validity bound. To determine if such a maxmimum
-should be considerd physical, a model some distance right of the 
-maximum but limited to the EOS range is computed. If its mass
-is smaller than (1 - max_margin) times the maximum mass, the latter
-is considered physical (as can be checked later using the 
-includes_maximum() method of the branch object).
+is determined using a maximum search. However, the maximum might be 
+located at the EOS validity bound. The maxmimum is considered physical 
+based on a simple heuristics: (g_max-1)*(1+max_margin) < g_eos, where 
+g_max and g_eos are the the central pseudo-enthalpy of the maximum mass 
+model and the EOS upper validity bound. This criterion can later be 
+queried using the includes_maximum() method of the branch object.
 Finally, the branch is then sampled with resolution given by num_samp.
 **/ 
 auto make_tov_branch_stable(eos_barotr eos, tov_acc_simple acc,
                           real_t mgrav_min=0.5,
                           unsigned int num_samp=500,
                           real_t gm1_initial=1.2, 
-                          real_t max_margin=1e-2)
+                          real_t max_margin=5e-2)
 -> star_branch;
 
 }

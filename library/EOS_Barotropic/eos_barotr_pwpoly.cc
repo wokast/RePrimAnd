@@ -3,6 +3,10 @@
 #include <stdexcept>
 #include <cmath>
 #include <limits>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+
 
 
 using namespace std;
@@ -275,3 +279,43 @@ EOS_Toolkit::make_eos_barotr_pwpoly(real_t rmdp0,
                                 units_)};
 }
 
+
+auto eos_barotr_pwpoly::descr_str() const -> std::string
+{
+  auto u = units_to_SI();
+  std::ostringstream s;
+  s.precision(15);
+  s.setf(std::ios::scientific);
+  
+  s << "Piecewise Polytropic EOS"
+    << ", max. valid density =" 
+    << (range_rho().max() * u.density())
+    << " kg/m^3"
+    << ", max. valid g-1 =" << range_gm1().max() 
+    << ", adibatic exponents = [";  
+  {
+    std::string c{""};
+    for (auto i : segments)  {
+      s << c << i.gamma; c=", ";
+    }
+  }
+  s << "]" 
+    << ", Segment boundaries = [";
+  {
+    std::string c{""};
+    for (auto i : segments)  {
+      s << c << (i.rmd0 * u.density()); c=", ";
+    }
+  }
+  s << "] kg/m^3"
+    << ", density scales = [";
+  {
+    std::string c{""};
+    for (auto i : segments)  {
+      s << c << (i.rmd_p * u.density()); c=", ";
+    }
+  }
+  s << "] kg/m^3";
+    
+  return s.str();
+}

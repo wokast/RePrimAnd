@@ -42,7 +42,7 @@ valid range.
    import pyreprimand as pyr
    import numpy as np
    
-   u   = pyr.units.geom_solar
+   u   = pyr.units.geom_solar()
    eos = pyr.load_eos_barotr("EOS/MS1_PP.eos.h5", units=u)
    
    rho = np.linspace(eos.range_rho.min, eos.range_rho.max, 1000)
@@ -52,15 +52,15 @@ Creating EOS Files
 ^^^^^^^^^^^^^^^^^^
 
 One prime use for the Python interface is the creation of EOS files based on
-data from other sources. Polytropic, piecewise polytropic, and tabulated EOS
-are supported directly. Other EOS types can be represented by first sampling
-them.
+data from other sources. Polytropic, piecewise polytropic, and spline-based 
+EOS for tabulated data are supported directly. Other EOS types can be represented 
+by first sampling them.
 
 Creating a piecewise polytropic EOS file is as simple as
 
 .. code-block:: python
 
-   u   = pyr.units.geom_solar
+   u   = pyr.units.geom_solar()
 
    eos = pyr.make_eos_barotr_pwpoly(rho_poly, 
                  rho_bounds, gammas, rho_max, uc)
@@ -78,15 +78,15 @@ EOS as follows
 
 .. code-block:: python
 
-   u   = pyr.units.geom_solar
+   u   = pyr.units.geom_solar()
 
-   eos = pyr.make_eos_barotr_spline(gm1, rho, eps, press, csnd, 
+   eos = pyr.make_eos_barotr_spline(rho, eps, press, csnd, 
                 temp, efrac, is_isentropic, range_rho, n_poly, 
                 eos_units, pts_per_mag)
 
    pyr.save_eos_barotr("example_spline.eos.h5", eos)
 
-where `gm1`, `rho`, `eps`, `press`, `csnd`, `temp`, and `efrac` are numpy 
+where `rho`, `eps`, `press`, `csnd`, `temp`, and `efrac` are numpy 
 arrays with the arbitrarily-spaced tabulated sample points. If temperature 
 and/or electron fraction are not available, pass an empty list instead.
 Any dimensionful arguments have to be specified in the unit system desired 
@@ -123,10 +123,8 @@ Methods related to stellar profiles, such as
 :cpp:func:`~EOS_Toolkit::spherical_star::press_from_rc`  
 are vectorized and accept a numpy array as argument for the radius.
 Note that computing TOV solutions is not vectorized, so passing a numpy array as central density
-will not work. Future versions may contain dedicated functions for TOV sequences.
+will not work. See below for working with TOV sequences.
 
-An example Python script plotting TOV sequences can be found under
-`examples/pwpoly_TOV.py`.
 
 NS Sequences
 ^^^^^^^^^^^^
@@ -143,6 +141,9 @@ branches) are vectorized, i.e., they accept `numpy` arrays. If the input is outs
 the valid range, the result is NAN. The same holds for :cpp:class:`~EOS_Toolkit::star_seq` 
 objects representing a general NS sequence.
 
+An example Python script plotting TOV sequences can be found under
+`examples/pwpoly_TOV.py`.
+
 Units
 ^^^^^
 
@@ -151,7 +152,10 @@ objects, which are used throughout the interface to specify unit systems
 in a unified consistent way. The unit objects should also be very
 useful on their own, for example in quick interactive calculations.
 The very popular system defined by :math:`G=c=M_\odot=1` is predefined as
-`pyr.units.geom_solar` and provides units as data members such as 
+`pyr.units.geom_solar()`. Note this is a function; when setting up
+geometric units, the default values for :math:`G` and/or :math:`M_\odot` 
+can be overridden by parameters msun_si, g_si. 
+Unit objects provide specific units via data members such as 
 `u.density` (try Tab-completion for the complete list!).
 Note that temperatures in the EOS framework are always in `MeV` and the unit
-conversion objects do not define a temperature unit.
+conversion objects do not define a temperature unit. 

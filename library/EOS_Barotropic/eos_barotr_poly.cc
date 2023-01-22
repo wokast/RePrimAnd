@@ -3,6 +3,10 @@
 #include <cmath>
 #include <limits>
 #include <stdexcept>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+
 
 using namespace std;
 using namespace EOS_Toolkit;
@@ -118,6 +122,21 @@ real_t eos_barotr_poly::ye(real_t gm1) const
                            "defined for this EOS");
 }
 
+
+auto eos_barotr_poly::descr_str() const -> std::string
+{
+  auto u = units_to_SI();
+  std::ostringstream s;
+  s.precision(15);
+  s.setf(std::ios::scientific);
+  s << "Polytropic EOS"
+    << ", max. valid density =" 
+    << (range_rho().max() * u.density()) << " kg/m^3"
+    << ", max. valid g-1 =" << range_gm1().max() 
+    << ", adibatic index =" << n
+    << ", density scale =" << (rmd_p * u.density()) << " kg/m^3";
+  return s.str();
+}
 
   
 eos_barotr EOS_Toolkit::make_eos_barotr_poly(real_t n, real_t rmd_p, 

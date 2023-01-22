@@ -3,6 +3,11 @@
 #include <stdexcept>
 #include <algorithm>
 #include <cmath>
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+
 
 using namespace EOS_Toolkit;
 using namespace EOS_Toolkit::implementations;
@@ -79,6 +84,27 @@ auto eos_idealgas::range_temp(real_t rho, real_t ye) const -> range
 {
   throw logic_error("eos_idealgas: temperature not implemented");
 }
+
+
+
+auto eos_idealgas::descr_str() const -> std::string
+{
+  auto u = units_to_SI();
+  std::ostringstream s;
+  s.precision(15);
+  s.setf(std::ios::scientific);
+  s << "Classical ideal gas EOS, "
+    << "valid density range = [" 
+    << (range_rho().min() * u.density()) << ", "
+    << (range_rho().max() * u.density())
+    << "] kg/m^3, "
+    << "valid specific energy range = [" 
+    << rgeps.min() << ", " << rgeps.max() << "], "
+    << "adibatic exponent Gamma =" << gamma;
+    
+  return s.str();
+}
+
 
 eos_thermal EOS_Toolkit::make_eos_idealgas(real_t n,  
     real_t max_eps, real_t max_rho, units eos_units)

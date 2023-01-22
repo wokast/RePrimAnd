@@ -12,7 +12,7 @@ INST_DIR=/usr
 
 mkdir -p $BUILD_DIR
 cd /project
-meson setup --prefix=$INST_DIR -Dbuild_python_api=false -Dbuild_tests=false -Dbuild_benchmarks=false -Dbuild_documentation=false $BUILD_DIR
+meson setup --prefix=$INST_DIR -Dbuild_tests=false -Dbuild_benchmarks=false -Dbuild_documentation=false $BUILD_DIR
 cd $BUILD_DIR
 ninja 
 ninja install

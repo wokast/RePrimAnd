@@ -139,6 +139,7 @@ class eos_barotr_pwpoly : public eos_barotr_impl {
   ) const final;
 
   void save(datasink s) const final;
+  auto descr_str() const -> std::string final;
 
   const static bool file_handler_registered;
   static const std::string datastore_id;

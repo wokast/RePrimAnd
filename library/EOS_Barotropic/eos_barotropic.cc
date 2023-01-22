@@ -35,6 +35,7 @@ class eos_barotr_invalid: public eos_barotr_impl {
   [[ noreturn ]] bool is_zero_temp() const final  {throw(nope());}
   [[ noreturn ]] bool has_temp() const final  {throw(nope());}
   [[ noreturn ]] bool has_efrac() const final  {throw(nope());}
+  [[ noreturn ]] std::string descr_str() const final {throw(nope());};
 
   [[ noreturn ]] 
   real_t gm1_from_rho(real_t) const final {throw(invalid());}
@@ -231,6 +232,12 @@ void eos_barotr::save(datasink s) const
 {
   impl().save(s);
 }
+
+auto eos_barotr::descr_str() const -> std::string
+{
+  return impl().descr_str();
+}
+
 
 void eos_barotr_impl::save(datasink s) const
 {

@@ -76,6 +76,8 @@ bool compare_eos_barotr(eos_barotr eos1, eos_barotr eos2,
   {
     auto s1 = eos1.at_rho(rho);
     auto s2 = eos2.at_rho(rho);
+    assert(s1);
+    assert(s2);
     hope.isclose(s1.gm1(), s2.gm1(), err_gm1, 0., "gm1 from rho");
     hope.isclose(s1.press(), s2.press(), err_p, 0., "p from rho");
     hope.isclose(s1.csnd(), s2.csnd(), err_cs, 0., "csnd from rho");
@@ -83,8 +85,11 @@ bool compare_eos_barotr(eos_barotr eos1, eos_barotr eos2,
                  "1+eps from rho");
     
     real_t gm1 = s1.gm1();
+
     auto t1 = eos1.at_gm1(gm1);
     auto t2 = eos2.at_gm1(gm1);
+    assert(t1);
+    assert(t2);
     hope.isclose(t1.rho(), t2.rho(), err_rho, 0., "rho from gm1");
     hope.isclose(t1.press(), t2.press(), err_p, 0., "p from gm1");
     hope.isclose(t1.csnd(), t2.csnd(), err_cs, 0., "csnd from gm1");
@@ -424,6 +429,7 @@ BOOST_AUTO_TEST_CASE( test_eos_spline_fromtab )
     vgm1, vrho, veps, vpress, vcsnd, vtemp, vefrac, true,            
     {rho0, vrho[vrho.size()-2]}, n_poly, u, pts_per_mag);
 
+
   const real_t gcorr{ 
     (vgm1[ij] - eos.gm1_at_rho(vrho[ij])) / (1.0+vgm1[ij])
   };
@@ -454,6 +460,21 @@ BOOST_AUTO_TEST_CASE( test_eos_spline_fromtab )
          "Evaluate EOS at single point");
     
   }
+  
+  auto eos2 = make_eos_barotr_spline(
+                  vrho, veps, vpress, vcsnd, vtemp, vefrac, true,            
+                  {rho0, vrho[vrho.size()-2]}, n_poly, u, pts_per_mag);
+
+  hope(compare_eos_barotr(eos, eos2, 
+                          rho0, eos2.range_rho().max()*0.99, 400,
+                          6e-3,  //err_rho, 
+                          5e-4,  //err_rhoe, 
+                          1e-3,  //err_p,
+                          3e-2,  //err_cs, 
+                          5e-4), //err_gm1) ,
+       "Creating EOS from samples with and without gm1 equivalent");
+
+  
 }
 
 

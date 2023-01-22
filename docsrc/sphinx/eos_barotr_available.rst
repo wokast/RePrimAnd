@@ -113,7 +113,7 @@ In terms of the pseudo-enthalpy, the segments are given by
 .. warning::
    The intended use case for this EOS contains just few (<10) segments.
    It would be very inefficient to approximate arbitrary EOS using 
-   hundreds of segments. For this, use the tabulated EOS below.
+   hundreds of segments. For this, use the spline EOS below.
 
 
 
@@ -127,8 +127,9 @@ interpolation. The EOS is therefore differentiable in principle.
 Of course, there can still be steep gradients.
 
 Internally, most properties are represented in terms of the 
-pseudo enthalpy. This has the advantage of avoiding jumps at phase 
-transitions. Only the density has a jump.
+pseudo enthalpy. This has some advantages for computing hydrostatic
+equilibrium models and also with regard to phase 
+transitions (although the density has a jump at those).
 When calling the EOS using density as independent variable, another 
 interpolation spline is used to first compute the pseudo enthalpy
 (in presence of phase transitions, it has a plateau as function of 

@@ -120,6 +120,8 @@ class eos_barotr_gpoly : public eos_barotr_impl {
   ) const final;
 
   void save(datasink s) const final;
+  auto descr_str() const -> std::string final;
+
 
   static real_t rmd_p_from_p_rho_n(real_t p, real_t rho, real_t n);
   static real_t eps0_from_p_rho_eps_n(real_t p, real_t rho, 

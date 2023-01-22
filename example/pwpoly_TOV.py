@@ -9,39 +9,38 @@ import matplotlib
 matplotlib.use("AGG")
 from matplotlib import pyplot as plt
 
-def get_seq(eos, rho_min, rho_max,   
-            nsamp=400, acc_tov=1.e-6, acc_def=1.e-3, acc_mres=500):
+
+
+def get_seq(eos, mgmin=0.5, acc_tov=1.e-6, acc_def=1.e-3, 
+            acc_mres=500, seq_res=500):
+    """Compute stable TOV branch 
     """
-    Compute mass, radius, and tidal deformability for a sequence
-    of TOV solution with given EOS and within given range of central
-    density.
-    """    
-    rho_max = min(rho_max, eos.range_rho.max*0.99999)
     
-    rhoc = np.exp(np.linspace(np.log(rho_min), np.log(rho_max), nsamp))
+    acc = pyr.tov_acc_simple(acc_tov, acc_def, acc_mres)
     
-    accs = pyr.tov_acc_simple(acc_tov, acc_def, acc_mres)
-    
-    @np.vectorize
-    def props(rho_cent):
-        tov  = pyr.get_tov_star_properties(eos, rho_cent, accs)
-        return (tov.grav_mass, tov.circ_radius, 
-                  tov.deformability.lambda_tidal)
-        
-    return props(rhoc)
-    
-    
+    return pyr.make_tov_branch_stable(eos, acc, mgrav_min=mgmin, 
+                                      num_samp=seq_res)
+#
+
 def plot_seqs(seqs):
     """
     Plot mass-radius and compactness-deformability diagrams for 
     a list of TOV sequences.
     """
-    u   = pyr.units.geom_solar
     
     fig,(ax1,ax2) = plt.subplots(2,1)
     cm = plt.get_cmap("viridis")
-    for oga,mg,rc,lt in seqs:
+    for oga,seq in seqs:
         clr = cm(oga) 
+        
+        u = seq.units_to_SI     
+        rggm1 = seq.range_center_gm1
+        gm1 = np.linspace(rggm1.min, rggm1.max, 800)
+        
+        mg  = seq.grav_mass_from_center_gm1(gm1)
+        rc  = seq.circ_radius_from_center_gm1(gm1)
+        lt  = seq.lambda_tidal_from_center_gm1(gm1)
+        
         c = mg/rc
         ax2.semilogy(c, lt, ls='-', color=clr)
         ax2.set_xlabel(r"$M/R$")
@@ -60,7 +59,7 @@ def main():
     of the segment's adiabatic exponent. Compute TOV sequence
     for each EOS, plot them, save plot in current directory.
     """
-    u   = pyr.units.geom_solar
+    u   = pyr.units.geom_solar()
     
     seg_bounds_si = [0.0, 2.44034e+10, 3.78358e+14, 2.6278e+15,
                      9.417030181375906e+16, 5.011872336272714e+17, 
@@ -77,16 +76,16 @@ def main():
     rho_max     = rho_max_si / u.density
     rho_min     = rho_min_si / u.density
     
-    
-    seqs = []
-    for oga in np.linspace(0, 1, 10):
+
+    def mkeos(oga):  
       ga = 2.9 + (oga-0.5)*0.5
       gammas = seg_gammas[:4] + [ga] + seg_gammas[5:]
-      eos = pyr.make_eos_barotr_pwpoly(rho_poly, seg_bounds, gammas,
-                                     rho_max*2)
+      return pyr.make_eos_barotr_pwpoly(rho_poly, seg_bounds, gammas,
+                                        rho_max*2)
+    #
                                      
-      seq = get_seq(eos, rho_min, rho_max)
-      seqs.append([oga]+list(seq))
+    seqs = [( oga, get_seq(mkeos(oga)) ) 
+              for oga in np.linspace(0, 1, 10)]
     
     plot_seqs(seqs)
     

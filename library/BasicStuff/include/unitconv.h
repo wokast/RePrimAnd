@@ -79,32 +79,54 @@ class units {
   ///Get SI units
   static constexpr units si() {return {};}
 
-  ///Compute units with G=c=1 and given length unit
+  /**\brief Compute units with G=c=1 and given length unit
+  
+  @param g_si  Gravitational constant \f$ G \f$ in SI units 
+  @return units object
+  **/  
   static constexpr units geom_ulength(double ulength, double g_si=G_SI)
   {
     return {ulength, ulength/c_SI, ulength * c_SI * c_SI / g_si};
   }
 
-  ///Compute units with G=c=1 where length unit is meter
+  /**\brief Compute units with G=c=1 where length unit is meter
+  
+  @param g_si  Gravitational constant \f$ G \f$ in SI units
+  @return units object
+  **/
   static constexpr units geom_meter(double g_si=G_SI) 
   {
     return geom_ulength(1.0, g_si);
   }
 
-  ///Compute units with G=c=1 and given density unit
+  /**\brief Compute units with G=c=1 and given density unit
+  @param udensity Target density unit in SI units
+  @param g_si  Gravitational constant \f$ G \f$ in SI units
+  @return units object
+  **/  
   static units geom_udensity(double udensity, 
                                        double g_si=G_SI)
   {
     return geom_ulength( c_SI / std::sqrt(g_si * udensity));
   }
 
-  ///Compute units with G=c=1 and given mass unit
+  /**\brief Compute units with G=c=1 and given mass unit
+
+  @param umass Target mass unit in SI units
+  @param g_si  Gravitational constant \f$ G \f$ in SI units
+  @return units object
+  **/  
   static constexpr units geom_umass(double umass, double g_si=G_SI)
   {
     return geom_ulength(umass * g_si /(c_SI*c_SI));
   }
 
-  ///Compute units with G=c=1 and the mass unit is the solar mass
+  /**\brief Compute units with G=c=1 and the mass unit is the solar mass
+
+  @param m_sun_si Solar mass in SI units
+  @param g_si  Gravitational constant \f$ G \f$ in SI units
+  @return units object
+  **/    
   static constexpr units geom_solar(double m_sun_si=M_sun_SI, 
                                     double g_si=G_SI) 
   {

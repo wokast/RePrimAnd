@@ -117,9 +117,27 @@ class eos_barotr_impl {
   **/
   virtual real_t ye(real_t gm1) const =0;
   
+  /**\brief Save EOS to a datastore
+  
+  This allows saving the EOS to a datastore. Used internally by the 
+  EOS file functionality.
+  **/
   virtual void save(datasink s) const;
+
+  /**\brief Return the EOS units
+
+  @return Unit object with the geometric unit system of the EOS with
+          respect to SI units
+  **/
   
   const units& units_to_SI() const {return eos_units;}
+
+  /**\brief Short description string 
+  
+  @returns EOS type-specific description string 
+  **/
+  virtual auto descr_str() const -> std::string =0;
+
 };
 
 }// namespace implementations

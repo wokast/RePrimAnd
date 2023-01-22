@@ -5,7 +5,7 @@ all EOS implementations are derived.
 */
 #ifndef EOSTHERMAL_IMPL_H
 #define EOSTHERMAL_IMPL_H
-
+#include <string>
 #include "datastore.h"
 #include "eos_thermal.h"
 
@@ -167,7 +167,18 @@ class eos_thermal_impl {
 
   virtual void save(datasink s) const;
 
+  /**\brief Return the EOS units
+
+  @return Unit object with the geometric unit system of the EOS with
+          respect to SI units
+  **/
   const units& units_to_SI() const {return eos_units;}
+  
+  /**\brief Short description string 
+  
+  @returns EOS type-specific description string 
+  **/
+  virtual auto descr_str() const -> std::string =0;
 
   protected:
   

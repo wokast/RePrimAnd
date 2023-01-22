@@ -4,6 +4,11 @@
 #include <stdexcept>
 #include <algorithm>
 #include <cmath>
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+
 
 using namespace EOS_Toolkit;
 using namespace EOS_Toolkit::implementations;
@@ -111,6 +116,26 @@ eos_thermal_impl::range
 eos_hybrid::range_temp(real_t rho, real_t ye) const
 {
   throw runtime_error("eos_hybrid: temperature not implemented");
+}
+
+
+auto eos_hybrid::descr_str() const -> std::string
+{
+  auto u = units_to_SI();
+  std::ostringstream s;
+  s.precision(15);
+  s.setf(std::ios::scientific);
+  s << "Hybrid Gamma-law EOS, "
+    << "valid density range = [" 
+    << (range_rho().min() * u.density()) << ", "
+    << (range_rho().max() * u.density())
+    << "] kg/m^3, "
+    << "max. valid specific energy = " 
+    << eps_max 
+    << ", Gamma_thermal =" << gamma_th
+    << ", zero-temperature EOS: " << eos_c.descr_str();
+    
+  return s.str();
 }
 
 eos_thermal EOS_Toolkit::make_eos_hybrid(EOS_Toolkit::eos_barotr eos_c,  

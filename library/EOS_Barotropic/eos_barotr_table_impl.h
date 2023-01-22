@@ -135,6 +135,8 @@ class eos_barotr_table : public eos_barotr_impl {
     real_t gm1      ///< \f$ g-1 \f$
   ) const final;
 
+  auto descr_str() const -> std::string final;
+
   const static bool file_handler_registered;
   static const std::string datastore_id;
 };

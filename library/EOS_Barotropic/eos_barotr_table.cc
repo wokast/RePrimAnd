@@ -2,6 +2,10 @@
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+
 
 #include "eos_barotr_table.h"
 #include "eos_barotr_table_impl.h"
@@ -130,6 +134,28 @@ real_t eos_barotr_table::ye(real_t gm1) const
   return (gm1 > efrac_gm1.range_x().min()) ? efrac_gm1(gm1) : efrac0;
 }
 
+
+auto eos_barotr_table::descr_str() const -> std::string
+{
+  auto u = units_to_SI();
+  std::ostringstream s;
+  s.precision(15);
+  s.setf(std::ios::scientific);
+  s << "Linearly interpolating EOS (DEPRECATED! Use spline EOS instead)"
+    << ", max. valid density =" 
+    << (range_rho().max() * u.density())
+    << " kg/m^3"
+    << ", max. valid g-1 =" << range_gm1().max()
+    << ", temperature " 
+    << (has_temp() ? "" : "not") << " available"
+    << ", electron fraction " 
+    << (has_efrac() ? "" : "not") << " available"
+    << ". Below density of " 
+    << (gm1_rho.range_x().min() * u.density())
+    << " kg/m^3"
+    << " using:" << poly.descr_str();
+  return s.str();
+}
 
 
 eos_barotr EOS_Toolkit::make_eos_barotr_table(

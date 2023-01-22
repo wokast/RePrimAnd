@@ -71,6 +71,7 @@ class eos_thermal_invalid : public eos_thermal_impl {
   range_temp(real_t rho, real_t ye) const final {throw nope();}
 
   [[ noreturn ]] real_t minimal_h() const final {throw nope();}
+  [[ noreturn ]] std::string descr_str() const final {throw(nope());};
 
 };
 
@@ -329,6 +330,10 @@ auto eos_thermal::units_to_SI() const -> const units&
   return impl().units_to_SI();
 }
 
+auto eos_thermal::descr_str() const -> std::string
+{
+  return impl().descr_str();
+}
 
 void eos_thermal_impl::save(datasink s) const
 {

@@ -2,6 +2,9 @@
 #include "eos_barotr_gpoly_impl.h"
 #include <cmath>
 #include <stdexcept>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
 
 using namespace std;
 using namespace EOS_Toolkit;
@@ -111,3 +114,22 @@ eos_barotr EOS_Toolkit::make_eos_barotr_gpoly(real_t n, real_t rmd_p,
   return eos_barotr{std::make_shared<eos_barotr_gpoly>(n, rmd_p,
                                             sed0, rho_max, units_)};
 }
+
+
+auto eos_barotr_gpoly::descr_str() const -> std::string
+{
+  auto u = units_to_SI();
+  std::ostringstream s;
+  s.precision(15);
+  s.setf(std::ios::scientific);
+  s << "Generalized polytropic EOS"
+    << ", max. valid density =" 
+    << (range_rho().max() * u.density())
+    << " kg/m^3"
+    << ", max. valid g-1 =" << range_gm1().max() 
+    << ", adibatic index =" << n
+    << ", density scale =" << (rmd_p * u.density()) << " kg/m^3"
+    << ", specific energy(rho=0) = " << sed0;
+  return s.str();
+}
+

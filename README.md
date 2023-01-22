@@ -10,8 +10,11 @@ The full documentation can be found [here](https://wokast.github.io/RePrimAnd/in
 
 The main target and devolpment platform is Linux, although the
 library code is not platform-specific and should also work on Macs.
-Windows and AIX are not supported. Binary packages are currently not available, but a conda
-package is planned.
+Windows and AIX are not supported. For use in HPC, users need to build 
+the library from source. For use in postprocessing, the Python intferface
+can also be installed via pip (binary wheel of the library available for 
+Linux). Conda packages for the C++ library and Python intface are planned 
+but not available yet.
 
 ## Requirements
 
@@ -192,7 +195,7 @@ This requires Python+matplotlib.
 ### Visualizing Master Function
 
 In addition, there is code to sample the primitive recovery master
-function (the central ingredient of the scheme) for various cases,
+function (the central ingredient of the con2prim scheme) for various cases,
 as shown in the paper.
 
 ```bash

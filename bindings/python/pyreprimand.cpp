@@ -34,12 +34,20 @@ std::string range_to_str(const range& rg)
   return fmt.str();
 }
 
+std::string units_to_repr(const etk::units& u) 
+{
+  boost::format fmt("pyreprimand.units(%.20e, %.20e, %.20e)");
+  fmt % u.length() % u.time() % u.mass();
+  return fmt.str();
+}
+
 
 PYBIND11_MODULE(pyreprimand, m) {
     m.doc() = "Python bindings for RePrimAnd library";
     
-    py::class_<range>(m, "range")
-        .def(py::init<real_t, real_t>(),
+    py::class_<range>(m, "range", "Represents a numeric range")
+        .def(py::init<real_t, real_t>(), 
+             "Construct from minimum and maximum",
              py::arg("min")=0, py::arg("max")=0)
         .def("limit_to", py::vectorize(&range::limit_to),
              "Limit values to range")
@@ -53,33 +61,77 @@ PYBIND11_MODULE(pyreprimand, m) {
         .def_property_readonly("length", &range::length)
         .def("__str__", &range_to_str);
 
-    py::class_<etk::units>(m, "units")
+    py::class_<etk::units>(m, "units", "Represents a unit system")
         .def(py::init<const double, const double, const double>(),
-             py::arg("length"), py::arg("time"), py::arg("mass"))
-        .def(py::self / py::self)
-        .def_property_readonly("length", &etk::units::length)
-        .def_property_readonly("time", &etk::units::time)
-        .def_property_readonly("freq", &etk::units::freq)
-        .def_property_readonly("mass", &etk::units::mass)
-        .def_property_readonly("velocity", &etk::units::velocity)
-        .def_property_readonly("accel", &etk::units::accel)
-        .def_property_readonly("force", &etk::units::force)
-        .def_property_readonly("area", &etk::units::area)
-        .def_property_readonly("volume", &etk::units::volume)
-        .def_property_readonly("density", &etk::units::density)
-        .def_property_readonly("pressure", &etk::units::pressure)
-        .def_property_readonly("mom_inertia", &etk::units::mom_inertia)
-        .def_readonly_static("c_SI", &etk::units::c_SI)
-        .def_readonly_static("G_SI", &etk::units::G_SI)
-        .def_readonly_static("M_sun_SI", &etk::units::M_sun_SI)
-        .def_property_readonly_static("geom_solar", 
-                 [](py::object) { return etk::units::geom_solar(); })
-        .def_property_readonly_static("geom_meter", 
-                 [](py::object) { return etk::units::geom_meter(); })
+R"(Construct arbitrary unit system from base units length, 
+time, and mass)",
+             py::arg("length"), 
+             py::arg("time"), 
+             py::arg("mass"))
+        .def(py::self / py::self, 
+"Dividing unit objects A/B expresses units of A in unit system B")
+        .def_property_readonly("length", &etk::units::length, 
+                               "Unit of Length")
+        .def_property_readonly("time", &etk::units::time, 
+                               "Unit of time")
+        .def_property_readonly("freq", &etk::units::freq, 
+                               "Unit of frequency")
+        .def_property_readonly("mass", &etk::units::mass, 
+                               "Unit of mass")
+        .def_property_readonly("velocity", &etk::units::velocity, 
+                               "Unit of velocity")
+        .def_property_readonly("accel", &etk::units::accel, 
+                               "Unit of acceleration")
+        .def_property_readonly("force", &etk::units::force, 
+                               "Unit of force")
+        .def_property_readonly("area", &etk::units::area, 
+                               "Unit of area")
+        .def_property_readonly("volume", &etk::units::volume, 
+                               "Unit of volume")
+        .def_property_readonly("density", &etk::units::density, 
+                               "Unit of mass density")
+        .def_property_readonly("pressure", &etk::units::pressure, 
+                               "Unit of pressure")
+        .def_property_readonly("mom_inertia", &etk::units::mom_inertia, 
+                               "Unit of moment of inertia")
+        .def_readonly_static("c_SI", &etk::units::c_SI,
+                             "Speed of light in SI units")
+        .def_readonly_static("G_SI", &etk::units::G_SI,
+R"(Default value for gravitational constant in SI units.
+Used in some methods unless other value is specified)")
+        .def_readonly_static("M_sun_SI", &etk::units::M_sun_SI,
+R"(Default value for solar mass in SI units.
+Used in some methods unless other value is specified)")
+        .def_static("geom_udensity", &etk::units::geom_udensity,
+R"(Create geometric unit system with given mass density unit and 
+"G=c=1. The constant G in SI units can be overridden.)",
+             py::arg("umass"),
+             py::arg("g_si")=etk::units::G_SI)
+        .def_static("geom_umass", &etk::units::geom_umass, 
+R"(Create geometric unit system (i.e. G=c=1) specified by 
+mass unit. The constant G [SI units] can be overridden.)",
+             py::arg("umass"),
+             py::arg("g_si")=etk::units::G_SI)
+        .def_static("geom_ulength", &etk::units::geom_ulength,
+R"(Create geometric unit system (i.e. G=c=1) specified by
+length unit. The constant G [SI units] can be overridden.)",
+             py::arg("ulength"),
+             py::arg("g_si")=etk::units::G_SI)
+        .def_static("geom_solar", &etk::units::geom_solar,
+R"(Create geometric unit system with G=c=M_sun=1.
+Constants for G and M_sun in SI units can be overridden.)",
+             py::arg("msun_si")=etk::units::M_sun_SI,
+             py::arg("g_si")=etk::units::G_SI)
+        .def_static("geom_meter", &etk::units::geom_meter,
+R"(Create geometric unit system with G=c=1 and a length unit
+of 1 m. The constant G [SI units] can be overridden.)",
+             py::arg("g_si")=etk::units::G_SI)
+        .def("__repr__", &units_to_repr)
         .def("__str__", &etk::units::to_str);
     
     
-    py::class_<etk::eos_thermal>(m, "eos_thermal")
+    py::class_<etk::eos_thermal>(m, "eos_thermal", 
+    "Represents an EOS with thermal and composition effects")
         .def("press_at_rho_eps_ye", 
              py::vectorize(&etk::eos_thermal::press_at_rho_eps_ye),
              "Compute pressure from density, specific energy, and "
@@ -204,7 +256,9 @@ PYBIND11_MODULE(pyreprimand, m) {
              "Lower bound for enthalpy")
         .def_property_readonly("units_to_SI", 
               &etk::eos_thermal::units_to_SI,
-             "Unit system");
+             "Unit system (geometric) used by the EOS")
+        .def("__str__", &etk::eos_thermal::descr_str);
+
 
     m.def("load_eos_thermal", &etk::load_eos_thermal, 
           "Load thermal EOS from file",
@@ -212,7 +266,8 @@ PYBIND11_MODULE(pyreprimand, m) {
           py::arg("units")=etk::units::geom_solar());
 
 
-    py::class_<etk::eos_barotr>(m, "eos_barotr")
+    py::class_<etk::eos_barotr>(m, "eos_barotr",
+        "Represents a barotropic EOS")
         .def("gm1_at_rho", 
              py::vectorize(&etk::eos_barotr::gm1_at_rho),
              "Compute pseudo enthalpy g-1 from density \n"
@@ -316,15 +371,35 @@ PYBIND11_MODULE(pyreprimand, m) {
              "Lower bound for enthalpy")
         .def_property_readonly("units_to_SI", 
               &etk::eos_barotr::units_to_SI,
-             "Unit system");
+             "Unit system (geometric) used by the EOS")
+        .def("__str__", &etk::eos_barotr::descr_str);
              
     m.def("load_eos_barotr", &etk::load_eos_barotr, 
-          "Load barotropic EOS from file",
+R"(Load barotropic EOS from file
+
+Args:
+    path (str): Path of the EOS file
+    units (pyreprimand.units): Unit system, with respect to SI, to be 
+        used by the returned EOS object (this has nothing to do with 
+        the units inside the file, which are fixed)
+
+Returns:
+    pyreprimand.eos_barotr object
+    
+)",
           py::arg("path"),
           py::arg("units")=etk::units::geom_solar());
 
     m.def("save_eos_barotr", &etk::save_eos_barotr, 
-          "Save barotropic EOS to file",
+R"(Save barotropic EOS to file
+
+Args:
+    path (str): Path of the EOS file (file should not exist)
+    eos (pyreprimand.eos_barotr): The EOS object to be saved
+    info (str): Optional arbitrary free-form string to be embedded 
+        into the file (this is not used by the library)
+
+)",
           py::arg("path"),
           py::arg("eos"),
           py::arg("info")="");
@@ -332,6 +407,9 @@ PYBIND11_MODULE(pyreprimand, m) {
 
     m.def("make_eos_barotr_table",
           &etk::make_eos_barotr_table,
+R"(DEPRECATED: create EOS based on linear interpolation from irregularly
+spaced sample points. Use make_eos_barotr_spline instead.
+)",
           py::arg("gm1"),
           py::arg("rho"),
           py::arg("eps"),
@@ -342,6 +420,8 @@ PYBIND11_MODULE(pyreprimand, m) {
           py::arg("isentropic"),            
           py::arg("n_poly"),
           py::arg("units")=etk::units::geom_solar());   
+
+
 
     m.def("make_eos_barotr_spline",
           [] (const std::vector<real_t>& gm1,
@@ -358,6 +438,41 @@ PYBIND11_MODULE(pyreprimand, m) {
                 press, csnd, temp, efrac, isentr, rg_rho, n_poly, 
                 uc, pts_per_mag);
               },
+R"(Create an EOS based on interpolation splines from irregularly spaced
+sample points. This EOS type is internally using monotonic splines that
+are regular in log-space. The given arbitrarily-spaced samples are first
+resampled via irregular-spaced monotonic splines. Note that the cost of
+evaluating the EOS is (almost) independent of the internal resolution.
+
+Also note that the pseudo-enthalpy  g-1 is redundant, it is the 
+responsability of the user to provide consistent values. Other versions 
+exist that compute g-1 (or even epsilon and g-1) from the other 
+quantities. Use those unless accurate values for g-1 and epsilon are 
+readily available, e.g. for EOS given by analytic expressions. 
+
+Args:
+    gm1 (array_like): Pseudo enthalpy g-1
+    rho (array_like): Baryonic mass density
+    eps (array_like): Specific energy
+    press (array_like): Pressure
+    csnd (array_like): Adiabatic sound speed
+    temperature (array_like): Temperature (or empty array if unavailable)
+    efrac (array_like): Electron fraction (or empty array if unavailable)
+    isentropic (bool): Whether EOS is supposed to be isentropic
+    rg_rho (pyreprimand.range): Range of mass density where EOS is 
+        computed via spline interpolation. 
+    n_poly (float): Adiabatic index of the generalized polytropic EOS
+        that will be used below the interpolated range
+    units (pyreprimand.units): Unit system of the EOS and the given 
+        sample points.
+    pts_per_mag (int): How many sample points per magnitude should be
+        used by the interpolation splines employed internally by the 
+        EOS. Note this has nothing to do with the resolution of the 
+        provided sample points. The default should be reasonable for
+        most applications.
+
+)",
+              
           py::arg("gm1"),
           py::arg("rho"),
           py::arg("eps"),
@@ -372,12 +487,145 @@ PYBIND11_MODULE(pyreprimand, m) {
           py::arg("pts_per_mag")=200);   
 
     m.def("make_eos_barotr_spline",
+          [] (const std::vector<real_t>& rho,
+              const std::vector<real_t>& eps,
+              const std::vector<real_t>& press,
+              const std::vector<real_t>& csnd,
+              const std::vector<real_t>& temp,
+              const std::vector<real_t>& efrac, 
+              bool isentr, range rg_rho,
+              real_t n_poly, etk::units uc,
+              std::size_t pts_per_mag) {
+                return etk::make_eos_barotr_spline(rho, eps,
+                press, csnd, temp, efrac, isentr, rg_rho, n_poly, 
+                uc, pts_per_mag);
+              },
+R"(Create an EOS based on interpolation splines from irregularly spaced
+sample points. This EOS type is internally using monotonic splines that
+are regular in log-space. The given arbitrarily-spaced samples are first
+resampled via irregular-spaced monotonic splines. Note that the cost of
+evaluating the EOS is (almost) independent of the internal resolution.
+
+This version of the function computes the required pseudo-enthalpy g-1 
+from given density, pressure, and specific energy via numerical 
+integration of the corresponding interpolation splines (thus ensuring 
+consistency). 
+
+Args:
+    rho (array_like): Baryonic mass density
+    eps (array_like): Specific energy
+    press (array_like): Pressure
+    csnd (array_like): Adiabatic sound speed
+    temperature (array_like): Temperature (or empty array if unavailable)
+    efrac (array_like): Electron fraction (or empty array if unavailable)
+    isentropic (bool): Whether EOS is supposed to be isentropic
+    rg_rho (pyreprimand.range): Range of mass density where EOS is 
+        computed via spline interpolation. 
+    n_poly (float): Adiabatic index of the generalized polytropic EOS
+        that will be used below the interpolated range
+    units (pyreprimand.units): Unit system of the EOS and the given 
+        sample points.
+    pts_per_mag (int): How many sample points per magnitude should be
+        used by the interpolation splines employed internally by the 
+        EOS. Note this has nothing to do with the resolution of the 
+        provided sample points. The default should be reasonable for
+        most applications.
+
+)",              
+          py::arg("rho"),
+          py::arg("eps"),
+          py::arg("press"),
+          py::arg("csnd"),
+          py::arg("temp"),
+          py::arg("efrac"), 
+          py::arg("isentropic"),
+          py::arg("rg_rho"),            
+          py::arg("n_poly"),
+          py::arg("units")=etk::units::geom_solar(),
+          py::arg("pts_per_mag")=200);   
+
+    m.def("make_eos_barotr_spline",
+          [] (const std::vector<real_t>& rho,
+              const std::vector<real_t>& press,
+              const std::vector<real_t>& csnd,
+              const std::vector<real_t>& temp,
+              const std::vector<real_t>& efrac, 
+              range rg_rho,
+              real_t n_poly, 
+              real_t eps_0, 
+              etk::units uc,
+              std::size_t pts_per_mag) {
+                return etk::make_eos_barotr_spline(rho, press, csnd, 
+                temp, efrac, rg_rho, n_poly, eps_0,
+                uc, pts_per_mag);
+              },
+R"(Create an EOS based on interpolation splines from irregularly spaced
+sample points. This EOS type is internally using monotonic splines that
+are regular in log-space. The given arbitrarily-spaced samples are first
+resampled via irregular-spaced monotonic splines. Note that the cost of
+evaluating the EOS is (almost) independent of the internal resolution.
+
+This version of the function computes the required specific energy from
+pressure and density under the assumption that the EOS is isentropic.
+This is done via numerical integration of the corresponding interpolation 
+splines (thus ensuring consistency). The required pseudo-enthalpy g-1 is 
+similarly computed from specific energy and given density and pressure.
+
+Args:
+    rho (array_like): Baryonic mass density
+    press (array_like): Pressure
+    csnd (array_like): Adiabatic sound speed
+    temperature (array_like): Temperature (or empty array if unavailable)
+    efrac (array_like): Electron fraction (or empty array if unavailable)
+    rg_rho (pyreprimand.range): Range of mass density where EOS is 
+        computed via spline interpolation. 
+    n_poly (float): Adiabatic index of the generalized polytropic EOS
+        that will be used below the interpolated range
+    eps_0 (float): Specific energy density at zero density
+    units (pyreprimand.units): Unit system of the EOS and the given 
+        sample points.
+    pts_per_mag (int): How many sample points per magnitude should be
+        used by the interpolation splines employed internally by the 
+        EOS. Note this has nothing to do with the resolution of the 
+        provided sample points. The default should be reasonable for
+        most applications.
+
+)",              
+          py::arg("rho"),
+          py::arg("press"),
+          py::arg("csnd"),
+          py::arg("temp"),
+          py::arg("efrac"), 
+          py::arg("rg_rho"),            
+          py::arg("n_poly"),
+          py::arg("eps_0"),
+          py::arg("units")=etk::units::geom_solar(),
+          py::arg("pts_per_mag")=200);   
+
+    m.def("make_eos_barotr_spline",
           [] (etk::eos_barotr eos, 
               range rg_rho, real_t n_poly, 
               std::size_t pts_per_mag) {
                 return etk::make_eos_barotr_spline(eos, rg_rho, 
                 n_poly, pts_per_mag);
               },
+R"(Create an EOS based on interpolation splines from an existing 
+barotropic EOS of (any type) via sampling. 
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS to be approximated
+    rg_rho (pyreprimand.range): Range of mass density where EOS is 
+        computed via spline interpolation. 
+    n_poly (float): Adiabatic index of the generalized polytropic EOS
+        that will be used below the interpolated range
+    pts_per_mag (int): How many sample points per magnitude should be
+        used by the interpolation splines employed internally by the 
+        EOS. 
+        
+Returns:
+    eos_barotr_spline object (using same units as the source EOS)
+
+)",              
           py::arg("eos"),
           py::arg("rg_rho"),            
           py::arg("n_poly"),
@@ -385,6 +633,21 @@ PYBIND11_MODULE(pyreprimand, m) {
 
     m.def("make_eos_barotr_pwpoly", 
           &etk::make_eos_barotr_pwpoly,
+R"(Create a picewise polytropic EOS.
+
+Args:
+    rho_poly_0 (float): The polytropic density scale of the first segment.
+    rho_segm_bounds (array_like): Mass densities of lower boundary 
+        for each segment. The first segment has to start at zero.
+    segm_gammas (array_like): Adiabatic exponent for each segment.
+    rho_max (float): Maximum valid mass density.
+    units (pyreprimand.units): Unit system of the EOS and the parameters
+        above.
+
+Returns:
+    pyreprimand.eos_barotr object.
+
+)",
           py::arg("rho_poly_0"),
           py::arg("rho_segm_bounds"),
           py::arg("segm_gammas"),
@@ -393,6 +656,19 @@ PYBIND11_MODULE(pyreprimand, m) {
 
     m.def("make_eos_barotr_poly",
           &etk::make_eos_barotr_poly, 
+R"(Create an polytropic EOS.
+
+Args:
+    n_poly (float): Polytropic index
+    rho_poly (float): The polytropic density scale.
+    rho_max (float): Maximum valid mass density.
+    units (pyreprimand.units): Unit system of the EOS and the parameters
+        above.
+
+Returns:
+    pyreprimand.eos_barotr object.
+
+)", 
           py::arg("n_poly"), 
           py::arg("rho_poly"),
           py::arg("rho_max"),
@@ -469,12 +745,22 @@ PYBIND11_MODULE(pyreprimand, m) {
           py::arg("x"),
           py::arg("y"));
 
-    py::class_<etk::spherical_star_tidal>(m, "spherical_star_tidal")
-        .def_readonly("k2", &etk::spherical_star_tidal::k2)
-        .def_readonly("lambda_tidal", &etk::spherical_star_tidal::lambda);
+    py::class_<etk::spherical_star_tidal>(m, "spherical_star_tidal",
+    "Describes tidal deformability" )
+        .def_readonly("k2", &etk::spherical_star_tidal::k2,
+                      "Love number k_2")
+        .def_readonly("lambda_tidal", 
+                      &etk::spherical_star_tidal::lambda,
+                      "Dimensionless tidal deformability Lambda");
 
     
-    py::class_<etk::spherical_star_profile>(m, "spherical_star_profile")
+    py::class_<etk::spherical_star_profile>(m, "spherical_star_profile",
+R"(Represents the radial profiles of a spherical star
+
+The profiles are provided as functions of circumferential
+radius that can be evaluated both inside and outside the star.
+All quantities are in the same geometric units used by the EOS.
+)" )
         .def_property_readonly("eos", 
              &etk::spherical_star_profile::eos,
              "Star EOS")
@@ -506,7 +792,15 @@ PYBIND11_MODULE(pyreprimand, m) {
              py::arg("rc"));
   
         
-    py::class_<etk::spherical_star_properties>(m, "spherical_star_properties")
+    py::class_<etk::spherical_star_properties>(m, 
+            "spherical_star_properties",
+R"(Represents properties of a spherical neutron star
+
+This collects scalar measures of a spherical neutron star
+solution, but not the radial profile. It also provides the EOS.
+All quantities are in the same geometric units used by the EOS.
+
+)" )
         .def_property_readonly("eos", 
              &etk::spherical_star_properties::eos,
              "Star EOS")
@@ -557,7 +851,16 @@ PYBIND11_MODULE(pyreprimand, m) {
              "Star tidal deformability and love number");
         
         
-    py::class_<etk::spherical_star>(m, "spherical_star")
+    py::class_<etk::spherical_star>(m, "spherical_star",
+R"(Represents a spherical neutron star model
+
+This provides everything spherical_star_properties does,
+and in addition the radial profiles for metric and matter 
+quantities. The profiles are provided as functions of circumferential
+radius that can be evaluated both inside and outside the star.
+All quantities are in the same geometric units used by the EOS.
+
+)" )
         .def_property_readonly("eos", 
              &etk::spherical_star::eos,
              "Star EOS")
@@ -647,8 +950,25 @@ PYBIND11_MODULE(pyreprimand, m) {
              "Temperature at circumf. radius ",
              py::arg("rc"));
 
-    py::class_<etk::tov_acc_simple>(m, "tov_acc_simple")
+    py::class_<etk::tov_acc_simple>(m, "tov_acc_simple",
+R"(Accuracy parameters for solving TOV and tidal deformability ODEs.
+
+
+This contains heuristic parameters used in the adaptive ODE solvers.
+Accuracy for TOV and tidal deformability ODEs are specified seperately.
+There are no guarantees on the absolute errors of the various 
+quantities, but lowering the values should lead to more accurate results.
+    
+)" )
         .def(py::init<real_t, real_t, std::size_t>(),
+R"(
+Args:
+    tov (float): accuracy parameter for solving TOV ODE
+    deform (float): accuracy parameter for solving deformability ODE
+    minsteps (int): Minimum number of steps (controls maximum stepsize)
+    
+)",
+        
              py::arg("tov")=1e-8, 
              py::arg("deform")=1e-6, 
              py::arg("minsteps")=500)
@@ -656,9 +976,27 @@ PYBIND11_MODULE(pyreprimand, m) {
         .def_readonly("deform", &etk::tov_acc_simple::deform)
         .def_readonly("minsteps", &etk::tov_acc_simple::minsteps);
 
-    py::class_<etk::tov_acc_precise>(m, "tov_acc_precise")
+    py::class_<etk::tov_acc_precise>(m, "tov_acc_precise",
+R"(Accuracy parameters for solving TOV and tidal deformability ODEs.
+
+This allows to seperately specify the required tolerance for each 
+quantity. This will repeatedly solve the ODEs with increasing accuracy
+until the estimated residuals fall below the given tolerances.
+
+)" )
         .def(py::init<real_t, real_t, real_t, real_t, 
                        std::size_t, real_t>(),
+R"(Args:
+    mass (float): Relative tolerance for baryonic and gravitational mass
+    radius (float): Relative tolerance for radius and volume^(1/3)
+    minertia (float): Relative tolerance for moment of inertia
+    deform (float): Relative tolerance for tidal deformability (Lambda
+        and k_2)
+    minsteps (int): Minimum number of steps (controls maximum stepsize)
+    acc_min (float): Give up if adaptive ODE solver tolerances get 
+        any smaller.
+
+)",
              py::arg("mass")=1e-8, 
              py::arg("radius")=1e-8, 
              py::arg("minertia")=1e-8, 
@@ -672,7 +1010,17 @@ PYBIND11_MODULE(pyreprimand, m) {
         .def_readonly("minsteps", &etk::tov_acc_precise::minsteps)
         .def_readonly("acc_min", &etk::tov_acc_precise::acc_min);
 
-    py::class_<etk::star_seq>(m, "star_seq")
+    py::class_<etk::star_seq>(m, "star_seq",
+R"(Represents sequences of neutron stars or similar.
+
+This class allows to store precomputed properties for a sequence 
+of spherical stars and provide those as functions of the central 
+pseudo-enthalpy. For this, regular spaced monotonic spline 
+interpolation is used. The unit system can be chosen when creating
+sequences, but is assumed to be geometric. It is stored for 
+bookkeeping.
+
+)")
         .def("grav_mass_from_center_gm1",  
              py::vectorize(&etk::star_seq::grav_mass_from_center_gm1),
              "Gravitational mass from central pseudo enthalpy",
@@ -704,7 +1052,13 @@ PYBIND11_MODULE(pyreprimand, m) {
              &etk::star_seq::units_to_SI,
              "Unit system");
 
-    py::class_<etk::star_branch, etk::star_seq>(m, "star_branch")
+    py::class_<etk::star_branch, etk::star_seq>(m, "star_branch",
+R"(Representing a stable branch of a star sequence.
+
+This provides star properties as function of gravitational mass, in  
+addition to the methods available from pyreprimand.star_seq. 
+
+)")
         .def("grav_mass_from_center_gm1",  
              py::vectorize(
                &etk::star_branch::grav_mass_from_center_gm1),
@@ -733,7 +1087,7 @@ PYBIND11_MODULE(pyreprimand, m) {
         .def("center_gm1_from_grav_mass",  
              py::vectorize(
                &etk::star_branch::center_gm1_from_grav_mass),
-             "Tidal deformability from grav. mass",
+             "Central pseudo enthalpy from grav. mass",
              py::arg("mg"))
         .def("bary_mass_from_grav_mass",  
              py::vectorize(
@@ -795,7 +1149,24 @@ PYBIND11_MODULE(pyreprimand, m) {
           { 
              return etk::make_tov_star(eos, rho_center, acc, 
                                        find_bulk, find_tidal);
-          }, "Compute a TOV solution (including profile)",
+          }, 
+R"(Compute a TOV solution 
+
+Use this if you also need the radial profile, otherwise use
+get_tov_star_properties. This function provides only basic control
+on the accuracy via pyreprimand.tov_acc_simple. There is also a
+version using pyreprimand.tov_acc_precise.
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density [EOS Units].
+    acc (pyreprimand.tov_acc_simple): Tolerances for adaptive solver
+    find_bulk (bool): Whether to also compute the "bulk" properties
+    find_tidal (bool): Whether to compute the tidal deformability
+
+Returns:
+    pyreprimand.spherical_star
+)",
           py::arg("eos"),
           py::arg("rho_center"),
           py::arg("acc"),
@@ -809,7 +1180,25 @@ PYBIND11_MODULE(pyreprimand, m) {
           { 
              return etk::get_tov_star_properties(eos, rho_center, 
                                           acc, find_bulk, find_tidal);
-          }, "Compute a TOV solution (without profile)",
+          }, 
+R"(Compute a TOV solution 
+
+Use this if you do not need the radial profile, otherwise use
+make_tov_star. This function provides only basic control
+on the accuracy via pyreprimand.tov_acc_simple. There is also a
+version using pyreprimand.tov_acc_precise.
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density [EOS Units].
+    acc (pyreprimand.tov_acc_simple): Tolerances for adaptive solver
+    find_bulk (bool): Whether to also compute the "bulk" properties
+    find_tidal (bool): Whether to compute the tidal deformability
+
+Returns:
+    pyreprimand.spherical_star_properties
+
+)",
           py::arg("eos"),
           py::arg("rho_center"),
           py::arg("acc"),
@@ -818,26 +1207,66 @@ PYBIND11_MODULE(pyreprimand, m) {
 
     m.def("make_tov_star", 
           [](etk::eos_barotr eos, const real_t rho_center, 
-             const etk::tov_acc_precise acc, const bool find_bulk) 
+             const etk::tov_acc_precise acc, const bool find_bulk,
+             const bool find_tidal) 
           { 
-             return etk::make_tov_star(eos, rho_center, acc, find_bulk);
-          }, "Compute a TOV solution (including profile)",
+             return etk::make_tov_star(eos, rho_center, acc, 
+                                       find_bulk, find_tidal);
+          }, 
+R"(Compute a TOV solution 
+
+Use this if you also need the radial profile, otherwise use
+get_tov_star_properties. This function provides strict control
+on the accuracy via pyreprimand.tov_acc_precise. There is also a
+faster version using pyreprimand.tov_acc_simple.
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density [EOS Units].
+    acc (pyreprimand.tov_acc_simple): Tolerances for adaptive solver
+    find_bulk (bool): Whether to also compute the "bulk" properties
+    find_tidal (bool): Whether to compute the tidal deformability
+
+Returns:
+    pyreprimand.spherical_star
+)",
           py::arg("eos"),
           py::arg("rho_center"),
           py::arg("acc"),
-          py::arg("find_bulk")=false);
+          py::arg("find_bulk")=false,
+          py::arg("find_tidal")=true);
 
     m.def("get_tov_star_properties", 
           [](etk::eos_barotr eos, const real_t rho_center, 
-             const etk::tov_acc_precise acc, const bool find_bulk) 
+             const etk::tov_acc_precise acc, const bool find_bulk,
+             const bool find_tidal) 
           { 
              return etk::get_tov_star_properties(eos, rho_center, 
-                                                 acc, find_bulk);
-          }, "Compute a TOV solution (without profile)",
+                                      acc, find_bulk, find_tidal);
+          }, 
+R"(Compute a TOV solution 
+
+Use this if you do not need the radial profile, otherwise use
+make_tov_star. This function provides strict control
+on the accuracy via pyreprimand.tov_acc_precise. There is also a
+faster version using pyreprimand.tov_acc_simple.
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density [EOS Units].
+    acc (pyreprimand.tov_acc_simple): Tolerances for adaptive solver
+    find_bulk (bool): Whether to also compute the "bulk" properties
+    find_tidal (bool): Whether to compute the tidal deformability
+
+Returns:
+    pyreprimand.spherical_star_properties
+
+)",
           py::arg("eos"),
           py::arg("rho_center"),
           py::arg("acc"),
-          py::arg("find_bulk")=false);
+          py::arg("find_bulk")=false,
+          py::arg("find_tidal")=true);
 
     m.def("find_rhoc_tov_max_mass", 
           &etk::find_rhoc_tov_max_mass, 
@@ -861,7 +1290,22 @@ PYBIND11_MODULE(pyreprimand, m) {
 
     m.def("make_tov_seq", 
           &etk::make_tov_seq, 
-          "Compute sequence of TOV models",
+R"(Compute sequence of TOV solutions
+
+This computes the sequence of solutions within a given range of
+central pseudo-enthalpy. If you only want to obtain the stable branch,
+use make_tov_branch_stable instead.
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the NSs. 
+    acc (pyreprimand.tov_acc_simple): Tolerances for adaptive ODE solver.
+    rg_gm1 (pyreprimand.range): Range of central pseudo enthalpy \f$ g-1 \f$
+    num_samp (int): Number of sample points along the sequence.
+
+Returns:
+    pyreprimand.star_seq
+
+)",
           py::arg("eos"),
           py::arg("acc"),
           py::arg("rg_gm1"),
@@ -869,7 +1313,26 @@ PYBIND11_MODULE(pyreprimand, m) {
 
     m.def("make_star_seq", 
           &etk::make_star_seq, 
-          "Create star sequence from arrays with star properties",
+R"(Create star sequence from given arrays with star properties
+
+This creates a star_seq object from given stellar properties for a 
+seqquence. The provided sample points must be uniformly spaced in 
+the central pseudo enthalpy g-1.
+
+Args:
+    mg (array_like): Samples for gravitational mass
+    mb (array_like): Samples for baryonic mass
+    rc (array_like): Samples for circumferential proper radius
+    mi (array_like): Samples for moment of inertia
+    lt (array_like): Samples for tidal deformability
+    range_gm1 (pyreprimand.range): Range of central 
+        pseudo-enthalpy g-1
+    seq_units (pyreprimand.units): Unit system of the samples and
+        the returned sequence object
+    
+Returns:
+    pyreprimand.star_seq
+)",
           py::arg("mg"),
           py::arg("mb"),
           py::arg("rc"),
@@ -880,7 +1343,18 @@ PYBIND11_MODULE(pyreprimand, m) {
 
     m.def("load_star_seq", 
           &etk::load_star_seq, 
-          "Load sequence from file",
+R"(Load sequence from file
+
+Args:
+    path (str): path of the sequence file.
+    units (pyreprimand.units): Unit system to use for the sequence 
+        object that is returned. This does *not* refer to the units
+        inside the file, which are fixed.
+
+Returns:
+    pyreprimand.star_seq
+
+)",
           py::arg("path"),
           py::arg("units"));
 
@@ -892,7 +1366,18 @@ PYBIND11_MODULE(pyreprimand, m) {
 
     m.def("load_star_branch", 
           &etk::load_star_branch, 
-          "Load sequence branch from file",
+R"(Load sequence branch from file
+
+Args:
+    path (str): path of the branch file.
+    units (pyreprimand.units): Unit system to use for the branch
+        object that is returned. This does *not* refer to the units
+        inside the file, which are fixed.
+
+Returns:
+    pyreprimand.star_branch
+
+)",
           py::arg("path"),
           py::arg("units"));
 
@@ -906,13 +1391,44 @@ PYBIND11_MODULE(pyreprimand, m) {
 
     m.def("make_tov_branch_stable", 
           &etk::make_tov_branch_stable, 
-          "Compute a stable branch TOV sequence",
+R"(Compute stable branch of TOV solutions
+
+This function employs heuristic algorithm to find the stable branch
+of TOV solutions. Since there may be more than one such branch, one 
+has to provide a central pseudo-enthalpy to indicate the correct one.
+By increasing/decreasing this value successively by some factor,
+a search interval is expanded until it brackets the maximum mass
+or until the upper bound exceeds the EOS validity range. The initial 
+guess is not required to be within a stable branch, and the default
+value should work for any remotely realistic NS EOS.
+In a similar fashion, a central pseudo-enthalpy for which the NS mass 
+falls below the parameter mgrav_min is determined. Next, the maximum
+is determined using a maximum search. However, the maximum might be 
+located at the EOS validity bound. The maxmimum is considered physical 
+based on a simple heuristics: (g_max-1)*(1+max_margin) < g_eos, where 
+g_max and g_eos are the the central pseudo-enthalpy of the maximum mass 
+model and the EOS upper validity bound. This criterion can later be 
+queried using the includes_maximum() method of the branch object.
+Finally, the branch is sampled with resolution given by num_samp.
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the NSs. 
+    acc (pyreprimand.tov_acc_simple) Tolerances for adaptive ODE solver.
+    mgrav_min (float) Minimum gravitational mass that should be covered.
+    num_samp (int) Sample resolution of the sequence.
+    gm1_initial (float) Central enthalpy to indicate desired branch.
+    max_margin Defines when maximum is considered physical.
+
+Returns:
+    pyreprimand.star_branch
+
+)",
           py::arg("eos"),
           py::arg("acc"),
           py::arg("mgrav_min")=0.5,
           py::arg("num_samp")=500,
           py::arg("gm1_initial")=1.2,
-          py::arg("max_margin")=1e-2);
+          py::arg("max_margin")=1e-4);
 
 
 }

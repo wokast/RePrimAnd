@@ -4,6 +4,10 @@
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+
 
 using namespace std;
 using namespace EOS_Toolkit;
@@ -163,12 +167,48 @@ real_t eos_barotr_spline::ye(real_t gm1) const
   return (gm1 >= gm1_low) ? (*efrac_gm1)(gm1) : efrac0;
 }
 
+
+auto eos_barotr_spline::descr_str() const -> std::string
+{
+  auto u = units_to_SI();
+  std::ostringstream s;
+  s.precision(15);
+  s.setf(std::ios::scientific);
+  s << "Interpolating spline EOS, "
+    << "max. valid density =" 
+    << (range_rho().max() * u.density())
+    << " kg/m^3, "
+    << "max. valid g-1 =" << range_gm1().max() << ", ";
+    
+    if (has_temp()) {
+      if (is_zero_temp()) {
+        s << "zero temperature";
+      } else {
+        s << "available";
+      }
+    } else {
+      s << "not available";
+    }
+    s << ", ";
+    if (is_isentropic()) {
+      s << "isentropic, ";
+    }
+    
+  s << "electron fraction " 
+    << (has_efrac() ? "" : "not") << " available"
+    << ". Below density of " 
+    << (rho_low * u.density())
+    << " kg/m^3"
+    << " using " << poly.descr_str();
+  return s.str();
+}
   
-eos_barotr EOS_Toolkit::make_eos_barotr_spline(
+auto EOS_Toolkit::make_eos_barotr_spline(
   func_t gm1_rho, func_t rho_gm1, func_t eps_gm1, func_t press_gm1, 
   func_t csnd_gm1, func_t temp_gm1, func_t efrac_gm1, 
   bool isentropic, interval<real_t> rg_rho, real_t n_poly,
   units u, std::size_t pts_per_mag)
+-> eos_barotr
 {  
   using detail::interpol_logspl_impl;
   using detail::interpol_llogspl_impl;
@@ -279,9 +319,10 @@ eos_barotr EOS_Toolkit::make_eos_barotr_spline(
 }
 
 
-eos_barotr EOS_Toolkit::make_eos_barotr_spline(const eos_barotr& eos, 
+auto EOS_Toolkit::make_eos_barotr_spline(const eos_barotr& eos, 
               interval<real_t> rg_rho, real_t n_poly,
               std::size_t pts_per_mag)
+-> eos_barotr
 {
   func_t temp_gm1{nullptr};
   if (eos.has_temp())
@@ -306,14 +347,215 @@ eos_barotr EOS_Toolkit::make_eos_barotr_spline(const eos_barotr& eos,
          );
 }
 
+template<class T>
+auto integrate_trapz(const std::vector<T>& x, const std::vector<T>& y, 
+                     const T int_const=0)
+-> std::vector<T>
+{
+  assert(x.size() == y.size());
+  assert(x.size() > 0);
+  
+  std::vector<T> r(x.size());
+  r[0] = int_const;
+  for (std::size_t i=0; i+1<x.size(); ++i) 
+  {
+    r[i+1] = r[i] + (x[i+1] - x[i]) * (y[i] + y[i+1]) / 2;
+  }
+  return r;
+}
 
-eos_barotr EOS_Toolkit::make_eos_barotr_spline(
+auto compute_gm1_for_samples(const std::vector<real_t>& rho,
+                             func_t eps_rho,
+                             func_t press_rho)
+-> std::vector<real_t>
+{
+  std::vector<real_t> vp, vy;
+  for (auto r_ : rho) 
+  {
+    assert(r_ >0);
+    const real_t p_{ press_rho(r_) };
+    const real_t y_{ 1.0 / (r_ * (1.0 + eps_rho(r_)) + p_) };
+    vp.push_back(p_);
+    vy.push_back(y_);
+  }
+  
+  auto gm1{ integrate_trapz(vp, vy) };
+  
+  for (real_t& x : gm1) x = expm1(x);
+  
+  return gm1;
+}
+
+
+auto ensure_resolution_log(const std::vector<real_t>& x, 
+                           std::size_t ppmg) 
+-> std::vector<real_t>
+{
+  std::vector<real_t> xf;
+
+  const real_t mindlgx{ log(10.) / ppmg };
+  for (std::size_t i=0; i+1<x.size(); ++i) 
+  {    
+    assert(x[i] > 0);
+    assert(x[i+1] > x[i]);
+    const real_t lgx0{ log(x[i]) };
+    const real_t lgx1{ log(x[i+1]) };
+    const real_t dlgx{ lgx1 - lgx0 };
+    const int    nsub{ (int) ceil(dlgx / mindlgx) };
+    const real_t sdlgx{ dlgx / nsub };
+    for (int k=0; k<nsub; ++k)
+    {
+      xf.push_back(exp(lgx0 + k*sdlgx));
+    }
+  
+  }
+  xf.push_back(x.back());
+  
+  return xf;
+}
+
+
+auto EOS_Toolkit::make_eos_barotr_spline(
+  const std::vector<real_t>& rho,
+  const std::vector<real_t>& eps, const std::vector<real_t>& press, 
+  const std::vector<real_t>& csnd, const std::vector<real_t>& temp, 
+  const std::vector<real_t>& efrac, bool isentropic, 
+  interval<real_t> rg_rho, real_t n_poly,
+  units uc, std::size_t pts_per_mag)
+-> eos_barotr
+{  
+  if (rho[0] <= 0) {
+    throw std::runtime_error("Density must be strictly positive for"
+    "sample points when constructing eos_barotr_spline EOS");
+  }
+  
+  auto eps_rho{ make_interpol_pchip_spline(rho, eps) };
+  auto press_rho{ make_interpol_pchip_spline(rho, press) };
+  auto csnd_rho{ make_interpol_pchip_spline(rho, csnd) };
+
+  auto rho_f{ ensure_resolution_log(rho, pts_per_mag) };
+  
+  auto gm1_f{ compute_gm1_for_samples(rho_f, eps_rho, press_rho) };
+
+  auto rho_gm1{ make_interpol_pchip_spline(gm1_f, rho_f) };
+  auto gm1_rho{ make_interpol_pchip_spline(rho_f, gm1_f) };
+
+  auto eps_gm1 = [&] (real_t gm1) {return eps_rho(rho_gm1(gm1));};
+  auto press_gm1 = [&] (real_t gm1) {return press_rho(rho_gm1(gm1));};
+  auto csnd_gm1 = [&] (real_t gm1) {return csnd_rho(rho_gm1(gm1));};
+
+  auto temp_gm1 = [&]() -> func_t {
+    if (temp.empty()) return nullptr;
+    auto temp_rho{ make_interpol_pchip_spline(rho, temp) };
+    return [=] (real_t gm1) {return temp_rho(rho_gm1(gm1));};
+  }();
+
+  auto efrac_gm1 = [&]() -> func_t {
+    if (efrac.empty()) return nullptr;
+    auto efrac_rho{ make_interpol_pchip_spline(rho, efrac) };
+    return [=] (real_t gm1) {return efrac_rho(rho_gm1(gm1));};
+  }();
+  
+  if (!gm1_rho.contains(rg_rho))
+  {
+    throw std::range_error("eos_barotr_spline: target density range "
+                           "outside provided sample points");
+  }
+  
+  return make_eos_barotr_spline(gm1_rho, rho_gm1, eps_gm1, 
+                      press_gm1, csnd_gm1, temp_gm1, efrac_gm1, 
+                      isentropic, rg_rho, n_poly, uc, pts_per_mag);
+}
+
+
+auto compute_eps_for_samples(const std::vector<real_t>& rho,
+                             func_t press_rho)
+-> std::vector<real_t>
+{
+  std::vector<real_t> vy;
+  for (auto r_ : rho) 
+  {
+    assert(r_ > 0);
+    const real_t p_{ press_rho(r_) };
+    vy.push_back( p_ / (r_ * r_) );
+  }
+  
+  return integrate_trapz(rho, vy);
+}
+
+
+auto EOS_Toolkit::make_eos_barotr_spline(
+  const std::vector<real_t>& rho,
+  const std::vector<real_t>& press,
+  const std::vector<real_t>& csnd,
+  const std::vector<real_t>& temp,
+  const std::vector<real_t>& efrac, 
+  interval<real_t> rg_rho,
+  real_t n_poly, real_t eps0, units uc,
+  std::size_t pts_per_mag) 
+-> eos_barotr
+{
+  if (rho[0] <= 0) {
+    throw std::runtime_error("Density must be strictly positive for"
+    "sample points when constructing eos_barotr_spline EOS");
+  }
+  
+  auto press_rho{ make_interpol_pchip_spline(rho, press) };
+  auto csnd_rho{ make_interpol_pchip_spline(rho, csnd) };
+
+  auto rho_f{ ensure_resolution_log(rho, pts_per_mag) };
+  
+  
+  const real_t eps_m{ n_poly * press_rho(rg_rho.min()) / rg_rho.min() };
+  
+  auto deps_f{ compute_eps_for_samples(rho_f, press_rho) };
+  
+  auto deps_rho{ make_interpol_pchip_spline(rho_f, deps_f) };
+  auto eps_rho = [&] (real_t rho) {
+    return deps_rho(rho) - deps_rho(rg_rho.min()) + eps_m;
+  };
+  
+  auto gm1_f{ compute_gm1_for_samples(rho_f, eps_rho, press_rho) };
+
+  auto rho_gm1{ make_interpol_pchip_spline(gm1_f, rho_f) };
+  auto gm1_rho{ make_interpol_pchip_spline(rho_f, gm1_f) };
+
+  auto eps_gm1 = [&] (real_t gm1) {return eps_rho(rho_gm1(gm1));};
+  auto press_gm1 = [&] (real_t gm1) {return press_rho(rho_gm1(gm1));};
+  auto csnd_gm1 = [&] (real_t gm1) {return csnd_rho(rho_gm1(gm1));};
+
+  auto temp_gm1 = [&]() -> func_t {
+    if (temp.empty()) return nullptr;
+    auto temp_rho{ make_interpol_pchip_spline(rho, temp) };
+    return [=] (real_t gm1) {return temp_rho(rho_gm1(gm1));};
+  }();
+
+  auto efrac_gm1 = [&]() -> func_t {
+    if (efrac.empty()) return nullptr;
+    auto efrac_rho{ make_interpol_pchip_spline(rho, efrac) };
+    return [=] (real_t gm1) {return efrac_rho(rho_gm1(gm1));};
+  }();
+  
+  if (!gm1_rho.contains(rg_rho))
+  {
+    throw std::range_error("eos_barotr_spline: target density range "
+                           "outside provided sample points");
+  }
+  
+  return make_eos_barotr_spline(gm1_rho, rho_gm1, eps_gm1, 
+                      press_gm1, csnd_gm1, temp_gm1, efrac_gm1, 
+                      true, rg_rho, n_poly, uc, pts_per_mag);
+  
+}
+
+auto EOS_Toolkit::make_eos_barotr_spline(
   const std::vector<real_t>& gm1, const std::vector<real_t>& rho,
   const std::vector<real_t>& eps, const std::vector<real_t>& press, 
   const std::vector<real_t>& csnd, const std::vector<real_t>& temp, 
   const std::vector<real_t>& efrac, bool isentropic, 
   interval<real_t> rg_rho, real_t n_poly,
   units uc, std::size_t pts_per_mag)
+-> eos_barotr
 {  
   
   auto gm1_rho{ make_interpol_pchip_spline(rho, gm1) };

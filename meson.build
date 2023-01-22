@@ -1,6 +1,6 @@
 
 project('RePrimAnd', ['cpp','c'], default_options : ['cpp_std=c++11'],
-        version : '1.5beta', license : 'CC BY-NC-SA 4.0')
+        version : '1.5', license : 'CC BY-NC-SA 4.0')
 
 project_headers_dest = 'reprimand'
 
@@ -11,8 +11,6 @@ dep_h5    = dependency('hdf5')
 subdir('EOS')
 
 subdir('library')
-
-subdir('bindings')
 
 subdir('tests')
 

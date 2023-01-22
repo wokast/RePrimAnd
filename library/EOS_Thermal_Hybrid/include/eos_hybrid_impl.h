@@ -113,6 +113,8 @@ class eos_hybrid : public eos_thermal_impl {
   real_t minimal_h() const final {return min_h;}
 
   void save(datasink s) const final;
+
+  auto descr_str() const -> std::string final;
   
   static const std::string datastore_id;  
   static const bool file_handler_registered;

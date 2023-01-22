@@ -3,6 +3,7 @@
 
 #include "config.h"
 #include <memory>
+#include <string>
 #include "eos_barotropic_internals.h"
 #include "intervals.h"
 #include "unitconv.h"
@@ -416,6 +417,12 @@ class eos_barotr : detail::eos_barotr_base {
   internally by the EOS file functionality.
   **/
   void save(datasink s) const;
+
+  /**\brief Short description string 
+  
+  @returns Short auto-generated EOS type-specific description string 
+  **/
+  auto descr_str() const -> std::string;
 };
 
 

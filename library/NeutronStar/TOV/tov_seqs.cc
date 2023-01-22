@@ -515,9 +515,10 @@ auto bracket_root(const F& f, R guess, EOS_Toolkit::interval<R> bnd,
     if  (((f0 < 0) && (0 < f1)) || ((f1 < 0) && (0 < f0))) {
       return {x0, x1};
     }
-    if (f1 >= f0) {
+    if (((f0 >= 0) && (f1 > f0)) || ( (f0 <= 0) && (f1 < f0) )) {
       x0 = x0 / search_fac;
       if (x0 <= bnd.min()) {
+        if (f(bnd.min())*f1 <= 0) return {bnd.min(),x1};
         throw std::runtime_error("Root bracket failed (out of bounds)");
       }
       f0 = f(x0);
@@ -525,6 +526,7 @@ auto bracket_root(const F& f, R guess, EOS_Toolkit::interval<R> bnd,
     else {
       x1 = x1 * search_fac;
       if (x1 >= bnd.max()) {
+        if (f(bnd.max())*f0 <= 0) return {x0,bnd.max()};
         throw std::runtime_error("Root bracket failed (out of bounds)");
       }
       f1 = f(x1);
@@ -583,7 +585,9 @@ auto make_tov_seq_impl(eos_barotr eos, tov_acc_simple acc,
   for (unsigned int i=0; i < num_samp; ++i)
   {
     const real_t w{ i/double(num_samp-1) };
-    const real_t gm1{ rg_gm1.min() + w * rg_gm1.length() };
+    const real_t gm1{ 
+      eos.range_gm1().limit_to( rg_gm1.min() + w * rg_gm1.length() ) 
+    };
     const real_t rhoc{ eos.at_gm1(gm1).rho() };
     auto tov{ get_tov_star_properties(eos, rhoc, acc) };
     
@@ -657,6 +661,11 @@ auto make_tov_branch_stable(eos_barotr eos, tov_acc_simple acc,
   const unsigned int oversamp=2;
   const unsigned int tmp_subsamp=10;
   
+  if (max_margin <= 0) {
+    throw std::invalid_argument("Margin for true maximum must be" 
+                                "positive");
+  }
+  
   auto f = [&] (real_t gm1c) {
     real_t rhoc{ eos.range_rho().limit_to(eos.at_gm1(gm1c).rho()) };
     auto tov{ get_tov_star_properties(eos, rhoc, acc) };
@@ -679,14 +688,11 @@ auto make_tov_branch_stable(eos_barotr eos, tov_acc_simple acc,
   };
   
   const real_t gm1_max{ find_maximum(f2, bracket_max) };
-  
-  const real_t max_wind{ 1.5 };
-  const real_t max_comp_gm1{
-    eos.range_gm1().limit_to(max_wind * gm1_max)
-  };
+    
   const bool incl_max{ 
-    f(max_comp_gm1) < (1. - max_margin) * f(gm1_max)
+    eos.range_gm1().contains(gm1_max * (1.0 + max_margin))
   };
+  
   
   interval<real_t> rg_gm1{sqimpl->range_center_gm1().min(), 
                           std::min(sqimpl->range_center_gm1().max(), 
