@@ -107,7 +107,7 @@ class units {
   static units geom_udensity(double udensity, 
                                        double g_si=G_SI)
   {
-    return geom_ulength( c_SI / std::sqrt(g_si * udensity));
+    return geom_ulength( c_SI / std::sqrt(g_si * udensity), g_si);
   }
 
   /**\brief Compute units with G=c=1 and given mass unit
@@ -118,7 +118,7 @@ class units {
   **/  
   static constexpr units geom_umass(double umass, double g_si=G_SI)
   {
-    return geom_ulength(umass * g_si /(c_SI*c_SI));
+    return geom_ulength(umass * g_si /(c_SI*c_SI), g_si);
   }
 
   /**\brief Compute units with G=c=1 and the mass unit is the solar mass

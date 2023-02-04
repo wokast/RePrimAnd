@@ -68,12 +68,11 @@ real_t eos_barotr_gpoly::hm1(real_t gm1) const
 }
 
 /**
-\return Soundspeed squared \f$ c_s^2 = \frac{h-1}{nh} \f$
+\return Soundspeed squared \f$ c_s^2 = \frac{g-1}{ng} \f$
 */
 real_t eos_barotr_gpoly::csnd(real_t gm1) const
 {
-  real_t h1 = hm1(gm1);
-  real_t cs2 = h1/(n*(h1+1));
+  real_t cs2 = gm1/(n*(gm1+1));
   return sqrt(cs2);
 }
 

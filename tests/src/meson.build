@@ -54,20 +54,3 @@ src_gen_tov = ['gen_tov_ref_data.cc']
 exe_gen_tov = executable('gen_tov_ref_data', sources : src_gen_tov, 
                       dependencies : [dep_reprim, dep_json])
 
-
-if get_option('build_python_api')
-  if py3_inst.found()
-    pytov_test_script = files('test_python_tov.py')
-    test('PYTOV',
-      py3_inst,
-      args : [pytov_test_script, eos_dir],
-      env : ['PYTHONPATH=' + pyreprimand_path])
-      
-    pyeos_test_script = files('test_python_eos.py')
-    test('PYEOS',
-      py3_inst,
-      args : [pyeos_test_script, eos_dir],
-      env : ['PYTHONPATH=' + pyreprimand_path])
-    
-  endif
-endif

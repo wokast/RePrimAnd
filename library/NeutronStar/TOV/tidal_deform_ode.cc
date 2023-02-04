@@ -64,26 +64,47 @@ tidal_ode::tidal_ode(eos_barotr eos_, real_t gm1_center_,
                              "computed for isentropic EOS"));
   }
   
-  std::vector<real_t> revrho;
-  for (auto i = dnu_.rbegin(); i != dnu_.rend(); ++i) 
+  std::vector<real_t> revrho, revlambda, revdnu, revrsqr, revmbr3;
+  
+  auto ilambda = lambda_.rbegin();
+  auto irsqr = rsqr_.rbegin();
+  for (auto idnu = dnu_.rbegin(); idnu != dnu_.rend(); ++idnu) 
   {
-    real_t gm1{ gm1_from_dnu(*i) };
+    assert(ilambda != lambda_.rend());
+    assert(irsqr != rsqr_.rend());
+    
+    real_t dnu{ *idnu };
+    real_t lambda{ *ilambda++ };
+    real_t rsqr{ *irsqr++ };
+
+    real_t gm1{ gm1_from_dnu(dnu) };
     auto s{ eos.at_gm1(eos.range_gm1().limit_to(gm1)) };
+    
     assert(s);
-    revrho.push_back(s.rho());
+    assert(lambda >= 0.0);
+    assert(rsqr >= 0.0);
+    
+    real_t rho{ s.rho() };
+    real_t rho_e{ rho * (1.0 + s.eps()) };
+    real_t mbr3{ m_by_r3(rsqr, lambda, rho_e) };
+    
+    revrho.push_back(rho);
+    revlambda.push_back(lambda);
+    revdnu.push_back(dnu);
+    revrsqr.push_back(rsqr);
+    revmbr3.push_back(mbr3);
   }
   
-  
-  const std::vector<real_t> revdnu(dnu_.rbegin(), dnu_.rend());
-
-  const std::vector<real_t> revlambda(lambda_.rbegin(), lambda_.rend());
-  const std::vector<real_t> revrsqr(rsqr_.rbegin(), rsqr_.rend());
   
   dnu_rho = make_interpol_pchip_spline(revrho, revdnu);
   
   lambda_rho = make_interpol_pchip_spline(revrho, revlambda);
 
   rsqr_rho = make_interpol_pchip_spline(revrho, revrsqr);
+
+  mbr3_rho = make_interpol_pchip_spline(revrho, revmbr3);
+
+
   assert(x_start()>x_end());
 }
 
@@ -111,20 +132,19 @@ auto tidal_ode::drho_y(real_t rho_, real_t ym2) const -> real_t
   real_t cs2{ std::pow(s.csnd(), 2) }; 
    
   real_t rho_e{ rho * (1.0 + eps) };
-  
-  real_t lambda{ lambda_rho(rho) };
+  assert(lambda_rho.range_x().contains(rho));
+  real_t lambda{ std::max(0.0, lambda_rho(rho)) };
   real_t e2l{ std::exp(2.0 * lambda) };
   real_t rsqr{ rsqr_rho(rho) };
   real_t wtfac{ cs2 / rho };
- 
-      
-  real_t mbyr3{ m_by_r3(rsqr, lambda, rho_e) };
+  real_t mbyr3{ mbr3_rho(rho) };
   
   real_t a{ 4.0*PI * p + mbyr3 };
   real_t b{ 2.0 * rsqr * (mbyr3 + 2.0*PI * (p - rho_e)) };
   real_t c{ 4.0*PI * (3.0 * rho_e + 11.0 * p) - 8.0 * mbyr3 };
   real_t d{ 4.0 * rsqr * wtfac * e2l * a };
   real_t g{ (ym2+2.0 + 3.0) / e2l + b };
+  
   
   real_t f{0.0};
   if (rsqr>0) {
@@ -134,9 +154,11 @@ auto tidal_ode::drho_y(real_t rho_, real_t ym2) const -> real_t
     f = (-4.0*PI/7.0) * (
                 (11.0 * h - (32.0/3.0) * (1.0 + eps) ) * cs2 + h);
   }
-  
-  
-  return (4.0*PI * h +  (f * g + wtfac * c)) / a - d;
+
+
+  real_t res{ (4.0*PI * h +  (f * g + wtfac * c)) / a - d };
+  assert(std::isfinite(res));
+  return res;
 }
 
 auto tidal_ode::initial_data() const -> state_t

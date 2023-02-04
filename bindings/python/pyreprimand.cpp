@@ -917,6 +917,10 @@ All quantities are in the same geometric units used by the EOS.
              py::vectorize(&etk::spherical_star::lambda_from_rc),
              "Metric function lambda at circumf. radius",
              py::arg("rc"))     
+        .def("gm1_from_rc", 
+             py::vectorize(&etk::spherical_star::gm1_from_rc),
+             "Pseudo enthalpy g - 1 at circumf. radius",
+             py::arg("rc"))
         .def("mbary_from_rc", 
              py::vectorize(&etk::spherical_star::mbary_from_rc),
              "Baryonic mass within circumf. radius",

@@ -17,6 +17,7 @@ class tidal_ode {
   interpolator dnu_rho;
   interpolator lambda_rho;
   interpolator rsqr_rho;
+  interpolator mbr3_rho;
   
   auto gm1_from_dnu(real_t dnu) const -> real_t;
 
