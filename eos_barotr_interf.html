@@ -39,12 +39,12 @@
   <section id="interface">
 <span id="barotr-interface"></span><h1>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">¶</a></h1>
 <p>The barotropic EOS are represented
-by objects of type <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code></a>.
+by objects of type <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code>.
 These objects
 represent the generic EOS interface and do not implement any EOS.
 Instead, they forward any request to an actual implementation of a
 particular EOS. To obtain an
-<a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code></a>
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code>
 object representing a particular EOS, one uses functions such as
 <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t5units" title="EOS_Toolkit::make_eos_barotr_poly"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_eos_barotr_poly()</span></code></a>
 provided for each type of EOS.</p>
@@ -55,7 +55,7 @@ For this, use the methods
 <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">at_rho()</span></code> and
 <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">at_gm1()</span></code>.
 Both return an object of type
-<a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">state</span></code></a>.
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">state</span></code>.
 All EOS always provide both forms.</p>
 <p>Second, one can use methods of this object to obtain mass density,
 pseudo enthalpy, pressure,
@@ -64,11 +64,11 @@ Further, one can use the state object like a boolean
 variable to check if the state is in the valid regime of the EOS.
 Trying to compute any of the above from an invalid state will throw
 an exception. The following snipped demonstrates the EOS use:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eos</span><span class="p">.</span><span class="n">at_rho</span><span class="p">(</span><span class="n">rho</span><span class="p">);</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">pressure</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">press</span><span class="p">()</span><span class="w"></span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">soundspeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">csnd</span><span class="p">()</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eos</span><span class="p">.</span><span class="n">at_rho</span><span class="p">(</span><span class="n">rho</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">pressure</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">press</span><span class="p">()</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">soundspeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">csnd</span><span class="p">()</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The functionality above is also provided by another set of EOS methods
@@ -78,7 +78,7 @@ exceptions when called outside the valid ranges, but instead return
 NANs. When computing several quantities for the same state, the
 alternative syntax might be less efficient because the validity has to
 be checked each time instead of only once as for the primary syntax.</p>
-<p>The <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code></a> class
+<p>The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code> class
 also provides methods to query the valid ranges of mass density and
 pseudo enthalpy. For convenience, there are methods to check if
 given parameter is inside the valid range.</p>
@@ -175,7 +175,7 @@ better be done by reference instead of value.</p>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/eos_barotr_interf.rst.txt"

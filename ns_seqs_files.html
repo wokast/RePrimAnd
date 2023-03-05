@@ -51,23 +51,23 @@ and the sequence. For saving a branch, use
 <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13load_star_seqENSt6stringERK5units" title="EOS_Toolkit::load_star_seq"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_seq()</span></code></a> or
 <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16load_star_branchENSt6stringERK5units" title="EOS_Toolkit::load_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_branch()</span></code></a>, respectively.</p>
 <p>The following example demonstrates basic use of stable TOV branches.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/unitconv.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_sequence.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_seq_file.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/unitconv.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_sequence.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_seq_file.h&quot;</span>
 
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">seq1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_star_branch</span><span class="p">(</span><span class="s">&quot;example1.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">);</span><span class="w">    </span>
-<span class="w">    </span><span class="n">save_star_branch</span><span class="p">(</span><span class="s">&quot;copy1.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">seq1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">save_star_branch</span><span class="p">(</span><span class="s">&quot;copy1.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">seq1</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">seq2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_star_seq</span><span class="p">(</span><span class="s">&quot;example2.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">);</span><span class="w">    </span>
-<span class="w">    </span><span class="n">save_star_seq</span><span class="p">(</span><span class="s">&quot;copy2.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">seq2</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">save_star_seq</span><span class="p">(</span><span class="s">&quot;copy2.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">seq2</span><span class="p">);</span>
 
-<span class="p">}</span><span class="w"></span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
@@ -145,7 +145,7 @@ and the sequence. For saving a branch, use
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/ns_seqs_files.rst.txt"

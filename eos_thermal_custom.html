@@ -70,64 +70,64 @@ and the global minimum <span class="math notranslate nohighlight">\(h_0\)</span>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef EOS_FOOBAR_IMPL_H</span>
 <span class="cp">#define EOS_FOOBAR_IMPL_H</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_thermal_impl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_thermal_impl.h&quot;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">eos_foobar</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">eos_thermal_impl</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rgye</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="n">min_h</span><span class="p">;</span><span class="w"></span>
-
-
-<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">eos_foobar</span><span class="p">(</span><span class="cm">/* foobar parameters */</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">eos_foobar</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">therm_from_rho_eps_ye</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="n">real_t</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"></span>
-<span class="w">                               </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">therm_from_rho_temp_ye</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">eps</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span><span class="w"></span>
-<span class="w">             </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">temp</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">press</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">csnd</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span><span class="w"></span>
-<span class="w">              </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">sentr</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span><span class="w"></span>
-<span class="w">               </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">dpress_drho</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span><span class="w"></span>
-<span class="w">                     </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">dpress_deps</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span><span class="w"></span>
-<span class="w">                     </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">range</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">range_rho</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;}</span><span class="w"></span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">range</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">range_ye</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">rgye</span><span class="p">;}</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="nf">range_eps</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="nf">range_temp</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">minimal_h</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">min_h</span><span class="p">;}</span><span class="w"></span>
-
-<span class="p">};</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">eos_foobar</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">eos_thermal_impl</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;</span>
+<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rgye</span><span class="p">;</span>
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="n">min_h</span><span class="p">;</span>
 
 
-<span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+
+<span class="w">  </span><span class="n">eos_foobar</span><span class="p">(</span><span class="cm">/* foobar parameters */</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">eos_foobar</span><span class="p">();</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">therm_from_rho_eps_ye</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="n">real_t</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">therm_from_rho_temp_ye</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">eps</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span>
+<span class="w">             </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">temp</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span>
+<span class="w">              </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">press</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span>
+<span class="w">               </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">csnd</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span>
+<span class="w">              </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">sentr</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span>
+<span class="w">               </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">dpress_drho</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">dpress_deps</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">therm</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">range</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">range_rho</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;}</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">range</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">range_ye</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">rgye</span><span class="p">;}</span>
+
+<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="nf">range_eps</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="nf">range_temp</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">ye</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">minimal_h</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">min_h</span><span class="p">;}</span>
+
+<span class="p">};</span>
+
+
+<span class="p">}</span>
+<span class="p">}</span>
 
 <span class="cp">#endif</span>
 </pre></div>
@@ -144,16 +144,16 @@ incorrect “dummy” values or NANs be returned.</p>
 <p>Finally, one has to provide a function to wrap the
 implementation into <a class="reference internal" href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_thermal</span></code></a> EOS object,
 like this:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">eos_thermal</span><span class="w"> </span><span class="nf">EOS_Toolkit::make_eos_foobar</span><span class="p">(</span><span class="cm">/* &lt;foobar parameters&gt; */</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">eos_thermal</span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">eos_foobar</span><span class="o">&gt;</span><span class="p">(</span><span class="cm">/* &lt;foobar parameters&gt; */</span><span class="p">)</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">eos_thermal</span><span class="w"> </span><span class="nf">EOS_Toolkit::make_eos_foobar</span><span class="p">(</span><span class="cm">/* &lt;foobar parameters&gt; */</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">eos_thermal</span><span class="p">{</span>
+<span class="w">            </span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">eos_foobar</span><span class="o">&gt;</span><span class="p">(</span><span class="cm">/* &lt;foobar parameters&gt; */</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The custom EOS is then ready to use:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">foobar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_eos_foobar</span><span class="p">(</span><span class="cm">/* &lt;foobar parameters&gt; */</span><span class="p">);</span><span class="w"></span>
-<span class="n">press</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foobar</span><span class="p">.</span><span class="n">at_rho_eps_ye</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">eps</span><span class="p">,</span><span class="n">ye</span><span class="p">).</span><span class="n">press</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">foobar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_eos_foobar</span><span class="p">(</span><span class="cm">/* &lt;foobar parameters&gt; */</span><span class="p">);</span>
+<span class="n">press</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foobar</span><span class="p">.</span><span class="n">at_rho_eps_ye</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">eps</span><span class="p">,</span><span class="n">ye</span><span class="p">).</span><span class="n">press</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>For a real example, we suggest to look at the implementation of
@@ -171,31 +171,31 @@ named <cite>eos_thermal_custom_foobar</cite>.</p>
 <p>To register a reader, one needs to create a translation unit similar
 to the one below. Files with custom EOS can then be loaded via the same
 interface as for the types provided by the library.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hdf5imple.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_thermal_file_impl.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_foobar.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hdf5imple.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_thermal_file_impl.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_foobar.h&quot;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span>
 
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">reader_eos_foobar</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reader_eos_thermal</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">eos_thermal</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">reader_eos_foobar</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reader_eos_thermal</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">eos_thermal</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">register_reader_eos_foobar</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">registry_reader_eos_thermal</span><span class="o">::</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;thermal_custom_foobar&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                   </span><span class="k">new</span><span class="w"> </span><span class="n">reader_eos_foobar</span><span class="p">())</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">register_reader_eos_foobar</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">registry_reader_eos_thermal</span><span class="o">::</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;thermal_custom_foobar&quot;</span><span class="p">,</span>
+<span class="w">                                   </span><span class="k">new</span><span class="w"> </span><span class="n">reader_eos_foobar</span><span class="p">())</span>
+<span class="p">};</span>
 
-<span class="n">eos_thermal</span><span class="w"> </span><span class="nf">reader_eos_foobar::load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                           </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
+<span class="n">eos_thermal</span><span class="w"> </span><span class="nf">reader_eos_foobar::load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span>
+<span class="w">                                           </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
+<span class="p">{</span>
 <span class="w">  </span><span class="c1">//code to read EOS from HDF5 group g goes here</span>
 
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">make_eos_foobar</span><span class="p">(</span><span class="cm">/* foobar parameters loaded above */</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">make_eos_foobar</span><span class="p">(</span><span class="cm">/* foobar parameters loaded above */</span><span class="p">);</span>
+<span class="p">}</span>
 
 
 
@@ -540,7 +540,7 @@ It must be guaranteed that the enthaply computed by the EOS for any valid state 
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/eos_thermal_custom.rst.txt"

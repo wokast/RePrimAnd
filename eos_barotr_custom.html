@@ -66,56 +66,56 @@ circumstances</strong> should incorrect “dummy” values or NANs be returned.<
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef EOS_BARFOO_IMPL_H</span>
 <span class="cp">#define EOS_BARFOO_IMPL_H</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_barotropic_impl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_barotropic_impl.h&quot;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">eos_barfoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">eos_barotr_impl</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rggm1</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">min_h</span><span class="p">;</span><span class="w"></span>
-
-
-<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">eos_barfoo</span><span class="p">(</span><span class="cm">/* eos parameters */</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">range</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">range_rho</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;}</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">range</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">range_gm1</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">rggm1</span><span class="p">;}</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">minimal_h</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">min_h</span><span class="p">;}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_isentropic</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_zero_temp</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">has_temp</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">has_efrac</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">eos_barfoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">eos_barotr_impl</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;</span>
+<span class="w">  </span><span class="n">range</span><span class="w"> </span><span class="n">rggm1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">real_t</span><span class="w"> </span><span class="n">min_h</span><span class="p">;</span>
 
 
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">gm1_from_rho</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
 
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">rho</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">eos_barfoo</span><span class="p">(</span><span class="cm">/* eos parameters */</span><span class="p">);</span>
 
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">eps</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w">  </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">range</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">range_rho</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">rgrho</span><span class="p">;}</span>
 
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">press</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">range</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">range_gm1</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">rggm1</span><span class="p">;}</span>
 
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">hm1</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">minimal_h</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">min_h</span><span class="p">;}</span>
 
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">csnd</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_isentropic</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">temp</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">is_zero_temp</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">ye</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">has_temp</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
 
-<span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">has_efrac</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
 
-<span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">gm1_from_rho</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">rho</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">rho</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">eps</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w">  </span><span class="k">final</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">press</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">hm1</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">csnd</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">temp</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">real_t</span><span class="w"> </span><span class="nf">ye</span><span class="p">(</span><span class="n">real_t</span><span class="w"> </span><span class="n">gm1</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
+
+<span class="p">};</span>
+
+<span class="p">}</span>
+<span class="p">}</span>
 
 <span class="cp">#endif</span>
 </pre></div>
@@ -129,16 +129,16 @@ region.</p>
 <p>Finally, one has to provide a function to wrap the
 implementation into <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code> EOS object,
 like this:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">eos_barotr</span><span class="w"> </span><span class="nf">EOS_Toolkit::make_eos_barfoo</span><span class="p">(</span><span class="cm">/* &lt;barfoo parameters&gt; */</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">eos_barotr</span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">eos_barfoo</span><span class="o">&gt;</span><span class="p">(</span><span class="cm">/* &lt;barfoo parameters&gt; */</span><span class="p">)</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">eos_barotr</span><span class="w"> </span><span class="nf">EOS_Toolkit::make_eos_barfoo</span><span class="p">(</span><span class="cm">/* &lt;barfoo parameters&gt; */</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">eos_barotr</span><span class="p">{</span>
+<span class="w">          </span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">eos_barfoo</span><span class="o">&gt;</span><span class="p">(</span><span class="cm">/* &lt;barfoo parameters&gt; */</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The custom EOS is then ready to use:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">barfoo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_eos_barfoo</span><span class="p">(</span><span class="cm">/* &lt;barfoo parameters&gt; */</span><span class="p">);</span><span class="w"></span>
-<span class="n">press</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">barfoo</span><span class="p">.</span><span class="n">at_rho</span><span class="p">(</span><span class="n">rho</span><span class="p">).</span><span class="n">press</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">barfoo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_eos_barfoo</span><span class="p">(</span><span class="cm">/* &lt;barfoo parameters&gt; */</span><span class="p">);</span>
+<span class="n">press</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">barfoo</span><span class="p">.</span><span class="n">at_rho</span><span class="p">(</span><span class="n">rho</span><span class="p">).</span><span class="n">press</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>For a real example, we suggest to look at the implementation of
@@ -156,35 +156,35 @@ named <cite>eos_barotr_custom_foobar</cite>.</p>
 <p>To register a reader, one needs to create a translation unit similar
 to the one below. Files with custom EOS can then be loaded via the same
 interface as for the types provided by the library.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hdf5imple.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_barotr_file_impl.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_barotr_poly.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hdf5imple.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_barotr_file_impl.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_barotr_poly.h&quot;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="w"> </span><span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">implementations</span><span class="w"> </span><span class="p">{</span>
 
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">reader_eos_barfoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reader_eos_barotr</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">eos_barotr</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">reader_eos_barfoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reader_eos_barotr</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">eos_barotr</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">register_reader_eos_barfoo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">registry_reader_eos_barotr</span><span class="o">::</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;barotr_custom_barfoo&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                  </span><span class="k">new</span><span class="w"> </span><span class="n">reader_eos_barfoo</span><span class="p">())</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">register_reader_eos_barfoo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">registry_reader_eos_barotr</span><span class="o">::</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;barotr_custom_barfoo&quot;</span><span class="p">,</span>
+<span class="w">                                  </span><span class="k">new</span><span class="w"> </span><span class="n">reader_eos_barfoo</span><span class="p">())</span>
+<span class="p">};</span>
 
-<span class="n">eos_barotr</span><span class="w"> </span><span class="nf">reader_eos_barfoo::load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                        </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
+<span class="n">eos_barotr</span><span class="w"> </span><span class="nf">reader_eos_barfoo::load</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">h5grp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="p">,</span>
+<span class="w">                                        </span><span class="k">const</span><span class="w"> </span><span class="n">units</span><span class="o">&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
+<span class="p">{</span>
 
 <span class="w">  </span><span class="c1">// code to read EOS data from HDF5 group g goes here</span>
 
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">make_eos_barfoo</span><span class="p">(</span><span class="cm">/* barfoo EOS parameters loaded above */</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">make_eos_barfoo</span><span class="p">(</span><span class="cm">/* barfoo EOS parameters loaded above */</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The header <cite>hdf5imple.h</cite> provides a minimalistic C++ wrapper of the
@@ -285,6 +285,23 @@ It must be guaranteed that the enthaply computed by the EOS for any valid state 
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl17csnd_from_rho_gm1E6real_t6real_t">
+<span id="_CPPv3NK11EOS_Toolkit15implementations15eos_barotr_impl17csnd_from_rho_gm1E6real_t6real_t"></span><span id="_CPPv2NK11EOS_Toolkit15implementations15eos_barotr_impl17csnd_from_rho_gm1E6real_t6real_t"></span><span id="EOS_Toolkit::implementations::eos_barotr_impl::csnd_from_rho_gm1__real_t.real_tC"></span><span class="target" id="classEOS__Toolkit_1_1implementations_1_1eos__barotr__impl_1a3bb344bad67844a71ee8313c2eebd079"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd_from_rho_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit15implementations15eos_barotr_impl17csnd_from_rho_gm1E6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute soundspeed if both density and pseudo-enthalpy are available, using best choice for given EOS. Note: this was introduced as a workaround because using <span class="math notranslate nohighlight">\( c_s(g-1) \)</span> internally is a bad choice when allowing for phase transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> – Rest mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p></li>
+<li><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span> </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Adiabatic soundspeed <span class="math notranslate nohighlight">\( c_s \)</span> </p>
 </dd>
 </dl>
 </dd></dl>
@@ -496,7 +513,7 @@ It must be guaranteed that the enthaply computed by the EOS for any valid state 
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/eos_barotr_custom.rst.txt"

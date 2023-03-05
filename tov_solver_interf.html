@@ -66,31 +66,31 @@ error bounds for individual properties, such as mass, radius, and tidal deformab
 tidal deformability. If not needed, computation of those can be turned off to increase
 performance.</p>
 <p>The following example creates an EOS on the fly and computes a single TOV model</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/unitconv.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/eos_barotr_poly.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/spherical_stars.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/unitconv.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/eos_barotr_poly.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/spherical_stars.h&quot;</span>
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">n_poly</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rho_poly</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">6.176e+18</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">density</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rhomax_poly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1E40</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">density</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">eos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_eos_barotr_poly</span><span class="p">(</span><span class="n">n_poly</span><span class="p">,</span><span class="w"> </span><span class="n">rho_poly</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                    </span><span class="n">rhomax_poly</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">n_poly</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rho_poly</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">6.176e+18</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">density</span><span class="p">();</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rhomax_poly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1E40</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">density</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">eos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_eos_barotr_poly</span><span class="p">(</span><span class="n">n_poly</span><span class="p">,</span><span class="w"> </span><span class="n">rho_poly</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">rhomax_poly</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">tov_cnt_rho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">7.9056e+17</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">density</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">tov_cnt_rho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">7.9056e+17</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">density</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">tov_acc_simple</span><span class="w"> </span><span class="n">accs</span><span class="p">{</span><span class="mf">1e-8</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">tov_acc_simple</span><span class="w"> </span><span class="n">accs</span><span class="p">{</span><span class="mf">1e-8</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">};</span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">tov</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_tov_star_properties</span><span class="p">(</span><span class="n">eos</span><span class="p">,</span><span class="w"> </span><span class="n">tov_cnt_rho</span><span class="p">,</span><span class="w"> </span><span class="n">accs</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">tov</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_tov_star_properties</span><span class="p">(</span><span class="n">eos</span><span class="p">,</span><span class="w"> </span><span class="n">tov_cnt_rho</span><span class="p">,</span><span class="w"> </span><span class="n">accs</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">gravitational_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tov</span><span class="p">.</span><span class="n">grav_mass</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">circumferential_radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tov</span><span class="p">.</span><span class="n">circ_radius</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">dimless_tidal_deform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tov</span><span class="p">.</span><span class="n">deformability</span><span class="p">().</span><span class="n">lambda</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">gravitational_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tov</span><span class="p">.</span><span class="n">grav_mass</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">circumferential_radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tov</span><span class="p">.</span><span class="n">circ_radius</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">dimless_tidal_deform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tov</span><span class="p">.</span><span class="n">deformability</span><span class="p">().</span><span class="n">lambda</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The library also provides a method to find the maximum mass model
@@ -183,7 +183,7 @@ shared pointers.</p>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/tov_solver_interf.rst.txt"

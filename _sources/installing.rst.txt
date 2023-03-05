@@ -6,7 +6,7 @@ library code is not platform-specific and should also work on Macs.
 Windows and AIX are not supported. For use in HPC, users need to build 
 the library from source. For use in postprocessing, the Python intferface
 can also be installed via pip (binary wheel of the library available for 
-Linux). Conda packages for the C++ library and Python interface are planned 
+Linux). Conda packages for the C++ library and Python intface are planned 
 but not available yet.
 
 Requirements

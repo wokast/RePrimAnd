@@ -67,11 +67,11 @@ specific energy. Further, one can use the state object like a boolean
 variable to check if the state is in the valid regime of the EOS.
 Trying to compute any of the above from an invalid state will throw
 an exception. The following snipped demonstrates the EOS use:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eos</span><span class="p">.</span><span class="n">at_rho_eps_ye</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="n">ye</span><span class="p">);</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">pressure</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">press</span><span class="p">()</span><span class="w"></span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">soundspeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">csnd</span><span class="p">()</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eos</span><span class="p">.</span><span class="n">at_rho_eps_ye</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="n">ye</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">pressure</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">press</span><span class="p">()</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">soundspeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">csnd</span><span class="p">()</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The functionality above is also provided by another set of EOS methods
@@ -183,7 +183,7 @@ better be done by reference instead of value.</p>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/eos_thermal_interf.rst.txt"

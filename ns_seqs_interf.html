@@ -79,28 +79,28 @@ those used while saving (taken from the EOS).
 To avoid any unit confusion, the files always use SI units
 internally.</p>
 <p>The following example demonstrates basic use of stable TOV branches.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/unitconv.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/eos_barotropic.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/eos_barotr_file.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_sequence.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/unitconv.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/eos_barotropic.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/eos_barotr_file.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_sequence.h&quot;</span>
 
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">eos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_eos_barotr</span><span class="p">(</span><span class="s">&quot;example.eos.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">eos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_eos_barotr</span><span class="p">(</span><span class="s">&quot;example.eos.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">);</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">tov_acc_simple</span><span class="w"> </span><span class="n">acc</span><span class="p">{</span><span class="mf">1e-8</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">};</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_tov_branch_stable</span><span class="p">(</span><span class="n">eos</span><span class="p">,</span><span class="w"> </span><span class="n">acc</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">tov_acc_simple</span><span class="w"> </span><span class="n">acc</span><span class="p">{</span><span class="mf">1e-8</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">};</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_tov_branch_stable</span><span class="p">(</span><span class="n">eos</span><span class="p">,</span><span class="w"> </span><span class="n">acc</span><span class="p">);</span>
 <span class="w">    </span>
 <span class="w">    </span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">max_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">grav_mass_maximum</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">max_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">grav_mass_maximum</span><span class="p">();</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">lambda09</span><span class="w"> </span>
-<span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">lambda_tidal_from_grav_mass</span><span class="p">(</span><span class="mf">0.9</span><span class="o">*</span><span class="n">max_mass</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">lambda_tidal_from_grav_mass</span><span class="p">(</span><span class="mf">0.9</span><span class="o">*</span><span class="n">max_mass</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition tip">
@@ -186,7 +186,7 @@ shared pointers. Using sequences or branches is thread-save.</p>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/ns_seqs_interf.rst.txt"
