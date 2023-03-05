@@ -5,7 +5,6 @@ configure_file(input : 'test_config.h.in',
                configuration : conf_tests)
 
 dep_utf = dependency('boost', static : false, modules : ['unit_test_framework'])
-dep_json = dependency('boost', static : false, modules : ['json'])
 
 src_tst_c2p = ['test_con2prim_mhd.cc', 'test_utils.cc']
 
@@ -35,7 +34,7 @@ test('INTERP', exe_tst_interp)
 src_tst_tovsol = ['test_tovsol.cc', 'test_utils.cc']
 
 exe_tst_tovsol = executable('test_tovsol', sources : src_tst_tovsol, 
-                      dependencies : [dep_reprim, dep_utf, dep_json], 
+                      dependencies : [dep_reprim, dep_utf], 
                       cpp_args : '-DBOOST_TEST_DYN_LINK')
 
 test('TOVSOL', exe_tst_tovsol)
@@ -52,5 +51,5 @@ test('NSSEQS', exe_tst_nsseqs)
 src_gen_tov = ['gen_tov_ref_data.cc']
 
 exe_gen_tov = executable('gen_tov_ref_data', sources : src_gen_tov, 
-                      dependencies : [dep_reprim, dep_json])
+                      dependencies : [dep_reprim])
 

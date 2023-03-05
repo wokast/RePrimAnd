@@ -104,6 +104,14 @@ class eos_barotr_spline : public eos_barotr_impl {
     real_t gm1      ///< \f$ g-1 \f$
   ) const final;
 
+  ///Compute adiabatic soundspeed \f$ c_s \f$
+  /**Assumes input is in the valid range, no checks are performed.*/
+  real_t csnd_from_rho_gm1(
+    real_t rho,     ///<Rest mass density  \f$ \rho \f$
+    real_t gm1      ///< \f$ g-1 \f$
+  ) const final;
+
+
   ///Returns temperature \f$ T \f$
   /**Assumes input is in the valid range, no checks are performed.*/
   real_t temp(
@@ -124,9 +132,8 @@ class eos_barotr_spline : public eos_barotr_impl {
 
   private:
 
-  static auto get_rggm1(const lglgspl_t&, const lgspl_t&, 
-                        const lglgspl_t&, const lgspl_t&, 
-                        const lglgspl_t&, const lgspl_t&, 
+  static auto get_rggm1(const lgspl_t&, const lglgspl_t&, 
+                        const lgspl_t&, const lglgspl_t&, 
                         const opt_t&, const opt_t&)  
   -> range;
 
@@ -135,7 +142,7 @@ class eos_barotr_spline : public eos_barotr_impl {
   lglgspl_t p_gm1;
   lgspl_t hm1_gm1;
   lglgspl_t rho_gm1;
-  lgspl_t csnd_gm1;
+  lgspl_t csnd_rho;
   opt_t temp_gm1;
   opt_t efrac_gm1;
 

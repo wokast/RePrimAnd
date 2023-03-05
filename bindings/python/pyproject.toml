@@ -1,18 +1,18 @@
 [build-system]
-requires = ["setuptools>=42", "wheel", "pybind11~=2.6.1"]
+requires = ["setuptools>=42", "wheel", "pybind11>=2.6.1"]
 build-backend = "setuptools.build_meta"
 
 
 [project]
   name = "RePrimAnd"
-  version = "1.5"
+  version = "1.6"
   authors = [
     { name = "Wolfgang Kastaun", email = "physik@fangwolg.de" }
   ]  
   description = "Library for handling equations of state for supranuclear matter, computing neutron star properties, and utilities for numerical relativity"
   readme = "README.md" 
   license = { file = "LICENSE" }
-  requires-python = '>=3.7, <3.11'
+  requires-python = '>=3.7'
   dependencies = [
     "numpy"
   ]
@@ -26,7 +26,6 @@ build-backend = "setuptools.build_meta"
 [tool.cibuildwheel]
 
   archs = ["x86_64"]
-  skip="cp311-manylinux_x86_64 cp311-musllinux_x86_64"
 
   before-all = "/project/docker/cibw_prepare.sh"
   

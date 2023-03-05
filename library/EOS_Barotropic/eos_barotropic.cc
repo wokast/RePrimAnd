@@ -71,13 +71,13 @@ auto eos_barotr::is_gm1_valid(real_t gm1) const -> bool
 auto eos_barotr::at_rho(real_t rho) const -> state
 {
   if (!is_rho_valid(rho)) return {};
-  return {impl(), impl().gm1_from_rho(rho)};
+  return {impl(), impl().gm1_from_rho(rho), rho};
 }
 
 auto eos_barotr::at_gm1(real_t gm1) const -> state
 {
   if (!is_gm1_valid(gm1)) return {};
-  return {impl(), gm1};
+  return {impl(), gm1, impl().rho(gm1)};
 }
 
 
@@ -99,14 +99,14 @@ auto eos_barotr::state::press() const -> real_t
 
 auto eos_barotr::state::rho() const -> real_t 
 {
-  real_t rho = impl().rho(gm1_);  
-  assert(rho >= 0);
-  return rho;
+  if (!am_ok()) throw(eos_barotr_invalid::invalid());
+  assert(rho_ >= 0);
+  return rho_;
 }
 
 auto eos_barotr::state::csnd() const -> real_t 
 {
-  real_t cs = impl().csnd(gm1_);  
+  real_t cs = impl().csnd_from_rho_gm1(rho_, gm1_);  
   assert(cs < 1.0);
   assert(cs >= 0);
   return cs;
@@ -238,6 +238,11 @@ auto eos_barotr::descr_str() const -> std::string
   return impl().descr_str();
 }
 
+auto eos_barotr_impl::csnd_from_rho_gm1(real_t rho, real_t gm1) const 
+-> real_t
+{
+  return csnd(gm1);
+}
 
 void eos_barotr_impl::save(datasink s) const
 {

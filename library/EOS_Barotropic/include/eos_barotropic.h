@@ -24,13 +24,14 @@ class eos_barotr : detail::eos_barotr_base {
   ///Class representing the matter state for the eos_barotr interface 
   class state : state_base {
     const real_t gm1_{0};
+    const real_t rho_{0};
     
     protected:
       
     state() = default;
       
-    state(const impl_t& i, real_t gm1) 
-    : state_base{i}, gm1_{gm1} {}
+    state(const impl_t& i, real_t gm1, real_t rho) 
+    : state_base{i}, gm1_{gm1}, rho_{rho} {}
       
     
     public:

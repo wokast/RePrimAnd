@@ -7,7 +7,7 @@
 namespace EOS_Toolkit {
 namespace implementations {
 
-const std::string eos_barotr_spline::datastore_id{ "barotr_spline" };
+const std::string eos_barotr_spline::datastore_id{ "barotr_spline_v2" };
 
 struct reader_eos_barotr_spline : reader_eos_barotr 
 {
@@ -42,7 +42,7 @@ eos_barotr reader_eos_barotr_spline::load(const datasource g,
   lgspl_t seps        = g["eps_from_gm1"];
   lgspl_t shm1        = g["hm1_from_gm1"];
   lglgspl_t spress_si = g["press_from_gm1"];
-  lgspl_t scsnd_si    = g["csnd_from_gm1"];
+  lgspl_t scsnd_si    = g["csnd_from_rho"];
   
   opt_t stemp_mev     = g["temp_from_gm1"];
   opt_t sefrac        = g["efrac_from_gm1"];
@@ -50,7 +50,7 @@ eos_barotr reader_eos_barotr_spline::load(const datasource g,
   lglgspl_t sgm1   = sgm1_si.rescale_x(1./u.density());
   lglgspl_t srho   = srho_si / u.density();
   lglgspl_t spress = spress_si / u.pressure();
-  lgspl_t scsnd    = scsnd_si / u.velocity();
+  lgspl_t scsnd    = scsnd_si.rescale_x(1./u.density()) / u.velocity();
 
   return eos_barotr{ 
     std::make_shared<eos_barotr_spline>(sgm1, srho, seps, spress, 
@@ -71,7 +71,7 @@ void eos_barotr_spline::save(datasink g) const
   g["eps_from_gm1"] = eps_gm1;
   g["hm1_from_gm1"] = hm1_gm1;
   g["press_from_gm1"] = p_gm1 * u.pressure();
-  g["csnd_from_gm1"] = csnd_gm1 * u.velocity();
+  g["csnd_from_rho"] = csnd_rho.rescale_x(u.density()) * u.velocity();
   
   
   if (!zerotemp) 

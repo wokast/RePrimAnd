@@ -126,24 +126,24 @@ This EOS implements all functions using monotonic cubic spline
 interpolation. The EOS is therefore differentiable in principle. 
 Of course, there can still be steep gradients.
 
-Internally, most properties are represented in terms of the 
-pseudo enthalpy. This has some advantages for computing hydrostatic
-equilibrium models and also with regard to phase 
-transitions (although the density has a jump at those).
+Internally, most properties are internally represented as functions 
+of the pseudo enthalpy. This has some advantages for computing hydrostatic
+equilibrium models and with regard to phase transitions. 
 When calling the EOS using density as independent variable, another 
 interpolation spline is used to first compute the pseudo enthalpy
 (in presence of phase transitions, it has a plateau as function of 
 density). The desired quantity is then computed from the pseudo enthalpy
 using the same interpolation splines used for evaluating the EOS as 
-function of pseudo enthalpy.
-The monotonic interpolation ensures that the EOS does not produce 
-unphysical overshoots.
+function of pseudo enthalpy. On exception is the soundspeed, which is 
+internally represented as function of density (this is because at 
+phase transition it has infinitly sharp features as function of 
+pseudo enthalpy). The monotonic interpolation ensures that the EOS 
+does not produce unphysical overshoots.
 
 The spline sample points are spaced regularly with respect to 
 logarithm of pseudo-enthalpy-minus-one  :math:`\log(g-1)` or 
-mass density :math:`\rho`. This allows 
-efficient computation with cost nearly independent of the sample 
-resolution.
+mass density :math:`\rho`. The regular sampling allows efficient 
+computation with cost nearly independent of the sample resolution.
 In order to use the number of sample points efficiently, the spline 
 interpolation covers a user-specified range of magnitudes. Below,
 a generalized polytrope (meaning an additional offset in specific
@@ -154,7 +154,12 @@ If the temperature is not provided when creating the EOS, it is assumed
 to be a zero-temperature EOS.
 
 To set up this type of EOS, one provides individual functions which are then
-sampled to create the interpolation splines. In addition, one has to specify 
+sampled to create the interpolation splines. There are different options
+which quantities need to be provided. One always needs density and pressure.
+Providing the pseudo-enthalpy is optional, it can be recomputed from density, 
+energy, and pressure. Providing the specific energy is optional for 
+isentropic EOS, where it can be recomputed from pressure and density.
+In addition, one has to specify 
 the maximum validity range, the matching point to the polytrope, and its 
 exponent. Note that this polytrope is completely determined by the density,
 energy, and pressure at the matching point. Since the pseudo-enthalpy is an integral

@@ -70,6 +70,18 @@ class eos_barotr_impl {
   virtual real_t gm1_from_rho(real_t rho) const =0;
 
   /**
+  Compute soundspeed if both density and pseudo-enthalpy are
+  available, using best choice for given EOS. Note: this was 
+  introduced as a workaround because using \f$ c_s(g-1) \f$ 
+  internally is a bad choice when allowing for phase transitions.
+  
+  @param rho Rest mass density  \f$ \rho \f$
+  @param gm1 Pseudo enthalpy \f$ g-1 \f$
+  @return Adiabatic soundspeed \f$ c_s \f$
+  **/
+  virtual real_t csnd_from_rho_gm1(real_t rho, real_t gm1) const;
+
+  /**
   @param gm1 Pseudo enthalpy \f$ g-1 \f$
   @return Rest mass density \f$ \rho \f$
   **/

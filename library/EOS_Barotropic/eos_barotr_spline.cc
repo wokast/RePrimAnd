@@ -15,16 +15,15 @@ using namespace EOS_Toolkit::implementations;
 
 using func_t  = std::function<real_t(real_t)>;
 
-auto eos_barotr_spline::get_rggm1(const lglgspl_t& gm1_rho, 
-  const lgspl_t& eps_gm1, const lglgspl_t& p_gm1, 
-  const lgspl_t& hm1_gm1, const lglgspl_t& rho_gm1, 
-  const lgspl_t& csnd_gm1, const opt_t& temp_gm1, 
+auto eos_barotr_spline::get_rggm1(const lgspl_t& eps_gm1, 
+  const lglgspl_t& p_gm1, const lgspl_t& hm1_gm1, 
+  const lglgspl_t& rho_gm1, const opt_t& temp_gm1, 
   const opt_t& efrac_gm1)
 -> range
 {
   range rg{ 
     intersect(eps_gm1.range_x(), p_gm1.range_x(), hm1_gm1.range_x(),
-              rho_gm1.range_x(), csnd_gm1.range_x())
+              rho_gm1.range_x())
   };
   
   if (temp_gm1) 
@@ -43,7 +42,7 @@ auto eos_barotr_spline::get_rggm1(const lglgspl_t& gm1_rho,
 eos_barotr_spline::eos_barotr_spline(
     lglgspl_t gm1_rho_, lglgspl_t rho_gm1_,
     lgspl_t eps_gm1_, lglgspl_t p_gm1_, 
-    lgspl_t hm1_gm1_, lgspl_t csnd_gm1_, 
+    lgspl_t hm1_gm1_, lgspl_t csnd_rho_, 
     opt_t temp_gm1_, opt_t efrac_gm1_, 
     bool isentropic_,
     const eos_barotr_gpoly& poly_)
@@ -53,12 +52,12 @@ eos_barotr_spline::eos_barotr_spline(
   p_gm1{ std::move(p_gm1_) }, 
   hm1_gm1{ std::move(hm1_gm1_) },
   rho_gm1{ std::move(rho_gm1_) }, 
-  csnd_gm1{ std::move(csnd_gm1_) }, 
+  csnd_rho{ std::move(csnd_rho_) }, 
   temp_gm1{ std::move(temp_gm1_) }, 
   efrac_gm1{ std::move(efrac_gm1_) }, 
   poly{ poly_ },  
-  rggm1{ get_rggm1(gm1_rho, eps_gm1, p_gm1, hm1_gm1, rho_gm1,
-                   csnd_gm1,temp_gm1, efrac_gm1) },
+  rggm1{ get_rggm1(eps_gm1, p_gm1, hm1_gm1, rho_gm1,
+                   temp_gm1, efrac_gm1) },
   rgrho{ 0, rho_gm1(rggm1.max()) },
   gm1_low{ poly.range_gm1().max() },
   rho_low{ poly.range_rho().max() },
@@ -69,7 +68,6 @@ eos_barotr_spline::eos_barotr_spline(
   if (!(eps_gm1.contains(gm1_low) &&
         p_gm1.contains(gm1_low) &&
         rho_gm1.contains(gm1_low) &&
-        csnd_gm1.contains(gm1_low) &&
         hm1_gm1.contains(gm1_low) &&
         (!temp_gm1 || temp_gm1->contains(gm1_low)) &&
         (!efrac_gm1 || efrac_gm1->contains(gm1_low)) ))
@@ -79,7 +77,7 @@ eos_barotr_spline::eos_barotr_spline(
   }
   
   
-  if (!gm1_rho.contains(rho_low))
+  if (!(gm1_rho.contains(rho_low) && csnd_rho.contains(rho_low)))
   {
     throw runtime_error("eos_barotr_spline: matching polytrope "
                         "outside sampled range for rho");     
@@ -89,10 +87,10 @@ eos_barotr_spline::eos_barotr_spline(
     throw runtime_error("eos_barotr_spline: negative mass density "
                         "in rho(gm1)");
   }
-  if (csnd_gm1.range_y().max() >= 1.0) {
+  if (csnd_rho.range_y().max() >= 1.0) {
     throw runtime_error("eos_barotr_spline: sound speed >= 1");
   }
-  if (csnd_gm1.range_y().min() < 0.0) {
+  if (csnd_rho.range_y().min() < 0.0) {
     throw runtime_error("eos_barotr_spline: sound speed < 0");
   }
   if (p_gm1.range_y().min() < 0.0) {
@@ -150,7 +148,12 @@ real_t eos_barotr_spline::hm1(real_t gm1) const
 
 real_t eos_barotr_spline::csnd(real_t gm1) const
 {
-  return (gm1 >= gm1_low) ? csnd_gm1(gm1) : poly.csnd(gm1);
+  return (gm1 >= gm1_low) ? csnd_rho(rho_gm1(gm1)) : poly.csnd(gm1);
+}
+
+real_t eos_barotr_spline::csnd_from_rho_gm1(real_t rho, real_t gm1) const 
+{
+  return (rho >= rho_low) ? csnd_rho(rho) : poly.csnd(gm1);
 }
 
 real_t eos_barotr_spline::temp(real_t gm1) const
@@ -205,7 +208,7 @@ auto eos_barotr_spline::descr_str() const -> std::string
   
 auto EOS_Toolkit::make_eos_barotr_spline(
   func_t gm1_rho, func_t rho_gm1, func_t eps_gm1, func_t press_gm1, 
-  func_t csnd_gm1, func_t temp_gm1, func_t efrac_gm1, 
+  func_t csnd_rho, func_t temp_gm1, func_t efrac_gm1, 
   bool isentropic, interval<real_t> rg_rho, real_t n_poly,
   units u, std::size_t pts_per_mag)
 -> eos_barotr
@@ -287,9 +290,7 @@ auto EOS_Toolkit::make_eos_barotr_spline(
   };
   
   auto scsnd{ 
-    interpol_logspl_impl::from_function(
-      [&] (real_t gm1) -> real_t {return csnd_gm1(gm1_old(gm1));},
-      rg_gm1, npts_gm1)
+    interpol_logspl_impl::from_function(csnd_rho, rg_rho, npts_rho)
   };
   
   boost::optional<interpol_logspl_impl> stemp;
@@ -340,7 +341,7 @@ auto EOS_Toolkit::make_eos_barotr_spline(const eos_barotr& eos,
             [&eos](real_t gm1) {return eos.at_gm1(gm1).rho();},  
             [&eos](real_t gm1) {return eos.at_gm1(gm1).eps();},  
             [&eos](real_t gm1) {return eos.at_gm1(gm1).press();},  
-            [&eos](real_t gm1) {return eos.at_gm1(gm1).csnd();},  
+            [&eos](real_t rho) {return eos.at_rho(rho).csnd();},  
             temp_gm1, efrac_gm1, 
             eos.is_isentropic(), rg_rho, n_poly,
             eos.units_to_SI(), pts_per_mag
@@ -442,7 +443,6 @@ auto EOS_Toolkit::make_eos_barotr_spline(
 
   auto eps_gm1 = [&] (real_t gm1) {return eps_rho(rho_gm1(gm1));};
   auto press_gm1 = [&] (real_t gm1) {return press_rho(rho_gm1(gm1));};
-  auto csnd_gm1 = [&] (real_t gm1) {return csnd_rho(rho_gm1(gm1));};
 
   auto temp_gm1 = [&]() -> func_t {
     if (temp.empty()) return nullptr;
@@ -463,7 +463,7 @@ auto EOS_Toolkit::make_eos_barotr_spline(
   }
   
   return make_eos_barotr_spline(gm1_rho, rho_gm1, eps_gm1, 
-                      press_gm1, csnd_gm1, temp_gm1, efrac_gm1, 
+                      press_gm1, csnd_rho, temp_gm1, efrac_gm1, 
                       isentropic, rg_rho, n_poly, uc, pts_per_mag);
 }
 
@@ -522,7 +522,6 @@ auto EOS_Toolkit::make_eos_barotr_spline(
 
   auto eps_gm1 = [&] (real_t gm1) {return eps_rho(rho_gm1(gm1));};
   auto press_gm1 = [&] (real_t gm1) {return press_rho(rho_gm1(gm1));};
-  auto csnd_gm1 = [&] (real_t gm1) {return csnd_rho(rho_gm1(gm1));};
 
   auto temp_gm1 = [&]() -> func_t {
     if (temp.empty()) return nullptr;
@@ -543,7 +542,7 @@ auto EOS_Toolkit::make_eos_barotr_spline(
   }
   
   return make_eos_barotr_spline(gm1_rho, rho_gm1, eps_gm1, 
-                      press_gm1, csnd_gm1, temp_gm1, efrac_gm1, 
+                      press_gm1, csnd_rho, temp_gm1, efrac_gm1, 
                       true, rg_rho, n_poly, uc, pts_per_mag);
   
 }
@@ -562,7 +561,7 @@ auto EOS_Toolkit::make_eos_barotr_spline(
   auto rho_gm1{ make_interpol_pchip_spline(gm1, rho) };
   auto eps_gm1{ make_interpol_pchip_spline(gm1, eps) };
   auto press_gm1{ make_interpol_pchip_spline(gm1, press) };
-  auto csnd_gm1{ make_interpol_pchip_spline(gm1, csnd) };
+  auto csnd_rho{ make_interpol_pchip_spline(rho, csnd) };
   
   func_t temp_gm1{nullptr};
   if (!temp.empty()) 
@@ -583,7 +582,7 @@ auto EOS_Toolkit::make_eos_barotr_spline(
   }
   
   return make_eos_barotr_spline(gm1_rho, rho_gm1, eps_gm1, 
-                      press_gm1, csnd_gm1, temp_gm1, efrac_gm1, 
+                      press_gm1, csnd_rho, temp_gm1, efrac_gm1, 
                       isentropic, rg_rho, n_poly, uc, pts_per_mag);
   
 }

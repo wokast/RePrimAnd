@@ -12,10 +12,11 @@ namespace EOS_Toolkit {
 This EOS type internally uses regularly-spaced cardinal cubic splines.
 The regular spacing implies that the evaluation cost is independent
 from the table resolution.
-All quantities are interpolated with respect to logarithmic 
+Most quantities are interpolated with respect to logarithmic 
 pseudo-enthalpy. In addition there is an interpolation spline 
 that computes logarithmic pseudo-enthalpy from logarithmic density, 
 which is used when the EOS is evaluated based on density.
+The soundspeed is interpolated as function of logarithmic density.
 
 The samples used for creating the EOS need to provide both 
 pseudo-enthalpy and density, but may be arbitrarily spaced. 
@@ -90,10 +91,12 @@ auto make_eos_barotr_spline(
 This EOS type internally uses regularly-spaced cardinal cubic splines.
 The regular spacing implies that the evaluation cost is independent
 from the table resolution.
-All quantities are interpolated with respect to logarithmic 
+Most quantities are interpolated with respect to logarithmic 
 pseudo-enthalpy. In addition there is an interpolation spline 
 that computes logarithmic pseudo-enthalpy from logarithmic density, 
 which is used when the EOS is evaluated based on density.
+The soundspeed is interpolated as function of logarithmic density.
+
 
 The sample points provided for creating the EOS do not have to be
 regularly spaced. They are resampled to the required spacing using
@@ -176,10 +179,11 @@ auto make_eos_barotr_spline(
 This EOS type internally uses regularly-spaced cardinal cubic splines.
 The regular spacing implies that the evaluation cost is independent
 from the table resolution.
-All quantities are interpolated with respect to logarithmic 
+Most quantities are interpolated with respect to logarithmic 
 pseudo-enthalpy. In addition there is an interpolation spline 
 that computes logarithmic pseudo-enthalpy from logarithmic density, 
 which is used when the EOS is evaluated based on density.
+The soundspeed is interpolated as function of logarithmic density.
 
 The sample points provided for creating the EOS do not have to be
 regularly spaced. They are resampled to the required spacing using
@@ -255,7 +259,7 @@ auto make_eos_barotr_spline(
   std::function<real_t(real_t)> rho_gm1, 
   std::function<real_t(real_t)> eps_gm1, 
   std::function<real_t(real_t)> press_gm1, 
-  std::function<real_t(real_t)> csnd_gm1, 
+  std::function<real_t(real_t)> csnd_rho, 
   std::function<real_t(real_t)> temp_gm1, 
   std::function<real_t(real_t)> efrac_gm1, 
   bool isentropic, 

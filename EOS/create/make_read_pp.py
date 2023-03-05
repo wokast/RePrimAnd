@@ -64,7 +64,7 @@ def make_read_eos(name, p1_cgs, ga, rho_max_si=1e20):
    
     path     = f"{name}.eos.h5"
     
-    uc = pyr.units.geom_solar
+    uc = pyr.units.geom_solar()
     rho_poly = sly_ds_si[0] / uc.density
     rho_b    = rho_b_si / uc.density 
     rho_max = rho_max_si / uc.density

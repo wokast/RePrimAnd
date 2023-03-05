@@ -199,10 +199,9 @@ tidal_ode2::tidal_ode2(eos_barotr eos_, real_t gm1_center_,
             real_t dnu0_, real_t y0_)
 : eos{eos_}, gm1_center{gm1_center_}, dnu0{dnu0_}
 {
-  const std::size_t sz{ dnu_.size() };
   std::vector<real_t> rddy, rrho;
-  assert(sz == rsqr_.size());
-  assert(sz == lambda_.size());
+  assert(dnu_.size() == rsqr_.size());
+  assert(dnu_.size() == lambda_.size());
   
   for (std::size_t k = dnu_.size()-1; k > 0; --k) 
   {
