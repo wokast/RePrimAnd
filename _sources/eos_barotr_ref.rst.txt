@@ -58,7 +58,8 @@ Generic Interface
 ^^^^^^^^^^^^^^^^^
 .. doxygenclass:: EOS_Toolkit::eos_barotr
    :project: RePrimAnd
-   :members:|
+   :members:
+
 
 
 Deprecated EOS 
