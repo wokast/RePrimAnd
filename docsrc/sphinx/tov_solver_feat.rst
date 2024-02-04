@@ -50,19 +50,9 @@ such as early merger remnants.
 
 .. warning::
 
-    The TOV solver functionality in general is experimental.
-    In particular, phase transitions are allowed by design but they 
-    are currently not tested at all.
-
-.. note::
-
-   Since tabulated EOS and piecewise polytropic EOS are not 
-   differentiable at segment boundaries, for those EOS the convergence 
-   speed of ODE
-   solvers effectively drops to first order with increasing resolution. 
-   If speed is an issue it is recommended not to request solutions 
-   with relative errors below :math:`10^{-10}`. 
-   A fully differentiable tabulated EOS is planned.
+    Strong phase transitions are allowed by design 
+    but they have not been considered during the calibration of the 
+    error bars.
 
    
 References

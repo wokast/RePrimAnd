@@ -79,31 +79,35 @@ bool compare_star_seqs(star_branch s1, star_branch s2,
   {
     assert(s1.contains_grav_mass(mg));
     assert(s2.contains_grav_mass(mg));
+    bool allok{ true };
     
-    if (!hope.isclose(s1.center_gm1_from_grav_mass(mg), 
+    allok = hope.isclose(s1.center_gm1_from_grav_mass(mg), 
                  s2.center_gm1_from_grav_mass(mg), 
-                 err_gm1_mg, 0., "g-1 from mg"))
+                 err_gm1_mg, 0., "g-1 from mg") && allok;
+                 
+    allok = hope.isclose(s1.bary_mass_from_grav_mass(mg), 
+                 s2.bary_mass_from_grav_mass(mg), 
+                 err_m_mg, 0., "mb from mg") && allok;
+
+    allok = hope.isclose(s1.circ_radius_from_grav_mass(mg), 
+                 s2.circ_radius_from_grav_mass(mg), 
+                 err_rc_mg, 0., "rc from mg") && allok;
+
+    allok = hope.isclose(s1.moment_inertia_from_grav_mass(mg), 
+                 s2.moment_inertia_from_grav_mass(mg), 
+                 err_mi_mg, 0., "mi from mg") && allok;
+
+    allok = hope.isclose(s1.lambda_tidal_from_grav_mass(mg), 
+                 s2.lambda_tidal_from_grav_mass(mg), 
+                 err_lt_mg, 0., "lt from mg") && allok;
+    
+    if (!allok) 
     {
       hope.postmortem(str(boost::format(
         "mg = %.15e = (1 + %.15e) mg_max ") 
         % mg % (mg/rg_mg.max() - 1)));
     }
-                 
-    hope.isclose(s1.bary_mass_from_grav_mass(mg), 
-                 s2.bary_mass_from_grav_mass(mg), 
-                 err_m_mg, 0., "mb from mg");
 
-    hope.isclose(s1.circ_radius_from_grav_mass(mg), 
-                 s2.circ_radius_from_grav_mass(mg), 
-                 err_rc_mg, 0., "rc from mg");
-
-    hope.isclose(s1.moment_inertia_from_grav_mass(mg), 
-                 s2.moment_inertia_from_grav_mass(mg), 
-                 err_mi_mg, 0., "mi from mg");
-
-    hope.isclose(s1.lambda_tidal_from_grav_mass(mg), 
-                 s2.lambda_tidal_from_grav_mass(mg), 
-                 err_lt_mg, 0., "lt from mg");
   }
   
   return hope;
@@ -117,24 +121,23 @@ auto get_eos_by_name(std::string s, units u)
     return load_eos_barotr(eos_path, u);
 }
 
-bool test_branch_file_io(const star_branch seq, 
-                         std::size_t nsamp=500, real_t tol=1e-13)
+bool test_branch_file_io(const star_branch seq, std::size_t nsamp=500, 
+                    const real_t tol1=1e-13, const real_t tol2=3e-8)
 {
   char tmpn[L_tmpnam];
   {
     auto gotf{ std::tmpnam(tmpn) }; 
-    assert(gotf);
+    BOOST_REQUIRE(gotf);
   }
   
   save_star_branch(tmpn, seq);
   auto seq2 = load_star_branch(tmpn);
   std::remove(tmpn);
   
-  //~ const real_t tol{ 1e-13 };
   failcount hope("Loading and saving star sequence branch works");
 
-  hope(compare_star_seqs(seq, seq2, nsamp, tol, tol, tol, tol, 
-                         tol, tol, tol, tol, tol, tol),
+  hope(compare_star_seqs(seq, seq2, nsamp, tol1, tol1, tol1, tol1, 
+                         tol2, tol2, tol2, tol2, tol2, tol2),
        "Star sequence still same after recovery from file");
   
   return hope;     
@@ -160,7 +163,10 @@ BOOST_AUTO_TEST_CASE( test_tovseq_acc )
   {
     
     auto eos{ get_eos_by_name(s, u) };
-    const tov_acc_simple acc{1e-8, 1e-6};
+    const real_t acc_tov{ 1e-6 };
+    const real_t acc_def{ 1e-4 };
+    const auto acc{ star_acc_simple(true, false, acc_tov, acc_def, 20) };
+    
     auto seq = make_tov_branch_stable(eos, acc);
 
     std::string ref_path{ std::string(PATH_TOV_REF) + "/ref_tovseq_" 
@@ -170,13 +176,14 @@ BOOST_AUTO_TEST_CASE( test_tovseq_acc )
     
     std::size_t nsamp{500};
     
-    real_t tol_gm1{1e-12};
-    real_t tol_mg{5e-10}; // Lower accuracy at maximum mass
-    real_t err_m_gm1{tol_gm1}, err_rc_gm1{tol_gm1}, err_mi_gm1{tol_gm1}; 
-    real_t err_lt_gm1{tol_gm1}, err_gm1_mg{tol_mg};
-    real_t err_m_mg{tol_mg}, err_rc_mg{tol_mg}, err_mi_mg{tol_mg}; 
-    real_t err_lt_mg{tol_mg};
-    real_t err_rg{1e-12};
+    
+    real_t err_inv { 5e-4 };
+    real_t err_inv_lt { 7e-4 };
+    real_t err_m_gm1{acc_tov}, err_rc_gm1{acc_tov}, err_mi_gm1{acc_tov}; 
+    real_t err_lt_gm1{acc_def}, err_gm1_mg{acc_tov+err_inv};
+    real_t err_m_mg{acc_tov+err_inv}, err_rc_mg{acc_tov+err_inv}; 
+    real_t err_mi_mg{acc_tov+err_inv}, err_lt_mg{acc_def+err_inv_lt};
+    real_t err_rg{acc_tov+err_inv};
            
     if (!hope(compare_star_seqs(seq, refseq, nsamp,
                 err_m_gm1, err_rc_gm1, err_mi_gm1, err_lt_gm1, 
@@ -186,7 +193,6 @@ BOOST_AUTO_TEST_CASE( test_tovseq_acc )
     {
       hope.postmortem(str(boost::format("EOS = %s") %  s));
     }
-    //~ save_star_branch(seq_path, seq);
   }
   
 }

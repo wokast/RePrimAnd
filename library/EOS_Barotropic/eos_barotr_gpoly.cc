@@ -19,6 +19,10 @@ eos_barotr_gpoly::eos_barotr_gpoly(real_t n_, real_t rmd_p_,
   rgrho(0, rho_max_), n(n_), rmd_p(rmd_p_), np1(n + 1), 
   gamma(1.0 + 1.0 / n), invn(1.0 / n), sed0(sed0_), h0(1.0 + sed0_)
 {
+  if (h0 <= 0) {
+    throw std::runtime_error("eos_barotr_gpoly: invalid energy offset "
+                             "specified (causing h(0) < 0)");
+  }
   rggm1 = {0, gm1_from_rho(rho_max_)};
 }
 

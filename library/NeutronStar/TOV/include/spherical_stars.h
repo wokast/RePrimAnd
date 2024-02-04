@@ -130,7 +130,7 @@ class spherical_star_properties {
   
   private: 
   
-  const eos_barotr _eos;
+  eos_barotr _eos;
   spherical_star_info _info;
   deform_t _deform;
   bulk_t  _bulk;
@@ -246,64 +246,96 @@ class spherical_star : public spherical_star_properties  {
 };
 
 
-///Class for specifiying heuristic accuracy of TOV solution
-struct tov_acc_simple {  
-  const real_t tov;    ///< Accuracy for adaptive solution of TOV ODE
-  const real_t deform; ///< Accuracy for adaptive solution of tidal ODE
-  
-  /// Minimum number of steps used for solving ODEs
-  const std::size_t minsteps; 
-  
-  ///Constructor
-  tov_acc_simple(real_t acc_tov_=1e-8, 
-                 real_t acc_deform_=1e-6,
-                 std::size_t minsteps_=500)
-  : tov{acc_tov_}, deform{acc_deform_}, minsteps{minsteps_} {}
-};
 
-///Class for specifying absolute tolerances for TOV solution
-struct tov_acc_precise {  
-  const real_t mass;     ///< Tolerance for masses
-  const real_t radius;   ///< Tolerance for radius
-  const real_t minertia; ///< Tolerance for moment of inertia
-  const real_t deform;   ///< Tolerance for  tidal deformability
-  
-  /// Minimum number of steps used for solving ODEs
+
+///Class for specifying maximum allowed relative error for NS properties
+struct star_accuracy_spec {  
+  /// Tolerance for relative error of mass (grav, baryonic)
+  const real_t acc_mass; 
+  /// Tolerance for relative error of length (radius, volume^1/3)
+  const real_t acc_radius;  
+  /// Tolerance for relative error of moment of inertia
+  const real_t acc_minertia; 
+  /// Minimum number of sample points within star
   const std::size_t minsteps; 
-  /// Minimum adaptive tolerance to try before giving up
-  const real_t acc_min; 
+  /// If tidal deformability is needed
+  const bool need_deform; 
+  /// Tolerance for relative error of deformability (lambda, k2)
+  const real_t acc_deform;  
+  /// If bulk properties are needed
+  const bool need_bulk;  
   
   ///Constructor
-  tov_acc_precise(real_t acc_mass_=1e-8, 
-                  real_t acc_radius_=1e-8, 
-                  real_t acc_minertia_=1e-8, 
-                  real_t acc_deform_=1e-6,
-                  std::size_t minsteps_=500,
-                  real_t acc_min_=1e-14)
-  : mass{acc_mass_}, radius{acc_radius_}, minertia{acc_minertia_},
-    deform{acc_deform_}, minsteps{minsteps_}, acc_min{acc_min_} {}
+  star_accuracy_spec(real_t acc_mass_, 
+                     real_t acc_radius_, 
+                     real_t acc_minertia_, 
+                     std::size_t minsteps_,
+                     bool need_deform_,
+                     real_t acc_deform_,
+                     bool need_bulk_);
 };
 
 
-/**\brief Compute spherical neutron star model. 
+/**Convenience function for NS solution accuracy specification 
 
-@param eos The (barotropic) EOS of the NS. 
-@param rho_center The central baryonic mass density. Units are the 
-same as used by the EOS.
-@param acc Tolerances for adaptive ODE solver
-@param find_bulk Option to also compute the "bulk" properties 
-@param find_tidal Whether to compute the tidal deformability
+This allows a basic accuracy specification for use in TOV solvers,
+with default values reasonable for most applications. One can
+specify an accuracy for tidal deformability and another one for
+all other NS properties. For more fine-grained control, use 
+star_acc_detailed() instead. 
+If the tidal deformability is not needed this can be indicated,
+which reduces computational costs by not solving the tidal ODE. 
+One can also request computation of the "bulk radius" which is
+not done by default. 
+Finally, one can specify a minimum resolution (number of points 
+within star) for ODE solving and radial profile interpolation.
+This is usually not required, a suitable resolution is chosen from
+the specified accuracies using calibrated heuristics.
+**/
+auto star_acc_simple(bool need_deform=true, 
+                     bool need_bulk=false, 
+                     real_t acc_tov=1e-6,
+                     real_t acc_deform=1e-3, 
+                     std::size_t minsteps=20) 
+-> star_accuracy_spec;
 
-@return Stellar model 
 
-This returns a class providing all global NS properties as well as
-the stellar profile. 
-**/ 
-auto make_tov_star(const eos_barotr eos, const real_t rho_center, 
-                   const tov_acc_simple acc, 
-                   const bool find_bulk=false, 
-                   const bool find_tidal=true) 
--> spherical_star;
+/**Convenience function for NS solution accuracy specification 
+
+This allows a detailed accuracy specification for use in TOV solvers. 
+One can specify an accuracy for masses (gravitational and baryonic),
+radii (circumferential and based on proper volume), moment of
+inertia, and tidal deformability. For a more simplistic description, 
+use  star_acc_simple() instead. 
+If the tidal deformability is not needed this can be indicated,
+which reduces computational costs by not solving the tidal ODE. 
+One can also request computation of the "bulk radius" which is
+not done by default.
+Finally, one can specify a minimum resolution (number of points 
+within star) for ODE solving and radial profile interpolation.
+This is usually not required, a suitable resolution is chosen from
+the specified accuracies using calibrated heuristics.
+**/
+
+auto star_acc_detailed(bool need_deform=true,
+                       bool need_bulk=false, 
+                       real_t acc_mass=1e-6, 
+                       real_t acc_radius=1e-6, 
+                       real_t acc_minertia=1e-5,
+                       real_t acc_deform=1e-3, 
+                       std::size_t minsteps=20) 
+-> star_accuracy_spec;
+
+
+auto get_tov_properties_adaptive(const eos_barotr eos, 
+                   const real_t rho_center, 
+                   const star_accuracy_spec acc=star_acc_simple()) 
+-> spherical_star_properties;
+
+auto get_tov_properties_fixstep(const eos_barotr eos, 
+                   const real_t rho_center, 
+                   const star_accuracy_spec acc=star_acc_simple()) 
+-> spherical_star_properties;
 
 
 /**\brief Compute properties of spherical neutron star. 
@@ -311,19 +343,15 @@ auto make_tov_star(const eos_barotr eos, const real_t rho_center,
 @param eos The (barotropic) EOS of the NS. 
 @param rho_center The central baryonic mass density. Units are the 
 same as used by the EOS.
-@param acc Tolerances for adaptive ODE solver
-@param find_bulk Option to also compute the "bulk" properties 
-@param find_tidal Whether to compute the tidal deformability
+@param acc Specifies required accuracies for NS properties
 
 @return Stellar model properties
 
-This returns a class providing all global NS properties but not
+This returns an object providing all global NS properties but not
 the stellar profile. 
 **/ 
-auto get_tov_star_properties(const eos_barotr eos, 
-                   const real_t rho_center, const tov_acc_simple acc, 
-                   const bool find_bulk=false, 
-                   const bool find_tidal=true) 
+auto get_tov_properties(const eos_barotr eos, const real_t rho_center, 
+                   const star_accuracy_spec acc=star_acc_simple()) 
 -> spherical_star_properties;
 
 
@@ -332,40 +360,75 @@ auto get_tov_star_properties(const eos_barotr eos,
 @param eos The (barotropic) EOS of the NS. 
 @param rho_center The central baryonic mass density. Units are the 
 same as used by the EOS.
-@param acc Absolute error bounds for individual stellar properties
-@param find_bulk Option to also compute the "bulk" properties 
-@param find_tidal Whether to compute the tidal deformability
+@param acc Specifies required accuracies for NS properties
 
 @return Stellar model 
 
-This returns a class providing all global NS properties as well as
+This returns an object providing all global NS properties as well as
 the stellar profile. 
 **/ 
-auto make_tov_star(const eos_barotr eos, const real_t rho_center, 
-              const tov_acc_precise acc, const bool find_bulk=false, 
-              const bool find_tidal=true)
+auto get_tov_star(const eos_barotr eos, 
+                   const real_t rho_center, 
+                   const star_accuracy_spec acc=star_acc_simple()) 
 -> spherical_star;
 
 
-/**\brief Compute properties of spherical neutron star. 
 
-@param eos The (barotropic) EOS of the NS 
+/**\brief Compute neutron star properties with fixed ODE steps.
+This low-level function is not intended for direct use.
+
+@param eos The (barotropic) EOS of the NS. 
 @param rho_center The central baryonic mass density. Units are the 
-same as used by the EOS
-@param acc Absolute error bounds for individual stellar properties
+same as used by the EOS.
 @param find_bulk Option to also compute the "bulk" properties 
 @param find_tidal Whether to compute the tidal deformability
+@param nsamp_tov Number of steps for integrating TOV ODE
+@param nsub_tidal Factor increasing number steps for integrating tidal ODE
+@param wdiv_tidal Where to switch ODE variants
+@param bulk_acc Root finder accuracy for bulk computation
 
 @return Stellar model properties
 
-This returns a class providing all global NS properties but not
-the stellar profile. 
+This low-level function is intended only for testing and development.
 **/ 
-auto get_tov_star_properties(const eos_barotr eos, 
+auto get_tov_properties_fixstep(const eos_barotr eos, 
                    const real_t rho_center, 
-                   const tov_acc_precise acc, 
-                   const bool find_bulk=false, 
-                   const bool find_tidal=true)
+                   const bool find_bulk, const bool find_tidal,
+                   const std::size_t nsamp_tov, 
+                   const std::size_t nsub_tidal=2,
+                   const real_t wdiv_tidal=0.91,
+                   const real_t bulk_acc=1e-8) 
+-> spherical_star_properties;
+
+
+/**\brief Compute neutron star properties with adaptive ODE steps 
+
+@param eos The (barotropic) EOS of the NS. 
+@param rho_center The central baryonic mass density. Units are the 
+same as used by the EOS.
+@param nsamp_tov Use at least that many equally spaced steps for TOV
+@param acc_tov Tolerance for adaptive ODE solver for TOV
+@param nsamp_tidal Use at least that many equally spaced steps for tidal
+@param acc_tidal Tolerance for adaptive ODE solver for tidal
+@param wdiv_tidal Transition location for switching between the tidal ODEs
+@param find_bulk Option to also compute the "bulk" properties 
+@param find_tidal Whether to compute the tidal deformability
+@param bulk_acc Accuracy of bulk radius root finder
+
+
+@return Stellar model properties
+
+This low-level function is intended only for testing and development.
+**/ 
+auto get_tov_properties_adaptive(const eos_barotr eos, 
+                   const real_t rho_center, 
+                   const std::size_t nsamp_tov, 
+                   const real_t acc_tov,
+                   const std::size_t nsamp_tidal, 
+                   const real_t acc_tidal,
+                   const real_t wdiv_tidal,
+                   const bool find_bulk, const bool find_tidal,
+                   const real_t bulk_acc) 
 -> spherical_star_properties;
 
 
@@ -417,6 +480,9 @@ auto find_rhoc_tov_of_mass(eos_barotr eos, real_t mg,
 -> real_t;
 
 
+
+auto k2_from_ym2_mbr_stable(real_t ym2, real_t mbr, 
+                              real_t b_thresh=5e-2)  -> real_t;
 
 }
 

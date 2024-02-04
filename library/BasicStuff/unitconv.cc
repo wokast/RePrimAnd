@@ -11,6 +11,7 @@ constexpr double units::PDG2021_M_sun_SI;
 constexpr double units::c_SI;
 constexpr double units::G_SI;
 constexpr double units::M_sun_SI;
+constexpr double units::FORMAL_BARYON_MASS_SI;
 
 string units::to_str() const
 {

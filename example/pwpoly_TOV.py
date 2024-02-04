@@ -11,15 +11,13 @@ from matplotlib import pyplot as plt
 
 
 
-def get_seq(eos, mgmin=0.5, acc_tov=1.e-6, acc_def=1.e-3, 
-            acc_mres=500, seq_res=500):
+def get_seq(eos, mgmin=0.5, acc_tov=1.e-5, acc_def=1.e-3):
     """Compute stable TOV branch 
     """
     
-    acc = pyr.tov_acc_simple(acc_tov, acc_def, acc_mres)
+    acc = pyr.star_acc_simple(acc_tov=acc_tov, acc_deform=acc_def)
     
-    return pyr.make_tov_branch_stable(eos, acc, mgrav_min=mgmin, 
-                                      num_samp=seq_res)
+    return pyr.make_tov_branch_stable(eos, acc, mg_cut_low_abs=mgmin, mg_cut_low_rel=0)
 #
 
 def plot_seqs(seqs):

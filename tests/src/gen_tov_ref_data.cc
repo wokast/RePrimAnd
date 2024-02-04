@@ -22,14 +22,15 @@ using namespace EOS_Toolkit;
 void generate_ref_tov(eos_barotr eos, const real_t rho_cen, 
                       std::string tov_path, const units u)
 {
-  const real_t acc{ 1e-10 };
-  const tov_acc_precise accs{acc, acc, acc, acc, 5000};
-  
-  const auto tov{ make_tov_star(eos, rho_cen, accs, true) };
+  const real_t acc_tov{ 1e-8 };
+  const real_t acc_def{ 1e-7 };
+  const auto accs{ star_acc_simple(true, true, acc_tov, acc_def, 5000) };
+  const auto tov{ get_tov_properties(eos, rho_cen, accs) };
   
   auto s = make_hdf5_file_sink(tov_path);
     
-  s["accuracy"] = acc;
+  s["accuracy_tov"] = acc_tov;
+  s["accuracy_deform"] = acc_def;
   s["rho_cen"] = rho_cen;
   s["rho_cen_SI"] = rho_cen * u.density();
   s["circ_radius"] = tov.circ_radius();
@@ -108,9 +109,13 @@ void make_ref_seqs()
     
     auto eos{ get_eos_by_name(s, u) };
 
-    const tov_acc_simple acc{1e-8, 1e-6};
+    const real_t acc_tov{ 1e-8 };
+    const real_t acc_def{ 1e-6 };
+    const auto accs{ 
+      star_acc_simple(true, false, acc_tov, acc_def, 5000) 
+    };
 
-    auto seq = make_tov_branch_stable(eos, acc);
+    auto seq = make_tov_branch_stable(eos, accs);
     
     save_star_branch(seq_path, seq);
   }

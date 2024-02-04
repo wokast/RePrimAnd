@@ -5,6 +5,7 @@
 #include <boost/math/constants/constants.hpp>
 #include "tidal_deform_ode.h"
 #include "solve_ode.h"
+#include "integration.h"
 
 using namespace EOS_Toolkit;
 
@@ -17,54 +18,34 @@ const EOS_Toolkit::real_t PI {
 }
 
 
-
-auto EOS_Toolkit::find_deform(eos_barotr eos, real_t gm1_center, 
-            const std::vector<real_t>& dnu, 
-            const std::vector<real_t>& rsqr, 
-            const std::vector<real_t>& lambda, 
-            real_t acc) -> spherical_star_tidal
+auto EOS_Toolkit::k2_from_ym2_mbr_stable(real_t ym2, real_t mbr, 
+                              real_t b_thresh)  -> real_t
 {
-    real_t gm1_switch{ gm1_center / 1.1 };
-    real_t rho_switch{ eos.at_gm1(gm1_switch).rho() };
-    tidal_ode tode(eos, gm1_center, dnu, rsqr, lambda, rho_switch);
-
-    auto rtid{ integrate_ode_adapt(tode, acc, acc) };
-
-    real_t dnu_switch{
-      -std::log1p( (gm1_switch-gm1_center) / (1.+gm1_center) )
-    };
-    
-    real_t y_switch{ rtid[tidal_ode::YM2] + 2. };
-    
-    tidal_ode2 tode2( eos, gm1_center, dnu, rsqr, lambda, 
-                      dnu_switch, y_switch);
-
-    auto rtid2{ integrate_ode_adapt(tode2, acc, acc) };
-
-    return tode2.deformability(rtid2);
+  return  tidal_ode2::k2_from_ym2_mbr_interp(ym2, mbr, b_thresh); 
 }
-
-
 
 auto tidal_ode::gm1_from_dnu(real_t dnu) const -> real_t
 {
   real_t gm1_raw{ gm1_center + (1.0 + gm1_center) * std::expm1(-dnu) };
-  return std::max(gm1_raw, 0.0);
+  return eos.range_gm1().limit_to(gm1_raw);
 }
 
-tidal_ode::tidal_ode(eos_barotr eos_, real_t gm1_center_, 
+tidal_ode::tidal_ode(eos_barotr eos_, 
+            const spherical_star_info& prop_,
             const std::vector<real_t>& dnu_, 
             const std::vector<real_t>& rsqr_, 
             const std::vector<real_t>& lambda_,
             real_t rho_stop_)
-: eos{eos_}, gm1_center{gm1_center_}, rho_stop{rho_stop_}
+: eos{eos_}, gm1_center{prop_.center_gm1}, 
+  rho_start{prop_.center_rho}, rho_stop{rho_stop_}
+
 {
   if (!eos.is_isentropic()) {
     throw(std::runtime_error("Tidal deformability can only be"
                              "computed for isentropic EOS"));
   }
-  
-  std::vector<real_t> revrho, revlambda, revdnu, revrsqr, revmbr3;
+  assert(rsqr_[1]>0);
+  std::vector<real_t> revgm1, revlambda, revrsqr, revmbr3;
   
   auto ilambda = lambda_.rbegin();
   auto irsqr = rsqr_.rbegin();
@@ -78,7 +59,7 @@ tidal_ode::tidal_ode(eos_barotr eos_, real_t gm1_center_,
     real_t rsqr{ *irsqr++ };
 
     real_t gm1{ gm1_from_dnu(dnu) };
-    auto s{ eos.at_gm1(eos.range_gm1().limit_to(gm1)) };
+    auto s{ eos.at_gm1(gm1) };
     
     assert(s);
     assert(lambda >= 0.0);
@@ -86,23 +67,23 @@ tidal_ode::tidal_ode(eos_barotr eos_, real_t gm1_center_,
     
     real_t rho{ s.rho() };
     real_t rho_e{ rho * (1.0 + s.eps()) };
-    real_t mbr3{ m_by_r3(rsqr, lambda, rho_e) };
+    real_t mbr3{ 
+      rsqr >= rsqr_[1] ? m_by_r3(rsqr, lambda, rho_e) 
+                       : m_by_r3_origin(rho_e) 
+    };
     
-    revrho.push_back(rho);
+    revgm1.push_back(gm1);
     revlambda.push_back(lambda);
-    revdnu.push_back(dnu);
     revrsqr.push_back(rsqr);
     revmbr3.push_back(mbr3);
   }
   
   
-  dnu_rho = make_interpol_pchip_spline(revrho, revdnu);
-  
-  lambda_rho = make_interpol_pchip_spline(revrho, revlambda);
+  lambda_gm1 = make_interpol_pchip_spline(revgm1, revlambda);
 
-  rsqr_rho = make_interpol_pchip_spline(revrho, revrsqr);
+  rsqr_gm1 = make_interpol_pchip_spline(revgm1, revrsqr);
 
-  mbr3_rho = make_interpol_pchip_spline(revrho, revmbr3);
+  mbr3_gm1 = make_interpol_pchip_spline(revgm1, revmbr3);
 
 
   assert(x_start()>x_end());
@@ -113,10 +94,14 @@ tidal_ode::tidal_ode(eos_barotr eos_, real_t gm1_center_,
 auto tidal_ode::m_by_r3(real_t rsqr, real_t lambda, 
                         real_t rho_e) const -> real_t
 {
-  if (rsqr <= 0) {
-    return (4.0/3.0) * PI * rho_e;
-  }
+  assert(rsqr > 0);
   return -0.5 * std::expm1(-2.0 * lambda) / rsqr;   
+}
+
+
+auto tidal_ode::m_by_r3_origin(real_t rho_e) -> real_t
+{
+  return (4.0/3.0) * PI * rho_e;
 }
 
 auto tidal_ode::drho_y(real_t rho_, real_t ym2) const -> real_t
@@ -132,12 +117,12 @@ auto tidal_ode::drho_y(real_t rho_, real_t ym2) const -> real_t
   real_t cs2{ std::pow(s.csnd(), 2) }; 
    
   real_t rho_e{ rho * (1.0 + eps) };
-  assert(lambda_rho.range_x().contains(rho));
-  real_t lambda{ std::max(0.0, lambda_rho(rho)) };
+  real_t gm1{ lambda_gm1.range_x().limit_to(s.gm1()) }; 
+  real_t lambda{ std::max(0.0, lambda_gm1(gm1)) };
   real_t e2l{ std::exp(2.0 * lambda) };
-  real_t rsqr{ rsqr_rho(rho) };
+  real_t rsqr{ rsqr_gm1(gm1) };
   real_t wtfac{ cs2 / rho };
-  real_t mbyr3{ mbr3_rho(rho) };
+  real_t mbyr3{ mbr3_gm1(gm1) };
   
   real_t a{ 4.0*PI * p + mbyr3 };
   real_t b{ 2.0 * rsqr * (mbyr3 + 2.0*PI * (p - rho_e)) };
@@ -187,66 +172,101 @@ auto tidal_ode2::m_by_r3(real_t rsqr, real_t lambda) const -> real_t
 auto tidal_ode2::gm1_from_dnu(real_t dnu) const -> real_t
 {
   real_t gm1_raw{ gm1_center + (1.0 + gm1_center) * std::expm1(-dnu) };
-  return std::max(gm1_raw, 0.0);
+  //limit to range because to prevent roundoff errors causing trouble
+  //when central density is at maximum of validity range and at the 
+  //surface
+  return eos.range_gm1().limit_to(gm1_raw);
 }
 
 
 
-tidal_ode2::tidal_ode2(eos_barotr eos_, real_t gm1_center_, 
+
+tidal_ode2::tidal_ode2(eos_barotr eos_, 
+            const spherical_star_info& prop,
             const std::vector<real_t>& dnu_, 
             const std::vector<real_t>& rsqr_, 
             const std::vector<real_t>& lambda_, 
-            real_t dnu0_, real_t y0_)
-: eos{eos_}, gm1_center{gm1_center_}, dnu0{dnu0_}
+            real_t rho0_, real_t z0_)
+: eos{eos_}, gm1_center{prop.center_gm1}
 {
-  std::vector<real_t> rddy, rrho;
   assert(dnu_.size() == rsqr_.size());
   assert(dnu_.size() == lambda_.size());
-  
-  for (std::size_t k = dnu_.size()-1; k > 0; --k) 
-  {
-    real_t gm1{ gm1_from_dnu(dnu_[k]) };
-    auto s{ eos.at_gm1(eos.range_gm1().limit_to(gm1)) };
-    assert(s);
-    
-    rrho.push_back( s.rho() );
-    
-    real_t h{ 1. + s.hm1() };
-    real_t p{ s.press() };
-    real_t mbr3{ m_by_r3(rsqr_[k], lambda_[k]) };
-  
-    rddy.push_back( h / (p + mbr3 / (4*PI)) );
+
+  if (!eos.is_isentropic()) {
+    throw(std::runtime_error("Tidal deformability can only be"
+                             "computed for isentropic EOS"));
   }
-  
-  std::vector<real_t> rdy(rrho.size());
-  rdy[0] = 0;
-  for (size_t k=1; k<rrho.size(); ++k) {
-    real_t drho{ (rrho[k]-rrho[k-1]) };
-    assert(drho > 0);
-    rdy[k] = rdy[k-1] + 0.5 * (rddy[k] + rddy[k-1]) * drho;
-  }
-  
-  deltay_rho = make_interpol_pchip_spline(rrho, rdy);
+
+  const real_t gm10{ eos.at_rho(rho0_).gm1() };
+  dnu0 = -std::log1p((gm10 - gm1_center) / (1. + gm1_center));
 
   rsqr_dnu   = make_interpol_pchip_spline(dnu_, rsqr_);
   lambda_dnu = make_interpol_pchip_spline(dnu_, lambda_);
 
-  real_t rho0{ 
-    eos.at_gm1(eos.range_gm1().limit_to(gm1_from_dnu(dnu0))).rho() 
-  }; 
-  yhat0 = y0_ - deltay_rho(rho0);
+  std::vector<real_t> t_gm1, t_mbr3;
+  for (std::size_t k = dnu_.size()-1; k > 0; --k) 
+  {
+    const real_t gm1{ gm1_from_dnu(dnu_[k]) };
+    const real_t mbr3{ m_by_r3(rsqr_[k], lambda_[k]) };
+    
+    t_gm1.push_back( gm1 );
+    t_mbr3.push_back(mbr3);
+  }
+  auto mbr3_gm1 { make_interpol_pchip_spline(t_gm1, t_mbr3) };
+
+  std::vector<real_t> rddy, rrho;
+
+  real_t dlgrho_max { 10. / dnu_.size() };
+  
+  rrho.push_back(eos.at_gm1(t_gm1[0]).rho());
+  for (std::size_t j=1; j<dnu_.size()-2; ++j) 
+  {
+    real_t rhoa { eos.at_gm1(t_gm1[j]).rho() };
+    rrho.push_back( rhoa );
+    
+    real_t rhob { eos.at_gm1(t_gm1[j+1]).rho() };
+    real_t lgrhoa{ log(rhoa) };
+    real_t lgrhob{ log(rhob) };
+    real_t dlgrho { lgrhob - lgrhoa };
+    
+    
+    if (dlgrho > dlgrho_max)
+    {
+      const real_t n{ ceil(dlgrho/dlgrho_max) };
+      for (int i=1; i<n; ++i) 
+      {
+        rrho.push_back( exp(lgrhoa + dlgrho * i / real_t(n)) );
+      }
+    }
+  }
+  rrho.push_back(eos.at_gm1(t_gm1[dnu_.size()-2]).rho()  );
+  
+  for (auto rho :  rrho) 
+  {
+      auto s{ eos.at_rho(rho) };
+      assert(s);
+      real_t h{ 1. + s.hm1() };
+      real_t p{ s.press() };
+      real_t gm1{ mbr3_gm1.range_x().limit_to(s.gm1()) };
+      
+      rddy.push_back( h / (p + mbr3_gm1(gm1) / (4.*PI)) );
+  }
+  auto rdy = integrate_order3(rrho, rddy);    
+  deltay_rho = make_interpol_pchip_spline(rrho, rdy);
+
+   
+  zhat0 = z0_ - deltay_rho(rho0_);
 }
 
 
-auto tidal_ode2::dlnh_yhat(real_t dnu, real_t yhat) const -> real_t
+auto tidal_ode2::dlnh_zhat(real_t dnu, real_t zhat) const -> real_t
 {
   real_t gm1{ gm1_from_dnu(dnu) };
   real_t lambda{ lambda_dnu(dnu) };
   real_t rsqr{ rsqr_dnu(dnu) };
   
-  //limit to range because to prevent roundoff errors causing trouble
-  //when central density is at maximum of validity range
-  auto s{ eos.at_gm1(eos.range_gm1().limit_to(gm1)) };
+
+  auto s{ eos.at_gm1(gm1) };
   assert(s);
   
   real_t rho{ s.rho() };
@@ -255,48 +275,108 @@ auto tidal_ode2::dlnh_yhat(real_t dnu, real_t yhat) const -> real_t
   real_t rho_e{ rho * (1. + eps) };
   real_t mbr3{ m_by_r3(rsqr, lambda) };
  
-  real_t y{ yhat + deltay_rho(rho) };
+  real_t z{ zhat + deltay_rho(rho) };
   
   real_t a{ 4.0*PI * p + mbr3 };
   real_t b{ rsqr * std::exp(2.*lambda) };
   real_t c{ 2.*PI * (3.*rho_e + 11.*p) - 4.*mbr3 };
-  real_t d{ (y + 3.) / (2. * b)  + mbr3 + 2.*PI * (p - rho_e) };
+  real_t d{ (z + 5.) / (2. * b)  + mbr3 + 2.*PI * (p - rho_e) };
   
-  return ((y-2.) * d + c) * 2. / a - 4. * b * a;  
+  return (z * d + c) * 2. / a - 4. * b * a;  
 }
 
 void tidal_ode2::operator()(const state_t &s, state_t &dsdx, 
                   const real_t x) const
 {
-   dsdx[YHAT] = -dlnh_yhat(x, s[YHAT]);
+   dsdx[ZHAT] = -dlnh_zhat(x, s[ZHAT]);
 }
 
 
 auto tidal_ode2::initial_data() const -> state_t
 {
-  return {yhat0};  
+  return {zhat0};  
 }
 
 
 
-auto tidal_ode2::deform_from_y_mbr(real_t y, real_t b) 
-const -> spherical_star_tidal
+auto tidal_ode2::k2_from_ym2_mbr_taylor_exp(real_t z, real_t b) 
+-> real_t
 {
-  const double c0{ 
-    2.0*b*(6.0 - 3.0*y + 3.0*b*(5.0*y-8.0) 
-           + 2 * (b*b) * (13.0 - 11.0*y + b * (3.0*y-2.0) 
-                          + 2.0 * (b*b) * (1.0+y)))
-    +3.0 * pow((1.0 - 2.0*b), 2) 
-         * (2.0 - y + 2.0*b*(y-1.0)) * log(1.0-2.0*b)
-  };
+    const real_t zp5{ z + 5. };
+    const real_t p0{ -z / 2. };
+    const real_t p1{ 
+      (z * (z + 10.) + 10.) / 2.
+    };
+    const real_t p2{ 
+      (((z + 40.) * z + 140.)*z + 140.) / 14.
+    };
+    const real_t p3{ 
+      ((((z  + 70. ) * z + 480.) * z + 1160.) * z + 980.) / 14.
+    };
+    const real_t p4{ 
+      (((((5.*z + 540.) * z + 5592.) * z + 22876.) * z
+       + 42756.) * z + 30912.) * 5. / 294.
+    };
+    const real_t p5{ 
+      ((((((33. * z + 5090.) * z + 71020.) * z + 416280.) * z 
+           + 1249720.) * z + 1918280.) * z + 1207920.) / 294.
+    };
+    const real_t c{ b/zp5 };
+    const real_t p{ 
+      (p0 + c * (p1 + c * (p2 + c * (p3 + c * (p4 + c * p5))))) / zp5
+    };
+    return  p * pow(1. - 2. * b, 2);
+}
+
+namespace {
+auto lgsigma(real_t x) -> real_t 
+{
+  const real_t e{ expm1(x) };
+  return log1p((x - e) / (1. + e));
+}
+}
+
   
-  const double c1{ 
-    ((8.0/5.0) * pow(b, 5)) * pow((1.0-2.0*b), 2) 
-    * (2.0 - y + 2.0 * b * (y - 1.0))
+auto tidal_ode2::k2_from_ym2_mbr(real_t z, real_t b) -> real_t
+{
+  assert(b > 0);
+  const real_t s { lgsigma(-2.*b) / (-2.*b*b) };
+  const real_t c1 {  
+    -(4./5.) * pow(b, 3) * (2.*b*(z+1.) - z)
+  };  
+  const real_t c0 { 
+    b * (b * (b * (24.*s*(z+1.) - 4.*z - 12.) 
+              + ((-36.*z -24.) * s + 18.*z + 16.))
+         + ((18.*z + 6.) * s -14.*z - 6.)) + 3.*z*(1.-s)
   };
+  return  pow(1.-2.*b, 2) * c1 / c0;
+}
+
+auto tidal_ode2::k2_from_ym2_mbr_interp(real_t z, real_t b, 
+                                     real_t b_thresh) -> real_t
+{   
+    const real_t f { k2_from_ym2_mbr(z, b) };
     
-  real_t k2{ c1 / c0 };  
-  real_t lt{ (2.0/3.0) * k2 / pow(b, 5) };
+    if (b > b_thresh) return f;
+    
+    const real_t a { k2_from_ym2_mbr_taylor_exp(z, b) };
+    
+    const real_t e { 
+       k2_from_ym2_mbr(z, b_thresh) 
+       - k2_from_ym2_mbr_taylor_exp(z, b_thresh)
+    };
+    
+    return a + e*pow(b/b_thresh,6);
+}
+
+
+
+auto tidal_ode2::deform_from_ym2_mbr(real_t ym2, real_t b) 
+-> spherical_star_tidal
+{
+  const real_t k2{ k2_from_ym2_mbr_interp(ym2,b) };
+    
+  const real_t lt{ (2.0/3.0) * k2 / pow(b, 5) };
   
   return {k2, lt};
 }
@@ -306,17 +386,12 @@ auto tidal_ode2::deformability(const state_t& surf)
 const -> spherical_star_tidal
 { 
   real_t dnu{ x_end() };
-  real_t gm1{ gm1_from_dnu(dnu) };
   real_t lambda{ lambda_dnu(dnu) };
   
-  auto s{ eos.at_gm1(eos.range_gm1().limit_to(gm1)) };
-  assert(s);  
-  real_t rho{ s.rho() };
-
   real_t mbr{ -0.5 * std::expm1(-2.0 * lambda) };
-  real_t y{ surf[YHAT] + deltay_rho(rho) };
+  real_t z{ surf[ZHAT] };
   
-  return deform_from_y_mbr(y, mbr);
+  return deform_from_ym2_mbr(z, mbr);
 }
 
 

@@ -22,6 +22,8 @@ the accompanying article :footcite:p:`Kastaun2021`.
 The latest public versions can be found on the 
 `github page <https://github.com/wokast/RePrimAnd>`_.
 Releases are also archived on Zenodo :footcite:p:`Zenodo:Reprimand`.
+Please report any problems on the 
+`issue tracker <https://github.com/wokast/RePrimAnd/issues>`_.
 
 Developers
 ^^^^^^^^^^

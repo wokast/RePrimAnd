@@ -4,10 +4,10 @@ Installation
 The main target and devolpment platform is Linux, although the
 library code is not platform-specific and should also work on Macs.
 Windows and AIX are not supported. For use in HPC, users need to build 
-the library from source. For use in postprocessing, the Python intferface
+the library from source. For use in postprocessing, the Python interface
 can also be installed via pip (binary wheel of the library available for 
-Linux). Conda packages for the C++ library and Python intface are planned 
-but not available yet.
+Linux). There is also an experimental conda package for the C++ 
+library (Python interface not included yet).
 
 Requirements
 ------------
@@ -36,9 +36,8 @@ To build the library,
 .. code::
 
    cd <repository>
-   meson mbuild --buildtype=release --prefix=<custom install location>
-   cd mbuild
-   ninja
+   meson setup --buildtype=release --prefix=<custom install location> mbuild
+   ninja -C mbuild
    
 This will compile with optimization and without debug symbols. Other
 possibilities are `--buildtype=debug` and `--buildtype=debugoptimized`.
@@ -48,6 +47,19 @@ See `here <https://mesonbuild.com/Running-Meson.html>`_ for general
 Meson usage.
 
 
+Note on Conda environments: if you build for a conda environment and meson 
+does not detect the boost library or the wrong version, use 
+
+:: code::
+   
+   BOOST_ROOT=$CONDA_PREFIX meson setup --prefix=$CONDA_PREFIX mbuild
+
+
+Note on HDF5: meson and HDF5 library do not play along nicely (partly caused by bad HDF5 
+packaging). Make sure there is a pkg-config file for the HDF5 library you want to build 
+against. Another common source of problems is that you are building within a conda environment and there exists another system-wide HDF5 installation. In that case, 
+prefixing `LD_LIBRARY_PATH` with `$CONDA_PREFIX/lib` might help.
+
 Installing
 ^^^^^^^^^^
 
@@ -55,11 +67,10 @@ To install the library, use
 
 .. code::
 
-   cd mbuild
-   ninja install
+   ninja -C mbuild install
    
 This will install in a user-defined location if the `--prefix` option
-was given during the build setup, otherwise systemwide. 
+was given during the build setup, otherwise systemwide (not recommended). 
 
 
 Using the Library
@@ -87,7 +98,7 @@ it is easiest to install from pypi
 
 .. code::
 
-   pip install pyreprimand
+   pip install reprimand
 
 
 Otherwise, one first has to buid and install the C++ library as shown above.
@@ -96,11 +107,11 @@ To build and install the Python interface, do
 
 .. code::
 
-   cd bindings/python
-   pip install .
+   cd <repository>
+   pip install ./bindings/python
 
 
-This will also pip install packages numpy and pybind11>=2.6.0. 
+This will also pip install packages `numpy` and `pybind11>=2.6.0`. 
 When using conda environment, it may be better to install those 
 first using conda.
 
@@ -112,15 +123,13 @@ Einstein Toolkit Support
 ------------------------
 
 RePrimAnd does provide a thorn that builds the library within
-an EinsteinToolkit (ET) environment, using the ExternalLibraries mechanism. The
-thorn can be found in the folder `ET_interface/thorns/RePrimAnd/`. The thorn
+an EinsteinToolkit (ET) environment, using the ExternalLibraries mechanism. 
+The thorn is part of the official ET framework. The version in the master 
+brach of this repository may however be ahead of the ET version.
+It can be found in the folder `ET_interface/thorns/RePrimAnd/`. The thorn
 depends on the HDF5, GSL, and BOOST ExternalLibraries thorns. Building it via
-the ET build system does not require meseon. Note this only builds the library,
+the ET build system does not require meson. Note this only builds the library,
 but not the tests and Python bindings. 
-
-The thorn is also part of the official ET framework. The version in the master 
-brach will typically by ahead of the ET version, but is not guaranteed to be 
-stable or compatible.
 
 There are two experimental (and largely undocumented for now) thorns 
 that aim to simplifying the usage.
@@ -141,8 +150,8 @@ To build it, do
 
 .. code::
 
-   meson configure -Dbuild_documentation=true
-   ninja documentation
+   meson configure -Dbuild_documentation=true mbuild
+   ninja -C mbuild documentation
 
 The resulting pages can be found in the build directory under
 `docsrc/sphinx/index.html`.
@@ -168,7 +177,8 @@ To build them, specify
    meson configure -Dbuild_tests=true
    ninja test
    
-Please report errors on the issue tracker.
+Please report errors on the 
+`issue tracker <https://github.com/wokast/RePrimAnd/issues>`_.
 
 Benchmarks
 ^^^^^^^^^^
@@ -189,8 +199,8 @@ The resulting pdf figures are placed in the build directory under
 
 This requires Python+matplotlib.
 
-Visualizing Master Function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Visualizing Con2Prim Master Function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In addition, there is code to sample the primitive recovery master
 function (the central ingredient of the scheme) for various cases,

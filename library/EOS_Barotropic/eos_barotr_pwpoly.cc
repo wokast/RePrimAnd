@@ -95,7 +95,7 @@ real_t eos_poly_piece::csnd_from_gm1(real_t gm1) const
 }
 
 /**
-\return Maximum density within segment below which soundspeed is zero.
+\return Maximum density within segment below which soundspeed is one.
 */
 real_t eos_poly_piece::rho_max_save(real_t rho_max) const
 {

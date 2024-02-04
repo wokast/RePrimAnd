@@ -23,7 +23,7 @@ using namespace EOS_Toolkit;
 
 
 auto check_tov_close(datasource s, 
-                     const spherical_star& tov, 
+                     const spherical_star_properties& tov, 
                      real_t tol_tov, real_t tol_def) -> bool
 {
   failcount hope("TOV solutions agree within tolerance");
@@ -73,14 +73,13 @@ bool check_ref_tov(std::string eospath, std::string refpath)
   eos_barotr eos{ load_eos_barotr(eospath, uc) };
   const real_t rho_cen{ real_t(ref["rho_cen"]) };
 
-
-  const tov_acc_simple accs{1e-8, 1e-6, 500}; 
-  const real_t tol_tov{ 1e2 * accs.tov};
-  const real_t tol_def{ 5e-5 }; // limited by nsamp=500
+  const real_t acc_tov{ 1e-8 };
+  const real_t acc_def{ 1e-6 };
+  const auto accs{ star_acc_simple(true, true, acc_tov, acc_def, 500) };
   
-  auto tov{ make_tov_star(eos, rho_cen, accs, true) }; 
+  auto tov{ get_tov_properties(eos, rho_cen, accs) }; 
 
-  return check_tov_close(ref, tov, tol_tov, tol_def);
+  return check_tov_close(ref, tov, acc_tov, acc_def);
 
 }
 
@@ -126,17 +125,16 @@ BOOST_AUTO_TEST_CASE( test_tovsol_basic )
 
   const real_t tov_cnt_rmd       = 7.9056e+17 / u.density();
   
-  const tov_acc_simple accs{1e-10, 1e-10, 500};
-  
-  hope.nothrow("Find TOV solution", 
-               [&] () {make_tov_star(eos, tov_cnt_rmd, accs, true, true);}
-              );
-  
-  hope.nothrow("Find TOV solution", 
-               [&] () {make_tov_star(eos, tov_cnt_rmd, accs, false, false);}
-              );
+  const real_t acc_tov{ 1e-8 };
+  const real_t acc_def{ 1e-6 };
+  const auto accs{ star_acc_simple(true, true, acc_tov, acc_def, 500) };
 
-  auto tov = get_tov_star_properties(eos, tov_cnt_rmd, accs, true); 
+  hope.nothrow("Find TOV solution", 
+               [&] () {get_tov_star(eos, tov_cnt_rmd, accs);}
+              );
+  
+
+  auto tov = get_tov_properties(eos, tov_cnt_rmd, accs); 
 
   hope.istrue(tov.has_deform(), "tidal deformability available");
   hope.istrue(tov.has_bulk(), "bulk properties available");

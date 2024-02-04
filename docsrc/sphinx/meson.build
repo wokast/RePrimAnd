@@ -6,7 +6,6 @@ sphinx_out_dir = meson.current_build_dir()
 
 conf_sphinx = configuration_data()
 conf_sphinx.set('SPHINX_DOXYGEN', doxy_out_dir)
-conf_sphinx.set('SPHINX_AUTODOC', eoscreate_dir)
 
 sphinxfile = configure_file(input : 'conf.py.in',
                             output : 'conf.py',
@@ -33,7 +32,7 @@ gen_sphinx = custom_target('sphinxdoc', \
   command : [sphinx, '-b', 'html', \
              '-c', sphinx_out_dir, \
              sphinx_src_dir, sphinx_out_dir], \
-  input : [sphinx_sources, sphinxfile, eoscreate_src], \
+  input : [sphinx_sources, sphinxfile], \
   output : 'index.html', depends : gen_doxy)
 
 alias_target('documentation', gen_sphinx)

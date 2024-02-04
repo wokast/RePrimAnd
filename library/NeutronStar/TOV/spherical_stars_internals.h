@@ -52,6 +52,110 @@ auto find_bulk_props(const spherical_star_profile& prf, real_t acc,
                std::size_t max_it=30) -> spherical_star_bulk;
                          
 }
+
+
+class tov_solver_adaptive {
+  public:
+
+  class engine {
+    public:
+    
+    struct parameters {
+      const bool find_bulk;
+      const bool find_tidal;
+      const std::size_t nsamp_tov;
+      const real_t acc_tov;
+      const std::size_t nsamp_tidal;
+      const real_t acc_tidal;
+      const real_t wdiv_tidal;
+      const real_t bulk_acc;
+    };
+
+    static auto get_star_properties(const eos_barotr& eos, 
+                                    const real_t rho_center, 
+                                    const parameters& par) 
+    -> spherical_star_properties;
+
+    static auto get_star(const eos_barotr& eos, 
+                         const real_t rho_center, 
+                         const parameters& par) 
+    -> spherical_star;
+
+    private:
+
+    static auto get_deform(const eos_barotr& eos, 
+            const spherical_star_info& prop,
+            const std::vector<real_t>& dnu, 
+            const std::vector<real_t>& rsqr, 
+            const std::vector<real_t>& lambda, 
+            const parameters& par) 
+    -> spherical_star_tidal;
+  };
+  
+  static auto heuristic_params_accuracy(const star_accuracy_spec& acc)
+  -> engine::parameters;
+    
+  static auto get_star_properties(const eos_barotr& eos, real_t rho_center,
+                             const star_accuracy_spec acc) 
+  -> spherical_star_properties;
+  
+  static auto get_star(const eos_barotr& eos, real_t rho_center,
+                        const star_accuracy_spec acc)
+  -> spherical_star;
+};
+
+class tov_solver_fixstep {
+
+  public:
+
+  class engine {
+
+    public:
+
+    struct parameters {
+      const bool find_bulk;
+      const bool find_tidal;
+      const std::size_t nsamp_tov;
+      const std::size_t nsub_tidal; 
+      const real_t wdiv_tidal; 
+      const real_t bulk_acc; 
+    };
+
+    static auto get_star_properties(const eos_barotr& eos, 
+                                    const real_t rho_center, 
+                                    const parameters& par) 
+    -> spherical_star_properties;
+
+    static auto get_star(const eos_barotr& eos, 
+                         const real_t rho_center, 
+                         const parameters& par) 
+    -> spherical_star;
+
+    private:
+    
+    static auto get_deform(const eos_barotr& eos, 
+            const spherical_star_info& prop,
+            const std::vector<real_t>& dnu, 
+            const std::vector<real_t>& rsqr, 
+            const std::vector<real_t>& lambda, 
+            const parameters& par) 
+    -> spherical_star_tidal;
+
+  };
+  
+  static auto heuristic_params_accuracy(const star_accuracy_spec& acc)
+  -> engine::parameters;
+  
+
+  static auto get_star_properties(const eos_barotr& eos, 
+                    real_t rho_center, const star_accuracy_spec acc) 
+  -> spherical_star_properties;
+  
+  static auto get_star(const eos_barotr& eos, real_t rho_center,
+                       const star_accuracy_spec acc)
+  -> spherical_star;
+};
+
 }
 
 

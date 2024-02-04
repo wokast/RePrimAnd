@@ -102,6 +102,10 @@ Used in some methods unless other value is specified)")
         .def_readonly_static("M_sun_SI", &etk::units::M_sun_SI,
 R"(Default value for solar mass in SI units.
 Used in some methods unless other value is specified)")
+        .def_readonly_static("FORMAL_BARYON_MASS_SI", 
+                             &etk::units::FORMAL_BARYON_MASS_SI,
+R"(Convention for the mass constant defining baryonic mass density
+in terms of baryon number density, in SI units.)")
         .def_static("geom_udensity", &etk::units::geom_udensity,
 R"(Create geometric unit system with given mass density unit and 
 "G=c=1. The constant G in SI units can be overridden.)",
@@ -753,6 +757,21 @@ Returns:
                       &etk::spherical_star_tidal::lambda,
                       "Dimensionless tidal deformability Lambda");
 
+    py::class_<etk::spherical_star_bulk>(m, "spherical_star_bulk",
+    "Describes bulk properties" )
+        .def_readonly("circ_radius", 
+                      &etk::spherical_star_bulk::circ_radius,
+                      "Bulk circumferential radius")
+        .def_readonly("rho", 
+                      &etk::spherical_star_bulk::rho,
+                      "Bulk baryonic mass density")
+        .def_readonly("proper_volume", 
+                      &etk::spherical_star_bulk::proper_volume,
+                      "Bulk enclosed proper volume")
+        .def_readonly("bary_mass", 
+                      &etk::spherical_star_bulk::bary_mass,
+                      "Bulk enclosed baryonic mass");
+
     
     py::class_<etk::spherical_star_profile>(m, "spherical_star_profile",
 R"(Represents the radial profiles of a spherical star
@@ -804,6 +823,9 @@ All quantities are in the same geometric units used by the EOS.
         .def_property_readonly("eos", 
              &etk::spherical_star_properties::eos,
              "Star EOS")
+        .def_property_readonly("center_gm1", 
+             &etk::spherical_star_properties::center_gm1,
+             "Central pseudo enthalpy")
         .def_property_readonly("center_rho", 
              &etk::spherical_star_properties::center_rho,
              "Central baryonic mass density")
@@ -954,65 +976,283 @@ All quantities are in the same geometric units used by the EOS.
              "Temperature at circumf. radius ",
              py::arg("rc"));
 
-    py::class_<etk::tov_acc_simple>(m, "tov_acc_simple",
-R"(Accuracy parameters for solving TOV and tidal deformability ODEs.
 
 
-This contains heuristic parameters used in the adaptive ODE solvers.
-Accuracy for TOV and tidal deformability ODEs are specified seperately.
-There are no guarantees on the absolute errors of the various 
-quantities, but lowering the values should lead to more accurate results.
-    
+    py::class_<etk::star_accuracy_spec>(m, "star_accuracy_spec",
+R"(Accuracy requirements for NS model properties.
+
+This allows to seperately specify the desired tolerance for each 
+quantity, and whether the optional variables tidal deformability
+and bulk radius are required.
+
 )" )
-        .def(py::init<real_t, real_t, std::size_t>(),
-R"(
+        .def_readonly("acc_mass", &etk::star_accuracy_spec::acc_mass)
+        .def_readonly("acc_radius", &etk::star_accuracy_spec::acc_radius)
+        .def_readonly("acc_minertia", &etk::star_accuracy_spec::acc_minertia)
+        .def_readonly("minsteps", &etk::star_accuracy_spec::minsteps)
+        .def_readonly("need_deform", &etk::star_accuracy_spec::need_deform)
+        .def_readonly("acc_deform", &etk::star_accuracy_spec::acc_deform)
+        .def_readonly("need_bulk", &etk::star_accuracy_spec::need_bulk);
+
+    m.def("star_acc_simple", &etk::star_acc_simple,
+R"(Simplified accuracy specification for NS models.
+
 Args:
-    tov (float): accuracy parameter for solving TOV ODE
-    deform (float): accuracy parameter for solving deformability ODE
-    minsteps (int): Minimum number of steps (controls maximum stepsize)
+    need_deform (boolean): If tidel deformability is needed
+    need_bulk (bool): If bulk radius is needed
+    acc_tov (float): Relative error tolerance for masses, radii, 
+                     and  moment of inertia.
+    acc_deform (float): Relative error tolerance for tidal deformability
+    minsteps (int): Minimum resolution inside NS.
     
+Returns:
+    pyreprimand.star_accuracy_spec
 )",
-        
-             py::arg("tov")=1e-8, 
-             py::arg("deform")=1e-6, 
-             py::arg("minsteps")=500)
-        .def_readonly("tov", &etk::tov_acc_simple::tov)
-        .def_readonly("deform", &etk::tov_acc_simple::deform)
-        .def_readonly("minsteps", &etk::tov_acc_simple::minsteps);
+        py::kw_only(),
+        py::arg("need_deform")=true, 
+        py::arg("need_bulk")=false, 
+        py::arg("acc_tov")=1e-6,
+        py::arg("acc_deform")=1e-3, 
+        py::arg("minsteps")=20);
 
-    py::class_<etk::tov_acc_precise>(m, "tov_acc_precise",
-R"(Accuracy parameters for solving TOV and tidal deformability ODEs.
 
-This allows to seperately specify the required tolerance for each 
-quantity. This will repeatedly solve the ODEs with increasing accuracy
-until the estimated residuals fall below the given tolerances.
 
-)" )
-        .def(py::init<real_t, real_t, real_t, real_t, 
-                       std::size_t, real_t>(),
-R"(Args:
-    mass (float): Relative tolerance for baryonic and gravitational mass
-    radius (float): Relative tolerance for radius and volume^(1/3)
-    minertia (float): Relative tolerance for moment of inertia
-    deform (float): Relative tolerance for tidal deformability (Lambda
-        and k_2)
-    minsteps (int): Minimum number of steps (controls maximum stepsize)
-    acc_min (float): Give up if adaptive ODE solver tolerances get 
-        any smaller.
+    m.def("star_acc_detailed", &etk::star_acc_detailed,
+R"(Detailed accuracy specification for NS models.
+
+Args:
+    need_deform (boolean): If tidel deformability is needed
+    need_bulk (bool): If bulk radius is needed
+    acc_mass (float): Relative error tolerance for mass
+    acc_radius (float): Relative error tolerance for radius
+    acc_minertia (float): Relative error tolerance for moment of inertia
+    acc_deform (float): Relative error tolerance for tidal deformability
+    minsteps (int): Minimum resolution inside NS.
+    
+Returns:
+    pyreprimand.star_accuracy_spec
+)",
+          py::kw_only(),
+          py::arg("need_deform")=true,
+          py::arg("need_bulk")=false,
+          py::arg("acc_mass")=1e-6, 
+          py::arg("acc_radius")=1e-6, 
+          py::arg("acc_minertia")=1e-5,
+          py::arg("acc_deform")=1e-3, 
+          py::arg("minsteps")=20);
+
+
+    m.def("get_tov_properties", &etk::get_tov_properties,
+R"(Compute properties of TOV solution for given EOS and central density.
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density
+    acc (pyreprimand.star_accuracy_spec): Specifies desired accuracy and
+      which optional quantities are needed. To set up the accuracy
+      spec, use star_acc_detailed() or star_acc_simple(). 
+      
+Returns:
+    pyreprimand.spherical_star_properties
+)",    
+    
+    py::arg("eos"), 
+    py::arg("rho_center"), 
+    py::arg("acc"));
+
+
+    m.def("get_tov_properties", 
+          [] (const etk::eos_barotr eos, 
+              const etk::real_t rho_center) 
+          { 
+            return etk::get_tov_properties(eos, rho_center, 
+                                           etk::star_acc_simple());
+          },
+R"(Compute properties of TOV solution for given EOS and central density.
+
+This variant uses a default accuracy specification equivalent to
+get_tov_properties(eos, rho_center, star_acc_simple())
+ 
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density
+      
+Returns:
+    pyreprimand.spherical_star_properties
+)",    
+    
+    py::arg("eos"), 
+    py::arg("rho_center"));
+
+
+ 
+
+    m.def("get_tov_star", &etk::get_tov_star,
+R"(Compute TOV solution for given EOS and central density.
+
+Use this if you also need the radial profile, otherwise use
+get_tov_properties().
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density
+    acc (pyreprimand.star_accuracy_spec): Specifies desired accuracy and
+      which optional quantities are needed. To set up the accuracy
+      spec, use star_acc_detailed() or star_acc_simple(). 
+      
+Returns:
+    pyreprimand.spherical_star
+)",    
+    
+    py::arg("eos"), 
+    py::arg("rho_center"), 
+    py::arg("acc"));
+
+
+    m.def("get_tov_star", 
+          [] (const etk::eos_barotr eos, 
+              const etk::real_t rho_center) 
+          { 
+            return etk::get_tov_star(eos, rho_center, 
+                                           etk::star_acc_simple());
+          },
+R"(Compute TOV solution for given EOS and central density.
+
+Use this if you also need the radial profile, otherwise use
+get_tov_properties().
+This variant uses a default accuracy specification equivalent to
+get_tov_properties(eos, rho_center, star_acc_simple())
+ 
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density
+      
+Returns:
+    pyreprimand.spherical_star
+)",    
+    
+    py::arg("eos"), 
+    py::arg("rho_center"));
+
+
+    m.def("get_tov_properties_fixstep", 
+          [] (const etk::eos_barotr eos, const real_t rho_center, 
+              const etk::star_accuracy_spec acc) 
+          {
+            return etk::get_tov_properties_fixstep(eos, 
+                                                   rho_center, acc); 
+          },  
+R"(Compute properties of TOV solution for given EOS and central density.
+
+This function is intended for development and debugging.
+It uses an implementation based on fixed-stepsize ODE solvers. 
+For use in production, use get_tov_properties() instead. 
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density
+    acc (pyreprimand.star_accuracy_spec): Specifies desired accuracy and
+      which optional quantities are needed. To set up the accuracy
+      spec, use star_acc_detailed() or star_acc_simple(). 
+      
+Returns:
+    pyreprimand.spherical_star_properties
+)",    
+    
+    py::arg("eos"), 
+    py::arg("rho_center"), 
+    py::arg("acc"));
+ 
+
+    m.def("get_tov_properties_fixstep", 
+          [](etk::eos_barotr eos, const real_t rho_center, 
+             const bool find_bulk,
+             const bool find_tidal,
+             const std::size_t nsamp_tov, 
+             const std::size_t nsub_tidal,
+             const real_t wdiv_tidal, 
+             const real_t bulk_acc) 
+          { 
+             return etk::get_tov_properties_fixstep(eos, rho_center, 
+                                find_bulk, find_tidal,
+                                nsamp_tov, nsub_tidal, wdiv_tidal, 
+                                bulk_acc);
+          }, 
+R"(Compute a TOV solution with fixed ode step size
+
+This low-level function is only meant for testing and development.
+It might change or disappear at any new version.
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density [EOS Units].
+    nsamp_tov (int): In how many steps to divide TOV ODE integration interval.
+    nsub_tidal (int): Factor to divide TOV ODE step size for tidal ODE.
+    wdiv_tidal (float): where to switch between the two tidal ODE variants
+    find_bulk (bool): Whether to also compute the "bulk" properties
+    find_tidal (bool): Whether to compute the tidal deformability
+    bulk_acc (float): Root finding accuracy for bulk radius
+
+Returns:
+    pyreprimand.spherical_star_properties
 
 )",
-             py::arg("mass")=1e-8, 
-             py::arg("radius")=1e-8, 
-             py::arg("minertia")=1e-8, 
-             py::arg("deform")=1e-6, 
-             py::arg("minsteps")=500,
-             py::arg("acc_min")=1e-14)
-        .def_readonly("mass", &etk::tov_acc_precise::mass)
-        .def_readonly("radius", &etk::tov_acc_precise::radius)
-        .def_readonly("minertia", &etk::tov_acc_precise::minertia)
-        .def_readonly("deform", &etk::tov_acc_precise::deform)
-        .def_readonly("minsteps", &etk::tov_acc_precise::minsteps)
-        .def_readonly("acc_min", &etk::tov_acc_precise::acc_min);
+          py::arg("eos"),
+          py::arg("rho_center"),
+          py::arg("find_bulk"),
+          py::arg("find_tidal"),
+          py::arg("nsamp_tov"),
+          py::arg("nsub_tidal")=2,
+          py::arg("wdiv_tidal")=0.91,
+          py::arg("bulk_acc")=1e-8);
+
+    m.def("get_tov_properties_adaptive", 
+          [](etk::eos_barotr eos, const real_t rho_center, 
+             const std::size_t nsamp_tov, 
+             const real_t acc_tov,
+             const std::size_t nsamp_tidal, 
+             const real_t acc_tidal,
+             const real_t wdiv_tidal, 
+             const bool find_bulk,
+             const bool find_tidal, const real_t bulk_acc) 
+          { 
+             return etk::get_tov_properties_adaptive(eos, rho_center, 
+                                nsamp_tov, acc_tov, nsamp_tidal, 
+                                acc_tidal, wdiv_tidal, 
+                                find_bulk, find_tidal, bulk_acc);
+          }, 
+R"(Compute a TOV solution with adaptive ode step size
+
+This low-level function is only meant for testing and development.
+It might change or disappear at any new version.
+
+Args:
+    eos (pyreprimand.eos_barotr): The EOS of the star
+    rho_center (float): The central baryonic mass density [EOS Units].
+    nsamp_tov (int): Sample resolution for TOV profile
+    acc_tov (int): Adaptive accuracy parameter for TOV ODE
+    nsamp_tidal (int): Minimum number of steps for tidal ODEs
+    acc_tidal (float): Adaptive accuracy parameter for tidal ODE 
+    wdiv_tidal (float): where to switch between the two tidal ODE variants
+    find_bulk (bool): Whether to also compute the "bulk" properties
+    find_tidal (bool): Whether to compute the tidal deformability
+    bulk_acc (float): Root finding accuracy for bulk radius
+
+Returns:
+    pyreprimand.spherical_star_properties
+
+)",
+          py::arg("eos"),
+          py::arg("rho_center"),
+          py::arg("nsamp_tov"),
+          py::arg("acc_tov"),
+          py::arg("nsamp_tidal"),
+          py::arg("acc_tidal"),
+          py::arg("wdiv_tidal"),
+          py::arg("find_bulk"),
+          py::arg("find_tidal"),
+          py::arg("bulk_acc"));
+
 
     py::class_<etk::star_seq>(m, "star_seq",
 R"(Represents sequences of neutron stars or similar.
@@ -1145,132 +1385,7 @@ addition to the methods available from pyreprimand.star_seq.
              &etk::star_seq::units_to_SI,
              "Unit system");
 
-            
-    m.def("make_tov_star", 
-          [](etk::eos_barotr eos, const real_t rho_center, 
-             const etk::tov_acc_simple acc, const bool find_bulk,
-             const bool find_tidal) 
-          { 
-             return etk::make_tov_star(eos, rho_center, acc, 
-                                       find_bulk, find_tidal);
-          }, 
-R"(Compute a TOV solution 
-
-Use this if you also need the radial profile, otherwise use
-get_tov_star_properties. This function provides only basic control
-on the accuracy via pyreprimand.tov_acc_simple. There is also a
-version using pyreprimand.tov_acc_precise.
-
-Args:
-    eos (pyreprimand.eos_barotr): The EOS of the star
-    rho_center (float): The central baryonic mass density [EOS Units].
-    acc (pyreprimand.tov_acc_simple): Tolerances for adaptive solver
-    find_bulk (bool): Whether to also compute the "bulk" properties
-    find_tidal (bool): Whether to compute the tidal deformability
-
-Returns:
-    pyreprimand.spherical_star
-)",
-          py::arg("eos"),
-          py::arg("rho_center"),
-          py::arg("acc"),
-          py::arg("find_bulk")=false,
-          py::arg("find_tidal")=true);
-
-    m.def("get_tov_star_properties", 
-          [](etk::eos_barotr eos, const real_t rho_center, 
-             const etk::tov_acc_simple acc, const bool find_bulk,
-             const bool find_tidal) 
-          { 
-             return etk::get_tov_star_properties(eos, rho_center, 
-                                          acc, find_bulk, find_tidal);
-          }, 
-R"(Compute a TOV solution 
-
-Use this if you do not need the radial profile, otherwise use
-make_tov_star. This function provides only basic control
-on the accuracy via pyreprimand.tov_acc_simple. There is also a
-version using pyreprimand.tov_acc_precise.
-
-Args:
-    eos (pyreprimand.eos_barotr): The EOS of the star
-    rho_center (float): The central baryonic mass density [EOS Units].
-    acc (pyreprimand.tov_acc_simple): Tolerances for adaptive solver
-    find_bulk (bool): Whether to also compute the "bulk" properties
-    find_tidal (bool): Whether to compute the tidal deformability
-
-Returns:
-    pyreprimand.spherical_star_properties
-
-)",
-          py::arg("eos"),
-          py::arg("rho_center"),
-          py::arg("acc"),
-          py::arg("find_bulk")=false,
-          py::arg("find_tidal")=true);
-
-    m.def("make_tov_star", 
-          [](etk::eos_barotr eos, const real_t rho_center, 
-             const etk::tov_acc_precise acc, const bool find_bulk,
-             const bool find_tidal) 
-          { 
-             return etk::make_tov_star(eos, rho_center, acc, 
-                                       find_bulk, find_tidal);
-          }, 
-R"(Compute a TOV solution 
-
-Use this if you also need the radial profile, otherwise use
-get_tov_star_properties. This function provides strict control
-on the accuracy via pyreprimand.tov_acc_precise. There is also a
-faster version using pyreprimand.tov_acc_simple.
-
-Args:
-    eos (pyreprimand.eos_barotr): The EOS of the star
-    rho_center (float): The central baryonic mass density [EOS Units].
-    acc (pyreprimand.tov_acc_simple): Tolerances for adaptive solver
-    find_bulk (bool): Whether to also compute the "bulk" properties
-    find_tidal (bool): Whether to compute the tidal deformability
-
-Returns:
-    pyreprimand.spherical_star
-)",
-          py::arg("eos"),
-          py::arg("rho_center"),
-          py::arg("acc"),
-          py::arg("find_bulk")=false,
-          py::arg("find_tidal")=true);
-
-    m.def("get_tov_star_properties", 
-          [](etk::eos_barotr eos, const real_t rho_center, 
-             const etk::tov_acc_precise acc, const bool find_bulk,
-             const bool find_tidal) 
-          { 
-             return etk::get_tov_star_properties(eos, rho_center, 
-                                      acc, find_bulk, find_tidal);
-          }, 
-R"(Compute a TOV solution 
-
-Use this if you do not need the radial profile, otherwise use
-make_tov_star. This function provides strict control
-on the accuracy via pyreprimand.tov_acc_precise. There is also a
-faster version using pyreprimand.tov_acc_simple.
-
-Args:
-    eos (pyreprimand.eos_barotr): The EOS of the star
-    rho_center (float): The central baryonic mass density [EOS Units].
-    acc (pyreprimand.tov_acc_simple): Tolerances for adaptive solver
-    find_bulk (bool): Whether to also compute the "bulk" properties
-    find_tidal (bool): Whether to compute the tidal deformability
-
-Returns:
-    pyreprimand.spherical_star_properties
-
-)",
-          py::arg("eos"),
-          py::arg("rho_center"),
-          py::arg("acc"),
-          py::arg("find_bulk")=false,
-          py::arg("find_tidal")=true);
+         
 
     m.def("find_rhoc_tov_max_mass", 
           &etk::find_rhoc_tov_max_mass, 
@@ -1302,7 +1417,9 @@ use make_tov_branch_stable instead.
 
 Args:
     eos (pyreprimand.eos_barotr): The EOS of the NSs. 
-    acc (pyreprimand.tov_acc_simple): Tolerances for adaptive ODE solver.
+    acc (pyreprimand.star_accuracy_spec): Specifies desired accuracy and
+      which optional quantities are needed. To set up the accuracy
+      spec, use star_acc_detailed() or star_acc_simple(). 
     rg_gm1 (pyreprimand.range): Range of central pseudo enthalpy \f$ g-1 \f$
     num_samp (int): Number of sample points along the sequence.
 
@@ -1311,12 +1428,21 @@ Returns:
 
 )",
           py::arg("eos"),
-          py::arg("acc"),
           py::arg("rg_gm1"),
+          py::arg("acc"),
           py::arg("num_samp")=500);
 
     m.def("make_star_seq", 
-          &etk::make_star_seq, 
+          [] (std::vector<real_t> mg, 
+              std::vector<real_t> mb, 
+              std::vector<real_t> rc, 
+              std::vector<real_t> mi, 
+              std::vector<real_t> lt, 
+              etk::star_seq::range_t rg_gm1, 
+              etk::units u) 
+          {
+            return etk::make_star_seq(mg,mb,rc,mi,lt,rg_gm1, u);
+          }, 
 R"(Create star sequence from given arrays with star properties
 
 This creates a star_seq object from given stellar properties for a 
@@ -1393,6 +1519,7 @@ Returns:
 
 
 
+
     m.def("make_tov_branch_stable", 
           &etk::make_tov_branch_stable, 
 R"(Compute stable branch of TOV solutions
@@ -1400,28 +1527,53 @@ R"(Compute stable branch of TOV solutions
 This function employs heuristic algorithm to find the stable branch
 of TOV solutions. Since there may be more than one such branch, one 
 has to provide a central pseudo-enthalpy to indicate the correct one.
-By increasing/decreasing this value successively by some factor,
-a search interval is expanded until it brackets the maximum mass
-or until the upper bound exceeds the EOS validity range. The initial 
-guess is not required to be within a stable branch, and the default
-value should work for any remotely realistic NS EOS.
-In a similar fashion, a central pseudo-enthalpy for which the NS mass 
-falls below the parameter mgrav_min is determined. Next, the maximum
-is determined using a maximum search. However, the maximum might be 
-located at the EOS validity bound. The maxmimum is considered physical 
+If the given value is on a stable branch, that branch will be returned.
+If the value lies on an unstable branch, the adjacent stable branch
+at lower densities will be returned. The default value should work for 
+any remotely realistic NS EOS.
+
+For most astrophysical applications, the low-mass part of a branch 
+is not relevant. One can specify a low-mass cutoff factor relative 
+to the maximum mass to indicate that lower masses are not needed.
+The default cutoff is 1/5 of the maximum mass. One can also specify 
+an additional absolute mass cutoff, but beware that an exception 
+is thrown if it happens to exceed the maximum mass. If the mass cutoff
+is below the actual minimum mass of the stable branch, the branch
+will extend down to the minimum mass. Set the cutoffs to zero if the
+goal is to find the minimum mass.
+
+The parameter for the accuracy refers to the accuracy of the TOV
+solutions, but does not include the interpolation error of the 
+resulting star sequence. The algorithm samples the TOV sequence 
+using regular steps in log(g-1), g being the central pseudo-enthalpy. 
+The sample point of maximum mass will be moved closer to the true
+maximum using a quadratic approximation around the maximum. 
+
+The stepsize can be controled by a parameter. The default stepsize is 
+chosen such that the total error is dominated by the TOV solution 
+error for the default TOV solver accurracy. Changing the step size 
+should only be required when extreme accuracy is required, or when 
+accuracy is less important than speed. The computational costs are 
+roughly antiproportional to the stepsize parameter.
+
+For some EOS, the maximum NS mass is limited by the 
+EOS validity range and not by the physical maximum of TOV solutions. 
+This case can be queried using the includes_maximum() method of the 
+returned branch object. For this, the maxmimum is considered physical
 based on a simple heuristics: (g_max-1)*(1+max_margin) < g_eos, where 
 g_max and g_eos are the the central pseudo-enthalpy of the maximum mass 
-model and the EOS upper validity bound. This criterion can later be 
-queried using the includes_maximum() method of the branch object.
-Finally, the branch is sampled with resolution given by num_samp.
+model and the EOS upper validity bound. 
 
 Args:
     eos (pyreprimand.eos_barotr): The EOS of the NSs. 
-    acc (pyreprimand.tov_acc_simple) Tolerances for adaptive ODE solver.
-    mgrav_min (float) Minimum gravitational mass that should be covered.
-    num_samp (int) Sample resolution of the sequence.
-    gm1_initial (float) Central enthalpy to indicate desired branch.
-    max_margin Defines when maximum is considered physical.
+    acc (pyreprimand.star_accuracy_spec): Specifies desired accuracy and
+      which optional quantities are needed. To set up the accuracy
+      spec, use star_acc_detailed() or star_acc_simple().
+    mg_cut_low_rel (float) Low-mass cutoff in terms of maximum mass.
+    mg_cut_low_abs (float) Low-mass cutoff in terms of absolute mass.
+    gm1_initial (float) Central enthalpy g-1 to indicate desired branch.
+    gm1_step (int) Sample resolution in terms of (delta g) / (g-1)
+    max_margin Distance to EOS validity bound needed to consider maximum as physical.
 
 Returns:
     pyreprimand.star_branch
@@ -1429,10 +1581,33 @@ Returns:
 )",
           py::arg("eos"),
           py::arg("acc"),
-          py::arg("mgrav_min")=0.5,
-          py::arg("num_samp")=500,
+          py::kw_only(),
+          py::arg("mg_cut_low_rel")=0.2,
+          py::arg("mg_cut_low_abs")=0.0,
           py::arg("gm1_initial")=1.2,
-          py::arg("max_margin")=1e-4);
+          py::arg("gm1_step")=0.004,
+          py::arg("max_margin")=1e-2);
 
+
+    m.def("k2_from_ym2_mbr_stable", 
+          py::vectorize(&etk::k2_from_ym2_mbr_stable),
+R"(Numerically stable implementation of formula for computing 
+   love number k2
+  
+   This computes k2 from y-2 and beta, where y is the surface value
+   of the tidal ODE, and beta=M/R is the NS compactness. For small
+   compactness beta, a Taylor expansion has to be used because the 
+   exact formula suffers from extreme cancellation errors. The 
+   coefficient of the highest order term beta^6 is not computed 
+   analytically but from the difference between the terms of lower 
+   order and the exact formula, evaluated at a value were the latter 
+   is still more accurate. This is reducing the overall error 
+   further. 
+   
+   This function is intended for development and debugging. 
+)",
+          py::arg("ym2"),
+          py::arg("beta"),
+          py::arg("b_thresh")=5e-2);
 
 }

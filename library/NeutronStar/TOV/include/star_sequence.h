@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include <cassert>
+#include <functional>
 #include <boost/optional.hpp>
 #include "config.h"
 #include "intervals.h"
@@ -22,7 +23,7 @@ namespace detail {
 
 This class allows to store precomputed properties for a sequence 
 of spherical stars and provide those as functions of the central 
-pseudo-enthalpy. For this, regular spaced monotonic spline 
+pseudo-enthalpy. For this, monotonic spline 
 interpolation is used. The unit system can be chosen when creating
 sequences, but is assumed to be geometric. It is stored for 
 bookkeeping.
@@ -342,55 +343,159 @@ auto make_star_seq(std::vector<real_t> mg,
 -> star_seq;
 
 
+
+auto make_star_seq(
+      std::function<spherical_star_properties(real_t)> solver,
+      interval<real_t> rg_gm1, units u, unsigned int num_samp=500)
+-> star_seq;
+
+
+
 /**\brief Compute sequence of TOV solutions
 
 @param eos The (barotropic) EOS of the NSs. 
-@param acc Tolerances for adaptive ODE solver.
 @param rg_gm1 Range of central pseudo enthalpy \f$ g-1 \f$
+@param acc Accuracy requirements for TOV solutions
 @param num_samp Sample resolution of the sequence.
 
 @return A star_seq object describing the TOV sequence. 
 **/ 
-auto make_tov_seq(eos_barotr eos, tov_acc_simple acc, 
-                       interval<real_t> rg_gm1, 
-                       unsigned int num_samp=500)
+auto make_tov_seq(eos_barotr eos, interval<real_t> rg_gm1, 
+                  const star_accuracy_spec acc=star_acc_simple(),
+                  unsigned int num_samp=500)
 -> star_seq;
 
 
-/**\brief Compute stable branch of TOV solutions
 
-@param eos The (barotropic) EOS of the NSs. 
-@param acc Tolerances for adaptive ODE solver.
-@param mgrav_min Minimum mass which sequence should cover.
-@param num_samp Sample resolution of the sequence.
+/**\brief Compute stable branch of TOV solutions 
+
+@param eos Barotropic EOS of the NS
+@param acc Accuracy requirements for TOV solutions
+@param mg_cut_low_rel Low-mass cutoff (in terms of maximum mass).
+@param mg_cut_low_abs Low-mass cutoff (absolute).
 @param gm1_initial Central enthalpy to indicate desired branch.
-@param max_margin Defines when maximum is considerd physical.
+@param gm1_step Sample resolution in terms of (delta g) / (g-1)
+@param max_margin Defines when maximum is considered physical.
 
-@return A star_branch onject describing the TOV stable branch. 
+@return A star_branch object describing the stable branch.
 
 This function employs heuristic algorithm to find the stable branch
-of TOV solutions. Since there may be more than one such branch, one 
+of TOV solutions for a given EOS.
+
+
+Since there may be more than one such branch, one 
 has to provide a central pseudo-enthalpy to indicate the correct one.
-By increasing/decreasing this value successively by some factor,
-a search interval is expanded until it brackets the maximum mass
-or until the upper bound exceeds the EOS validity range. The initial 
-guess is not required to be within a stable branch, and the default
-value should work for any remotely realistic NS EOS.
-In a similar fashion, a central pseudo-enthalpy for which the NS mass 
-falls below the parameter mgrav_min is determined. Next, the maximum
-is determined using a maximum search. However, the maximum might be 
-located at the EOS validity bound. The maxmimum is considered physical 
+If the given value is on a stable branch, that branch will be returned.
+If the value lies on an unstable branch, the adjacent stable branch
+at lower densities will be returned. The default value should work for 
+any remotely realistic NS EOS.
+
+For most astrophysical applications, the low-mass part of a branch 
+is not relevant. One can specify a low-mass cutoff to indicate that 
+lower masses are not needed. There are two cutoff parameters, one 
+for mass and one for the ratio of mass to maximum mass. 
+The default cutoff is 1/5 of the maximum mass. If the mass cutoff
+is below the actual minimum mass of the stable branch, the branch
+will extend down to the minimum mass. Set the cutoff to zero if the
+goal is to find the minimum mass.
+
+The parameter for the accuracy refers to the accuracy of the TOV
+solutions, but does not include the interpolation error of the 
+resulting star sequence. The algorithm samples the TOV sequence 
+using regular steps in log(g-1), g being the central pseudo-enthalpy. 
+The sample point of maximum mass will be moved closer to the true
+maximum using a quadratic approximation around the maximum. 
+
+The stepsize can be controled by a parameter. The default stepsize is 
+chosen such that the total error is dominated by the TOV solution 
+error for the default TOV solver accurracy. Changing the step size 
+should only be required when extreme accuracy is required, or when 
+accuracy is less important than speed. The computational costs are 
+roughly antiproportional to the stepsize parameter.
+
+For some EOS, the maximum NS mass is limited by the 
+EOS validity range and not by the physical maximum of TOV solutions. 
+This case can be queried using the includes_maximum() method of the 
+returned branch object. For this, the maxmimum is considered physical
 based on a simple heuristics: (g_max-1)*(1+max_margin) < g_eos, where 
 g_max and g_eos are the the central pseudo-enthalpy of the maximum mass 
-model and the EOS upper validity bound. This criterion can later be 
-queried using the includes_maximum() method of the branch object.
-Finally, the branch is then sampled with resolution given by num_samp.
+model and the EOS upper validity bound. 
 **/ 
-auto make_tov_branch_stable(eos_barotr eos, tov_acc_simple acc,
-                          real_t mgrav_min=0.5,
-                          unsigned int num_samp=500,
-                          real_t gm1_initial=1.2, 
-                          real_t max_margin=5e-2)
+auto make_tov_branch_stable(eos_barotr eos, 
+            const star_accuracy_spec acc,
+            real_t mg_cut_low_rel=0.2, real_t mg_cut_low_abs=0.0, 
+            real_t gm1_initial=1.2, 
+            real_t gm1_step=0.004, real_t max_margin=1e-2)
+-> star_branch;
+
+
+/**\brief Compute stable branch of NS solutions with custom solver
+
+@param solver A functor that returns spherical_star_properties for a 
+              given central pseudo-enthalpy. 
+@param rg_gm1 Valid range for the central pseudo-enthalpy.
+@param acc_mg Solver accuracy for mass
+@param gu Geometric unit system used by solver, also used for 
+          resulting sequence.
+@param mg_cut_low_rel Low-mass cutoff (in terms of maximum mass).
+@param mg_cut_low_abs Low-mass cutoff (absolute).
+@param gm1_initial Central enthalpy to indicate desired branch.
+@param gm1_step Sample resolution in terms of (delta g) / (g-1)
+@param max_margin Defines when maximum is considerd physical.
+
+@return A star_branch object describing the stable branch. 
+
+This function employs heuristic algorithm to find the stable branch
+of NS solutions. The function mapping central enthalpy to NS
+properties is provided as a parameter. This allows the use of different 
+TOV solvers or even custom code for NS models in alternative theories 
+of GR.
+
+Since there may be more than one such branch, one 
+has to provide a central pseudo-enthalpy to indicate the correct one.
+If the given value is on a stable branch, that branch will be returned.
+If the value lies on an unstable branch, the adjacent stable branch
+at lower densities will be returned. The default value should work for 
+any remotely realistic NS EOS.
+
+For most astrophysical applications, the low-mass part of a branch 
+is not relevant. One can specify a low-mass cutoff to indicate that 
+lower masses are not needed. There are two cutoff parameters, one 
+for mass and one for the ratio of mass to maximum mass. 
+The default cutoff is 1/5 of the maximum mass. If the mass cutoff
+is below the actual minimum mass of the stable branch, the branch
+will extend down to the minimum mass. Set the cutoff to zero if the
+goal is to find the minimum mass.
+
+The parameter for the accuracy refers to the accuracy of the TOV
+solutions, but does not include the interpolation error of the 
+resulting star sequence. The algorithm samples the TOV sequence 
+using regular steps in log(g-1), g being the central pseudo-enthalpy. 
+The sample point of maximum mass will be moved closer to the true
+maximum using a quadratic approximation around the maximum. 
+
+The stepsize can be controled by a parameter. The default stepsize is 
+chosen such that the total error is dominated by the TOV solution 
+error for the default TOV solver accurracy. Changing the step size 
+should only be required when extreme accuracy is required, or when 
+accuracy is less important than speed. The computational costs are 
+roughly antiproportional to the stepsize parameter.
+
+For some EOS, the maximum NS mass is limited by the 
+EOS validity range and not by the physical maximum of TOV solutions. 
+This case can be queried using the includes_maximum() method of the 
+returned branch object. For this, the maxmimum is considered physical
+based on a simple heuristics: (g_max-1)*(1+max_margin) < g_eos, where 
+g_max and g_eos are the the central pseudo-enthalpy of the maximum mass 
+model and the EOS upper validity bound. 
+**/ 
+auto make_star_branch_stable(
+        std::function<spherical_star_properties(real_t)> solver,
+        const interval<real_t> val_rg_gm1, const real_t acc_mg,
+        const units gu, const real_t mg_cut_low_rel,
+        const real_t mg_cut_low_abs,
+        const real_t gm1_initial, const real_t gm1_step, 
+        const real_t max_margin)
 -> star_branch;
 
 }

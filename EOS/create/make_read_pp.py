@@ -1,4 +1,3 @@
-#!/bin/env python
 import numpy as np
 import pyreprimand as pyr
 
@@ -45,13 +44,11 @@ def prep_sly():
 
 
 
-def make_read_eos(name, p1_cgs, ga, rho_max_si=1e20):
+def make_pp_eos(p1_si, rho_b_si, ga, rho_max_si=1e20):
     
-    p1_si = p1_cgs * CGS_PRESS
     
     sly_ds_si, sly_ga, sly_rho_b_si = prep_sly()
     
-    rho_b_si     = np.array([10**14.7, 1e15]) * CGS_DENS
     
     dsx = sly_ds_si[-1]
     gax = sly_ga[-1]
@@ -62,24 +59,51 @@ def make_read_eos(name, p1_cgs, ga, rho_max_si=1e20):
     ga = np.hstack((sly_ga, ga))
 
    
-    path     = f"{name}.eos.h5"
     
     uc = pyr.units.geom_solar()
     rho_poly = sly_ds_si[0] / uc.density
     rho_b    = rho_b_si / uc.density 
     rho_max = rho_max_si / uc.density
     
-    eos = pyr.make_eos_barotr_pwpoly(rho_poly, rho_b, ga, rho_max, uc)
-    pyr.save_eos_barotr(path, eos, "A piecewise polytropic EOS from [Read et al]")
+    eos_pp = pyr.make_eos_barotr_pwpoly(rho_poly, rho_b, ga, rho_max, uc)
     
-    rgrho2 = pyr.range(rho_b[1] / 2, eos.range_rho.max / 1.0000001)
+    rgrho2 = pyr.range(rho_b[1] / 2, eos_pp.range_rho.max / 1.0000001)
     polyn2 =  1./ (ga[0] - 1.)
     ppm2   = 200
-    eos2   = pyr.make_eos_barotr_spline(eos, rgrho2, polyn2, ppm2) 
-    path2  = f"{name}.spline.eos.h5"
-    pyr.save_eos_barotr(path2, eos2, "A spline representation of a piecewise polytropic EOS from [Read et al]")
+    eos_tab   = pyr.make_eos_barotr_spline(eos_pp, rgrho2, polyn2, ppm2) 
     
+    return eos_pp, eos_tab
 #    
+
+def make_read_eos(p1_cgs, ga):
+    p1_si = p1_cgs * CGS_PRESS
+    rho_b_si     = np.array([10**14.7, 1e15]) * CGS_DENS
+    return make_pp_eos(p1_si, rho_b_si, ga)
+#
+
+
+def make_apr4_epp_eos():
+    ga = np.array([
+      2.830, 3.445, 3.348,                # APR4 [Read]
+      3.0, 2.0                            # ensure causality
+    ])
+    p1_cgs = 10**34.269
+    p1_si = p1_cgs * CGS_PRESS
+    rho_b_si = np.array([10**14.7, 1e+15, 1.4e+15, 1.61e+15]) * CGS_DENS
+    return make_pp_eos(p1_si, rho_b_si, ga)
+#
+
+def save_eos(name, eos_pp,eos_tab):
+    path     = f"{name}.eos.h5"
+    pyr.save_eos_barotr(path, eos_pp, "A piecewise polytropic EOS from [Read et al]")
+    
+    
+    path2  = f"{name}.spline.eos.h5"
+    pyr.save_eos_barotr(path2, eos_tab, 
+        "A spline representation of a piecewise polytropic EOS from [Read et al]")
+#
+    
+  
 
 def make_read_cat():
     params = {
@@ -97,7 +121,13 @@ def make_read_cat():
 
     for n,p in params.items():
         name = f"{n}_Read_PP"
-        make_read_eos(name, *p)
+        eos = make_read_eos(*p)
+        save_eos(name, *eos)
 
+def make_other_cat():
+    eos = make_apr4_epp_eos()
+    save_eos('APR4_Read_EPP', *eos)
+    print(*eos)
 
 make_read_cat()   
+make_other_cat()

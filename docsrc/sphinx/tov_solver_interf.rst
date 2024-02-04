@@ -17,26 +17,38 @@ needed, one should use the first variant, which saves memory and
 computational costs since no interpolation tables have to be set up.
 
 The function returning only global properties is called
-:cpp:func:`~EOS_Toolkit::get_tov_star_properties` 
+:cpp:func:`~EOS_Toolkit::get_tov_properties` 
 and the one returning everything is called
-:cpp:func:`~EOS_Toolkit::make_tov_star`.
+:cpp:func:`~EOS_Toolkit::get_tov_star`.
 
-Furthermore, there are two options regarding the accuracy. 
-The fast option uses adaptive step size control, trying to archive 
-given tolerances but does not guarantee meeting them.
-A second option repeatedly employs the first one with increasingly 
-small tolerances until changes fall below given accuracy.
+To control the accuracy, there is a class 
+:cpp:class:`~EOS_Toolkit::star_accuracy_spec` which allows
+to express the desired accuracies for mass, radius, 
+moment of inertia, and tidal deformability individually, and
+whether the tidal deformability and/or bulk radius is needed at all.
+The specification of tolerances is completely independent from 
+the solution method. The available TOV solver translates the
+specification into suitable internal parameters, using heuristic
+formulas that have been calibrated using the measured error for 
+a large set of tabulated nuclear
+physics EOS, polytropic EOS spanning a wide range of compactness, 
+and piecewise polytropic EOS. 
+
+There are two functions to create an error specification:
+:cpp:func:`~EOS_Toolkit::star_acc_simple` and
+:cpp:func:`~EOS_Toolkit::star_acc_detailed`.
+The former distinguishes only the accuracy for deformability
+from anything else, while the latter allows finer grained control.
+The default values are appropriate for most applications. If very
+high precision is needed one should narrow the tolerances, and
+if speed is an issue one should widen the tolerance as much as 
+possible. In particular, tidal deformability and bulk radius 
+computation can be disabled if not needed in order to increase speed.
+
 
 All solvers take EOS and central baryonic mass density as first arguments.
-The third argument is the accuracy. Passing an object of type 
-:cpp:struct:`~EOS_Toolkit::tov_acc_simple` allows to specify tolerances
-for the fast adaptive solution. Passing an object of type 
-:cpp:struct:`~EOS_Toolkit::tov_acc_precise` instead allows to prescribe absolute 
-error bounds for individual properties, such as mass, radius, and tidal deformability.
-
-Further optional arguments specify whether to compute the "bulk" quantities and the 
-tidal deformability. If not needed, computation of those can be turned off to increase 
-performance.
+The third argument is the accuracy spec created by one of the above 
+functions. 
 
 The following example creates an EOS on the fly and computes a single TOV model
 
@@ -50,8 +62,9 @@ Another function, :cpp:func:`~EOS_Toolkit::find_rhoc_tov_of_mass`,
 finds a TOV model with given gravitational mass. Note this is not 
 efficient for finding many models for a given EOS since it finds a
 TOV solution for each step of the root finding. For such applications,
-e.g. in GW data parameter estimation, using an interpolation table 
-for a TOV sequence would be much faster.
+e.g. in GW data parameter estimation, it is much more efficient
+to use the star sequence functionality provided by the library 
+which is based on interpolation tables.
 
 
 .. tip::

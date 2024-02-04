@@ -16,17 +16,41 @@ const EOS_Toolkit::real_t PI {
 
 }
   
-tov_ode::tov_ode(real_t rho_center_, eos_barotr eos_)
-: eos{std::move(eos_)}
+tov_ode::tov_ode(real_t rho_center_, eos_barotr eos_, 
+                 real_t origin_margin)
+: eos{std::move(eos_)}, rho_center{rho_center_}
 {
-  auto e{ eos.at_rho(rho_center_) };
-  if (!e) {
+  if (!std::isfinite(rho_center_)) {
+    throw std::runtime_error("TOV central density must be finite");
+  }
+  if (rho_center_ <= 0) {
+    throw std::runtime_error("TOV central density must be positive");
+  }
+  if (!std::isfinite(origin_margin)) {
+    throw std::runtime_error("TOV ODE: margin for special boundary "
+                             "treatment must be finite.");
+  }  
+  if (origin_margin<0) {
+    throw std::runtime_error("TOV ODE: margin for special boundary "
+                             "treatment cannot be negative.");
+  }  
+  
+  auto e0{ eos.at_rho(rho_center_) };
+  if (!e0) {
     throw std::runtime_error("TOV central density outside EOS range");
   }
-  gm1_center = e.gm1();
+  gm1_center = eos.range_gm1().limit_to(e0.gm1());
+  auto e{ eos.at_gm1(gm1_center) };
+  
   hm1_center = e.hm1();
-  rho_center = e.rho();
-  rsqr_norm  = std::log1p(gm1_center) / rho_center;
+  eps_center = e.eps();
+  edens_center =  (eps_center  + 1.0) * rho_center;
+  
+  const real_t lgh{ std::log1p(gm1_center) };
+  rsqr_norm  = lgh / rho_center;
+  
+
+  x_margin   = lgh * origin_margin;
 }
 
 
@@ -43,13 +67,38 @@ auto tov_ode::gm1_from_x(real_t x) const -> real_t
   return std::max(gm1_raw, 0.0);
 }
 
-auto tov_ode::m_by_r3(real_t rsqr, real_t lambda, 
-                      real_t rho_e) -> real_t
+
+auto tov_ode::m_by_r3_approx_origin(real_t rsqr, real_t lambda, 
+                                    real_t rho_e) 
+const -> real_t
 {
-  assert(rsqr >= 0);
   if (rsqr == 0) {
     return (4.0/3.0) * PI * rho_e;
   }
+  real_t a0 { 2*PI * edens_center };
+  real_t de{  (rho_e / edens_center - 1.) };
+  real_t b0 { (2./3.) * a0 };
+  
+  
+  real_t approx_r2_over_lambda {
+    b0 * (1. + (3./5.) * de + b0 * rsqr)
+  };
+
+  auto approx_sigma = [] (real_t x) {
+    return  1. + 
+              (x / 2.) * (1. + 
+                (x / 3.) * (1. + 
+                  (x / 4.) * (1. + x / 5.)));
+  };
+  
+  return approx_r2_over_lambda * approx_sigma(-2. * lambda);  
+}
+
+
+auto tov_ode::m_by_r3(real_t rsqr, real_t lambda, 
+                      real_t rho_e) -> real_t
+{
+  assert(rsqr > 0);
   return -0.5 * std::expm1(-2.0 * lambda) / rsqr;   
 }
 
@@ -88,14 +137,25 @@ auto tov_ode::dx_lambda(real_t press, real_t rho_e,
 
 
 
+
+
 auto tov_ode::ebnd_by_r3(real_t ybnd, real_t rsqr, real_t rho, 
                          real_t eps) -> real_t
 {
-  assert(rsqr >= 0);
-  if (rsqr == 0) {
-    return (-4.0/3.0) * PI * rho * eps;
-  }
+  assert(rsqr > 0);
   return ybnd / rsqr;   
+}
+
+
+auto tov_ode::drsqr_ybnd_approx_origin(real_t ybnd, real_t rsqr, 
+                             real_t lambda, real_t rho, real_t eps) 
+const -> real_t
+{
+  
+  return  -(4./3.) * PI * rho_center * eps_center
+          -(8./5.) * PI * (rho_center * (eps-eps_center) 
+                            + (rho-rho_center)*eps_center)
+          +(8./5.) * PI * rho_center * lambda;
 }
 
 auto tov_ode::drsqr_ybnd(real_t ybnd, real_t rsqr, real_t lambda, 
@@ -173,15 +233,25 @@ void tov_ode::operator()(const state_t &s , state_t &dsdx,
   const real_t rsqr{ s[RSQR] * rsqr_norm };
   assert(s[RSQR] >= 0);
   assert(rsqr >= 0);
-  const real_t mbyr3{ m_by_r3(rsqr, s[LAMBDA], rho_e) };
+
+  const real_t mbyr3{ 
+    x > x_margin ? m_by_r3(rsqr, s[LAMBDA], rho_e) 
+                 : m_by_r3_approx_origin(rsqr, s[LAMBDA], rho_e) 
+  };
   const real_t volbyr{ s[YVOL] * rsqr_norm };
   const real_t dr2_w1{ drsqr_omega1(rsqr, s[OMEGA2] / rsqr_norm) }; 
   const real_t dx_r2{ dx_rsqr(s[LAMBDA], press, mbyr3) };
   dsdx[LAMBDA] = dx_lambda(press, rho_e, mbyr3);
   dsdx[RSQR]   = dx_r2 / rsqr_norm;
   assert(dsdx[RSQR] >= 0);
-  dsdx[YBND]   = dx_r2 
-                  * drsqr_ybnd(s[YBND], rsqr, s[LAMBDA], rho, eps); 
+  
+  const real_t dr2_ybnd{
+    x > x_margin ? drsqr_ybnd(s[YBND], rsqr, s[LAMBDA], rho, eps)
+                 : drsqr_ybnd_approx_origin(s[YBND], rsqr, s[LAMBDA], 
+                                            rho, eps)
+  };
+
+  dsdx[YBND]   = dx_r2 * dr2_ybnd;
   dsdx[YVOL]   = dsdx[RSQR] * drsqr_yvol(volbyr, rsqr, s[LAMBDA]);
   dsdx[OMEGA1] = dx_r2 * dr2_w1;
   dsdx[OMEGA2] = rsqr_norm * dx_r2 

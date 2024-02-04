@@ -125,7 +125,22 @@ auto intersect(const interval<T>& a, const interval<T>& b,
 }
 
 
-
 }// namespace EOS_Toolkit 
+
+
+
+template<class T>
+auto log(const EOS_Toolkit::interval<T>& i) -> EOS_Toolkit::interval<T>
+{
+  assert(0. < i);
+  return {std::log(i.min()), std::log(i.max())};
+}
+
+template<class T>
+auto exp(const EOS_Toolkit::interval<T>& i) -> EOS_Toolkit::interval<T>
+{
+  return {std::exp(i.min()), std::exp(i.max())};
+}
+
 
 #endif

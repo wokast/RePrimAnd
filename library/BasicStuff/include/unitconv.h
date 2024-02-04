@@ -79,6 +79,9 @@ class units {
   ///Get SI units
   static constexpr units si() {return {};}
 
+  ///Get CGS units
+  static constexpr units cgs() {return {1e-2, 1., 1e-3};}
+
   /**\brief Compute units with G=c=1 and given length unit
   
   @param g_si  Gravitational constant \f$ G \f$ in SI units 
@@ -152,6 +155,14 @@ class units {
   
   ///Default value used for solar mass
   static constexpr double M_sun_SI = PDG2021_M_sun_SI;
+  
+  /**\brief Convention for formal value of baryon mass 
+  
+  This is the proportionality in the definition of the baryonic 
+  mass density based on baryon number density. Different sources
+  use different values, this value is the RePrimAnd convention.
+  **/
+  static constexpr double FORMAL_BARYON_MASS_SI = 1.66e-27; // kg
 };
 
 std::ostream& operator<<(std::ostream& o, const units& u);

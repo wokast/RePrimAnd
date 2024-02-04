@@ -2,10 +2,13 @@ Reference
 ---------
 
 
-Loading from File
-^^^^^^^^^^^^^^^^^
+Loading and Saving EOS
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: EOS_Toolkit::load_eos_barotr
+   :project: RePrimAnd
+
+.. doxygenfunction:: EOS_Toolkit::save_eos_barotr
    :project: RePrimAnd
 
 
@@ -58,7 +61,8 @@ Generic Interface
 ^^^^^^^^^^^^^^^^^
 .. doxygenclass:: EOS_Toolkit::eos_barotr
    :project: RePrimAnd
-   :members:|
+   :members:
+
 
 
 Deprecated EOS 

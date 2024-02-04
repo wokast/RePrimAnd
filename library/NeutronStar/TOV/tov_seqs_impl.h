@@ -26,8 +26,18 @@ class star_seq_impl {
                 spline_t rc_gm1_, spline_t mi_gm1_, 
                 spline_t lt_gm1_, range_t rg_gm1_,
                 units u_);
+  star_seq_impl(spline_t mg_gm1_, spline_t mb_gm1_, 
+                spline_t rc_gm1_, spline_t mi_gm1_, 
+                spline_t lt_gm1_, 
+                units u_);
 
   static auto from_vector(std::vector<real_t> mg, 
+     std::vector<real_t> mb, std::vector<real_t> rc, 
+     std::vector<real_t> mi, std::vector<real_t> lt, 
+     range_t rg_gm1, units u)
+  -> std::shared_ptr<star_seq_impl>;
+  
+  static auto from_logspaced_samples(std::vector<real_t> mg, 
      std::vector<real_t> mb, std::vector<real_t> rc, 
      std::vector<real_t> mi, std::vector<real_t> lt, 
      range_t rg_gm1, units u)
