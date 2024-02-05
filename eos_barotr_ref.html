@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Reference &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -23,8 +23,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -38,21 +39,36 @@
             
   <section id="reference">
 <h1>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">¶</a></h1>
-<section id="loading-from-file">
-<h2>Loading from File<a class="headerlink" href="#loading-from-file" title="Permalink to this heading">¶</a></h2>
+<section id="loading-and-saving-eos">
+<h2>Loading and Saving EOS<a class="headerlink" href="#loading-and-saving-eos" title="Permalink to this heading">¶</a></h2>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units">
 <span id="_CPPv3N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units"></span><span id="_CPPv2N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units"></span><span id="EOS_Toolkit::load_eos_barotr__ss.unitsCR"></span><span class="target" id="eos__barotr__file_8cc_1a1fe3fda0acd4caf448b062a4826c61ec"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">load_eos_barotr</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fname</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">u</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><span class="n"><span class="pre">units</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5units10geom_solarEdd" title="EOS_Toolkit::units::geom_solar"><span class="n"><span class="pre">geom_solar</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Load barotropic EOS from hdf5 file. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fname</strong> – Filename of EOS file </p></li>
 <li><p><strong>Unit</strong> – system the returned EOS should use. The unit system needs to be geometric, i.e. <span class="math notranslate nohighlight">\( G=c=1 \)</span>. Default is to fix the mass unit to <span class="math notranslate nohighlight">\( 1 M_\odot \)</span>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Generic interface to the EOS </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit15save_eos_barotrENSt6stringE10eos_barotrNSt6stringE">
+<span id="_CPPv3N11EOS_Toolkit15save_eos_barotrENSt6stringE10eos_barotrNSt6stringE"></span><span id="_CPPv2N11EOS_Toolkit15save_eos_barotrENSt6stringE10eos_barotrNSt6stringE"></span><span id="EOS_Toolkit::save_eos_barotr__ss.eos_barotr.ss"></span><span class="target" id="eos__barotr__file_8cc_1a81b47c98f60bb476ed06be26c07f7423"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">EOS_Toolkit</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">save_eos_barotr</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fname</span></span>, <a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><span class="n"><span class="pre">eos_barotr</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">info</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit15save_eos_barotrENSt6stringE10eos_barotrNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Save barotropic EOS to hdf5 file. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> – Filename of EOS file </p></li>
+<li><p><strong>eos</strong> – EOS object to save </p></li>
+<li><p><strong>info</strong> – Free-form description text (optional) </p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -74,13 +90,13 @@ known accurately, one should use one of the following.</p>
 <p>One can specify whether the EOS is isentropic. If the temperature is zero, the EOS must be specified as isentropic or an exception is thrown. Note that physically, the pseudo-enthalpy is already determined by pressure, density, and specific energy. For isentropic EOS, energy density follows from density and pressure. The consistency of the provided samples is not checked and in the responsibility of the user. There are however similar functions which computes the pseudo-enthalpy itself using numerical integration, or both pseudo enthalpy and specific energy (only possible for isentropic case).</p>
 <p>The parameters are w.r.t EOS units, which have to be provided as a parameter and will be stored with the EOS for bookkeeping.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>gm1</strong> – Samples for pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span>. Must be strictly increasing. </p></li>
 <li><p><strong>rho</strong> – Samples for mass density <span class="math notranslate nohighlight">\( \rho \)</span>. Must be strictly increasing and strictly positive. </p></li>
-<li><p><strong>eps</strong> – Samples for specific energy <span class="math notranslate nohighlight">\( \epsilon \)</span>. Must be strictly increasing and obey <span class="math notranslate nohighlight">\( \epsilon &gt; -1 \)</span> </p></li>
+<li><p><strong>eps</strong> – Samples for specific energy <span class="math notranslate nohighlight">\( \epsilon \)</span>. Must be strictly increasing and obey <span class="math notranslate nohighlight">\( \epsilon &gt; -1 \)</span></p></li>
 <li><p><strong>press</strong> – Samples for pressure <span class="math notranslate nohighlight">\( P \ge 0 \)</span>. </p></li>
-<li><p><strong>csnd</strong> – Samples for soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s &lt; 1 \)</span> </p></li>
+<li><p><strong>csnd</strong> – Samples for soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s &lt; 1 \)</span></p></li>
 <li><p><strong>temp</strong> – Samples for temperature or empty vector (equivalent to all-zero). Must obey <span class="math notranslate nohighlight">\( T\ge 0 \)</span>. </p></li>
 <li><p><strong>efrac</strong> – Electron fraction or empty vector (in which case the EOS will not provide electron fraction). </p></li>
 <li><p><strong>isentropic</strong> – Whether the EOS is isentropic, e.g. for degenerate matter. </p></li>
@@ -90,7 +106,7 @@ known accurately, one should use one of the following.</p>
 <li><p><strong>pts_per_mag</strong> – Sample points per magnitude to be used internally for EOS splines</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Generic interface employing tabulated barotropic EOS </p>
 </dd>
 </dl>
@@ -111,12 +127,12 @@ known accurately, one should use one of the following.</p>
 <p>One can specify whether the EOS is isentropic. If the temperature is zero, the EOS must be specified as isentropic or an exception is thrown. Note that physically, energy density follows from density and pressure for the case of isentropic EOS. The consistency of the provided samples is not checked and in the responsibility of the user.</p>
 <p>The parameters are w.r.t EOS units, which have to be provided as a parameter and will be stored with the EOS for bookkeeping.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rho</strong> – Samples for mass density <span class="math notranslate nohighlight">\( \rho \)</span>. Must be strictly increasing and strictly positive. </p></li>
-<li><p><strong>eps</strong> – Samples for specific energy <span class="math notranslate nohighlight">\( \epsilon \)</span>. Must be strictly increasing and obey <span class="math notranslate nohighlight">\( \epsilon &gt; -1 \)</span> </p></li>
+<li><p><strong>eps</strong> – Samples for specific energy <span class="math notranslate nohighlight">\( \epsilon \)</span>. Must be strictly increasing and obey <span class="math notranslate nohighlight">\( \epsilon &gt; -1 \)</span></p></li>
 <li><p><strong>press</strong> – Samples for pressure <span class="math notranslate nohighlight">\( P \ge 0 \)</span>. </p></li>
-<li><p><strong>csnd</strong> – Samples for soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s &lt; 1 \)</span> </p></li>
+<li><p><strong>csnd</strong> – Samples for soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s &lt; 1 \)</span></p></li>
 <li><p><strong>temp</strong> – Samples for temperature or empty vector (equivalent to all-zero). Must obey <span class="math notranslate nohighlight">\( T\ge 0 \)</span>. </p></li>
 <li><p><strong>efrac</strong> – Electron fraction or empty vector (in which case the EOS will not provide electron fraction). </p></li>
 <li><p><strong>isentropic</strong> – Whether the EOS is isentropic, e.g. for degenerate matter. </p></li>
@@ -126,7 +142,7 @@ known accurately, one should use one of the following.</p>
 <li><p><strong>pts_per_mag</strong> – Sample points per magnitude to be used internally for EOS splines</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Generic interface employing tabulated barotropic EOS </p>
 </dd>
 </dl>
@@ -147,11 +163,11 @@ known accurately, one should use one of the following.</p>
 <p>If a temperature is given, its consistency with the assumption of isentropy cannot be checked and is in the responsability of the user.</p>
 <p>The parameters are w.r.t EOS units, which have to be provided as a parameter and will be stored with the EOS for bookkeeping.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rho</strong> – Samples for mass density <span class="math notranslate nohighlight">\( \rho \)</span>. Must be strictly increasing and strictly positive. </p></li>
 <li><p><strong>press</strong> – Samples for pressure <span class="math notranslate nohighlight">\( P \ge 0 \)</span>. </p></li>
-<li><p><strong>csnd</strong> – Samples for soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s &lt; 1 \)</span> </p></li>
+<li><p><strong>csnd</strong> – Samples for soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s &lt; 1 \)</span></p></li>
 <li><p><strong>temp</strong> – Samples for temperature or empty vector (equivalent to all-zero). Must obey <span class="math notranslate nohighlight">\( T\ge 0 \)</span>. </p></li>
 <li><p><strong>efrac</strong> – Electron fraction or empty vector (in which case the EOS will not provide electron fraction). </p></li>
 <li><p><strong>rg_rho</strong> – Range of <span class="math notranslate nohighlight">\( \rho \)</span> where EOS is computed from sample points. Below, a polytrope is used. Range must be within the provided sample points. </p></li>
@@ -161,7 +177,7 @@ known accurately, one should use one of the following.</p>
 <li><p><strong>pts_per_mag</strong> – Sample points per magnitude to be used internally for EOS splines</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Generic interface employing tabulated barotropic EOS </p>
 </dd>
 </dl>
@@ -177,7 +193,7 @@ known accurately, one should use one of the following.</p>
 <dd><p>Create barotropic EOS based on splines. </p>
 <p>This allows to represent existing EOS objects of any type as a spline EOS by sampling them it.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>eos</strong> – The EOS to be sampled </p></li>
 <li><p><strong>rg_rho</strong> – The density range that should be represented by interpolating splines </p></li>
@@ -185,7 +201,7 @@ known accurately, one should use one of the following.</p>
 <li><p><strong>pts_per_mag</strong> – Sample points per magnitude to be used internally for EOS splines</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Generic interface employing tabulated barotropic EOS </p>
 </dd>
 </dl>
@@ -203,15 +219,15 @@ known accurately, one should use one of the following.</p>
 <dd><p>Create a polytropic EOS. </p>
 <p>The valid range always starts at zero density up to user specified maximum. If the polytropic index is less than one, the valid range is reduced avoid superluminal soundspeed, if necessary. The parameters are w.r.t EOS units. The EOS units given in the last parameter are stored for bookkeeping.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n</strong> – Polytropic index <span class="math notranslate nohighlight">\( n &gt; 0 \)</span> </p></li>
-<li><p><strong>rmd_p</strong> – Polytropic density scale <span class="math notranslate nohighlight">\( \rho_p &gt; 0 \)</span> </p></li>
+<li><p><strong>n</strong> – Polytropic index <span class="math notranslate nohighlight">\( n &gt; 0 \)</span></p></li>
+<li><p><strong>rmd_p</strong> – Polytropic density scale <span class="math notranslate nohighlight">\( \rho_p &gt; 0 \)</span></p></li>
 <li><p><strong>rho_max</strong> – Maximum allowed mass density </p></li>
 <li><p><strong>units</strong> – Unit system (w.r.t. SI) of the EOS </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr"><span class="std std-ref">eos_barotr</span></a> generic interface employing polytropic EOS </p>
 </dd>
 </dl>
@@ -229,7 +245,7 @@ known accurately, one should use one of the following.</p>
 <dd><p>Create piecewise polytropic EOS. </p>
 <p>The valid range always starts at zero density up to user specified maximum. If the polytropic index of some segments is less than one, the valid range is reduced, if necessary, to avoid superluminal soundspeed. The parameters are w.r.t EOS units. The EOS units given in the last parameter are stored for bookkeeping.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rmdp0</strong> – Polytropic density scale <span class="math notranslate nohighlight">\(\rho_{p,0} &gt; 0\)</span> of first segment </p></li>
 <li><p><strong>segm_bound</strong> – Segment boundaries mass densities </p></li>
@@ -238,7 +254,7 @@ known accurately, one should use one of the following.</p>
 <li><p><strong>units</strong> – Unit system (w.r.t. SI) of the EOS</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr"><span class="std std-ref">eos_barotr</span></a> generic interface employing piecewise polytropic EOS </p>
 </dd>
 </dl>
@@ -268,7 +284,7 @@ known accurately, one should use one of the following.</p>
 <dd><p>Constructor from pointer to implementation. </p>
 <p>This is intended for EOS implementors. Users should use the functions provided by a given implementation to obtain the EOS.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>eos</strong> – Shared pointer to implementation </p>
 </dd>
 </dl>
@@ -317,13 +333,13 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr6at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr6at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1acb6068568f6d79d3e8e091903b69d12d"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><span class="n"><span class="pre">state</span></span></a><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr6at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Specify a matter state based on mass density. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Object representing matter <a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr_1_1state"><span class="std std-ref">state</span></a></p>
 </dd>
 </dl>
@@ -334,13 +350,13 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr6at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr6at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a8567a2364c32bf51075c54a0896179ed"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><span class="n"><span class="pre">state</span></span></a><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr6at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Specify a matter state based on pseudo enthalpy. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Object representing matter <a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr_1_1state"><span class="std std-ref">state</span></a></p>
 </dd>
 </dl>
@@ -350,10 +366,10 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr13is_isentropicEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr13is_isentropicEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr13is_isentropicEv"></span><span id="EOS_Toolkit::eos_barotr::is_isentropicC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a28de7bc8c675748f43571b6dc6066fe9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_isentropic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr13is_isentropicEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Whether EOS is isentropic</p>
 </dd>
 </dl>
@@ -363,10 +379,10 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr12is_zero_tempEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr12is_zero_tempEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr12is_zero_tempEv"></span><span id="EOS_Toolkit::eos_barotr::is_zero_tempC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ae6f2dd44da52fddb4a1e1f4ffb9513c2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_zero_temp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr12is_zero_tempEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Whether EOS is zero-temperature (or false if temperature not implemented)</p>
 </dd>
 </dl>
@@ -376,10 +392,10 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr8has_tempEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr8has_tempEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr8has_tempEv"></span><span id="EOS_Toolkit::eos_barotr::has_tempC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a7c4ab973cd4cccf39763b0d3d61910b7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_temp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr8has_tempEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Whether EOS provides temperature</p>
 </dd>
 </dl>
@@ -389,10 +405,10 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr9has_efracEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr9has_efracEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9has_efracEv"></span><span id="EOS_Toolkit::eos_barotr::has_efracC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a069aca82b7162c37ff92c856d826a306"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_efrac</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9has_efracEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Whether EOS provides electron fraction</p>
 </dd>
 </dl>
@@ -402,10 +418,10 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr9range_rhoEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr9range_rhoEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9range_rhoEv"></span><span id="EOS_Toolkit::eos_barotr::range_rhoC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1adb137cfbb94492875e621919c929e3fd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_rho</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5rangeE" title="EOS_Toolkit::eos_barotr::range"><span class="n"><span class="pre">range</span></span></a><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9range_rhoEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Validity <a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr_1a64b2da58a5fdb2858b1a22178b2ef1ab"><span class="std std-ref">range</span></a> for mass density</p>
 </dd>
 </dl>
@@ -415,10 +431,10 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr9range_gm1Ev">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr9range_gm1Ev"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9range_gm1Ev"></span><span id="EOS_Toolkit::eos_barotr::range_gm1C"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1adca75096a94ad8b27468f401c186c8f0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_gm1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10eos_barotr5rangeE" title="EOS_Toolkit::eos_barotr::range"><span class="n"><span class="pre">range</span></span></a><span class="p"><span class="pre">&amp;</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9range_gm1Ev" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Validity <a class="reference internal" href="#classEOS__Toolkit_1_1eos__barotr_1a64b2da58a5fdb2858b1a22178b2ef1ab"><span class="std std-ref">range</span></a> for pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
 </dl>
@@ -428,10 +444,10 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr9minimal_hEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr9minimal_hEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9minimal_hEv"></span><span id="EOS_Toolkit::eos_barotr::minimal_hC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a694ff074e81de69405c88476b335495a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minimal_h</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9minimal_hEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Global lower bound for relativistic enthalpy.</p>
 </dd>
 </dl>
@@ -441,13 +457,13 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr12is_rho_validE6real_t">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr12is_rho_validE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr12is_rho_validE6real_t"></span><span id="EOS_Toolkit::eos_barotr::is_rho_valid__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a8b0119ff5913c27f4b73247d26c32ded"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rho_valid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr12is_rho_validE6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Wether density is in valid range</p>
 </dd>
 </dl>
@@ -457,13 +473,13 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr12is_gm1_validE6real_t">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr12is_gm1_validE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr12is_gm1_validE6real_t"></span><span id="EOS_Toolkit::eos_barotr::is_gm1_valid__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a1ec152ec6c14077ecb40177e33462fdf"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_gm1_valid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr12is_gm1_validE6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Whether pseudo enthalpy is in valid range</p>
 </dd>
 </dl>
@@ -474,16 +490,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr10gm1_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10gm1_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::gm1_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a205a67e0ae3e2d1928e40cb9bfb9b027"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gm1_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10gm1_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute pseudo enthalpy from mass density. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( g \ge 1 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -494,16 +510,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr12press_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr12press_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::press_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ae20132d4dd62e06e0ae08381e685d64e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr12press_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute pressure from mass density. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Pressure if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( P\ge 0 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -514,16 +530,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr10eps_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10eps_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::eps_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ac2ee22eb74c9991abedadf7c4e264704"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eps_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10eps_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute specific energy from mass density. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( \epsilon \)</span> if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( \epsilon \ge -1 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -534,16 +550,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr10hm1_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10hm1_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::hm1_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ab43dfa2de980d25aac7cfd8c9d3874e9"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hm1_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10hm1_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute specific enthalpy from mass density. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( h - 1 \)</span> if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( h &gt; 0 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -554,16 +570,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr11csnd_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr11csnd_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::csnd_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1aa479848362a361a37d727d2ca7625d2a"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr11csnd_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute sound speed from mass density. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( c_s \)</span> if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( 0\le c_s &lt; 1 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -574,19 +590,19 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr11temp_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr11temp_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::temp_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1accb56e197b9172aa5b1b09e0a2b3e7a9"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temp_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr11temp_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute temperature from mass density. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( T \)</span> if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( T\ge 0 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -597,16 +613,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr9ye_at_rhoE6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9ye_at_rhoE6real_t"></span><span id="EOS_Toolkit::eos_barotr::ye_at_rho__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a8bdac63bcf18d8883a71059600e60a59"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ye_at_rho</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9ye_at_rhoE6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute electron fraction from mass density. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> – Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if electron fraction not available for EOS </p></li>
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( Y_e \)</span> if state is valid else NAN</p>
 </dd>
 </dl>
@@ -617,16 +633,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr10rho_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10rho_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::rho_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a77b4c6df702d28635e345537d9a66963"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rho_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10rho_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute mass density from pseudo enthalpy. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( \rho \)</span> if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( \rho \ge 0 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -637,16 +653,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr12press_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr12press_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::press_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a25fd5864c2ee2465d53d0b262772e48b"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr12press_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute pressure from pseudo enthalpy. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Pressure if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( P\ge 0 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -657,16 +673,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr10eps_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10eps_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::eps_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a052a745f637fe049ac320f496e441959"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eps_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10eps_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute specific energy from pseudo enthalpy. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( \epsilon \)</span> if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( \epsilon \ge -1 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -677,16 +693,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr10hm1_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr10hm1_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::hm1_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a646c7e15649a09b4c860b68a21b8b0cd"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hm1_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr10hm1_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute specific enthalpy from pseudo enthalpy. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( h - 1 \)</span> if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( h &gt; 0 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -697,16 +713,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr11csnd_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr11csnd_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::csnd_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a58caa65259f9923166c3ad4c93c72db9"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr11csnd_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute sound speed from pseudo enthalpy. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( c_s \)</span> if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( 0\le c_s &lt; 1 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -717,19 +733,19 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr11temp_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr11temp_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::temp_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a60c846fb350ee2b603fca2f52c0435b8"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temp_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr11temp_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute temperature from from pseudo enthalpy. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( T \)</span> if state is valid else NAN</p>
 </dd>
-<dt class="field-even">Post<span class="colon">:</span></dt>
+<dt class="field-even">Post</dt>
 <dd class="field-even"><p>Guarantees <span class="math notranslate nohighlight">\( T\ge 0 \)</span> (unless NAN) </p>
 </dd>
 </dl>
@@ -740,16 +756,16 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr9ye_at_gm1E6real_t"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9ye_at_gm1E6real_t"></span><span id="EOS_Toolkit::eos_barotr::ye_at_gm1__real_tC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1ab4f759d3924e6b446b83ffaa6c1b3a5f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ye_at_gm1</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gm1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9ye_at_gm1E6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute electron fraction from pseudo enthalpy. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span> </p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gm1</strong> – Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
-<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dt class="field-even">Throws</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if electron fraction not available for EOS </p></li>
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if called for unitialized object </p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><span class="math notranslate nohighlight">\( Y_e \)</span> if state is valid else NAN</p>
 </dd>
 </dl>
@@ -774,7 +790,7 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr9descr_strEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr9descr_strEv"></span><span id="EOS_Toolkit::eos_barotr::descr_strC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1a92bdc485b94a733559dcad8ca1d8934f"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">descr_str</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr9descr_strEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Short description string. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Short auto-generated EOS type-specific description string </p>
 </dd>
 </dl>
@@ -816,7 +832,7 @@ known accurately, one should use one of the following.</p>
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr5statecvbEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5statecvbEv"></span><span id="EOS_Toolkit::eos_barotr::state::castto-b-operatorC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1afc4ee02cf77f55ac363477a53a0e0ed9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5statecvbEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Conversion operator to bool. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>If state is valid. </p>
 </dd>
 </dl>
@@ -826,14 +842,14 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state3gm1Ev">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state3gm1Ev"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state3gm1Ev"></span><span id="EOS_Toolkit::eos_barotr::state::gm1C"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a42cf58d4e463afea9de13b415a7b8d2e"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gm1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state3gm1Ev" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Pseudo enthalpy <span class="math notranslate nohighlight">\( g - 1 \)</span></p>
 </dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( g \ge 1 \)</span> </p>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( g \ge 1 \)</span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -842,14 +858,14 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state3rhoEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state3rhoEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state3rhoEv"></span><span id="EOS_Toolkit::eos_barotr::state::rhoC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a6deefaaac0a526d0f37d8711ebb1d81b"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rho</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state3rhoEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Mass density <span class="math notranslate nohighlight">\( \rho \)</span></p>
 </dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( \rho \ge 0 \)</span> </p>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( \rho \ge 0 \)</span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -858,14 +874,14 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state5pressEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state5pressEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state5pressEv"></span><span id="EOS_Toolkit::eos_barotr::state::pressC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a4ad3696b17160187f1f6de1b2f2d6836"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">press</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state5pressEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Pressure <span class="math notranslate nohighlight">\( P \)</span></p>
 </dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( P\ge 0 \)</span> </p>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( P\ge 0 \)</span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -874,14 +890,14 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state3epsEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state3epsEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state3epsEv"></span><span id="EOS_Toolkit::eos_barotr::state::epsC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a08ae08e42d87ec2988f465a06d101c8c"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">eps</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state3epsEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Specific internal energy <span class="math notranslate nohighlight">\( \epsilon \)</span></p>
 </dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( \epsilon \ge -1 \)</span> </p>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( \epsilon \ge -1 \)</span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -890,13 +906,13 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state3hm1Ev">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state3hm1Ev"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state3hm1Ev"></span><span id="EOS_Toolkit::eos_barotr::state::hm1C"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a91340d4f8dd5c1ce7d4e55e9e355d2fa"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hm1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state3hm1Ev" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Specific enthalpy <span class="math notranslate nohighlight">\( h - 1 \)</span></p>
 </dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
+<dt class="field-odd">Post</dt>
 <dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( h &gt; 0 \)</span> (<em>not</em> <span class="math notranslate nohighlight">\( h &gt;= 1 \)</span>) </p>
 </dd>
 </dl>
@@ -906,14 +922,14 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state4csndEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state4csndEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state4csndEv"></span><span id="EOS_Toolkit::eos_barotr::state::csndC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a7331727210f0e93fc9a974c1aba797b6"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csnd</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state4csndEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Speed of sound <span class="math notranslate nohighlight">\( c_s \)</span></p>
 </dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( 0\le c_s &lt; 1 \)</span> </p>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( 0\le c_s &lt; 1 \)</span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -922,17 +938,17 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state4tempEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state4tempEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state4tempEv"></span><span id="EOS_Toolkit::eos_barotr::state::tempC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1afce7299632be2835d5e82592edf241bf"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state4tempEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p></li>
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if temperature not available for EOS </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Temperature <span class="math notranslate nohighlight">\( T \)</span></p>
 </dd>
-<dt class="field-odd">Post<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( T\ge 0 \)</span> </p>
+<dt class="field-odd">Post</dt>
+<dd class="field-odd"><p>Guarantees <span class="math notranslate nohighlight">\( T\ge 0 \)</span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -941,13 +957,13 @@ known accurately, one should use one of the following.</p>
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit10eos_barotr5state2yeEv">
 <span id="_CPPv3NK11EOS_Toolkit10eos_barotr5state2yeEv"></span><span id="_CPPv2NK11EOS_Toolkit10eos_barotr5state2yeEv"></span><span id="EOS_Toolkit::eos_barotr::state::yeC"></span><span class="target" id="classEOS__Toolkit_1_1eos__barotr_1_1state_1a393286232926afb8d6d21c6eed2f78e6"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ye</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="n"><span class="pre">real_t</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10eos_barotr5state2yeEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dt class="field-odd">Throws</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if state is invalid </p></li>
 <li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">runtime_error</span></span></span> – if composition not available for EOS </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Electron fraction <span class="math notranslate nohighlight">\( Y_e \)</span></p>
 </dd>
 </dl>
@@ -977,13 +993,13 @@ EOS its use is discouraged.</p>
 <p>The validity range will start at zero up to the largest provided sample point. Between zero and the lowest sample point, a polytropic EOS will be used.</p>
 <p>The parameters are w.r.t EOS units. The EOS units given in the last parameter are stored for bookkeeping.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>gm1</strong> – Samples for pseudo enthalpy <span class="math notranslate nohighlight">\( g-1 \)</span>. Must be strictly increasing. </p></li>
 <li><p><strong>rho</strong> – Samples for mass density <span class="math notranslate nohighlight">\( \rho \)</span>. Must be strictly increasing. </p></li>
-<li><p><strong>eps</strong> – Samples for specific energy <span class="math notranslate nohighlight">\( \epsilon \)</span>. Must be strictly increasing and obey <span class="math notranslate nohighlight">\( \epsilon &gt; -1 \)</span> </p></li>
+<li><p><strong>eps</strong> – Samples for specific energy <span class="math notranslate nohighlight">\( \epsilon \)</span>. Must be strictly increasing and obey <span class="math notranslate nohighlight">\( \epsilon &gt; -1 \)</span></p></li>
 <li><p><strong>pbr</strong> – Samples for <span class="math notranslate nohighlight">\( P / \rho \ge 0 \)</span>. </p></li>
-<li><p><strong>cs2</strong> – Samples for squared soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s^2 &lt; 1 \)</span> </p></li>
+<li><p><strong>cs2</strong> – Samples for squared soundspeed. Must obey <span class="math notranslate nohighlight">\( 0 \le c_s^2 &lt; 1 \)</span></p></li>
 <li><p><strong>temp</strong> – Samples for temperature or empty vector (equivalent to all-zero). Must obey <span class="math notranslate nohighlight">\( T\ge 0 \)</span>. </p></li>
 <li><p><strong>efrac</strong> – Electron fraction or empty vector (in which case the EOS will not provide electron fraction). </p></li>
 <li><p><strong>isentropic_</strong> – Whether the EOS is isentropic, e.g. for degenerate matter. </p></li>
@@ -991,7 +1007,7 @@ EOS its use is discouraged.</p>
 <li><p><strong>units</strong> – Unit system (w.r.t. SI) of the EOS</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Generic interface employing tabulated barotropic EOS </p>
 </dd>
 </dl>
@@ -1071,11 +1087,11 @@ EOS its use is discouraged.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/eos_barotr_ref.rst.txt"

@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>EOS Files &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -23,8 +23,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -53,40 +54,44 @@ This makes it easy to write file methods. As an example, see
 <cite>library/EOS_Barotropic/eos_barotr_spline_file.cc</cite>.</p>
 <section id="loading-eos">
 <h2>Loading EOS<a class="headerlink" href="#loading-eos" title="Permalink to this heading">¶</a></h2>
-<p>Loading an EOS is simple, after including the header</p>
+<p>For loading a barotropic EOS from file,
+use <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit15load_eos_barotrENSt6stringERK5units" title="EOS_Toolkit::load_eos_barotr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_eos_barotr()</span></code></a> as in the example below.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;eos_barotr_file.h&quot;</span>
 
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>one can obtain an EOS via</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">units</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span>
+
+<span class="n">units</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span>
 <span class="k">auto</span><span class="w"> </span><span class="n">eos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_eos_barotr</span><span class="p">(</span><span class="s">&quot;path/example.eos.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>One has to specify the geometric <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">unit</span></code></a>
 system the returned EOS object should employ. In the example above,
 we use <span class="math notranslate nohighlight">\(G=c=M_\odot=1\)</span>.</p>
-<p>For testing purposes, the library comes with some example EOS files:
-Files named
-<cite>EOS/*_Read_PP.eos.h5</cite> are some of the analytic (not tabulated)
-piecewise polytropic EOS from <a class="footnote-reference brackets" href="#footcite-read-2009-124032" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.
-The files <cite>EOS/*_Read_PP.spline.eos.h5</cite> are interpolation spline-based
-representations of the same EOS.</p>
+</section>
+<section id="example-eos">
+<h2>Example EOS<a class="headerlink" href="#example-eos" title="Permalink to this heading">¶</a></h2>
+<p>The library repository contains a small collection of EOS files
+representing barotropic nuclear physics EOS models. Most are
+spline-based (tabulated) and some are piecewise polytropic approximations.
+The collection can be found in the folder
+<cite>EOS/nuclear_physics_eos_collection</cite>.</p>
+<p>The original sources have been sanitized and resampled at our own
+discretion, and come with no guarantees. The collection is intended
+for educational and testing purposes.</p>
 </section>
 <section id="creating-eos-files">
 <h2>Creating EOS Files<a class="headerlink" href="#creating-eos-files" title="Permalink to this heading">¶</a></h2>
-<p>For saving a barotropic EOS to file, use
-<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">save_eos_barotr()</span></code>.
+<p>In order to create barotropic EOS to file, first create the EOS object and
+the save it to a file using
+<a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit15save_eos_barotrENSt6stringE10eos_barotrNSt6stringE" title="EOS_Toolkit::save_eos_barotr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">save_eos_barotr()</span></code></a>.
 For most use cases, it is probably more convenient to use the Python bindings,
 which include the C++ functions for creating and saving EOS.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Older versions of the library used a separate Python module for creating EOS files,
 while the C++ interface could only load. This asymmetric design was abandoned,
-but the module is still available under <cite>EOS/create/reprimand_eos_format.py</cite>.
-It should only be used for reproducing old results. Normally, the regular
-Python interface to the C++ library should be used for EOS file creation.</p>
+and the module removed in version 1.7. New EOS files should always be created
+using the regular Python interface to the C++ library.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -97,16 +102,6 @@ resampling. Therefore, those EOS objects do not contain the information
 to save in the original format. The old format can still be read, however.
 It is recommended to use the new spline-based EOS instead.</p>
 </div>
-<section id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h3>
-<div class="docutils container" id="id2">
-<aside class="footnote brackets" id="footcite-read-2009-124032" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Jocelyn S. Read, Benjamin D. Lackey, Benjamin J. Owen, and John L. Friedman. Constraints on a phenomenologically parametrized neutron-star equation of state. <em>Phys. Rev. D</em>, 79:124032, Jun 2009. <a class="reference external" href="https://doi.org/10.1103/PhysRevD.79.124032">doi:10.1103/PhysRevD.79.124032</a>.</p>
-</aside>
-</aside>
-</div>
-</section>
 </section>
 </section>
 
@@ -181,11 +176,11 @@ It is recommended to use the new spline-based EOS instead.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/eos_barotr_files.rst.txt"

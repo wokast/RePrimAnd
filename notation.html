@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Notation &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -23,8 +23,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -44,7 +45,7 @@
 both for documentation and the code internals. Which specific
 geometric units to employ is up to the user, e.g. setting
 <span class="math notranslate nohighlight">\(M_\odot=1\)</span>.
-All EOS and primitive recovery code is completely
+All EOS, TOV solver, and primitive recovery code is completely
 agnostic to this choice.
 Only when loading an EOS from file, the unit system needs to be
 specified. Our EOS file format is using SI units in order to
@@ -59,14 +60,17 @@ density, not at all using baryon number density.</p>
 entropy in <span class="math notranslate nohighlight">\([k_B/\mathrm{Baryon}]\)</span>.
 Computing temperature/entropy is the only place where the value of
 <span class="math notranslate nohighlight">\(m_B\)</span> might be used in the code.</p>
+<p>The library contains convenient utilities to handle all unit
+conversions in a consistent and readable manner,
+see <a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE" title="EOS_Toolkit::units"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">units</span></code></a>.</p>
 </section>
 <section id="primitive-variables">
 <h2>Primitive variables<a class="headerlink" href="#primitive-variables" title="Permalink to this heading">¶</a></h2>
-<table class="docutils align-default">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col style="width: 30.0%" />
-<col style="width: 20.0%" />
-<col style="width: 50.0%" />
+<col style="width: 30%" />
+<col style="width: 20%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Math</p></th>
@@ -160,11 +164,11 @@ of the 3-metric determinant. We also use that convention for the
 evolved magnetic field. Further, we assume that the electron fraction
 is evolved as a densitized tracer variable. Conversion from other
 conventions should be trivial.</p>
-<table class="docutils align-default">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col style="width: 50.0%" />
-<col style="width: 20.0%" />
-<col style="width: 30.0%" />
+<col style="width: 50%" />
+<col style="width: 20%" />
+<col style="width: 30%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Math</p></th>
@@ -264,11 +268,11 @@ conventions should be trivial.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/notation.rst.txt"

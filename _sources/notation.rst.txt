@@ -7,7 +7,7 @@ Unless specifically noted, we use geometric units :math:`G=c=1`,
 both for documentation and the code internals. Which specific 
 geometric units to employ is up to the user, e.g. setting 
 :math:`M_\odot=1`. 
-All EOS and primitive recovery code is completely
+All EOS, TOV solver, and primitive recovery code is completely
 agnostic to this choice. 
 Only when loading an EOS from file, the unit system needs to be 
 specified. Our EOS file format is using SI units in order to 
@@ -25,6 +25,10 @@ entropy in :math:`[k_B/\mathrm{Baryon}]`.
 Computing temperature/entropy is the only place where the value of 
 :math:`m_B` might be used in the code.
 
+
+The library contains convenient utilities to handle all unit 
+conversions in a consistent and readable manner, 
+see :cpp:class:`~EOS_Toolkit::units`.
 
 Primitive variables
 ^^^^^^^^^^^^^^^^^^^

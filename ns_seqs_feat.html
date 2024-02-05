@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Features &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -22,8 +22,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -45,18 +46,27 @@ sampled data from other sources (note this would also allow for NS solutions fro
 modified GR theories, provided that the same properties are still meaningful).
 The stored NS properties are: gravitational mass, baryonic mass, central matter
 state, moment of inertia, circumferential radius, and tidal deformability.</p>
-<p>The framework distinguishes generic sequences specified by central matter state,
-and stable branches which are segments where the gravitational mass is strictly
-increasing. Sequences are parametrized by central pseudo-enthalpy. Branches are
-also parametrized as function of gravitational mass. They also provide the maximum
-mass model properties. Finally, they distinguish the corner case where the maximum
-mass model is given by the EOS validity range from a physical maximum of the TOV
-solutions. Since the EOS framework insists on causality, the same guarantee
-extends to the star sequences.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The NS sequence functionality in general is experimental.</p>
-</div>
+<p>The framework provides a representation of generic sequences and
+a specialization representing stable branches.
+Sequences are spanning a range of central densities, and present
+NS properties as functions of central pseudo-enthalpy.
+Branches are sequences that restrict the range to a
+segment where the gravitational mass is strictly increasing with
+pseudo-enthalpy, and which extends up to the maximum mass.</p>
+<p>Branches also offer all properties as function of the gravitational
+mass, and they provide the maximum mass as wel as the properties of
+the corresponding NS model.</p>
+<p>We note that the EOS framework insists on causality, and
+therefore the same guarantee extends to the star sequences. By design,
+the library actively prevents the computation of TOV solutions with
+causality-violating regions. Even though the equations for the static
+TOV solution do not break down for such EOS, this does not hold
+for dynamic evolution equations that govern, e.g., oscillations.
+Such models are considered physically meaningless.</p>
+<p>It may happen that the central density exceeds the EOS validity
+range before the maximum NS mass is reached. The library
+distinguishes this case, and allows to query whether a branch
+extends to the physical maximum or the one given by the EOS range.</p>
 </section>
 
 
@@ -128,11 +138,11 @@ extends to the star sequences.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/ns_seqs_feat.rst.txt"

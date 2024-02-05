@@ -23,15 +23,16 @@ Creating star sequences
 Computing TOV Sequences
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. doxygenfunction:: EOS_Toolkit::make_tov_seq(eos_barotr eos, tov_acc_simple acc, interval<real_t> rg_gm1, unsigned int num_samp=500)
+.. doxygenfunction:: EOS_Toolkit::make_tov_seq(eos_barotr eos, interval<real_t> rg_gm1, const star_accuracy_spec acc, unsigned int num_samp)
    :project: RePrimAnd
 
 |
 
-.. doxygenfunction:: EOS_Toolkit::make_tov_branch_stable(eos_barotr eos, tov_acc_simple acc, real_t mgrav_min=0.5, unsigned int num_samp=500, real_t gm1_initial=1.2, real_t max_margin=1e-2)
+.. doxygenfunction:: EOS_Toolkit::make_tov_branch_stable(eos_barotr eos, const star_accuracy_spec acc, real_t mg_cut_low_rel=0.2, real_t mg_cut_low_abs=0.0, real_t gm1_initial=1.2, real_t gm1_step=0.004, real_t max_margin=1e-2)
    :project: RePrimAnd
 
 
+ 
 Create from existing data
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 

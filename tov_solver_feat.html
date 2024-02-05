@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Features &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -23,8 +23,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -68,53 +69,39 @@ sound speed <span class="math notranslate nohighlight">\(c_{sc}\)</span></p></li
 and the matter state are provided as
 functions of circumferential radius <span class="math notranslate nohighlight">\(r_c\)</span>.</p>
 <p>The tidal deformability formalism is described in
-<a class="footnote-reference brackets" href="#footcite-hinderer-2008-1216" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-han-2019-083014" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.
+<a class="footnote-reference brackets" href="#footcite-hinderer-2008-1216" id="id1">1</a><a class="footnote-reference brackets" href="#footcite-han-2019-083014" id="id2">2</a>.
 Since the formalism assumes adiabatic perturbations, the tidal deformability is
 only computed for isentropic EOS, for example zero-temperature stars.
-The library uses a reformulation of the ODE in <a class="footnote-reference brackets" href="#footcite-han-2019-083014" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> that is well-behaved across phase transitions (currently undocumented).</p>
+The library uses a reformulation of the ODE in <a class="footnote-reference brackets" href="#footcite-han-2019-083014" id="id3">2</a> that is well-behaved across phase transitions (currently undocumented).</p>
 <p>The moment of inertia is defined in the slow-rotation approximation following
-<a class="footnote-reference brackets" href="#footcite-hartle-1967-1005" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>.
+<a class="footnote-reference brackets" href="#footcite-hartle-1967-1005" id="id4">3</a>.
 Finally, the library can also compute a relatively new definition of “bulk” properties
-from <a class="footnote-reference brackets" href="#footcite-kastaun-2016" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>. This definition uses a sort of maximum compactness
+from <a class="footnote-reference brackets" href="#footcite-kastaun-2016" id="id5">4</a>. This definition uses a sort of maximum compactness
 iso-density surface and can also be applied to systems without symmetry or surface,
 such as early merger remnants.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The TOV solver functionality in general is experimental.
-In particular, phase transitions are allowed by design but they
-are currently not tested at all.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Since tabulated EOS and piecewise polytropic EOS are not
-differentiable at segment boundaries, for those EOS the convergence
-speed of ODE
-solvers effectively drops to first order with increasing resolution.
-If speed is an issue it is recommended not to request solutions
-with relative errors below <span class="math notranslate nohighlight">\(10^{-10}\)</span>.
-A fully differentiable tabulated EOS is planned.</p>
+<p>Strong phase transitions are allowed by design
+but they have not been considered during the calibration of the
+error bars.</p>
 </div>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
 <div class="docutils container" id="id6">
-<aside class="footnote brackets" id="footcite-hinderer-2008-1216" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Tanja Hinderer. Tidal Love Numbers of Neutron Stars. <em>Astrophys. J.</em>, 677(2):1216–1220, April 2008. <a class="reference external" href="https://arxiv.org/abs/0711.2420">arXiv:0711.2420</a>, <a class="reference external" href="https://doi.org/10.1086/533487">doi:10.1086/533487</a>.</p>
-</aside>
-<aside class="footnote brackets" id="footcite-han-2019-083014" role="note">
-<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id3">2</a>)</span>
-<p>Sophia Han and Andrew W. Steiner. Tidal deformability with sharp phase transitions in binary neutron stars. <em>Phys. Rev. D</em>, 99(8):083014, April 2019. <a class="reference external" href="https://arxiv.org/abs/1810.10967">arXiv:1810.10967</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevD.99.083014">doi:10.1103/PhysRevD.99.083014</a>.</p>
-</aside>
-<aside class="footnote brackets" id="footcite-hartle-1967-1005" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">3</a><span class="fn-bracket">]</span></span>
-<p>James B. Hartle. Slowly Rotating Relativistic Stars. I. Equations of Structure. <em>Astrophys. J.</em>, 150:1005, December 1967. <a class="reference external" href="https://doi.org/10.1086/149400">doi:10.1086/149400</a>.</p>
-</aside>
-<aside class="footnote brackets" id="footcite-kastaun-2016" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">4</a><span class="fn-bracket">]</span></span>
-<p>W. Kastaun, R. Ciolfi, and B. Giacomazzo. Structure of stable binary neutron star merger remnants: a case study. <em>Phys. Rev. D</em>, 94:044060, August 2016. <a class="reference external" href="https://arxiv.org/abs/1607.02186">arXiv:1607.02186</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevD.94.044060">doi:10.1103/PhysRevD.94.044060</a>.</p>
-</aside>
-</aside>
+<dl class="footnote brackets">
+<dt class="label" id="footcite-hinderer-2008-1216"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Tanja Hinderer. Tidal Love Numbers of Neutron Stars. <em>Astrophys. J.</em>, 677(2):1216–1220, April 2008. <a class="reference external" href="https://arxiv.org/abs/0711.2420">arXiv:0711.2420</a>, <a class="reference external" href="https://doi.org/10.1086/533487">doi:10.1086/533487</a>.</p>
+</dd>
+<dt class="label" id="footcite-han-2019-083014"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>)</span></dt>
+<dd><p>Sophia Han and Andrew W. Steiner. Tidal deformability with sharp phase transitions in binary neutron stars. <em>Phys. Rev. D</em>, 99(8):083014, April 2019. <a class="reference external" href="https://arxiv.org/abs/1810.10967">arXiv:1810.10967</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevD.99.083014">doi:10.1103/PhysRevD.99.083014</a>.</p>
+</dd>
+<dt class="label" id="footcite-hartle-1967-1005"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p>James B. Hartle. Slowly Rotating Relativistic Stars. I. Equations of Structure. <em>Astrophys. J.</em>, 150:1005, December 1967. <a class="reference external" href="https://doi.org/10.1086/149400">doi:10.1086/149400</a>.</p>
+</dd>
+<dt class="label" id="footcite-kastaun-2016"><span class="brackets"><a class="fn-backref" href="#id5">4</a></span></dt>
+<dd><p>W. Kastaun, R. Ciolfi, and B. Giacomazzo. Structure of stable binary neutron star merger remnants: a case study. <em>Phys. Rev. D</em>, 94:044060, August 2016. <a class="reference external" href="https://arxiv.org/abs/1607.02186">arXiv:1607.02186</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevD.94.044060">doi:10.1103/PhysRevD.94.044060</a>.</p>
+</dd>
+</dl>
 </div>
 </section>
 </section>
@@ -187,11 +174,11 @@ A fully differentiable tabulated EOS is planned.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/tov_solver_feat.rst.txt"

@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Reference &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -23,8 +23,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -52,13 +53,13 @@
 <span id="_CPPv3N11EOS_Toolkit12con2prim_mhd12con2prim_mhdE11eos_thermal6real_tb6real_t6real_tRK10atmosphere6real_ti"></span><span id="_CPPv2N11EOS_Toolkit12con2prim_mhd12con2prim_mhdE11eos_thermal6real_tb6real_t6real_tRK10atmosphere6real_ti"></span><span id="EOS_Toolkit::con2prim_mhd::con2prim_mhd__eos_thermal.real_t.b.real_t.real_t.atmosphereCR.real_t.i"></span><span class="target" id="classEOS__Toolkit_1_1con2prim__mhd_1a9c0464088fc7c03b05b9b001d439c0f0"></span><span class="sig-name descname"><span class="n"><span class="pre">con2prim_mhd</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit11eos_thermalE" title="EOS_Toolkit::eos_thermal"><span class="n"><span class="pre">eos_thermal</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">eos_</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_strict_</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye_lenient_</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">z_lim_</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">b_lim_</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit10atmosphereE" title="EOS_Toolkit::atmosphere"><span class="n"><span class="pre">atmosphere</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">atmo_</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">acc_</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">max_iter_</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit12con2prim_mhd12con2prim_mhdE11eos_thermal6real_tb6real_t6real_tRK10atmosphere6real_ti" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Constructor. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>eos_</strong> – The EOS </p></li>
 <li><p><strong>rho_strict_</strong> – Density above which most corrections are forbidden (strict regime) </p></li>
 <li><p><strong>ye_lenient_</strong> – Whether to allow restricting the electron fraction to valid range also in the strict regime </p></li>
-<li><p><strong>z_lim_</strong> – Speed limit in terms of <span class="math notranslate nohighlight">\( z = W v \)</span> </p></li>
-<li><p><strong>b_lim_</strong> – Fail for magnetization <span class="math notranslate nohighlight">\( b&gt;b_\mathrm{lim} \)</span> </p></li>
+<li><p><strong>z_lim_</strong> – Speed limit in terms of <span class="math notranslate nohighlight">\( z = W v \)</span></p></li>
+<li><p><strong>b_lim_</strong> – Fail for magnetization <span class="math notranslate nohighlight">\( b&gt;b_\mathrm{lim} \)</span></p></li>
 <li><p><strong>atmo_</strong> – Specifies artificial atmosphere </p></li>
 <li><p><strong>acc_</strong> – Required accuracy <span class="math notranslate nohighlight">\( \Delta \)</span> (see article). </p></li>
 <li><p><strong>max_iter_</strong> – Maximum allowed iterations for root finding. </p></li>
@@ -80,7 +81,7 @@ invalid and the error policy did not allow to correct it,
 <cite>rep.set_atmo == true</cite> in addition.</p>
  </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pv</strong> – Recovered primitive variables will be stored here </p></li>
 <li><p><strong>cv</strong> – Evolved variables for which to recover primitives. If corrections are applied, this contains the corrected values after the call. </p></li>
@@ -242,7 +243,7 @@ invalid and the error policy did not allow to correct it,
 <dd><p>
 This assembles a human readable debug message from the flags and numerical values stored internally (for performance reasons, no string is ever created before explicitly requested via this function). </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>String with debug information.</p>
 </dd>
 </dl>
@@ -252,7 +253,7 @@ This assembles a human readable debug message from the flags and numerical value
 <dt class="sig sig-object cpp" id="_CPPv4NK11EOS_Toolkit14c2p_mhd_report6failedEv">
 <span id="_CPPv3NK11EOS_Toolkit14c2p_mhd_report6failedEv"></span><span id="_CPPv2NK11EOS_Toolkit14c2p_mhd_report6failedEv"></span><span id="EOS_Toolkit::c2p_mhd_report::failedC"></span><span class="target" id="structEOS__Toolkit_1_1c2p__mhd__report_1a4f10c9544b66c5cdcdeaa8cb1ff84709"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">failed</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit14c2p_mhd_report6failedEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>If the input was invalid according to the error policy. </p>
 </dd>
 </dl>
@@ -263,7 +264,7 @@ This assembles a human readable debug message from the flags and numerical value
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit14c2p_mhd_report6statusE">
-<span id="_CPPv3N11EOS_Toolkit14c2p_mhd_report6statusE"></span><span id="_CPPv2N11EOS_Toolkit14c2p_mhd_report6statusE"></span><span id="EOS_Toolkit::c2p_mhd_report::status__err_code"></span><span class="target" id="structEOS__Toolkit_1_1c2p__mhd__report_1ab2539ec324df97a6d35bbcf0562589d3"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14c2p_mhd_report8err_codeE" title="EOS_Toolkit::c2p_mhd_report::err_code"><span class="n"><span class="pre">err_code</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">status</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14c2p_mhd_report8err_code16ERR_CODE_NOT_SETE" title="EOS_Toolkit::c2p_mhd_report::ERR_CODE_NOT_SET"><span class="n"><span class="pre">ERR_CODE_NOT_SET</span></span></a><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14c2p_mhd_report6statusE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11EOS_Toolkit14c2p_mhd_report6statusE"></span><span id="_CPPv2N11EOS_Toolkit14c2p_mhd_report6statusE"></span><span id="EOS_Toolkit::c2p_mhd_report::status__err_code"></span><span class="target" id="structEOS__Toolkit_1_1c2p__mhd__report_1ab2539ec324df97a6d35bbcf0562589d3"></span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit14c2p_mhd_report8err_codeE" title="EOS_Toolkit::c2p_mhd_report::err_code"><span class="n"><span class="pre">err_code</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">status</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="n"><span class="pre">ERR_CODE_NOT_SET</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit14c2p_mhd_report6statusE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>SUCCESS or reason for failure. </p>
 </dd></dl>
 
@@ -376,7 +377,7 @@ This assembles a human readable debug message from the flags and numerical value
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit9prim_vars3velE">
 <span id="_CPPv3N11EOS_Toolkit9prim_vars3velE"></span><span id="_CPPv2N11EOS_Toolkit9prim_vars3velE"></span><span id="EOS_Toolkit::prim_vars::vel__sm_vec3u"></span><span class="target" id="structEOS__Toolkit_1_1prim__vars_1a1e29cf4ca4b339162d5b584fc43fc6d7"></span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit8sm_vec3uE" title="EOS_Toolkit::sm_vec3u"><span class="n"><span class="pre">sm_vec3u</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vel</span></span></span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit9prim_vars3velE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>3-velocity <span class="math notranslate nohighlight">\( v^i \)</span> </p>
+<dd><p>3-velocity <span class="math notranslate nohighlight">\( v^i \)</span></p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -510,7 +511,7 @@ This assembles a human readable debug message from the flags and numerical value
 <dt class="sig sig-object cpp" id="_CPPv4N11EOS_Toolkit9cons_vars9from_primERK9prim_varsRK10sm_metric3">
 <span id="_CPPv3N11EOS_Toolkit9cons_vars9from_primERK9prim_varsRK10sm_metric3"></span><span id="_CPPv2N11EOS_Toolkit9cons_vars9from_primERK9prim_varsRK10sm_metric3"></span><span id="EOS_Toolkit::cons_vars::from_prim__prim_varsCR.sm_metric3CR"></span><span class="target" id="structEOS__Toolkit_1_1cons__vars_1ad0ca3d32112eb1330f5516671d34d32d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">from_prim</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit9prim_varsE" title="EOS_Toolkit::prim_vars"><span class="n"><span class="pre">prim_vars</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pv</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit10sm_metric3E" title="EOS_Toolkit::sm_metric3"><span class="n"><span class="pre">sm_metric3</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">g</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit9cons_vars9from_primERK9prim_varsRK10sm_metric3" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute conserved variables from primitives and 3-metric. </p>
-<p><p><p>The conserved variables are computed from</p>
+<p><p>The conserved variables are computed from</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}D     &amp;= V_c W \rho \\ 
 S_i   &amp;= V_c W^2 \rho h v_i \\
@@ -522,7 +523,6 @@ The formula for <span class="math notranslate nohighlight">\(\tau\)</span> is wr
 also in the Newtonian limit, i.e. for 
 <span class="math notranslate nohighlight">\(v^2 \ll 1, \epsilon \ll 1\)</span>.</p>
 </p>
- </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -653,7 +653,7 @@ also in the Newtonian limit, i.e. for
 <span id="_CPPv3N11EOS_Toolkit10atmosphere10atmosphereE6real_t6real_t6real_t6real_t6real_t"></span><span id="_CPPv2N11EOS_Toolkit10atmosphere10atmosphereE6real_t6real_t6real_t6real_t6real_t"></span><span id="EOS_Toolkit::atmosphere::atmosphere__real_t.real_t.real_t.real_t.real_t"></span><span class="target" id="structEOS__Toolkit_1_1atmosphere_1a423b0bb352554e26f960fd6283fa899b"></span><span class="sig-name descname"><span class="n"><span class="pre">atmosphere</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps_</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ye_</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">press_</span></span>, <span class="n"><span class="pre">real_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rho_cut_</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11EOS_Toolkit10atmosphere10atmosphereE6real_t6real_t6real_t6real_t6real_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Constructor. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rho_</strong> – Atmosphere mass density </p></li>
 <li><p><strong>eps_</strong> – Atmosphere specific internal energy </p></li>
@@ -676,7 +676,7 @@ also in the Newtonian limit, i.e. for
 <span id="_CPPv3NK11EOS_Toolkit10atmosphere3setER9prim_vars"></span><span id="_CPPv2NK11EOS_Toolkit10atmosphere3setER9prim_vars"></span><span id="EOS_Toolkit::atmosphere::set__prim_varsRC"></span><span class="target" id="structEOS__Toolkit_1_1atmosphere_1a5ecfb952724236c3422d163130616469"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit9prim_varsE" title="EOS_Toolkit::prim_vars"><span class="n"><span class="pre">prim_vars</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pv</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10atmosphere3setER9prim_vars" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set pure hydro primitive variables to atmosphere. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>pv</strong> – Primitive variables (hydro) </p>
 </dd>
 </dl>
@@ -687,7 +687,7 @@ also in the Newtonian limit, i.e. for
 <span id="_CPPv3NK11EOS_Toolkit10atmosphere3setER9cons_varsRK10sm_metric3"></span><span id="_CPPv2NK11EOS_Toolkit10atmosphere3setER9cons_varsRK10sm_metric3"></span><span id="EOS_Toolkit::atmosphere::set__cons_varsR.sm_metric3CRC"></span><span class="target" id="structEOS__Toolkit_1_1atmosphere_1af220e8c14f34100ba13eaee6192c606b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit9cons_varsE" title="EOS_Toolkit::cons_vars"><span class="n"><span class="pre">cons_vars</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cv</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit10sm_metric3E" title="EOS_Toolkit::sm_metric3"><span class="n"><span class="pre">sm_metric3</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">g</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10atmosphere3setER9cons_varsRK10sm_metric3" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set pure hydro evolved vars to atmosphere. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cv</strong> – Evolved variables (hydro) </p></li>
 <li><p><strong>g</strong> – 3-metric </p></li>
@@ -701,7 +701,7 @@ also in the Newtonian limit, i.e. for
 <span id="_CPPv3NK11EOS_Toolkit10atmosphere3setER9prim_varsR9cons_varsRK10sm_metric3"></span><span id="_CPPv2NK11EOS_Toolkit10atmosphere3setER9prim_varsR9cons_varsRK10sm_metric3"></span><span id="EOS_Toolkit::atmosphere::set__prim_varsR.cons_varsR.sm_metric3CRC"></span><span class="target" id="structEOS__Toolkit_1_1atmosphere_1adb7e1af3f895386d4d31cacb318d409b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit9prim_varsE" title="EOS_Toolkit::prim_vars"><span class="n"><span class="pre">prim_vars</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pv</span></span>, <a class="reference internal" href="#_CPPv4N11EOS_Toolkit9cons_varsE" title="EOS_Toolkit::cons_vars"><span class="n"><span class="pre">cons_vars</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cv</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit10sm_metric3E" title="EOS_Toolkit::sm_metric3"><span class="n"><span class="pre">sm_metric3</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">g</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10atmosphere3setER9prim_varsR9cons_varsRK10sm_metric3" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set pure hydro primitive and evolved variables to atmosphere. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pv</strong> – Primitive variables (hydro) </p></li>
 <li><p><strong>cv</strong> – Evolved variables (hydro) </p></li>
@@ -716,7 +716,7 @@ also in the Newtonian limit, i.e. for
 <span id="_CPPv3NK11EOS_Toolkit10atmosphere3setER13prim_vars_mhd"></span><span id="_CPPv2NK11EOS_Toolkit10atmosphere3setER13prim_vars_mhd"></span><span id="EOS_Toolkit::atmosphere::set__prim_vars_mhdRC"></span><span class="target" id="structEOS__Toolkit_1_1atmosphere_1a6e34d0bd2e9f3236edaee4b5df79dc75"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit13prim_vars_mhdE" title="EOS_Toolkit::prim_vars_mhd"><span class="n"><span class="pre">prim_vars_mhd</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pv</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10atmosphere3setER13prim_vars_mhd" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set ideal MHD primitive variables to atmosphere. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>pv</strong> – Primitive variables (GRMHD) </p>
 </dd>
 </dl>
@@ -727,7 +727,7 @@ also in the Newtonian limit, i.e. for
 <span id="_CPPv3NK11EOS_Toolkit10atmosphere3setER13cons_vars_mhdRK10sm_metric3"></span><span id="_CPPv2NK11EOS_Toolkit10atmosphere3setER13cons_vars_mhdRK10sm_metric3"></span><span id="EOS_Toolkit::atmosphere::set__cons_vars_mhdR.sm_metric3CRC"></span><span class="target" id="structEOS__Toolkit_1_1atmosphere_1a5fd61e90eb388c754e39feee952ac956"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit13cons_vars_mhdE" title="EOS_Toolkit::cons_vars_mhd"><span class="n"><span class="pre">cons_vars_mhd</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cv</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit10sm_metric3E" title="EOS_Toolkit::sm_metric3"><span class="n"><span class="pre">sm_metric3</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">g</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10atmosphere3setER13cons_vars_mhdRK10sm_metric3" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set ideal MHD conserved variables to atmosphere. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cv</strong> – Conserved vars </p></li>
 <li><p><strong>g</strong> – The 3-metric </p></li>
@@ -743,7 +743,7 @@ also in the Newtonian limit, i.e. for
 <span id="_CPPv3NK11EOS_Toolkit10atmosphere3setER13prim_vars_mhdR13cons_vars_mhdRK10sm_metric3"></span><span id="_CPPv2NK11EOS_Toolkit10atmosphere3setER13prim_vars_mhdR13cons_vars_mhdRK10sm_metric3"></span><span id="EOS_Toolkit::atmosphere::set__prim_vars_mhdR.cons_vars_mhdR.sm_metric3CRC"></span><span class="target" id="structEOS__Toolkit_1_1atmosphere_1a3c7c763a6581c306604d1589f4e3ec50"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N11EOS_Toolkit13prim_vars_mhdE" title="EOS_Toolkit::prim_vars_mhd"><span class="n"><span class="pre">prim_vars_mhd</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pv</span></span>, <a class="reference internal" href="#_CPPv4N11EOS_Toolkit13cons_vars_mhdE" title="EOS_Toolkit::cons_vars_mhd"><span class="n"><span class="pre">cons_vars_mhd</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cv</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="little_helpers.html#_CPPv4N11EOS_Toolkit10sm_metric3E" title="EOS_Toolkit::sm_metric3"><span class="n"><span class="pre">sm_metric3</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">g</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11EOS_Toolkit10atmosphere3setER13prim_vars_mhdR13cons_vars_mhdRK10sm_metric3" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set ideal MHD primitives and conserved variables to atmosphere. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pv</strong> – Primitive variables (GRMHD) </p></li>
 <li><p><strong>cv</strong> – Evolved variables (GRMHD) </p></li>
@@ -860,11 +860,11 @@ also in the Newtonian limit, i.e. for
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/c2p_imhd_ref.rst.txt"

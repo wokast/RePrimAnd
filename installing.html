@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Installation &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -22,8 +22,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -40,10 +41,10 @@
 <p>The main target and devolpment platform is Linux, although the
 library code is not platform-specific and should also work on Macs.
 Windows and AIX are not supported. For use in HPC, users need to build
-the library from source. For use in postprocessing, the Python intferface
+the library from source. For use in postprocessing, the Python interface
 can also be installed via pip (binary wheel of the library available for
-Linux). Conda packages for the C++ library and Python intface are planned
-but not available yet.</p>
+Linux). There is also an experimental conda package for the C++
+library (Python interface not included yet).</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
@@ -67,9 +68,8 @@ as standard package in most distributions and can also be installed
 via Python’s pip.</p>
 <p>To build the library,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">repository</span><span class="o">&gt;</span>
-<span class="n">meson</span> <span class="n">mbuild</span> <span class="o">--</span><span class="n">buildtype</span><span class="o">=</span><span class="n">release</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=&lt;</span><span class="n">custom</span> <span class="n">install</span> <span class="n">location</span><span class="o">&gt;</span>
-<span class="n">cd</span> <span class="n">mbuild</span>
-<span class="n">ninja</span>
+<span class="n">meson</span> <span class="n">setup</span> <span class="o">--</span><span class="n">buildtype</span><span class="o">=</span><span class="n">release</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=&lt;</span><span class="n">custom</span> <span class="n">install</span> <span class="n">location</span><span class="o">&gt;</span> <span class="n">mbuild</span>
+<span class="n">ninja</span> <span class="o">-</span><span class="n">C</span> <span class="n">mbuild</span>
 </pre></div>
 </div>
 <p>This will compile with optimization and without debug symbols. Other
@@ -78,15 +78,24 @@ To use a different compiler, e.g. clang, prefix the meson command
 with <cite>CC=clang CXX=clang++</cite>.
 See <a class="reference external" href="https://mesonbuild.com/Running-Meson.html">here</a> for general
 Meson usage.</p>
+<p>Note on Conda environments: if you build for a conda environment and meson
+does not detect the boost library or the wrong version, use</p>
+<p>:: code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>BOOST_ROOT=$CONDA_PREFIX meson setup --prefix=$CONDA_PREFIX mbuild
+</pre></div>
+</div>
+<p>Note on HDF5: meson and HDF5 library do not play along nicely (partly caused by bad HDF5
+packaging). Make sure there is a pkg-config file for the HDF5 library you want to build
+against. Another common source of problems is that you are building within a conda environment and there exists another system-wide HDF5 installation. In that case,
+prefixing <cite>LD_LIBRARY_PATH</cite> with <cite>$CONDA_PREFIX/lib</cite> might help.</p>
 <section id="installing">
 <h3>Installing<a class="headerlink" href="#installing" title="Permalink to this heading">¶</a></h3>
 <p>To install the library, use</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">mbuild</span>
-<span class="n">ninja</span> <span class="n">install</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ninja</span> <span class="o">-</span><span class="n">C</span> <span class="n">mbuild</span> <span class="n">install</span>
 </pre></div>
 </div>
 <p>This will install in a user-defined location if the <cite>–prefix</cite> option
-was given during the build setup, otherwise systemwide.</p>
+was given during the build setup, otherwise systemwide (not recommended).</p>
 </section>
 <section id="using-the-library">
 <h3>Using the Library<a class="headerlink" href="#using-the-library" title="Permalink to this heading">¶</a></h3>
@@ -105,16 +114,16 @@ example) can find it, compilation should be straightforward:</p>
 <h2>Python Bindings<a class="headerlink" href="#python-bindings" title="Permalink to this heading">¶</a></h2>
 <p>If only the Python interface is required on a Linux platform,
 it is easiest to install from pypi</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pyreprimand</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">reprimand</span>
 </pre></div>
 </div>
 <p>Otherwise, one first has to buid and install the C++ library as shown above.</p>
 <p>To build and install the Python interface, do</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">bindings</span><span class="o">/</span><span class="n">python</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">repository</span><span class="o">&gt;</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">./</span><span class="n">bindings</span><span class="o">/</span><span class="n">python</span>
 </pre></div>
 </div>
-<p>This will also pip install packages numpy and pybind11&gt;=2.6.0.
+<p>This will also pip install packages <cite>numpy</cite> and <cite>pybind11&gt;=2.6.0</cite>.
 When using conda environment, it may be better to install those
 first using conda.</p>
 <p>The Python extension module is called  <cite>pyreprimand</cite>.</p>
@@ -122,14 +131,13 @@ first using conda.</p>
 <section id="einstein-toolkit-support">
 <h2>Einstein Toolkit Support<a class="headerlink" href="#einstein-toolkit-support" title="Permalink to this heading">¶</a></h2>
 <p>RePrimAnd does provide a thorn that builds the library within
-an EinsteinToolkit (ET) environment, using the ExternalLibraries mechanism. The
-thorn can be found in the folder <cite>ET_interface/thorns/RePrimAnd/</cite>. The thorn
+an EinsteinToolkit (ET) environment, using the ExternalLibraries mechanism.
+The thorn is part of the official ET framework. The version in the master
+brach of this repository may however be ahead of the ET version.
+It can be found in the folder <cite>ET_interface/thorns/RePrimAnd/</cite>. The thorn
 depends on the HDF5, GSL, and BOOST ExternalLibraries thorns. Building it via
-the ET build system does not require meseon. Note this only builds the library,
+the ET build system does not require meson. Note this only builds the library,
 but not the tests and Python bindings.</p>
-<p>The thorn is also part of the official ET framework. The version in the master
-brach will typically by ahead of the ET version, but is not guaranteed to be
-stable or compatible.</p>
 <p>There are two experimental (and largely undocumented for now) thorns
 that aim to simplifying the usage.
 <cite>RePrimAnd_Global_EOS</cite> provides a centralized selection of a global thermal
@@ -143,8 +151,8 @@ It is intended for transitioning existing code to the new interface.</p>
 <h2>Creating Documentation<a class="headerlink" href="#creating-documentation" title="Permalink to this heading">¶</a></h2>
 <p>Building the documentation is deactivated by default.
 To build it, do</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meson</span> <span class="n">configure</span> <span class="o">-</span><span class="n">Dbuild_documentation</span><span class="o">=</span><span class="n">true</span>
-<span class="n">ninja</span> <span class="n">documentation</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meson</span> <span class="n">configure</span> <span class="o">-</span><span class="n">Dbuild_documentation</span><span class="o">=</span><span class="n">true</span> <span class="n">mbuild</span>
+<span class="n">ninja</span> <span class="o">-</span><span class="n">C</span> <span class="n">mbuild</span> <span class="n">documentation</span>
 </pre></div>
 </div>
 <p>The resulting pages can be found in the build directory under
@@ -165,7 +173,8 @@ To build them, specify</p>
 <span class="n">ninja</span> <span class="n">test</span>
 </pre></div>
 </div>
-<p>Please report errors on the issue tracker.</p>
+<p>Please report errors on the
+<a class="reference external" href="https://github.com/wokast/RePrimAnd/issues">issue tracker</a>.</p>
 </section>
 <section id="benchmarks">
 <h3>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this heading">¶</a></h3>
@@ -181,8 +190,8 @@ article. To recreate the data and plots,</p>
 <cite>tests/benchmarks</cite>.</p>
 <p>This requires Python+matplotlib.</p>
 </section>
-<section id="visualizing-master-function">
-<h3>Visualizing Master Function<a class="headerlink" href="#visualizing-master-function" title="Permalink to this heading">¶</a></h3>
+<section id="visualizing-con2prim-master-function">
+<h3>Visualizing Con2Prim Master Function<a class="headerlink" href="#visualizing-con2prim-master-function" title="Permalink to this heading">¶</a></h3>
 <p>In addition, there is code to sample the primitive recovery master
 function (the central ingredient of the scheme) for various cases,
 as shown in the paper.</p>
@@ -265,11 +274,11 @@ as shown in the paper.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/installing.rst.txt"

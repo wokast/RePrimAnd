@@ -60,10 +60,10 @@ Creating a piecewise polytropic EOS file is as simple as
 
 .. code-block:: python
 
-   u   = pyr.units.geom_solar()
+   eos_units   = pyr.units.geom_solar()
 
    eos = pyr.make_eos_barotr_pwpoly(rho_poly, 
-                 rho_bounds, gammas, rho_max, uc)
+                 rho_bounds, gammas, rho_max, eos_units)
 
    pyr.save_eos_barotr("example_pp.eos.h5", eos)
 
@@ -78,7 +78,7 @@ EOS as follows
 
 .. code-block:: python
 
-   u   = pyr.units.geom_solar()
+   eos_units   = pyr.units.geom_solar()
 
    eos = pyr.make_eos_barotr_spline(rho, eps, press, csnd, 
                 temp, efrac, is_isentropic, range_rho, n_poly, 
@@ -90,7 +90,7 @@ where `rho`, `eps`, `press`, `csnd`, `temp`, and `efrac` are numpy
 arrays with the arbitrarily-spaced tabulated sample points. If temperature 
 and/or electron fraction are not available, pass an empty list instead.
 Any dimensionful arguments have to be specified in the unit system desired 
-for the EOS, specified by the `uc` argument with respect to SI units.
+for the EOS, specified by the `eos_units` argument with respect to SI units.
 See also :cpp:func:`~EOS_Toolkit::make_eos_barotr_spline` 
 
 
@@ -106,11 +106,10 @@ TOV Solver
 ^^^^^^^^^^
 
 The C++ TOV solver functionality is also accessible from Python. The functions 
-:cpp:func:`~EOS_Toolkit::make_tov_star` and :cpp:func:`~EOS_Toolkit::get_tov_star_properties`
+:cpp:func:`~EOS_Toolkit::get_tov_star` and :cpp:func:`~EOS_Toolkit::get_tov_properties`
 allow the creation of a single star with and without profile information, respectively. 
-Constructing the objects :cpp:struct:`~EOS_Toolkit::tov_acc_simple` or 
-:cpp:struct:`~EOS_Toolkit::tov_acc_precise` describing the desired accuracy 
-works in Python as in C++.
+The accuracy requirements are passed as an object that can be created using :cpp:func:`~EOS_Toolkit::star_acc_simple` or 
+:cpp:func:`~EOS_Toolkit::star_acc_detailed`, same as in C++.
 
 A minor difference to C++ is that getter methods 
 such as :cpp:func:`~EOS_Toolkit::spherical_star_properties::grav_mass` are mapped to Python 

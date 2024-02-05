@@ -19,8 +19,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -37,7 +38,6 @@
 
 <div class="genindex-jumpbox">
  <a href="#E"><strong>E</strong></a>
- | <a href="#S"><strong>S</strong></a>
  
 </div>
 <h2 id="E">E</h2>
@@ -333,7 +333,9 @@
 </li>
       <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit21find_rhoc_tov_of_massE10eos_barotr6real_tK6real_tK6real_t6real_tj">EOS_Toolkit::find_rhoc_tov_of_mass (C++ function)</a>
 </li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb">EOS_Toolkit::get_tov_star_properties (C++ function)</a>, <a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK15tov_acc_preciseKbKb">[1]</a>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18get_tov_propertiesEK10eos_barotrK6real_tK18star_accuracy_spec">EOS_Toolkit::get_tov_properties (C++ function)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit12get_tov_starEK10eos_barotrK6real_tK18star_accuracy_spec">EOS_Toolkit::get_tov_star (C++ function)</a>
 </li>
       <li><a href="eos_barotr_custom.html#_CPPv4N11EOS_Toolkit15implementations15eos_barotr_implE">EOS_Toolkit::implementations::eos_barotr_impl (C++ class)</a>
 </li>
@@ -447,11 +449,9 @@
 </li>
       <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13make_star_seqENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEEN8star_seq7range_tE5units">EOS_Toolkit::make_star_seq (C++ function)</a>
 </li>
-      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit22make_tov_branch_stableE10eos_barotr14tov_acc_simple6real_tj6real_t6real_t">EOS_Toolkit::make_tov_branch_stable (C++ function)</a>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit22make_tov_branch_stableE10eos_barotrK18star_accuracy_spec6real_t6real_t6real_t6real_t6real_t">EOS_Toolkit::make_tov_branch_stable (C++ function)</a>
 </li>
-      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit12make_tov_seqE10eos_barotr14tov_acc_simple8intervalI6real_tEj">EOS_Toolkit::make_tov_seq (C++ function)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb">EOS_Toolkit::make_tov_star (C++ function)</a>, <a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK15tov_acc_preciseKbKb">[1]</a>
+      <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit12make_tov_seqE10eos_barotr8intervalI6real_tEK18star_accuracy_specj">EOS_Toolkit::make_tov_seq (C++ function)</a>
 </li>
       <li><a href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit9prim_varsE">EOS_Toolkit::prim_vars (C++ struct)</a>
 </li>
@@ -488,6 +488,10 @@
       <li><a href="c2p_imhd_ref.html#_CPPv4NK11EOS_Toolkit13prim_vars_mhd7scatterER6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_tR6real_t">EOS_Toolkit::prim_vars_mhd::scatter (C++ function)</a>
 </li>
       <li><a href="c2p_imhd_ref.html#_CPPv4N11EOS_Toolkit13prim_vars_mhd10set_to_nanEv">EOS_Toolkit::prim_vars_mhd::set_to_nan (C++ function)</a>
+</li>
+      <li><a href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit15save_eos_barotrENSt6stringE10eos_barotrNSt6stringE">EOS_Toolkit::save_eos_barotr (C++ function)</a>
+</li>
+      <li><a href="eos_thermal_ref.html#_CPPv4N11EOS_Toolkit16save_eos_thermalENSt6stringE11eos_thermalNSt6stringE">EOS_Toolkit::save_eos_thermal (C++ function)</a>
 </li>
       <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch">EOS_Toolkit::save_star_branch (C++ function)</a>
 </li>
@@ -655,6 +659,28 @@
 </li>
       <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesE10eos_barotr19spherical_star_info8deform_t6bulk_t">EOS_Toolkit::spherical_star_properties::spherical_star_properties (C++ function)</a>, <a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERK25spherical_star_properties">[1]</a>, <a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit25spherical_star_properties25spherical_star_propertiesERR25spherical_star_properties">[2]</a>
 </li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit17star_acc_detailedEbb6real_t6real_t6real_t6real_tNSt6size_tE">EOS_Toolkit::star_acc_detailed (C++ function)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15star_acc_simpleEbb6real_t6real_tNSt6size_tE">EOS_Toolkit::star_acc_simple (C++ function)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18star_accuracy_specE">EOS_Toolkit::star_accuracy_spec (C++ struct)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18star_accuracy_spec10acc_deformE">EOS_Toolkit::star_accuracy_spec::acc_deform (C++ member)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18star_accuracy_spec8acc_massE">EOS_Toolkit::star_accuracy_spec::acc_mass (C++ member)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18star_accuracy_spec12acc_minertiaE">EOS_Toolkit::star_accuracy_spec::acc_minertia (C++ member)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18star_accuracy_spec10acc_radiusE">EOS_Toolkit::star_accuracy_spec::acc_radius (C++ member)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18star_accuracy_spec8minstepsE">EOS_Toolkit::star_accuracy_spec::minsteps (C++ member)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18star_accuracy_spec9need_bulkE">EOS_Toolkit::star_accuracy_spec::need_bulk (C++ member)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18star_accuracy_spec11need_deformE">EOS_Toolkit::star_accuracy_spec::need_deform (C++ member)</a>
+</li>
+      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18star_accuracy_spec18star_accuracy_specE6real_t6real_t6real_tNSt6size_tEb6real_tb">EOS_Toolkit::star_accuracy_spec::star_accuracy_spec (C++ function)</a>
+</li>
       <li><a href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branchE">EOS_Toolkit::star_branch (C++ class)</a>
 </li>
       <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit11star_branch25bary_mass_from_center_gm1E6real_t">EOS_Toolkit::star_branch::bary_mass_from_center_gm1 (C++ function)</a>
@@ -719,32 +745,6 @@
 </li>
       <li><a href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq11units_to_SIEv">EOS_Toolkit::star_seq::units_to_SI (C++ function)</a>
 </li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_preciseE">EOS_Toolkit::tov_acc_precise (C++ struct)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_precise7acc_minE">EOS_Toolkit::tov_acc_precise::acc_min (C++ member)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_precise6deformE">EOS_Toolkit::tov_acc_precise::deform (C++ member)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_precise4massE">EOS_Toolkit::tov_acc_precise::mass (C++ member)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_precise8minertiaE">EOS_Toolkit::tov_acc_precise::minertia (C++ member)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_precise8minstepsE">EOS_Toolkit::tov_acc_precise::minsteps (C++ member)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_precise6radiusE">EOS_Toolkit::tov_acc_precise::radius (C++ member)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_precise15tov_acc_preciseE6real_t6real_t6real_t6real_tNSt6size_tE6real_t">EOS_Toolkit::tov_acc_precise::tov_acc_precise (C++ function)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14tov_acc_simpleE">EOS_Toolkit::tov_acc_simple (C++ struct)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14tov_acc_simple6deformE">EOS_Toolkit::tov_acc_simple::deform (C++ member)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14tov_acc_simple8minstepsE">EOS_Toolkit::tov_acc_simple::minsteps (C++ member)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14tov_acc_simple3tovE">EOS_Toolkit::tov_acc_simple::tov (C++ member)</a>
-</li>
-      <li><a href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14tov_acc_simple14tov_acc_simpleE6real_t6real_tNSt6size_tE">EOS_Toolkit::tov_acc_simple::tov_acc_simple (C++ function)</a>
-</li>
       <li><a href="little_helpers.html#_CPPv4N11EOS_Toolkit5unitsE">EOS_Toolkit::units (C++ class)</a>
 </li>
       <li><a href="little_helpers.html#_CPPv4NK11EOS_Toolkit5units5accelEv">EOS_Toolkit::units::accel (C++ function)</a>
@@ -753,9 +753,13 @@
 </li>
       <li><a href="little_helpers.html#_CPPv4N11EOS_Toolkit5units4c_SIE">EOS_Toolkit::units::c_SI (C++ member)</a>
 </li>
+      <li><a href="little_helpers.html#_CPPv4N11EOS_Toolkit5units3cgsEv">EOS_Toolkit::units::cgs (C++ function)</a>
+</li>
       <li><a href="little_helpers.html#_CPPv4NK11EOS_Toolkit5units7densityEv">EOS_Toolkit::units::density (C++ function)</a>
 </li>
       <li><a href="little_helpers.html#_CPPv4NK11EOS_Toolkit5units5forceEv">EOS_Toolkit::units::force (C++ function)</a>
+</li>
+      <li><a href="little_helpers.html#_CPPv4N11EOS_Toolkit5units21FORMAL_BARYON_MASS_SIE">EOS_Toolkit::units::FORMAL_BARYON_MASS_SI (C++ member)</a>
 </li>
       <li><a href="little_helpers.html#_CPPv4NK11EOS_Toolkit5units4freqEv">EOS_Toolkit::units::freq (C++ function)</a>
 </li>
@@ -798,22 +802,6 @@
       <li><a href="little_helpers.html#_CPPv4NK11EOS_Toolkit5units8velocityEv">EOS_Toolkit::units::velocity (C++ function)</a>
 </li>
       <li><a href="little_helpers.html#_CPPv4NK11EOS_Toolkit5units6volumeEv">EOS_Toolkit::units::volume (C++ function)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="S">S</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="eos_thermal_files.html#reprimand_eos_format.save_thermal_hybrid_poly">save_thermal_hybrid_poly() (in module reprimand_eos_format)</a>
-</li>
-      <li><a href="eos_thermal_files.html#reprimand_eos_format.save_thermal_hybrid_pwpoly">save_thermal_hybrid_pwpoly() (in module reprimand_eos_format)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="eos_thermal_files.html#reprimand_eos_format.save_thermal_hybrid_table">save_thermal_hybrid_table() (in module reprimand_eos_format)</a>
-</li>
-      <li><a href="eos_thermal_files.html#reprimand_eos_format.save_thermal_idealgas">save_thermal_idealgas() (in module reprimand_eos_format)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -878,11 +866,11 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
     </div>
 

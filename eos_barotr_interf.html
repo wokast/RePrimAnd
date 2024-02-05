@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Interface &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -23,8 +23,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -39,12 +40,12 @@
   <section id="interface">
 <span id="barotr-interface"></span><h1>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">¶</a></h1>
 <p>The barotropic EOS are represented
-by objects of type <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code>.
+by objects of type <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code></a>.
 These objects
 represent the generic EOS interface and do not implement any EOS.
 Instead, they forward any request to an actual implementation of a
 particular EOS. To obtain an
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code>
+<a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code></a>
 object representing a particular EOS, one uses functions such as
 <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit20make_eos_barotr_polyE6real_t6real_t6real_t5units" title="EOS_Toolkit::make_eos_barotr_poly"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_eos_barotr_poly()</span></code></a>
 provided for each type of EOS.</p>
@@ -55,7 +56,7 @@ For this, use the methods
 <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">at_rho()</span></code> and
 <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">at_gm1()</span></code>.
 Both return an object of type
-<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">state</span></code>.
+<a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotr5stateE" title="EOS_Toolkit::eos_barotr::state"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">state</span></code></a>.
 All EOS always provide both forms.</p>
 <p>Second, one can use methods of this object to obtain mass density,
 pseudo enthalpy, pressure,
@@ -78,7 +79,7 @@ exceptions when called outside the valid ranges, but instead return
 NANs. When computing several quantities for the same state, the
 alternative syntax might be less efficient because the validity has to
 be checked each time instead of only once as for the primary syntax.</p>
-<p>The <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code> class
+<p>The <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit10eos_barotrE" title="EOS_Toolkit::eos_barotr"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">eos_barotr</span></code></a> class
 also provides methods to query the valid ranges of mass density and
 pseudo enthalpy. For convenience, there are methods to check if
 given parameter is inside the valid range.</p>
@@ -171,11 +172,11 @@ better be done by reference instead of value.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/eos_barotr_interf.rst.txt"

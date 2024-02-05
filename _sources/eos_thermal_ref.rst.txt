@@ -9,10 +9,13 @@ Generic Interface
    :project: RePrimAnd
    :members:
 
-Loading from File
-^^^^^^^^^^^^^^^^^
+Loading and Saving EOS
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. doxygenfunction:: EOS_Toolkit::load_eos_thermal
+   :project: RePrimAnd
+
+.. doxygenfunction:: EOS_Toolkit::save_eos_thermal
    :project: RePrimAnd
 
 Creating Specific EOS

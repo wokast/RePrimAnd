@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Python Bindings &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -22,8 +22,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -83,10 +84,10 @@ data from other sources. Polytropic, piecewise polytropic, and spline-based
 EOS for tabulated data are supported directly. Other EOS types can be represented
 by first sampling them.</p>
 <p>Creating a piecewise polytropic EOS file is as simple as</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eos_units</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span><span class="p">()</span>
 
 <span class="n">eos</span> <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">make_eos_barotr_pwpoly</span><span class="p">(</span><span class="n">rho_poly</span><span class="p">,</span>
-              <span class="n">rho_bounds</span><span class="p">,</span> <span class="n">gammas</span><span class="p">,</span> <span class="n">rho_max</span><span class="p">,</span> <span class="n">uc</span><span class="p">)</span>
+              <span class="n">rho_bounds</span><span class="p">,</span> <span class="n">gammas</span><span class="p">,</span> <span class="n">rho_max</span><span class="p">,</span> <span class="n">eos_units</span><span class="p">)</span>
 
 <span class="n">pyr</span><span class="o">.</span><span class="n">save_eos_barotr</span><span class="p">(</span><span class="s2">&quot;example_pp.eos.h5&quot;</span><span class="p">,</span> <span class="n">eos</span><span class="p">)</span>
 </pre></div>
@@ -98,7 +99,7 @@ for the EOS, specified by the <cite>uc</cite> argument with respect to SI units.
 See also <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit22make_eos_barotr_pwpolyE6real_tRKNSt6vectorI6real_tEERKNSt6vectorI6real_tEE6real_t5units" title="EOS_Toolkit::make_eos_barotr_pwpoly"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_eos_barotr_pwpoly()</span></code></a>.</p>
 <p>For creating an EOS file that represents tabulated data, use the spline-based
 EOS as follows</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eos_units</span>   <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">geom_solar</span><span class="p">()</span>
 
 <span class="n">eos</span> <span class="o">=</span> <span class="n">pyr</span><span class="o">.</span><span class="n">make_eos_barotr_spline</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">csnd</span><span class="p">,</span>
              <span class="n">temp</span><span class="p">,</span> <span class="n">efrac</span><span class="p">,</span> <span class="n">is_isentropic</span><span class="p">,</span> <span class="n">range_rho</span><span class="p">,</span> <span class="n">n_poly</span><span class="p">,</span>
@@ -111,17 +112,16 @@ EOS as follows</p>
 arrays with the arbitrarily-spaced tabulated sample points. If temperature
 and/or electron fraction are not available, pass an empty list instead.
 Any dimensionful arguments have to be specified in the unit system desired
-for the EOS, specified by the <cite>uc</cite> argument with respect to SI units.
+for the EOS, specified by the <cite>eos_units</cite> argument with respect to SI units.
 See also <a class="reference internal" href="eos_barotr_ref.html#_CPPv4N11EOS_Toolkit22make_eos_barotr_splineERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEERKNSt6vectorI6real_tEEb8intervalI6real_tE6real_t5unitsNSt6size_tE" title="EOS_Toolkit::make_eos_barotr_spline"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_eos_barotr_spline()</span></code></a></p>
 </section>
 <section id="tov-solver">
 <h2>TOV Solver<a class="headerlink" href="#tov-solver" title="Permalink to this heading">¶</a></h2>
 <p>The C++ TOV solver functionality is also accessible from Python. The functions
-<a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit13make_tov_starEK10eos_barotrK6real_tK14tov_acc_simpleKbKb" title="EOS_Toolkit::make_tov_star"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_tov_star()</span></code></a> and <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit23get_tov_star_propertiesEK10eos_barotrK6real_tK14tov_acc_simpleKbKb" title="EOS_Toolkit::get_tov_star_properties"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">get_tov_star_properties()</span></code></a>
+<a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit12get_tov_starEK10eos_barotrK6real_tK18star_accuracy_spec" title="EOS_Toolkit::get_tov_star"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">get_tov_star()</span></code></a> and <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit18get_tov_propertiesEK10eos_barotrK6real_tK18star_accuracy_spec" title="EOS_Toolkit::get_tov_properties"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">get_tov_properties()</span></code></a>
 allow the creation of a single star with and without profile information, respectively.
-Constructing the objects <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit14tov_acc_simpleE" title="EOS_Toolkit::tov_acc_simple"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">tov_acc_simple</span></code></a> or
-<a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15tov_acc_preciseE" title="EOS_Toolkit::tov_acc_precise"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">tov_acc_precise</span></code></a> describing the desired accuracy
-works in Python as in C++.</p>
+The accuracy requirements are passed as an object that can be created using <a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit15star_acc_simpleEbb6real_t6real_tNSt6size_tE" title="EOS_Toolkit::star_acc_simple"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">star_acc_simple()</span></code></a> or
+<a class="reference internal" href="tov_solver_ref.html#_CPPv4N11EOS_Toolkit17star_acc_detailedEbb6real_t6real_t6real_t6real_tNSt6size_tE" title="EOS_Toolkit::star_acc_detailed"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">star_acc_detailed()</span></code></a>, same as in C++.</p>
 <p>A minor difference to C++ is that getter methods
 such as <a class="reference internal" href="tov_solver_ref.html#_CPPv4NK11EOS_Toolkit25spherical_star_properties9grav_massEv" title="EOS_Toolkit::spherical_star_properties::grav_mass"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">grav_mass()</span></code></a> are mapped to Python
 object attributes, so in Python one should not add brackets ().
@@ -138,7 +138,7 @@ will not work. See below for working with TOV sequences.</p>
 <h2>NS Sequences<a class="headerlink" href="#ns-sequences" title="Permalink to this heading">¶</a></h2>
 <p>The interface for NS sequences and their (stable) branches is available
 in Python. In particular, use the function
-<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit22make_tov_branch_stableE10eos_barotr14tov_acc_simple6real_tj6real_t6real_t" title="EOS_Toolkit::make_tov_branch_stable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_tov_branch_stable()</span></code></a> for computing a stable branch
+<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit22make_tov_branch_stableE10eos_barotrK18star_accuracy_spec6real_t6real_t6real_t6real_t6real_t" title="EOS_Toolkit::make_tov_branch_stable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_tov_branch_stable()</span></code></a> for computing a stable branch
 for TOV solutions, the function <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch" title="EOS_Toolkit::save_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">save_star_branch()</span></code></a>
 to save it to file, and the function <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16load_star_branchENSt6stringERK5units" title="EOS_Toolkit::load_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_branch()</span></code></a>
 to load such a file.</p>
@@ -233,11 +233,11 @@ conversion objects do not define a temperature unit.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/python_interf.rst.txt"

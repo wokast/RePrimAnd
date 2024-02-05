@@ -7,17 +7,14 @@ For this we defined a file format for thermal EOS, based on HDF5.
 
 Loading EOS
 -----------
-Loading an EOS is simple, after including the header
+For loading a thermal EOS from file, use 
+:cpp:func:`~EOS_Toolkit::load_eos_thermal` as in the example below.
 
 .. code:: cpp
 
    #include "eos_thermal_file.h"
    
    using namespace EOS_Toolkit;
-
-one can obtain an EOS via
-   
-.. code:: cpp
 
    units u = units::geom_solar();
    auto eos = load_eos_thermal("path/example.eos.h5", u);
@@ -35,34 +32,20 @@ cold EOS.
  
 Creating EOS Files
 ------------------
-To create EOS files, the library provides a Python interface.
-The EOS file format should not matter to users unless they want to
-extend it with custom EOS types.
-The interface consists of a single-file module
-`EOS/create/reprimand_eos_format.py`.
-The following EOS types are available:
 
-Hybrid EOS
-^^^^^^^^^^
 
-.. py:currentmodule:: reprimand_eos_format
 
-To create a hybrid EOS with cold part given by a tabulated barotropic EOS, use the following. See
-:ref:`EOSColdTabulated` for details on the cold EOS.
+In order to create barotropic EOS to file, first create the EOS object and
+the save it to a file using
+:cpp:func:`~EOS_Toolkit::save_eos_thermal`.
+For most use cases, it is probably more convenient to use the Python bindings, 
+which include the C++ functions for creating and saving EOS. 
 
-.. autofunction:: save_thermal_hybrid_table
 
-To create a hybrid EOS with cold part given by a piecewise polytropic EOS, use the following. See
-:ref:`EOSPiecewisePoly` for details on the cold EOS.
 
-.. autofunction:: save_thermal_hybrid_pwpoly
 
-To create a hybrid EOS with cold part given by a polytropic EOS, use the following. See
-:ref:`EOSPoly` for details on the cold EOS.
-
-.. autofunction:: save_thermal_hybrid_poly
-
-Ideal Gas EOS
-^^^^^^^^^^^^^
-
-.. autofunction:: save_thermal_idealgas
+.. note::
+   Older versions of the library used a separate Python module for creating EOS files,
+   while the C++ interface could only load. This asymmetric design was abandoned,
+   and the module removed in version 1.7. New EOS files should always be created
+   using the regular Python interface to the C++ library.

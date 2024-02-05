@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Interface &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -22,8 +22,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -45,19 +46,21 @@ a stable branch where properties can be obtained also as function of
 gravitational mass. The class <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit11star_branchE" title="EOS_Toolkit::star_branch"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">star_branch</span></code></a>
 derives from <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit8star_seqE" title="EOS_Toolkit::star_seq"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">star_seq</span></code></a> and can thus be
 used as a sequence as well. Both classes store the units they use,
-which can be freely specified during creation but are assumed to be geometric.</p>
+which can be freely specified during creation but are assumed to be
+geometric. Each object provides a method
+<a class="reference internal" href="ns_seqs_ref.html#_CPPv4NK11EOS_Toolkit8star_seq11units_to_SIEv" title="EOS_Toolkit::star_seq::units_to_SI"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">units_to_SI()</span></code></a> to query the units.</p>
 <p>To compute a sequence of TOV stars, use the function
-<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit12make_tov_seqE10eos_barotr14tov_acc_simple8intervalI6real_tEj" title="EOS_Toolkit::make_tov_seq"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_tov_seq()</span></code></a>, specifying
+<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit12make_tov_seqE10eos_barotr8intervalI6real_tEK18star_accuracy_specj" title="EOS_Toolkit::make_tov_seq"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_tov_seq()</span></code></a>, specifying
 the EOS, the desired accuracy (see TOV solver),
 the range of central pseudo-enthalpy, and the number
 of sample points. The units are taken from the EOS.</p>
 <p>To compute a stable branch for TOV stars, use the function
-<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit22make_tov_branch_stableE10eos_barotr14tov_acc_simple6real_tj6real_t6real_t" title="EOS_Toolkit::make_tov_branch_stable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_tov_branch_stable()</span></code></a>.
-To select the correct branch, one has to provide one central
-pseudo-enthalpy within the desired branch (the default value
-should work for almost any remotely realistic NS EOS). One
-also has to specify a minimum mass that has to be covered by
-the sequence. The units are taken from the EOS.</p>
+<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit22make_tov_branch_stableE10eos_barotrK18star_accuracy_spec6real_t6real_t6real_t6real_t6real_t" title="EOS_Toolkit::make_tov_branch_stable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_tov_branch_stable()</span></code></a>.
+To select the correct branch in case there are several, one can provide
+one central pseudo-enthalpy within the desired branch.
+The default value should work for almost any remotely realistic NS EOS.
+One can also specify a minimum mass that has to be covered by
+the sequence. The units for the sequence are copied from the EOS.</p>
 <p>To create a star sequence directly from data points,
 use <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13make_star_seqENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEENSt6vectorI6real_tEEN8star_seq7range_tE5units" title="EOS_Toolkit::make_star_seq"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">make_star_seq()</span></code></a>, specifying
 vectors for the NS properties. Currently, those need to
@@ -65,41 +68,38 @@ be equally spaced in central pseudo enthalpy. For the latter,
 only the range needs to be given, not a vector. Further,
 one needs to specify the unit system to which the provided
 data refers, which is assumed geometric.</p>
-<p>For saving a sequence to a hdf5 file, use
-<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13save_star_seqENSt6stringERK8star_seq" title="EOS_Toolkit::save_star_seq"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">save_star_seq()</span></code></a>, specifying the path
-and the sequence. For saving a branch, use
-<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch" title="EOS_Toolkit::save_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">save_star_branch()</span></code></a> instead.</p>
-<p>To load sequences or branches, use
-<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13load_star_seqENSt6stringERK5units" title="EOS_Toolkit::load_star_seq"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_seq()</span></code></a> or
-<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16load_star_branchENSt6stringERK5units" title="EOS_Toolkit::load_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_branch()</span></code></a>, respectively.
-Besides the file path, one has to specify the (geometric)
-units in which the sequence or branch should be represented.
-Note the units specified while loading do not need to match
-those used while saving (taken from the EOS).
-To avoid any unit confusion, the files always use SI units
-internally.</p>
 <p>The following example demonstrates basic use of stable TOV branches.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/unitconv.h&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/eos_barotropic.h&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/eos_barotr_file.h&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_sequence.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_seq_file.h&quot;</span>
 
 
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">EOS_Toolkit</span><span class="p">;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Choose geometric units to work in</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">units</span><span class="o">::</span><span class="n">geom_solar</span><span class="p">();</span>
 
+<span class="w">    </span><span class="c1">//Load EOS from file</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">eos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_eos_barotr</span><span class="p">(</span><span class="s">&quot;example.eos.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">);</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">tov_acc_simple</span><span class="w"> </span><span class="n">acc</span><span class="p">{</span><span class="mf">1e-8</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">};</span>
+<span class="w">    </span><span class="c1">// Specification for desired accuracy: using defaults</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">star_acc_simple</span><span class="p">();</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">// Create stable TOV branch</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_tov_branch_stable</span><span class="p">(</span><span class="n">eos</span><span class="p">,</span><span class="w"> </span><span class="n">acc</span><span class="p">);</span>
 <span class="w">    </span>
+<span class="w">    </span><span class="c1">// Save branch to file </span>
+<span class="w">    </span><span class="n">save_star_branch</span><span class="p">(</span><span class="s">&quot;example.tovseq.h5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">seq</span><span class="p">);</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">max_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">grav_mass_maximum</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Compute tidal deformability at 90% of maximum mass</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.9</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">grav_mass_maximum</span><span class="p">();</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">lambda09</span><span class="w"> </span>
-<span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">lambda_tidal_from_grav_mass</span><span class="p">(</span><span class="mf">0.9</span><span class="o">*</span><span class="n">max_mass</span><span class="p">);</span>
+<span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">lambda_tidal_from_grav_mass</span><span class="p">(</span><span class="n">mass</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -182,11 +182,11 @@ shared pointers. Using sequences or branches is thread-save.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/ns_seqs_interf.rst.txt"

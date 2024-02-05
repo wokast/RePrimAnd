@@ -3,6 +3,13 @@
 Little Helpers
 --------------
 
+Units
+^^^^^
+
+.. doxygenclass:: EOS_Toolkit::units
+   :project: RePrimAnd
+   :members:
+
 Tensors
 ^^^^^^^
 
@@ -53,13 +60,6 @@ and a lower index vector.
 .. doxygentypedef:: sm_symt3l
 
 .. doxygentypedef:: sm_metric3
-
-Units
-^^^^^
-
-.. doxygenclass:: EOS_Toolkit::units
-   :project: RePrimAnd
-   :members:
 
 
 Other

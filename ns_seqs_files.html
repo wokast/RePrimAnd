@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Sequence Files &#8212; RePrimAnd 0.9997 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -22,8 +22,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -49,7 +50,11 @@ and the sequence. For saving a branch, use
 <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16save_star_branchENSt6stringERK11star_branch" title="EOS_Toolkit::save_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">save_star_branch()</span></code></a> instead.</p>
 <p>To load sequences or branches, use
 <a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit13load_star_seqENSt6stringERK5units" title="EOS_Toolkit::load_star_seq"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_seq()</span></code></a> or
-<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16load_star_branchENSt6stringERK5units" title="EOS_Toolkit::load_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_branch()</span></code></a>, respectively.</p>
+<a class="reference internal" href="ns_seqs_ref.html#_CPPv4N11EOS_Toolkit16load_star_branchENSt6stringERK5units" title="EOS_Toolkit::load_star_branch"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">load_star_branch()</span></code></a>, respectively.
+Besides the file path, one has to specify the (geometric)
+units in which the sequence or branch should be represented.
+Note the units specified while loading do not need to match
+those used while saving.</p>
 <p>The following example demonstrates basic use of stable TOV branches.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/unitconv.h&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reprimand/star_sequence.h&quot;</span>
@@ -141,11 +146,11 @@ and the sequence. For saving a branch, use
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Wolfgang Kastaun.
+      &#169;2020, Wolfgang Kastaun.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/ns_seqs_files.rst.txt"
